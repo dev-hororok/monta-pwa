@@ -6,7 +6,7 @@ import { AuthSlice, createAuthSlice } from './authSlice';
 
 export type StoreState = MemberSlice & AuthSlice;
 
-export const useStore = create<StoreState>()(
+export const useBoundStore = create<StoreState>()(
   devtools(
     persist(
       immer((...data) => ({
@@ -21,4 +21,4 @@ export const useStore = create<StoreState>()(
   )
 );
 
-export default useStore;
+export default useBoundStore;
