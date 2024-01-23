@@ -41,7 +41,7 @@ const router = createBrowserRouter(
       <Route path="/auth/register" element={<RegisterPage />} />
     </Route>
   ),
-  { basename: import.meta.env.VITE_PUBLIC_URL }
+  { basename: import.meta.env.BASE_URL }
 );
 
 const App = () => {
