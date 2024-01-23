@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 export const LoginGateway = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-full gap-2 px-4 bg-primary space-y-20 rounded-md overflow-hidden">
+    <div className="flex flex-col items-center justify-center h-full gap-2 px-4 bg-primary space-y-20 md:rounded-md overflow-hidden">
       <div className="relative flex justify-center">
         <img
           src="/pockets/pocket_1.png"
