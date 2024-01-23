@@ -1,51 +1,30 @@
 import {
-  BackpackIcon,
-  DotsHorizontalIcon,
-  HomeIcon,
-  RocketIcon,
-  TimerIcon,
-} from '@radix-ui/react-icons';
-import { Footer } from './components/Footer';
-import { Header } from './components/Header';
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from 'react-router-dom';
+import { Home } from './pages/Home';
 import { MobileLayout } from './components/layouts/MobileLayout';
-import { NavItem } from './interfaces/app.interface';
+import { More } from './pages/More';
+import { Inventory } from './pages/Inventory';
+import { Shop } from './pages/Shop';
+import { Timer } from './pages/Timer';
 
-const navItems: NavItem[] = [
-  {
-    text: '홈',
-    icon: <HomeIcon className="w-5 h-5" />,
-    href: '/',
-  },
-  {
-    text: '타이머',
-    icon: <TimerIcon className="w-5 h-5" />,
-    href: '/study',
-  },
-  {
-    text: '상점',
-    icon: <RocketIcon className="w-5 h-5" />,
-    href: '/shop',
-  },
-  {
-    text: '인벤토리',
-    icon: <BackpackIcon className="w-5 h-5" />,
-    href: '/inventory',
-  },
-  {
-    text: '더보기',
-    icon: <DotsHorizontalIcon className="w-5 h-5" />,
-    href: '/more',
-  },
-];
-function App() {
-  return (
-    <>
-      <MobileLayout>
-        <Header />
-        <Footer navItems={navItems} />
-      </MobileLayout>
-    </>
-  );
-}
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<MobileLayout />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/more" element={<More />} />
+      <Route path="/inventory" element={<Inventory />} />
+      <Route path="/shop" element={<Shop />} />
+      <Route path="/study" element={<Timer />} />
+    </Route>
+  )
+);
+
+const App = () => {
+  return <RouterProvider router={router} />;
+};
 
 export default App;
