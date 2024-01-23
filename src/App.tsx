@@ -14,6 +14,7 @@ import { LoginPage } from './pages/Login';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { RootLayout } from './components/layouts/RootLayout';
 import { LoginGateway } from './components/LoginGateway';
+import { AgreeToTermsPage } from './pages/AgreeToTerms';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +36,8 @@ const router = createBrowserRouter(
 
       <Route path="/auth" element={<LoginGateway />} />
       <Route path="/auth/login" element={<LoginPage />} />
+      <Route path="/auth/agree" element={<AgreeToTermsPage />} />
+      <Route path="/auth/register" element={<AgreeToTermsPage />} />
     </Route>
   )
 );
