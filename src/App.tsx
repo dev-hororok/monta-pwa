@@ -10,6 +10,7 @@ import { More } from './pages/More';
 import { Inventory } from './pages/Inventory';
 import { Shop } from './pages/Shop';
 import { Timer } from './pages/Timer';
+import { LoginPage } from './pages/Login';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path="/inventory" element={<Inventory />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/study" element={<Timer />} />
+      <Route path="/login" element={<LoginPage />} />
     </Route>
   )
 );

@@ -9,6 +9,7 @@ import {
 } from '@radix-ui/react-icons';
 import { NavItem } from '@/interfaces/app.interface';
 import { Outlet } from 'react-router-dom';
+import { Toaster } from '../ui/toaster';
 
 const navItems: NavItem[] = [
   {
@@ -46,6 +47,7 @@ export const MobileLayout = () => {
           <Header />
           <main className="pb-safe-offset-14 pt-safe-offset-14">
             {<Outlet />}
+            <Toaster />
           </main>
           <Footer navItems={navItems} />
         </div>

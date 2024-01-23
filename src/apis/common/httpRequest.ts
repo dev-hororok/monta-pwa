@@ -21,7 +21,7 @@ async function refreshTokenIfNeeded() {
       authenticate(response.data.tokens, response.data.expiresIn);
       return response.data.tokens.accessToken;
     } catch (error) {
-      throw new Error('토큰 갱신 실패');
+      useBoundStore.getState().logout();
     }
   }
   return tokens.accessToken;
