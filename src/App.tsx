@@ -12,23 +12,29 @@ import { Shop } from './pages/Shop';
 import { Timer } from './pages/Timer';
 import { LoginPage } from './pages/Login';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { RootLayout } from './components/layouts/RootLayout';
+import { LoginGateway } from './components/LoginGateway';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<MobileLayout />}>
-      <Route path="/" element={<Home />} />
-      <Route path="/more" element={<More />} />
-      <Route path="/inventory" element={<Inventory />} />
-      <Route path="/shop" element={<Shop />} />
+    <Route path="/" element={<RootLayout />}>
       <Route
-        path="/study"
+        path="/"
         element={
           <ProtectedRoute>
-            <Timer />
+            <MobileLayout />
           </ProtectedRoute>
         }
-      />
-      <Route path="/login" element={<LoginPage />} />
+      >
+        <Route path="/" element={<Home />} />
+        <Route path="/more" element={<More />} />
+        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/study" element={<Timer />} />
+      </Route>
+
+      <Route path="/auth" element={<LoginGateway />} />
+      <Route path="/auth/login" element={<LoginPage />} />
     </Route>
   )
 );

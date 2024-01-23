@@ -9,7 +9,6 @@ import {
 } from '@radix-ui/react-icons';
 import { NavItem } from '@/interfaces/app.interface';
 import { Outlet } from 'react-router-dom';
-import { Toaster } from '../ui/toaster';
 
 const navItems: NavItem[] = [
   {
@@ -41,17 +40,10 @@ const navItems: NavItem[] = [
 
 export const MobileLayout = () => {
   return (
-    <div className="w-full h-screen">
-      <div className="w-full fixed top-0 md:top-1/2 md:left-1/2 md:-ml-[213px] md:-mt-[368px]">
-        <div className="relative w-full h-screen md:w-[416px] md:h-[736px] md:border md:rounded-md">
-          <Header />
-          <main className="pb-safe-offset-14 pt-safe-offset-14">
-            {<Outlet />}
-            <Toaster />
-          </main>
-          <Footer navItems={navItems} />
-        </div>
-      </div>
-    </div>
+    <>
+      <Header />
+      <main className="pb-safe-offset-14 pt-safe-offset-14">{<Outlet />}</main>
+      <Footer navItems={navItems} />
+    </>
   );
 };

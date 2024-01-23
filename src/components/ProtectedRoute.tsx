@@ -7,7 +7,7 @@ export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
 
   if (!accessToken) {
-    return <Navigate to="/login" replace state={{ from: location }} />;
+    return <Navigate to="/auth" replace state={{ from: location }} />;
   }
 
   return children;

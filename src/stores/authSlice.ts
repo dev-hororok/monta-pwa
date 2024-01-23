@@ -18,18 +18,20 @@ export interface AuthSlice {
 
 export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
   tokens: {
-    accessToken: '',
+    accessToken: localStorage.getItem('accessToken') || '',
     refreshToken: localStorage.getItem('refreshToken') || '',
   },
   expiresIn: 0,
   authenticate: (tokens, expiresIn) => {
     localStorage.setItem('refreshToken', tokens.refreshToken);
+    localStorage.setItem('accessToken', tokens.accessToken);
     set(() => ({
       tokens,
       expiresIn,
     }));
   },
   logout: () => {
+    localStorage.setItem('accessToken', '');
     localStorage.setItem('refreshToken', '');
     set(() => ({
       tokens: {
