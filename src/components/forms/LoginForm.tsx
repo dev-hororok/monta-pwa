@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import authService from '@/apis/common/authService';
 import { useToast } from '../ui/use-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const loginFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
@@ -24,6 +24,7 @@ const LoginForm = () => {
   });
 
   const { toast } = useToast();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginFormSchemaType> = async (
@@ -37,11 +38,12 @@ const LoginForm = () => {
       });
       return;
     }
-    console.log(result);
 
     if (result.success) {
       toast({ title: '로그인에 성공하였습니다.' });
-      navigate('/');
+      // 전에 리다이렉팅으로 왔다면 다시 보내주기
+      const origin = location.state?.from?.pathname || '/';
+      navigate(origin);
     }
   };
 

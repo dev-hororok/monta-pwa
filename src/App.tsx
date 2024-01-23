@@ -11,6 +11,7 @@ import { Inventory } from './pages/Inventory';
 import { Shop } from './pages/Shop';
 import { Timer } from './pages/Timer';
 import { LoginPage } from './pages/Login';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,7 +20,14 @@ const router = createBrowserRouter(
       <Route path="/more" element={<More />} />
       <Route path="/inventory" element={<Inventory />} />
       <Route path="/shop" element={<Shop />} />
-      <Route path="/study" element={<Timer />} />
+      <Route
+        path="/study"
+        element={
+          <ProtectedRoute>
+            <Timer />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/login" element={<LoginPage />} />
     </Route>
   )
