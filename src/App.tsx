@@ -1,10 +1,13 @@
 import { Button } from '@/components/ui/button';
+import { MobileLayout } from './components/layouts/MobileLayout';
 
 function App() {
   return (
     <>
-      <h1>Monta</h1>
-      <Button>Hello</Button>
+      <MobileLayout>
+        <h1>Monta</h1>
+        <Button>Hello</Button>
+      </MobileLayout>
     </>
   );
 }
