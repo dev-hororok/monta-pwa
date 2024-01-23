@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Toaster } from '../ui/toaster';
+import { DarkModeToggle } from '../DarkmodeToggle';
 
 export const RootLayout = () => {
   return (
@@ -8,6 +9,9 @@ export const RootLayout = () => {
         <div className="relative w-full h-screen md:w-[416px] md:h-[736px] md:border md:rounded-md">
           <Outlet />
           <Toaster />
+          <div className="absolute -bottom-16 -right-16">
+            <DarkModeToggle />
+          </div>
         </div>
       </div>
     </div>

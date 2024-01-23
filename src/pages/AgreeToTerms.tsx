@@ -40,7 +40,7 @@ export const AgreeToTermsPage = () => {
           <h4 className="text-3xl text-primary">약관동의</h4>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-4">
           <Checkbox
             id="terms"
             className="w-6 h-6"
@@ -61,7 +61,7 @@ export const AgreeToTermsPage = () => {
           <div className="relative flex justify-center text-xs uppercase"></div>
         </div>
         <div className="space-y-6">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
             <Checkbox
               id="terms_1"
               className="w-6 h-6"
@@ -76,7 +76,7 @@ export const AgreeToTermsPage = () => {
             </label>
             <ChevronRightIcon />
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
             <Checkbox
               id="terms_2"
               className="w-6 h-6"
