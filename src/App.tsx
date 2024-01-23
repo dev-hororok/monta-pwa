@@ -40,7 +40,8 @@ const router = createBrowserRouter(
       <Route path="/auth/agree" element={<AgreeToTermsPage />} />
       <Route path="/auth/register" element={<RegisterPage />} />
     </Route>
-  )
+  ),
+  { basename: import.meta.env.VITE_PUBLIC_URL }
 );
 
 const App = () => {
