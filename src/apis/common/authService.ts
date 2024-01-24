@@ -5,7 +5,10 @@ import { isAxiosError } from 'axios';
 class AuthService {
   async login(credentials: { email: string; password: string }) {
     try {
-      const response = await nestHttpRequest.post('/auth/login', credentials);
+      const response = await nestHttpRequest.post(
+        'hororok-api/auth/login',
+        credentials
+      );
 
       if (!response.data.success) {
         return {
@@ -35,7 +38,7 @@ class AuthService {
   async register(body: { email: string; password: string }) {
     try {
       const registerResponse = await nestHttpRequest.post(
-        '/auth/register',
+        'hororok-api/auth/register',
         body
       );
 
