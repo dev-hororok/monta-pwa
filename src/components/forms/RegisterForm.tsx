@@ -47,25 +47,27 @@ const RegisterForm = () => {
   const onSubmit: SubmitHandler<RegisterFormSchemaType> = async (
     data: RegisterFormSchemaType
   ) => {
+    if (isLoading) return;
+    setIsLoading(true);
+
     try {
-      if (isLoading) return;
-      setIsLoading(true);
       const result = await authService.register(data);
-      if (result.error) {
-        toast({
-          title: result.error || '서버에 문제가 발생했습니다.',
-          variant: 'destructive',
-        });
-        return;
-      }
 
       if (result.success) {
+        // 회원가입 성공
         toast({ title: '회원가입에 성공하였습니다.' });
         navigate('/');
+      } else {
+        // 회원가입 실패
+        toast({
+          title: result.error,
+          variant: 'destructive',
+        });
       }
     } catch (e) {
+      // 네트워크 에러나 기타 예외 처리
       toast({
-        title: '서버에 문제가 발생했습니다.',
+        title: e instanceof Error ? e.message : '서버에 문제가 발생했습니다.',
         variant: 'destructive',
       });
     } finally {

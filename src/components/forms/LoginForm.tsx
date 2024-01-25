@@ -48,27 +48,28 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<LoginFormSchemaType> = async (
     data: LoginFormSchemaType
   ) => {
+    if (isLoading) return;
+    setIsLoading(true);
     try {
-      if (isLoading) return;
-      setIsLoading(true);
       const result = await authService.login(data);
-      if (result.error) {
-        toast({
-          title: result.error || '서버에 문제가 발생했습니다.',
-          variant: 'destructive',
-        });
-        return;
-      }
 
       if (result.success) {
+        // 로그인 성공
         toast({ title: '로그인에 성공하였습니다.' });
         // 전에 리다이렉팅으로 왔다면 다시 보내주기
         const origin = location.state?.from?.pathname || '/';
         navigate(origin);
+      } else {
+        // 로그인 실패
+        toast({
+          title: '이메일 또는 패스워드가 잘못되었습니다.',
+          variant: 'destructive',
+        });
       }
     } catch (e) {
+      // 네트워크 에러나 기타 예외 처리
       toast({
-        title: '서버에 문제가 발생했습니다.',
+        title: e instanceof Error ? e.message : '서버에 문제가 발생했습니다.',
         variant: 'destructive',
       });
     } finally {

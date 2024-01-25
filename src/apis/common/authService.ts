@@ -1,21 +1,28 @@
 import useBoundStore from '@/stores/useBoundStore';
 import { nestHttpRequest } from './httpRequest';
 import { isAxiosError } from 'axios';
+import {
+  ServiceFailResponse,
+  ServiceResponse,
+} from '../interface/service.response.type';
+import { ApiSuccessResponse } from '../interface/api.response.type';
+
+interface AuthData {
+  access_token: string;
+  refresh_token: string;
+  expiresIn: number;
+}
 
 class AuthService {
-  async login(credentials: { email: string; password: string }) {
+  async login(credentials: {
+    email: string;
+    password: string;
+  }): Promise<ServiceResponse<null>> {
     try {
-      const response = await nestHttpRequest.post(
-        'hororok-api/auth/login',
+      const response = await nestHttpRequest.post<ApiSuccessResponse<AuthData>>(
+        '/hororok-api/auth/login',
         credentials
       );
-
-      if (!response.data.success) {
-        return {
-          success: false,
-          error: '서버에 문제가 발생했습니다.',
-        };
-      }
 
       useBoundStore.getState().authenticate(
         {
@@ -25,43 +32,39 @@ class AuthService {
         response.data.data.expiresIn
       );
 
-      return response.data;
+      return {
+        success: true,
+        data: null,
+      };
     } catch (error) {
       useBoundStore.getState().logout();
-      return {
-        success: false,
-        error: '이메일 또는 패스워드가 잘못되었습니다.',
-      };
+      return this.handleError(error);
     }
   }
 
-  async register(body: { email: string; password: string }) {
+  async register(body: {
+    email: string;
+    password: string;
+  }): Promise<ServiceResponse<null>> {
     try {
-      const registerResponse = await nestHttpRequest.post(
-        'hororok-api/auth/register',
-        body
-      );
+      await nestHttpRequest.post('/hororok-api/auth/register', body);
 
-      if (!registerResponse.data.success) {
-        return {
-          success: false,
-          error: '서버에 문제가 발생했습니다.',
-        };
+      const loginResult = await this.login({
+        email: body.email,
+        password: body.password,
+      });
+
+      if (!loginResult.success) {
+        throw new Error('Registration succeeded but login failed');
       }
 
-      return await this.login({ email: body.email, password: body.password });
+      return {
+        success: true,
+        data: null,
+      };
     } catch (error) {
       useBoundStore.getState().logout();
-      if (isAxiosError(error)) {
-        return {
-          success: false,
-          error: error.response?.data.message || '서버에 문제가 발생했습니다.',
-        };
-      }
-      return {
-        success: false,
-        error: '서버에 문제가 발생했습니다.',
-      };
+      return this.handleError(error);
     }
   }
 
@@ -72,6 +75,34 @@ class AuthService {
   isAuthenticated() {
     const { expiresIn } = useBoundStore.getState();
     return new Date().getTime() < expiresIn;
+  }
+
+  handleError(error: unknown): ServiceFailResponse {
+    if (isAxiosError(error)) {
+      const serverError = error.response?.data;
+      if (serverError && serverError.status === 'error') {
+        return {
+          success: false,
+          error: serverError.message || 'Unknown server error.',
+        };
+      }
+      // Network or other Axios-specific error
+      return {
+        success: false,
+        error: 'Network error or issue with Axios.',
+      };
+    } else if (error instanceof Error) {
+      return {
+        success: false,
+        error: error.message || 'An unexpected error occurred.',
+      };
+    }
+
+    // Generic error
+    return {
+      success: false,
+      error: 'An unexpected error occurred.',
+    };
   }
 }
 
