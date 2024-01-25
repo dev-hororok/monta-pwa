@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import authService from '@/apis/common/authService';
+import authService from '@/apis/services/authService';
 import { useToast } from '../ui/use-toast';
 import { useNavigate } from 'react-router-dom';
 import {

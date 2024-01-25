@@ -1,11 +1,8 @@
 import useBoundStore from '@/stores/useBoundStore';
-import { nestHttpRequest } from './httpRequest';
-import { isAxiosError } from 'axios';
-import {
-  ServiceFailResponse,
-  ServiceResponse,
-} from '../interface/service.response.type';
-import { ApiSuccessResponse } from '../interface/api.response.type';
+import { nestHttpRequest } from '../common/httpRequest';
+import { ServiceResponse } from '../interface/serviceResponse.type';
+import { ApiSuccessResponse } from '../interface/apiResponse.type';
+import { handleApiError } from '../common/apiErrorHandler';
 
 interface AuthData {
   access_token: string;
@@ -38,7 +35,7 @@ class AuthService {
       };
     } catch (error) {
       useBoundStore.getState().logout();
-      return this.handleError(error);
+      return handleApiError(error);
     }
   }
 
@@ -64,7 +61,7 @@ class AuthService {
       };
     } catch (error) {
       useBoundStore.getState().logout();
-      return this.handleError(error);
+      return handleApiError(error);
     }
   }
 
@@ -75,34 +72,6 @@ class AuthService {
   isAuthenticated() {
     const { expiresIn } = useBoundStore.getState();
     return new Date().getTime() < expiresIn;
-  }
-
-  handleError(error: unknown): ServiceFailResponse {
-    if (isAxiosError(error)) {
-      const serverError = error.response?.data;
-      if (serverError && serverError.status === 'error') {
-        return {
-          success: false,
-          error: serverError.message || 'Unknown server error.',
-        };
-      }
-      // Network or other Axios-specific error
-      return {
-        success: false,
-        error: 'Network error or issue with Axios.',
-      };
-    } else if (error instanceof Error) {
-      return {
-        success: false,
-        error: error.message || 'An unexpected error occurred.',
-      };
-    }
-
-    // Generic error
-    return {
-      success: false,
-      error: 'An unexpected error occurred.',
-    };
   }
 }
 
