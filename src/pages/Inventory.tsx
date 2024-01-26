@@ -1,3 +1,6 @@
+import { useCurrentMemberQuery } from '@/queries/memberQueries';
+
 export const Inventory = () => {
-  return <div>Inventory</div>;
+  const { data } = useCurrentMemberQuery();
+  return <div>{data?.role}</div>;
 };
