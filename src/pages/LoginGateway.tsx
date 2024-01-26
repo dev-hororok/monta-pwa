@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
-import { buttonVariants } from './ui/button';
+import { buttonVariants } from '../components/ui/button';
 import { cn } from '@/lib/utils';
 
 export const LoginGateway = () => {
   return (
     <div className="grid grid-rows-3 items-center justify-center bg-background h-full gap-2 px-4 space-y-20 md:rounded-md pb-safe-offset-14 pt-safe-offset-14 overflow-hidden">
       <div className="row-span-2 relative flex flex-col justify-center items-center">
-        <p className="text-5xl font-semibold text-primary">Study Timer</p>
         <img
           src="/characters/character_1.png"
           width={640}
@@ -14,6 +13,7 @@ export const LoginGateway = () => {
           alt="monta-main"
           className="px-28 pb-6 pt-10"
         />
+        <p className="text-4xl font-semibold text-primary">스터디 타이머</p>
       </div>
       <div className="row-span-1 w-full flex flex-col gap-2 items-center py-20">
         <Link

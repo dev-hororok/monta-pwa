@@ -102,6 +102,7 @@ const RegisterForm = () => {
                     placeholder="패스워드"
                     {...field}
                     className="h-12"
+                    autoComplete="off"
                   />
                 </FormControl>
                 <FormMessage />

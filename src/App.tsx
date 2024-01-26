@@ -13,7 +13,7 @@ import { Timer } from './pages/Timer';
 import { LoginPage } from './pages/Login';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { RootLayout } from './components/layouts/RootLayout';
-import { LoginGateway } from './components/LoginGateway';
+import { LoginGateway } from './pages/LoginGateway';
 import { AgreeToTermsPage } from './pages/AgreeToTerms';
 import { RegisterPage } from './pages/Register';
 
