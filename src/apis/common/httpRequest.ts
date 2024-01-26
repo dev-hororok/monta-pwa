@@ -1,6 +1,8 @@
 import { API_URL_NEST, API_URL_SPRING } from '@/constants';
 import useBoundStore from '@/stores/useBoundStore';
 import axios, { InternalAxiosRequestConfig } from 'axios';
+import { ApiSuccessResponse } from '../interface/apiResponse.type';
+import { AuthData } from '../services/authService';
 
 // 인터셉터로 만료 시간 확인 및 토큰 리프레시
 async function refreshTokenIfNeeded() {
@@ -9,7 +11,7 @@ async function refreshTokenIfNeeded() {
 
   if (now >= expiresIn) {
     try {
-      const response = await axios.post(
+      const response = await axios.post<ApiSuccessResponse<AuthData>>(
         `${API_URL_NEST}/hororok-api/auth/refresh`,
         {},
         {
@@ -18,8 +20,15 @@ async function refreshTokenIfNeeded() {
           },
         }
       );
-      authenticate(response.data.tokens, response.data.expiresIn);
-      return response.data.tokens.accessToken;
+
+      authenticate(
+        {
+          accessToken: response.data.data.access_token,
+          refreshToken: response.data.data.refresh_token,
+        },
+        response.data.data.expiresIn
+      );
+      return response.data.data.access_token;
     } catch (error) {
       useBoundStore.getState().logout();
     }

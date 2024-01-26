@@ -14,7 +14,11 @@ export const useBoundStore = create<StoreState>()(
       }),
       {
         name: 'bound-store',
-        partialize: (state) => ({ bears: state.member }),
+        partialize: (state) => ({
+          member: state.member,
+          tokens: state.tokens,
+          expiresIn: state.expiresIn,
+        }),
       }
     )
   )

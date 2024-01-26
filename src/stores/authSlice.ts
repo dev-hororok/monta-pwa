@@ -18,27 +18,27 @@ export interface AuthSlice {
 
 export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
   tokens: {
-    accessToken: localStorage.getItem('accessToken') || '',
-    refreshToken: localStorage.getItem('refreshToken') || '',
+    accessToken: '',
+    refreshToken: '',
   },
   expiresIn: 0,
   authenticate: (tokens, expiresIn) => {
-    localStorage.setItem('refreshToken', tokens.refreshToken);
-    localStorage.setItem('accessToken', tokens.accessToken);
+    // localStorage.setItem('refreshToken', tokens.refreshToken);
+    // localStorage.setItem('accessToken', tokens.accessToken);
     set(() => ({
       tokens,
       expiresIn,
     }));
   },
   logout: () => {
-    localStorage.setItem('accessToken', '');
-    localStorage.setItem('refreshToken', '');
+    // localStorage.setItem('accessToken', '');
+    // localStorage.setItem('refreshToken', '');
     set(() => ({
       tokens: {
         accessToken: '',
         refreshToken: '',
       },
-      tokenExpiry: 0,
+      expiresIn: 0,
     }));
   },
 });

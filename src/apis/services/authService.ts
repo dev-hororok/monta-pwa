@@ -4,7 +4,7 @@ import { ServiceResponse } from '../interface/serviceResponse.type';
 import { ApiSuccessResponse } from '../interface/apiResponse.type';
 import { handleApiError } from '../common/apiErrorHandler';
 
-interface AuthData {
+export interface AuthData {
   access_token: string;
   refresh_token: string;
   expiresIn: number;
@@ -28,13 +28,14 @@ class AuthService {
         },
         response.data.data.expiresIn
       );
+      useBoundStore.getState().fetchCurrentMember();
 
       return {
         success: true,
         data: null,
       };
     } catch (error) {
-      useBoundStore.getState().logout();
+      // useBoundStore.getState().logout();
       return handleApiError(error);
     }
   }
@@ -44,7 +45,10 @@ class AuthService {
     password: string;
   }): Promise<ServiceResponse<null>> {
     try {
-      await nestHttpRequest.post('/hororok-api/auth/register', body);
+      await nestHttpRequest.post<ApiSuccessResponse<null>>(
+        '/hororok-api/auth/register',
+        body
+      );
 
       const loginResult = await this.login({
         email: body.email,
@@ -60,7 +64,7 @@ class AuthService {
         data: null,
       };
     } catch (error) {
-      useBoundStore.getState().logout();
+      // useBoundStore.getState().logout();
       return handleApiError(error);
     }
   }
