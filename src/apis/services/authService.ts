@@ -28,7 +28,6 @@ class AuthService {
         },
         response.data.data.expiresIn
       );
-      useBoundStore.getState().fetchCurrentMember();
 
       return {
         success: true,
