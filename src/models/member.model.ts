@@ -4,11 +4,11 @@ export interface IMember {
   nickname: string;
   image_url: string;
   point: number;
-  role: IMemberRole;
+  role: MemberRole;
   active_record_id: number | null;
 }
 
-export enum IMemberRole {
+export enum MemberRole {
   ADMIN = 'ADMIN',
   USER = 'USER',
 }
