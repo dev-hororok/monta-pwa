@@ -1,5 +1,7 @@
+import { HomeHeader } from '@/components/headers/HomeHeader';
 import { useCurrentMemberQuery } from '@/queries/memberQueries';
 import { CharacterInventorySection } from '@/sections/CharacterIncentorySection';
+import { UseItemInventorySection } from '@/sections/UseItemInventorySection';
 
 export interface InventoryUseItem {
   itemType: 'streak-color-change';
@@ -23,21 +25,16 @@ export function Inventory() {
   }
 
   return (
-    <div className="w-full h-full py-4 px-4 space-y-6">
-      {/* 사용아이템 Section */}
-      {/* <div>
-        <p className="font-semibold pb-4">사용 아이템</p>
-        <div className="grid grid-cols-3 gap-2">
-          {dummyUseItems.map((item, idx) => {
-            if (item.itemType === 'streak-color-change') {
-              return <StreakItemCard key={idx} count={item.count} />;
-            }
-            return <StreakItemCard key={idx} count={item.count} />;
-          })}
-        </div>
-      </div> */}
+    <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe-offset-14">
+      <HomeHeader />
+      <main className="h-full overflow-y-scroll scrollbar-hide pb-10">
+        <div className="w-full h-full py-4 px-4 space-y-6">
+          {/* 사용아이템 Section */}
+          <UseItemInventorySection />
 
-      <CharacterInventorySection memberId={data.member_id} />
+          <CharacterInventorySection memberId={data.member_id} />
+        </div>
+      </main>
     </div>
   );
 }

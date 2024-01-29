@@ -14,7 +14,7 @@ export const EggInventorySection = ({ memberId }: Props) => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="px-4">
+    <section className="px-4">
       <p className="text-center text-sm font-bold pb-4">재료 (최대 4개)</p>
       <div className="grid grid-cols-4 gap-1">
         {dummyEggInventory ? (
@@ -34,6 +34,6 @@ export const EggInventorySection = ({ memberId }: Props) => {
           <div></div>
         )}
       </div>
-    </div>
+    </section>
   );
 };

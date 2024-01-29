@@ -1,4 +1,3 @@
-import { SunIcon } from '@radix-ui/react-icons';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 
@@ -27,10 +26,7 @@ export const CharacterItemCard = ({
       <img src={imgSrc} alt={alt} width={200} height={200} className="p-3" />
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
         <p className="w-full font-semibold truncate">{name}</p>
-        <p className="flex items-center gap-1">
-          <SunIcon className="w-3 h-3" />
-          {price}
-        </p>
+        <p className="flex items-center gap-1 text-foreground/60">{price} 원</p>
       </div>
     </Button>
   );

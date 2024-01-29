@@ -1,7 +1,6 @@
 import { CharacterItemCard } from '@/components/cards/CharacterCard';
 import { dummyCharacterInventory } from '@/mocks/characterIncentoryMock';
 import { useCharacterInventoryQuery } from '@/queries/memberQueries';
-import { SunIcon } from '@radix-ui/react-icons';
 
 interface Props {
   memberId: string;
@@ -17,15 +16,16 @@ export const CharacterInventorySection = ({ memberId }: Props) => {
   return (
     <section>
       <div className="flex items-center justify-between pb-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 text-sm">
           <p className="font-semibold">캐릭터</p>
-          <div className="flex items-center gap-1 text-xs">
-            <SunIcon className="w-3 h-3" />
+
+          <p className="flex items-center gap-1 text-foreground/60">
             {dummyCharacterInventory.reduce(
               (acc, cur) => acc + cur.character.sell_price,
               0
             )}
-          </div>
+            원
+          </p>
         </div>
         <p className="font-semibold text-sm text-muted-foreground">
           {dummyCharacterInventory.length} 개
