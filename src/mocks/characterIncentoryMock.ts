@@ -16,9 +16,9 @@ export const dummyCharacterInventory: ICharacterInventory[] = [
     character_inventory_id: 2,
     character: {
       character_id: '2',
-      image_url: '/characters/character_4.png',
+      image_url: '/characters/cat_2.png',
       sell_price: 4000,
-      name: '강아지',
+      name: '고양이',
       description: '',
       grade: 'C',
     },
@@ -27,9 +27,9 @@ export const dummyCharacterInventory: ICharacterInventory[] = [
     character_inventory_id: 3,
     character: {
       character_id: '3',
-      image_url: '/characters/character_5.png',
+      image_url: '/characters/sheep_1.png',
       sell_price: 4000,
-      name: '고양이',
+      name: '양',
       description: '',
       grade: 'C',
     },

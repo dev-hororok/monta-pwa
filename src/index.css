@@ -49,6 +49,17 @@
   }
 }
 
+* {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+body {
+  overscroll-behavior: contain;
+}
+
 @layer base {
   * {
     @apply border-border font-nanum;

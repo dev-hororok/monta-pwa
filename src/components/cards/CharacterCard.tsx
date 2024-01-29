@@ -19,7 +19,7 @@ export const CharacterItemCard = ({
   return (
     <Button
       type="button"
-      variant={'outline'}
+      variant={'ghost'}
       className="h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm"
     >
       <Badge variant={'secondary'}>{grade} 등급</Badge>
