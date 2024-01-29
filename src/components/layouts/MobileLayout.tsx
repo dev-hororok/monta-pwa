@@ -1,4 +1,3 @@
-import { Header } from '../Header';
 import { Footer } from '../Footer';
 import {
   BackpackIcon,
@@ -41,8 +40,7 @@ const navItems: NavItem[] = [
 export const MobileLayout = () => {
   return (
     <>
-      <Header />
-      <main className="pb-safe-offset-14 pt-safe-offset-14">{<Outlet />}</main>
+      <Outlet />
       <Footer navItems={navItems} />
     </>
   );
