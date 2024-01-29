@@ -24,7 +24,12 @@ export const Timer = ({ initialTime }: Props) => {
     <>
       <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe">
         <main className="h-full overflow-y-scroll scrollbar-hide pb-10">
-          <img src="./pots/pot_2.png" alt="main" className="h-1/2 mx-auto" />
+          <img
+            src="./pots/pot_2.png"
+            alt="main"
+            className="h-1/2 mx-auto animate-soft-bounce"
+          />
+          <p className="text-center">맛있게 익히는중..</p>
           <div className="flex items-center justify-center pt-4 h-1/4">
             <p className="text-7xl text-primary font-semibold">
               {formatTime(curTime)}
