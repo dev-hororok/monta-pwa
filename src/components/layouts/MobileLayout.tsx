@@ -4,7 +4,6 @@ import {
   DotsHorizontalIcon,
   HomeIcon,
   RocketIcon,
-  TimerIcon,
 } from '@radix-ui/react-icons';
 import { NavItem } from '@/interfaces/app.interface';
 import { Outlet } from 'react-router-dom';
@@ -14,11 +13,6 @@ const navItems: NavItem[] = [
     text: '홈',
     icon: <HomeIcon className="w-5 h-5" />,
     href: '/',
-  },
-  {
-    text: '타이머',
-    icon: <TimerIcon className="w-5 h-5" />,
-    href: '/study',
   },
   {
     text: '상점',

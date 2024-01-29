@@ -9,7 +9,7 @@ import { MobileLayout } from './components/layouts/MobileLayout';
 import { More } from './pages/More';
 import { Inventory } from './pages/Inventory';
 import { Shop } from './pages/Shop';
-import { Timer } from './pages/Timer';
+import { Timer } from './components/modals/Timer';
 import { LoginPage } from './pages/Login';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { RootLayout } from './components/layouts/RootLayout';
@@ -32,8 +32,8 @@ const router = createBrowserRouter(
         <Route path="/more" element={<More />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/study" element={<Timer />} />
       </Route>
+      <Route path="/study" element={<Timer initialTime={3500} />} />
 
       <Route path="/auth" element={<LoginGateway />} />
       <Route path="/auth/login" element={<LoginPage />} />

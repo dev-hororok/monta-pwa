@@ -1,11 +1,17 @@
 import { HomeHeader } from '@/components/headers/HomeHeader';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { useCurrentMemberQuery } from '@/queries/memberQueries';
 import { EggInventorySection } from '@/sections/EggInventorySection';
 import { PlayIcon } from '@radix-ui/react-icons';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
   const { data, isPending } = useCurrentMemberQuery();
+  // const [studyTime, setStudyTime] = useState(0);
+
+  // Timer 페이지 모달로 바꾸기
 
   if (isPending || !data) {
     console.log('Pending');
@@ -22,9 +28,12 @@ export const Home = () => {
             <p className="text-6xl text-primary font-semibold">1:30:00</p>
           </div>
           <div className="flex items-center justify-center py-10">
-            <Button variant={'ghost'} className="p-2 h-auto">
+            <Link
+              to="/study"
+              className={cn(buttonVariants({ variant: 'ghost' }), 'p-2 h-auto')}
+            >
               <PlayIcon className="w-8 h-8" />
-            </Button>
+            </Link>
           </div>
 
           <EggInventorySection memberId={data.member_id} />
