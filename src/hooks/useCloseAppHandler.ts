@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useToast } from '@/components/ui/use-toast';
 import useBoundStore from '@/stores/useBoundStore';
+import { useToast } from '@/components/ui/use-toast';
 
 //* 뒤로가기를 {delay}초안에 안누르면 종료방지 history를 복구하는 훅 */
 export const useCloseAppHandler = (delay = 2000) => {

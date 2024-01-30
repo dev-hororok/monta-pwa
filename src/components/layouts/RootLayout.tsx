@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import { Toaster } from '../ui/toaster';
 import { DarkModeToggle } from '../DarkmodeToggle';
 import { useEffect } from 'react';
 import { CloseAppTrigger } from '../providers/CloseAppTrigger';
+import { Toaster } from '../ui/toaster';
 
 export const RootLayout = () => {
   // 앱 첫 시작시 히스토리 하나 추가(뒤로가기 종료 막기용)

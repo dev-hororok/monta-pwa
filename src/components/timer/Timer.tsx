@@ -4,7 +4,7 @@ import useBoundStore from '@/stores/useBoundStore';
 import { PauseIcon } from '@radix-ui/react-icons';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Badge } from '../ui/badge';
+import { Badge } from '@/components/ui/badge';
 
 interface Props {
   onClose: () => void;

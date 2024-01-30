@@ -10,11 +10,12 @@ import { More } from './pages/More';
 import { Inventory } from './pages/Inventory';
 import { Shop } from './pages/Shop';
 import { LoginPage } from './pages/Login';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import { ProtectedRoute } from './components/layouts/ProtectedRoute';
 import { RootLayout } from './components/layouts/RootLayout';
 import { LoginGateway } from './pages/LoginGateway';
 import { AgreeToTermsPage } from './pages/AgreeToTerms';
 import { RegisterPage } from './pages/Register';
+import { UnAuthedRoute } from './components/layouts/UnAuthedRoute';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,10 +34,38 @@ const router = createBrowserRouter(
         <Route path="/shop" element={<Shop />} />
       </Route>
 
-      <Route path="/auth" element={<LoginGateway />} />
-      <Route path="/auth/login" element={<LoginPage />} />
-      <Route path="/auth/agree" element={<AgreeToTermsPage />} />
-      <Route path="/auth/register" element={<RegisterPage />} />
+      <Route
+        path="/auth"
+        element={
+          <UnAuthedRoute>
+            <LoginGateway />
+          </UnAuthedRoute>
+        }
+      />
+      <Route
+        path="/auth/login"
+        element={
+          <UnAuthedRoute>
+            <LoginPage />
+          </UnAuthedRoute>
+        }
+      />
+      <Route
+        path="/auth/agree"
+        element={
+          <UnAuthedRoute>
+            <AgreeToTermsPage />
+          </UnAuthedRoute>
+        }
+      />
+      <Route
+        path="/auth/register"
+        element={
+          <UnAuthedRoute>
+            <RegisterPage />
+          </UnAuthedRoute>
+        }
+      />
     </Route>
   ),
   { basename: import.meta.env.BASE_URL }

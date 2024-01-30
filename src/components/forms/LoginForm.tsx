@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import authService from '@/apis/services/authService';
-import { useToast } from '../ui/use-toast';
+import { useToast } from '@/components/ui/use-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Form,
@@ -10,9 +10,9 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
-import { Button, buttonVariants } from '../ui/button';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
