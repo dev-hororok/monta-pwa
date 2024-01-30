@@ -56,7 +56,7 @@ const RegisterForm = () => {
       if (result.success) {
         // 회원가입 성공
         toast({ title: '회원가입에 성공하였습니다.' });
-        navigate('/');
+        navigate('/', { replace: true });
       } else {
         // 회원가입 실패
         toast({
@@ -119,6 +119,7 @@ const RegisterForm = () => {
         <div className="flex justify-center items-center text-sm">
           <span className="text-muted-foreground">이미 계정이 있나요?</span>
           <Link
+            replace
             to="/auth/login"
             className={cn(buttonVariants({ variant: 'link' }), 'h-auto py-0')}
           >

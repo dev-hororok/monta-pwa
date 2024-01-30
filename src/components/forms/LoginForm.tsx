@@ -116,9 +116,21 @@ const LoginForm = () => {
           </Button>
         </form>
       </Form>
-
+      <div className="flex justify-center items-center text-sm">
+        <div className="flex justify-center items-center text-sm">
+          <span className="text-muted-foreground">아직 계정이 없으신가요?</span>
+          <Link
+            replace
+            to="/auth/agree"
+            className={cn(buttonVariants({ variant: 'link' }), 'h-auto py-0')}
+          >
+            회원가입
+          </Link>
+        </div>
+      </div>
       <div className="flex justify-center items-center text-sm">
         <Link
+          replace
           to="/auth/register"
           className={cn(
             buttonVariants({ variant: 'link' }),
@@ -128,6 +140,7 @@ const LoginForm = () => {
           계정 찾기
         </Link>
         <Link
+          replace
           to="/auth/register"
           className={cn(
             buttonVariants({ variant: 'link' }),

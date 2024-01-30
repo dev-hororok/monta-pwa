@@ -95,7 +95,7 @@ export const AgreeToTermsPage = () => {
 
         <Button
           disabled={!checked[0] || !checked[1]}
-          onClick={() => navigate('/auth/register')}
+          onClick={() => navigate('/auth/register', { replace: true })}
           className={cn(buttonVariants(), 'w-full h-12 mt-10')}
         >
           동의하기

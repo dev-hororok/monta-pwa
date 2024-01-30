@@ -17,6 +17,7 @@ export const LoginGateway = () => {
       </div>
       <div className="row-span-1 w-full flex flex-col gap-2 items-center py-20">
         <Link
+          replace
           to="/auth/login"
           className={cn(
             buttonVariants({ variant: 'ghost' }),
@@ -25,7 +26,11 @@ export const LoginGateway = () => {
         >
           로그인
         </Link>
-        <Link to="/auth/agree" className={cn(buttonVariants(), 'w-2/3 h-12')}>
+        <Link
+          replace
+          to="/auth/agree"
+          className={cn(buttonVariants(), 'w-2/3 h-12')}
+        >
           가입하기
         </Link>
       </div>
