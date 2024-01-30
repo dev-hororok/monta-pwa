@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const EggInventorySection = ({ memberId }: Props) => {
-  const { data: eggInventory, isPending } = useEggInventoryQuery(memberId);
+  const { isPending } = useEggInventoryQuery(memberId);
 
   if (isPending) {
     return <div>Loading...</div>;

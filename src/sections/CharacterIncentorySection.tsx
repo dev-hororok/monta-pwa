@@ -7,8 +7,7 @@ interface Props {
 }
 
 export const CharacterInventorySection = ({ memberId }: Props) => {
-  const { data: characterInventory, isPending } =
-    useCharacterInventoryQuery(memberId);
+  const { isPending } = useCharacterInventoryQuery(memberId);
 
   if (isPending) {
     return <div>Loading...</div>;
