@@ -80,19 +80,24 @@ const LoginForm = () => {
   return (
     <div className={'grid gap-6 bg-card w-full py-10 px-6'}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem className="">
                 <FormControl>
-                  <Input placeholder="이메일" {...field} className="h-12" />
+                  <Input
+                    placeholder="이메일"
+                    {...field}
+                    className="h-12 mb-2"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+          <Input placeholder="이메일" className="h-0 w-0 border-0 p-0" />
           <FormField
             control={form.control}
             name="password"
@@ -103,7 +108,7 @@ const LoginForm = () => {
                     type="password"
                     placeholder="패스워드"
                     {...field}
-                    className="h-12"
+                    className="h-12 mb-2"
                     autoComplete="off"
                   />
                 </FormControl>
