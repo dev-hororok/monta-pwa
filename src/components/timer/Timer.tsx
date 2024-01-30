@@ -1,30 +1,31 @@
 import { Button } from '@/components/ui/button';
 import { formatTime } from '@/lib/date-format';
+import useBoundStore from '@/stores/useBoundStore';
 import { PauseIcon } from '@radix-ui/react-icons';
 import { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
+import { Badge } from '../ui/badge';
 
 interface Props {
-  initialTime: number;
-  isOpen: boolean;
   onClose: () => void;
 }
 
-export const Timer = ({ initialTime, isOpen, onClose }: Props) => {
-  const [curTime, setCurTime] = useState(initialTime);
+export const Timer = ({ onClose }: Props) => {
+  const initialTime = useBoundStore((state) => state.initialTime);
+  const selectedCategory = useBoundStore((state) => state.selectedCategory);
+  const [curTime, setCurTime] = useState(initialTime * 60);
 
+  // 타이머 시간 표시
   useEffect(() => {
-    if (!isOpen) return;
     const interval = setInterval(() => {
       setCurTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isOpen]);
-
-  if (!isOpen) return null;
+  }, []);
 
   return (
-    <div className="absolute top-0 z-10 w-full md:border md:w-[416px] md:h-[736px] md:rounded-md bg-background border-t-0">
+    <div className="absolute top-0 z-40 w-full h-full md:border md:w-[416px] md:h-[736px] md:rounded-md bg-background border-t-0">
       <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe">
         <main className="h-full overflow-y-scroll scrollbar-hide">
           <img
@@ -37,15 +38,15 @@ export const Timer = ({ initialTime, isOpen, onClose }: Props) => {
             <p className="text-7xl text-primary dark:text-foreground font-semibold">
               {formatTime(curTime)}
             </p>
+            <Badge>{selectedCategory}</Badge>
           </div>
           <div className="flex items-center justify-center py-10 h-1/4">
             <Button
-              type="button"
-              onClick={onClose}
-              variant="ghost"
-              className={'p-2 h-auto'}
+              onClick={() => onClose()}
+              variant={'ghost'}
+              className={cn('p-2 h-auto')}
             >
-              <PauseIcon className="w-8 h-8" />
+              <PauseIcon className="w-10 h-10" />
             </Button>
           </div>
         </main>

@@ -1,20 +1,15 @@
-import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
+import useBoundStore from '@/stores/useBoundStore';
 
-interface Props {
-  setInitialTime: React.Dispatch<React.SetStateAction<number>>;
-  initialTime: number;
-}
-
-const TimePicker = ({ initialTime, setInitialTime }: Props) => {
+const TimePicker = () => {
+  const initialTime = useBoundStore((state) => state.initialTime);
+  const setInitialTime = useBoundStore((state) => state.setInitialTime);
   return (
     <Carousel
       opts={{
@@ -30,17 +25,17 @@ const TimePicker = ({ initialTime, setInitialTime }: Props) => {
           const minutes = (index + 1) * 5;
           const isSelected = minutes === initialTime;
           return (
-            <CarouselItem key={index} className={cn('basis-1/3')}>
+            <CarouselItem key={index} className={cn('basis-1/4')}>
               <div className="p-1">
                 <Card
                   className={cn(
-                    'cursor-pointer h-14 flex items-center justify-center',
+                    'cursor-pointer h-12 flex items-center justify-center',
                     isSelected && 'bg-primary text-primary-foreground'
                   )}
                   onClick={() => setInitialTime(minutes)}
                 >
                   <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-2xl font-semibold">{minutes}m</span>
+                    <span className="text-xl font-semibold">{minutes}</span>
                   </CardContent>
                 </Card>
               </div>
@@ -48,8 +43,6 @@ const TimePicker = ({ initialTime, setInitialTime }: Props) => {
           );
         })}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
     </Carousel>
   );
 };

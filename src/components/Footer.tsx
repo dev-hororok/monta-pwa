@@ -13,6 +13,7 @@ export const Footer = ({ navItems }: Props) => {
           <NavLink
             to={nav.href}
             key={nav.text}
+            replace
             className={({ isActive }) =>
               isActive
                 ? 'w-full text-xs text-accent-foreground'
