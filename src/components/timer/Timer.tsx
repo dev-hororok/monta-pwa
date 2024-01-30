@@ -34,7 +34,7 @@ export const Timer = ({ initialTime, isOpen, onClose }: Props) => {
           />
           <div className="flex flex-col items-center justify-center pt-4 h-1/4 gap-4">
             <p className="text-center">맛있게 익히는중..</p>
-            <p className="text-7xl text-primary font-semibold">
+            <p className="text-7xl text-primary dark:text-foreground font-semibold">
               {formatTime(curTime)}
             </p>
           </div>

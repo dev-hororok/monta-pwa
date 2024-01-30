@@ -3,10 +3,10 @@ import {
   BackpackIcon,
   DotsHorizontalIcon,
   HomeIcon,
-  RocketIcon,
 } from '@radix-ui/react-icons';
 import { NavItem } from '@/interfaces/app.interface';
 import { Outlet } from 'react-router-dom';
+import { ShoppingBagIcon } from 'lucide-react';
 
 const navItems: NavItem[] = [
   {
@@ -16,7 +16,7 @@ const navItems: NavItem[] = [
   },
   {
     text: '상점',
-    icon: <RocketIcon className="w-5 h-5" />,
+    icon: <ShoppingBagIcon className="w-5 h-5" />,
     href: '/shop',
   },
   {
