@@ -21,3 +21,18 @@ export const createStudyCategory = async (
   >(`/timer-api/members/${memberId}/study-categories`, newCategoryData);
   return response.data.data.category;
 };
+
+// 유저 공부 카테고리 수정
+export const editStudyCategory = async (
+  memberId: string,
+  categoryId: number,
+  updatedCategoryData: { subject: string }
+) => {
+  const response = await nestHttpRequest.patch<
+    ApiSuccessResponse<{ study_category: IStudyCategory }>
+  >(
+    `/timer-api/members/${memberId}/study-categories/${categoryId}`,
+    updatedCategoryData
+  );
+  return response.data.data.study_category;
+};
