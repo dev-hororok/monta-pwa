@@ -9,6 +9,14 @@ export const useCloseAppHandler = (delay = 2000) => {
     (state) => state.setBackButtonPressed
   );
 
+  // 앱 첫 시작시 히스토리 하나 추가(뒤로가기 종료 막기용)
+  useEffect(() => {
+    if (!sessionStorage.getItem('firstLoad')) {
+      sessionStorage.setItem('firstLoad', 'true');
+      window.history.pushState(null, 'home', window.location.href);
+    }
+  }, []);
+
   useEffect(() => {
     let timeout: any;
 
