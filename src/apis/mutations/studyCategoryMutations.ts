@@ -30,7 +30,7 @@ export const useCreateStudyCategoryMutation = (memberId: string) => {
       return { optimisticCategory };
     },
     // 성공시 실제 데이터로 교체
-    onSuccess: (result, variables, context) => {
+    onSuccess: (result, _variables, context) => {
       queryClient.setQueryData(
         [STUDY_CATEGORIES_QUERY_KEY, memberId],
         (old: IStudyCategory[]) => {
@@ -44,7 +44,7 @@ export const useCreateStudyCategoryMutation = (memberId: string) => {
       );
     },
     // 실패시 즉시적용된 데이터 제거
-    onError: (error, variables, context) => {
+    onError: (_error, _variables, context) => {
       queryClient.setQueryData(
         [STUDY_CATEGORIES_QUERY_KEY, memberId],
         (old: IStudyCategory[]) => {
@@ -91,7 +91,7 @@ export const useEditStudyCategoryMutation = (
       return { optimisticCategory };
     },
     // 성공시 실제 데이터로 교체
-    onSuccess: (result, variables, context) => {
+    onSuccess: (result, _variables, context) => {
       queryClient.setQueryData(
         [STUDY_CATEGORIES_QUERY_KEY, memberId],
         (old: IStudyCategory[]) => {
@@ -105,7 +105,7 @@ export const useEditStudyCategoryMutation = (
       );
     },
     // 실패시 즉시적용된 데이터 제거
-    onError: (error, variables, context) => {
+    onError: (_error, _variables, context) => {
       queryClient.setQueryData(
         [STUDY_CATEGORIES_QUERY_KEY, memberId],
         (old: IStudyCategory[]) => {
@@ -150,7 +150,7 @@ export const useDeleteStudyCategoryMutation = (
     // 성공시 아무일도 안함
     onSuccess: () => {},
     // 실패시 이전 카테고리로 되돌리기
-    onError: (error, variables, context) => {
+    onError: (_error, _variables, context) => {
       queryClient.setQueryData(
         [STUDY_CATEGORIES_QUERY_KEY, memberId],
         context?.previousCategories
