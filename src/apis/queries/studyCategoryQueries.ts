@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 // 유저 카테고리 조회
 export const STUDY_CATEGORIES_QUERY_KEY = 'studyCategories';
-export const useStudyCategoriesQuery = (memberId: string) => {
+export const useStudyCategoriesQuery = (memberId?: string) => {
   return useQuery({
     queryKey: [STUDY_CATEGORIES_QUERY_KEY, memberId],
     queryFn: () => fetchStudyCategory(memberId),

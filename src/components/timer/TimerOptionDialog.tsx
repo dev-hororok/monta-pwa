@@ -13,6 +13,9 @@ import useBoundStore from '@/stores/useBoundStore';
 import TimePicker from './TimePicker';
 import { Badge } from '../ui/badge';
 import CategoryPicker from './CategoryPicker';
+import { Link } from 'react-router-dom';
+import { Settings } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface Props {
   memberId: string;
@@ -31,7 +34,11 @@ export const TimerOptionDialog = ({ memberId }: Props) => {
           <Badge>{selectedCategory}</Badge>
         </div>
       </DialogTrigger>
-      <DialogContent className="md:max-w-[416px] h-auto">
+      <DialogContent
+        className={cn(
+          `w-full h-screen sm:max-w-[416px] sm:max-h-[736px] flex flex-col justify-start items-center pt-safe-offset-14`
+        )}
+      >
         <DialogHeader>
           <DialogTitle>타이머 설정</DialogTitle>
         </DialogHeader>
@@ -41,7 +48,12 @@ export const TimerOptionDialog = ({ memberId }: Props) => {
             <TimePicker />
           </div>
           <div className="w-full space-y-4 font-semibold py-3">
-            <p className="">카테고리</p>
+            <div className="flex items-center justify-between">
+              <p>카테고리</p>
+              <Link to="/categories">
+                <Settings />
+              </Link>
+            </div>
             <CategoryPicker memberId={memberId} />
           </div>
         </div>

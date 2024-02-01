@@ -12,9 +12,9 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useCreateStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
-import { DialogClose } from '../ui/dialog';
 import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
 import { useToast } from '../ui/use-toast';
+import { ModalHeader } from '../headers/ModalHeader';
 
 const createCategoryFormSchema = z.object({
   subject: z
@@ -26,9 +26,10 @@ type CreateCategoryFormSchemaType = z.infer<typeof createCategoryFormSchema>;
 
 interface Props {
   memberId: string;
+  closeModal: () => void;
 }
 
-export const CreateCategoryForm = ({ memberId }: Props) => {
+export const CreateCategoryForm = ({ memberId, closeModal }: Props) => {
   const { data: categories } = useStudyCategoriesQuery(memberId);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<CreateCategoryFormSchemaType>({
@@ -53,6 +54,7 @@ export const CreateCategoryForm = ({ memberId }: Props) => {
         return;
       }
       createCategory({ data });
+      closeModal();
     } catch (e) {
       // 네트워크 에러나 기타 예외 처리
     } finally {
@@ -62,22 +64,35 @@ export const CreateCategoryForm = ({ memberId }: Props) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 py-10 w-full"
+      >
+        <ModalHeader
+          title={'카테고리 추가'}
+          closeModal={closeModal}
+          rightButton={
+            <Button variant={'default'} type="submit">
+              완료
+            </Button>
+          }
+        />
         <FormField
           control={form.control}
           name="subject"
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Category" {...field} />
+                <Input
+                  placeholder="카테고리"
+                  {...field}
+                  className="w-full h-12"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <DialogClose asChild>
-          <Button type="submit">Submit</Button>
-        </DialogClose>
       </form>
     </Form>
   );

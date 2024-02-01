@@ -1,38 +1,29 @@
-import { cn } from '@/lib/utils';
 import { CreateCategoryForm } from '../forms/CreateCategoryForm';
-import { badgeVariants } from '../ui/badge';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../ui/dialog';
+import { Dialog, DialogContent } from '../ui/dialog';
+import { Button } from '../ui/button';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
 
 interface Props {
   memberId: string;
 }
 
 export const CreateCategoryDialog = ({ memberId }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <Dialog>
-      <DialogTrigger
+    <Dialog open={isOpen}>
+      <Button onClick={() => setIsOpen(true)} variant={'ghost'}>
+        추가
+      </Button>
+      <DialogContent
         className={cn(
-          badgeVariants({ variant: 'destructive' }),
-          'shrink-0 text-sm'
+          `w-full h-screen sm:max-w-[416px] sm:max-h-[736px] flex flex-col justify-start items-center pt-safe-offset-14`
         )}
       >
-        추가
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>카테고리 추가</DialogTitle>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid items-center gap-4">
-            <CreateCategoryForm memberId={memberId} />
-          </div>
-        </div>
+        <CreateCategoryForm
+          memberId={memberId}
+          closeModal={() => setIsOpen(false)}
+        />
       </DialogContent>
     </Dialog>
   );

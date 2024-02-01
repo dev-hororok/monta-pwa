@@ -1,6 +1,5 @@
 import useBoundStore from '@/stores/useBoundStore';
 import { Badge } from '../ui/badge';
-import { CreateCategoryDialog } from './CreateCategoryDialog';
 import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
 
 // const categories = ['공부', '코딩', '알고리즘', 'CS'];
@@ -25,8 +24,7 @@ const CategoryPicker = ({ memberId }: Props) => {
 
   return (
     <div className="w-full md:max-w-[368px] overflow-hidden">
-      <div className="flex items-center flex-wrap gap-2 overflow-x-scroll scrollbar-hide">
-        <CreateCategoryDialog memberId={memberId} />
+      <div className="flex items-center flex-wrap gap-3 overflow-x-scroll scrollbar-hide">
         {categories.map((category, idx) => {
           const isSelected = selectedCategory === category.subject;
           return (
@@ -34,7 +32,7 @@ const CategoryPicker = ({ memberId }: Props) => {
               onClick={() => setSelectedCategory(category.subject)}
               key={idx}
               variant={isSelected ? 'default' : 'outline'}
-              className="shrink-0 cursor-pointer text-sm"
+              className="shrink-0 text-md"
             >
               {category.subject}
             </Badge>
