@@ -14,7 +14,11 @@ import TimePicker from './TimePicker';
 import { Badge } from '../ui/badge';
 import CategoryPicker from './CategoryPicker';
 
-export function TimerOptionDialog() {
+interface Props {
+  memberId: string;
+}
+
+export const TimerOptionDialog = ({ memberId }: Props) => {
   const initialTime = useBoundStore((state) => state.initialTime);
   const selectedCategory = useBoundStore((state) => state.selectedCategory);
   return (
@@ -38,7 +42,7 @@ export function TimerOptionDialog() {
           </div>
           <div className="w-full space-y-4 font-semibold py-3">
             <p className="">카테고리</p>
-            <CategoryPicker />
+            <CategoryPicker memberId={memberId} />
           </div>
         </div>
         <DialogFooter>
@@ -49,4 +53,4 @@ export function TimerOptionDialog() {
       </DialogContent>
     </Dialog>
   );
-}
+};

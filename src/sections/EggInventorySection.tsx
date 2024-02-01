@@ -1,7 +1,7 @@
+import { useEggInventoryQuery } from '@/apis/queries/memberQueries';
 import { EggAddCard } from '@/components/cards/EggAddCard';
 import { EggCard } from '@/components/cards/EggCard';
 import { dummyEggInventory } from '@/mocks/eggInventoryMock';
-import { useEggInventoryQuery } from '@/queries/memberQueries';
 
 interface Props {
   memberId: string;

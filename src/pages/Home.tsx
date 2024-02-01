@@ -1,9 +1,9 @@
+import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { HomeHeader } from '@/components/headers/HomeHeader';
 import { Timer } from '@/components/timer/Timer';
 import { TimerOptionDialog } from '@/components/timer/TimerOptionDialog';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useCurrentMemberQuery } from '@/queries/memberQueries';
 import { EggInventorySection } from '@/sections/EggInventorySection';
 import { PlayIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
@@ -27,7 +27,7 @@ export const Home = () => {
           <div className="h-2/3 flex flex-col justify-center items-center">
             <img src="./pots/pot_2.png" alt="main" className="h-1/2 mx-auto" />
             <div className="flex items-center justify-center h-1/4">
-              <TimerOptionDialog />
+              <TimerOptionDialog memberId={data.member_id} />
             </div>
             <div className="flex items-center justify-center h-1/4">
               <Button

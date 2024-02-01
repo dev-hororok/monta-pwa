@@ -18,7 +18,7 @@ const TimePicker = () => {
         skipSnaps: true,
         startIndex: initialTime / 5 - 1,
       }}
-      className="w-full max-w-sm"
+      className="w-full max-w-[368px] mx-auto"
     >
       <CarouselContent>
         {Array.from({ length: 24 }).map((_, index) => {

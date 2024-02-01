@@ -1,4 +1,4 @@
-import { useCurrentMemberQuery } from '@/queries/memberQueries';
+import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { Button } from '../ui/button';
 import { PiggyBank } from 'lucide-react';
 

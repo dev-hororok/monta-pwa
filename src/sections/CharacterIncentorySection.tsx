@@ -1,6 +1,6 @@
+import { useCharacterInventoryQuery } from '@/apis/queries/memberQueries';
 import { CharacterItemCard } from '@/components/cards/CharacterCard';
 import { dummyCharacterInventory } from '@/mocks/characterIncentoryMock';
-import { useCharacterInventoryQuery } from '@/queries/memberQueries';
 
 interface Props {
   memberId: string;
