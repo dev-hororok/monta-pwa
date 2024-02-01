@@ -36,3 +36,14 @@ export const editStudyCategory = async (
   );
   return response.data.data.study_category;
 };
+
+// 유저 공부 카테고리 삭제
+export const deleteStudyCategory = async (
+  memberId: string,
+  categoryId: number
+) => {
+  const response = await nestHttpRequest.delete<ApiSuccessResponse<null>>(
+    `/timer-api/members/${memberId}/study-categories/${categoryId}`
+  );
+  return response.data.data;
+};

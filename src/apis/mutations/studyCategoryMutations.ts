@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   createStudyCategory,
+  deleteStudyCategory,
   editStudyCategory,
 } from '../services/studyCategory.api';
 import { STUDY_CATEGORIES_QUERY_KEY } from '../queries/studyCategoryQueries';
@@ -55,7 +56,6 @@ export const useCreateStudyCategoryMutation = (memberId: string) => {
         }
       );
     },
-    retry: 3,
   });
 };
 
@@ -92,7 +92,6 @@ export const useEditStudyCategoryMutation = (
     },
     // 성공시 실제 데이터로 교체
     onSuccess: (result, variables, context) => {
-      console.log(result, context);
       queryClient.setQueryData(
         [STUDY_CATEGORIES_QUERY_KEY, memberId],
         (old: IStudyCategory[]) => {
@@ -118,6 +117,44 @@ export const useEditStudyCategoryMutation = (
         }
       );
     },
-    retry: 3,
+  });
+};
+
+export const useDeleteStudyCategoryMutation = (
+  memberId: string,
+  categoryId: number
+) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => {
+      return deleteStudyCategory(memberId, categoryId);
+    },
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: [STUDY_CATEGORIES_QUERY_KEY, memberId],
+      });
+      const previousCategories = queryClient.getQueryData([
+        STUDY_CATEGORIES_QUERY_KEY,
+        memberId,
+      ]);
+
+      queryClient.setQueryData(
+        [STUDY_CATEGORIES_QUERY_KEY, memberId],
+        (old: IStudyCategory[]) => [
+          ...old.filter((c) => c.study_category_id !== categoryId),
+        ]
+      );
+      return { previousCategories };
+    },
+    // 성공시 아무일도 안함
+    onSuccess: () => {},
+    // 실패시 이전 카테고리로 되돌리기
+    onError: (error, variables, context) => {
+      queryClient.setQueryData(
+        [STUDY_CATEGORIES_QUERY_KEY, memberId],
+        context?.previousCategories
+      );
+    },
   });
 };

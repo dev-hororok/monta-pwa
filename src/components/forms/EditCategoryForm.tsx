@@ -14,6 +14,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEditStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
 import { ModalHeader } from '../headers/ModalHeader';
 import { IStudyCategory } from '@/models/study.model';
+import { DeleteCategoryDialog } from '../timer/DeleteCategoryDialog';
+import { Trash } from 'lucide-react';
 
 const editCategoryFormSchema = z.object({
   subject: z
@@ -71,9 +73,17 @@ export const EditCategoryForm = ({
           title={'카테고리 수정'}
           closeModal={closeModal}
           rightButton={
-            <Button variant={'default'} type="submit">
-              완료
-            </Button>
+            <div className="flex items-center gap-4">
+              <DeleteCategoryDialog
+                memberId={memberId}
+                studyCategory={studyCategory}
+              >
+                <Trash className="text-destructive" />
+              </DeleteCategoryDialog>
+              <Button variant={'default'} type="submit">
+                완료
+              </Button>
+            </div>
           }
         />
         <FormField
