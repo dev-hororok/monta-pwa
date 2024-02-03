@@ -3,8 +3,9 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { AuthSlice, createAuthSlice } from './authSlice';
 import { AppSlice, createAppSlice } from './appSlice';
+import { TimerSlice, createTimerSlice } from './timerSlice';
 
-export type StoreState = AppSlice & AuthSlice & TimerOptionSlice;
+export type StoreState = AppSlice & AuthSlice & TimerOptionSlice & TimerSlice;
 
 export const useBoundStore = create<StoreState>()(
   devtools(
@@ -13,6 +14,7 @@ export const useBoundStore = create<StoreState>()(
         ...createAppSlice(...data),
         ...createTimerOptionSlice(...data),
         ...createAuthSlice(...data),
+        ...createTimerSlice(...data),
       }),
       {
         name: 'bound-store',

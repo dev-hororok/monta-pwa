@@ -16,14 +16,23 @@ const TimePicker = () => {
         align: 'center',
         loop: true,
         skipSnaps: true,
-        startIndex: initialTime / 5 - 1,
+        startIndex: initialTime / 60 / 5 - 1,
       }}
       className="w-full max-w-[368px] mx-auto"
     >
       <CarouselContent>
+        <Card
+          className={cn('cursor-pointer h-12 flex items-center justify-center')}
+          onClick={() => setInitialTime(10)}
+        >
+          <CardContent className="flex aspect-square items-center justify-center p-6">
+            <span className="text-xl font-semibold">10초</span>
+          </CardContent>
+        </Card>
+
         {Array.from({ length: 24 }).map((_, index) => {
           const minutes = (index + 1) * 5;
-          const isSelected = minutes === initialTime;
+          const isSelected = minutes * 60 === initialTime;
           return (
             <CarouselItem key={index} className={cn('basis-1/4')}>
               <div className="p-1">
@@ -32,7 +41,7 @@ const TimePicker = () => {
                     'cursor-pointer h-12 flex items-center justify-center',
                     isSelected && 'bg-primary text-primary-foreground'
                   )}
-                  onClick={() => setInitialTime(minutes)}
+                  onClick={() => setInitialTime(minutes * 60)}
                 >
                   <CardContent className="flex aspect-square items-center justify-center p-6">
                     <span className="text-xl font-semibold">{minutes}</span>
