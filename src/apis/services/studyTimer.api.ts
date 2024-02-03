@@ -13,9 +13,12 @@ export const startStudyTimer = async (body: { category_id?: string }) => {
 };
 
 // 스터디 타이머 종료
-export const endStudyTimer = async () => {
+export const endStudyTimer = async (duration: number) => {
   const response = await nestHttpRequest.post<ApiSuccessResponse<null>>(
-    `/timer-api/study-timer/end`
+    `/timer-api/study-timer/end`,
+    {
+      duration,
+    }
   );
   return response.data.data;
 };

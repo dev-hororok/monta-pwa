@@ -2,17 +2,19 @@ import { Button } from '@/components/ui/button';
 import { formatTime } from '@/lib/date-format';
 import useBoundStore from '@/stores/useBoundStore';
 import { PauseIcon } from '@radix-ui/react-icons';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { useEndStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
 import { EndStudyTimerDialog } from './EndStudyTimerDialog';
+import { AlarmDialog } from './AlarmDialog';
 
 interface Props {
   onClose: () => void;
 }
 
 export const Timer = ({ onClose }: Props) => {
+  const [alarmIsOpen, setAlarmIsOpen] = useState(false);
   const initialTime = useBoundStore((state) => state.initialTime);
   const selectedCategory = useBoundStore((state) => state.selectedCategory);
   const duration = useBoundStore((state) => state.duration);
@@ -30,6 +32,7 @@ export const Timer = ({ onClose }: Props) => {
       return () => clearInterval(interval);
     } else {
       endStudyTimer(initialTime);
+      setAlarmIsOpen(true);
     }
   }, [initialTime, duration, updateTimer, endStudyTimer, resetTimer, onClose]);
   return (
@@ -57,6 +60,7 @@ export const Timer = ({ onClose }: Props) => {
               </Button>
             </EndStudyTimerDialog>
           </div>
+          <AlarmDialog isOpen={alarmIsOpen} closeTimerModal={onClose} />
         </main>
       </div>
     </div>

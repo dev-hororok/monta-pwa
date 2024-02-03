@@ -16,8 +16,7 @@ export const useEndStudyTimerMutation = () => {
 
   return useMutation({
     mutationFn: (duration: number) => {
-      console.log(duration);
-      return endStudyTimer();
+      return endStudyTimer(duration);
     },
     // 음식 남은시간 즉시적용
     onMutate: async (variables) => {

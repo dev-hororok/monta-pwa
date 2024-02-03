@@ -16,17 +16,21 @@ const TimePicker = () => {
         align: 'center',
         loop: true,
         skipSnaps: true,
-        startIndex: initialTime / 60 / 5 - 1,
+        startIndex: initialTime === 10 ? 0 : initialTime / 60 / 5 - 1,
       }}
       className="w-full max-w-[368px] mx-auto"
     >
       <CarouselContent>
+        {/* 테스트용 10초 */}
         <Card
-          className={cn('cursor-pointer h-12 flex items-center justify-center')}
+          className={cn(
+            'cursor-pointer h-12 flex items-center justify-center',
+            initialTime === 10 && 'bg-primary text-primary-foreground'
+          )}
           onClick={() => setInitialTime(10)}
         >
-          <CardContent className="flex aspect-square items-center justify-center p-6">
-            <span className="text-xl font-semibold">10초</span>
+          <CardContent className="flex aspect-square items-center justify-center p-6 shrink-0">
+            <span className="text-xl font-semibold">테스트용 </span>
           </CardContent>
         </Card>
 
