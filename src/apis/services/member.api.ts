@@ -5,7 +5,10 @@ import { ApiSuccessResponse } from '../interface/apiResponse.type';
 import { IMember } from '@/models/member.model';
 import { ICharacterInventory } from '@/models/character.model';
 import { IStudyRecord } from '@/models/study.model';
-import { IStatistic } from '@/models/statistic.model';
+import {
+  IConsumableItemInventory,
+  IFoodItemInventory,
+} from '@/models/item.model';
 
 // 현재유저 조회
 export const fetchCurrentMember = async () => {
@@ -21,6 +24,22 @@ export const fetchEggInventory = async (memberId: string) => {
     ApiSuccessResponse<{ egg_inventory: IEggInventory[] }>
   >(`/timer-api/members/${memberId}/egg-inventory`);
   return response.data.data.egg_inventory;
+};
+
+// 보유중인 음식 조회
+export const fetchFoodInventory = async (memberId: string) => {
+  const response = await nestHttpRequest.get<
+    ApiSuccessResponse<{ item_inventory: IFoodItemInventory[] }>
+  >(`/timer-api/members/${memberId}/item-inventory?item_type=${'Food'}`);
+  return response.data.data.item_inventory;
+};
+
+// 보유중인 사용아이템 조회
+export const fetchConsumableInventory = async (memberId: string) => {
+  const response = await nestHttpRequest.get<
+    ApiSuccessResponse<{ item_inventory: IConsumableItemInventory[] }>
+  >(`/timer-api/members/${memberId}/item-inventory?item_type=${'Consumable'}`);
+  return response.data.data.item_inventory;
 };
 
 // 보유중인 캐릭터 조회
@@ -45,12 +64,4 @@ export const fetchStudyRecords = async (memberId: string) => {
     ApiSuccessResponse<{ study_records: IStudyRecord[] }>
   >(`/timer-api/members/${memberId}/study-records`);
   return response.data.data.study_records;
-};
-
-// 유저 통계 조회
-export const fetchMemberStatistic = async (memberId: string) => {
-  const response = await nestHttpRequest.get<
-    ApiSuccessResponse<{ statistic: IStatistic }>
-  >(`/timer-api/members/${memberId}/statistic`);
-  return response.data.data.statistic;
 };

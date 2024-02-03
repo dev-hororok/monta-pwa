@@ -1,15 +1,14 @@
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { formatTime } from '@/lib/date-format';
+import { IFoodItemInventory } from '@/models/item.model';
 
 interface Props {
-  imgSrc: string;
-  alt?: string;
-  restSeconds: number;
+  foodItemInventory: IFoodItemInventory;
 }
 
-export const EggCard = ({ imgSrc, alt = 'egg_card', restSeconds }: Props) => {
-  const isActive = restSeconds === 0;
+export const FoodInventoryCard = ({ foodItemInventory }: Props) => {
+  const isActive = foodItemInventory.progress === 0;
   return (
     <Button
       variant={isActive ? 'default' : 'ghost'}
@@ -19,8 +18,14 @@ export const EggCard = ({ imgSrc, alt = 'egg_card', restSeconds }: Props) => {
       )}
     >
       {isActive ? <p>Open</p> : null}
-      <img width={200} height={200} src={imgSrc} alt={alt} className="p-0" />
-      <p>{formatTime(restSeconds)}</p>
+      <img
+        width={200}
+        height={200}
+        src={foodItemInventory.item.image_url}
+        alt={'FoodItem'}
+        className="p-0"
+      />
+      <p>{formatTime(foodItemInventory.progress)}</p>
     </Button>
   );
 };
