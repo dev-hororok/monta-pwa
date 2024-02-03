@@ -38,7 +38,9 @@ export const Timer = ({ onClose }: Props) => {
             <p className="text-7xl text-primary dark:text-foreground font-semibold">
               {formatTime(curTime)}
             </p>
-            <Badge>{selectedCategory}</Badge>
+            <Badge>
+              {selectedCategory ? selectedCategory.subject : '선택 안함'}
+            </Badge>
           </div>
           <div className="flex items-center justify-center py-10 h-1/4">
             <Button

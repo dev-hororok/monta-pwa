@@ -25,7 +25,7 @@ export const createStudyCategory = async (
 // 유저 공부 카테고리 수정
 export const editStudyCategory = async (
   memberId: string,
-  categoryId: number,
+  categoryId: string,
   updatedCategoryData: { subject: string }
 ) => {
   const response = await nestHttpRequest.patch<
@@ -40,7 +40,7 @@ export const editStudyCategory = async (
 // 유저 공부 카테고리 삭제
 export const deleteStudyCategory = async (
   memberId: string,
-  categoryId: number
+  categoryId: string
 ) => {
   const response = await nestHttpRequest.delete<ApiSuccessResponse<null>>(
     `/timer-api/members/${memberId}/study-categories/${categoryId}`

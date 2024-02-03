@@ -20,7 +20,7 @@ export const useCreateStudyCategoryMutation = (memberId: string) => {
         queryKey: [STUDY_CATEGORIES_QUERY_KEY, memberId],
       });
       const optimisticCategory: IStudyCategory = {
-        study_category_id: -1,
+        study_category_id: '-1',
         subject: variables.data.subject,
       };
       queryClient.setQueryData(
@@ -61,7 +61,7 @@ export const useCreateStudyCategoryMutation = (memberId: string) => {
 
 export const useEditStudyCategoryMutation = (
   memberId: string,
-  categoryId: number
+  categoryId: string
 ) => {
   const queryClient = useQueryClient();
 
@@ -74,7 +74,7 @@ export const useEditStudyCategoryMutation = (
         queryKey: [STUDY_CATEGORIES_QUERY_KEY, memberId],
       });
       const optimisticCategory: IStudyCategory = {
-        study_category_id: -1,
+        study_category_id: '-1',
         subject: variables.data.subject,
       };
       queryClient.setQueryData(
@@ -122,7 +122,7 @@ export const useEditStudyCategoryMutation = (
 
 export const useDeleteStudyCategoryMutation = (
   memberId: string,
-  categoryId: number
+  categoryId: string
 ) => {
   const queryClient = useQueryClient();
 

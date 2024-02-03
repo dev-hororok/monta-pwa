@@ -1,8 +1,9 @@
 import {
   fetchCharacterInventory,
+  fetchConsumableInventory,
   fetchCurrentMember,
   fetchEggInventory,
-  fetchMemberStatistic,
+  fetchFoodInventory,
   fetchStudyRecords,
   fetchStudyStreak,
 } from '@/apis/services/member.api';
@@ -22,8 +23,30 @@ export const useCurrentMemberQuery = () => {
 export const EGG_INVENTORY_QUERY_KEY = 'eggInventory';
 export const useEggInventoryQuery = (memberId: string) => {
   return useQuery({
-    queryKey: [CURRENT_MEMBER_QUERY_KEY, memberId],
+    queryKey: [CURRENT_MEMBER_QUERY_KEY],
     queryFn: () => fetchEggInventory(memberId),
+    staleTime: 10 * 60 * 1000,
+    enabled: !!memberId,
+  });
+};
+
+// 보유중인 음식 조회
+export const FOOD_INVENTORY_QUERY_KEY = 'foodInventory';
+export const useFoodInventoryQuery = (memberId: string) => {
+  return useQuery({
+    queryKey: [FOOD_INVENTORY_QUERY_KEY],
+    queryFn: () => fetchFoodInventory(memberId),
+    staleTime: 10 * 60 * 1000,
+    enabled: !!memberId,
+  });
+};
+
+// 보유중인 사용아이템 조회
+export const CONSUMABLE_INVENTORY_QUERY_KEY = 'consumableInventory';
+export const useConsumableInventoryQuery = (memberId: string) => {
+  return useQuery({
+    queryKey: [CONSUMABLE_INVENTORY_QUERY_KEY],
+    queryFn: () => fetchConsumableInventory(memberId),
     staleTime: 10 * 60 * 1000,
     enabled: !!memberId,
   });
@@ -33,7 +56,7 @@ export const useEggInventoryQuery = (memberId: string) => {
 export const CHARACTER_INVENTORY_QUERY_KEY = 'characterInventory';
 export const useCharacterInventoryQuery = (memberId: string) => {
   return useQuery({
-    queryKey: [CHARACTER_INVENTORY_QUERY_KEY, memberId],
+    queryKey: [CHARACTER_INVENTORY_QUERY_KEY],
     queryFn: () => fetchCharacterInventory(memberId),
     staleTime: 10 * 60 * 1000,
     enabled: !!memberId,
@@ -57,17 +80,6 @@ export const useStudyRecordsQuery = (memberId: string) => {
   return useQuery({
     queryKey: [STUDY_RECORDS_QUERY_KEY, memberId],
     queryFn: () => fetchStudyRecords(memberId),
-    staleTime: 10 * 60 * 1000,
-    enabled: !!memberId,
-  });
-};
-
-// 유저 통계 조회
-export const MEMBER_STATISTIC_QUERY_KEY = 'statistic';
-export const useMemberStatisticQuery = (memberId: string) => {
-  return useQuery({
-    queryKey: [MEMBER_STATISTIC_QUERY_KEY, memberId],
-    queryFn: () => fetchMemberStatistic(memberId),
     staleTime: 10 * 60 * 1000,
     enabled: !!memberId,
   });

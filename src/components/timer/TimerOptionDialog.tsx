@@ -31,7 +31,9 @@ export const TimerOptionDialog = ({ memberId }: Props) => {
           <Button variant="ghost" className="text-6xl h-auto">
             {formatTime(initialTime * 60)}
           </Button>
-          <Badge>{selectedCategory}</Badge>
+          <Badge>
+            {selectedCategory ? selectedCategory.subject : '선택 안함'}
+          </Badge>
         </div>
       </DialogTrigger>
       <DialogContent

@@ -1,18 +1,25 @@
+import { useStartStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { HomeHeader } from '@/components/headers/HomeHeader';
 import { Timer } from '@/components/timer/Timer';
 import { TimerOptionDialog } from '@/components/timer/TimerOptionDialog';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { EggInventorySection } from '@/sections/EggInventorySection';
+import { FoodInventorySection } from '@/sections/FoodInventorySection';
+import useBoundStore from '@/stores/useBoundStore';
 import { PlayIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 
 export const Home = () => {
   const { data, isPending } = useCurrentMemberQuery();
   const [isTimerModalOpen, setIsTimerModalOpen] = useState(false);
+  const { mutate: startStudyTimer } = useStartStudyTimerMutation();
+  const selectedCategory = useBoundStore((state) => state.selectedCategory);
 
-  const openTimerModal = () => setIsTimerModalOpen(true);
+  const openTimerModal = () => {
+    startStudyTimer({ category_id: selectedCategory?.study_category_id });
+    setIsTimerModalOpen(true);
+  };
   const closeTimerModal = () => setIsTimerModalOpen(false);
 
   if (isPending || !data) {
@@ -42,7 +49,7 @@ export const Home = () => {
           </div>
 
           <div className="h-1/3">
-            <EggInventorySection memberId={data.member_id} />
+            <FoodInventorySection memberId={data.member_id} />
           </div>
         </main>
       </div>

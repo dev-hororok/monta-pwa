@@ -1,11 +1,12 @@
+import { IStudyCategory } from '@/models/study.model';
 import { StateCreator } from 'zustand';
 
 export interface TimerOptionSlice {
   initialTime: number;
   setInitialTime: (time: number) => void;
 
-  selectedCategory: string;
-  setSelectedCategory: (category: string) => void;
+  selectedCategory: IStudyCategory | null;
+  setSelectedCategory: (category: IStudyCategory | null) => void;
 }
 
 export const createTimerOptionSlice: StateCreator<TimerOptionSlice> = (
@@ -17,7 +18,7 @@ export const createTimerOptionSlice: StateCreator<TimerOptionSlice> = (
       initialTime: time,
     }));
   },
-  selectedCategory: '공부',
+  selectedCategory: null,
   setSelectedCategory: (category) => {
     set(() => ({
       selectedCategory: category,

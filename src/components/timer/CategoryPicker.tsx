@@ -25,11 +25,18 @@ const CategoryPicker = ({ memberId }: Props) => {
   return (
     <div className="w-full md:max-w-[368px] overflow-hidden">
       <div className="flex items-center flex-wrap gap-3 overflow-x-scroll scrollbar-hide">
+        <Badge
+          onClick={() => setSelectedCategory(null)}
+          variant={selectedCategory === null ? 'default' : 'outline'}
+          className="shrink-0 text-md"
+        >
+          선택 안함
+        </Badge>
         {categories.map((category, idx) => {
-          const isSelected = selectedCategory === category.subject;
+          const isSelected = selectedCategory?.subject === category.subject;
           return (
             <Badge
-              onClick={() => setSelectedCategory(category.subject)}
+              onClick={() => setSelectedCategory(category)}
               key={idx}
               variant={isSelected ? 'default' : 'outline'}
               className="shrink-0 text-md"
