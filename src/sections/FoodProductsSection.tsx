@@ -1,14 +1,25 @@
+import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { useShopFoodItemsQuery } from '@/apis/queries/shopQueries';
 import { ProductCard } from '@/components/cards/ProductCard';
+import { PurchaseDrawer } from '@/components/shop/PurchaseDrawer';
 
 export const FoodProductsSection = () => {
-  const { data: items, isPending, isError } = useShopFoodItemsQuery();
+  const {
+    data: member,
+    isPending: memberIdPending,
+    isError: memberIsError,
+  } = useCurrentMemberQuery();
+  const {
+    data: items,
+    isPending: itemsIsPending,
+    isError: itemsIsError,
+  } = useShopFoodItemsQuery();
 
-  if (isPending) {
+  if (itemsIsPending || memberIdPending) {
     return <div>Loading...</div>;
   }
 
-  if (isError) {
+  if (itemsIsError || memberIsError) {
     return <div>Error</div>;
   }
 
@@ -17,15 +28,18 @@ export const FoodProductsSection = () => {
       <div className="grid grid-cols-3 gap-2">
         {items.map((item, idx) => {
           return (
-            <ProductCard
-              key={idx}
-              imgSrc={item.image_url}
-              alt={item.name}
-              price={item.cost}
-              name={item.name}
-              description={item.description}
-              grade={item.grade}
-            />
+            <PurchaseDrawer key={idx} item={item} member={member}>
+              <div>
+                <ProductCard
+                  imgSrc={item.image_url}
+                  alt={item.name}
+                  price={item.cost}
+                  name={item.name}
+                  description={item.description}
+                  grade={item.grade}
+                />
+              </div>
+            </PurchaseDrawer>
           );
         })}
       </div>

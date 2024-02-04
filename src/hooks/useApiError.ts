@@ -6,11 +6,18 @@ const useApiError = () => {
   const { toast } = useToast();
 
   const defaultHandler = useCallback(
-    (httpMessage: string) => {
-      toast({
-        variant: 'destructive',
-        title: httpMessage,
-      });
+    (httpMessage: string | string[]) => {
+      if (Array.isArray(httpMessage)) {
+        toast({
+          variant: 'destructive',
+          title: httpMessage[0],
+        });
+      } else {
+        toast({
+          variant: 'destructive',
+          title: httpMessage,
+        });
+      }
     },
     [toast]
   );

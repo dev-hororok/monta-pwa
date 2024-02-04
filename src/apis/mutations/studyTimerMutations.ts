@@ -26,10 +26,10 @@ export const useEndStudyTimerMutation = () => {
       queryClient.setQueryData(
         [FOOD_INVENTORY_QUERY_KEY],
         (old: IFoodItemInventory[]) => {
-          return old.map((category) => {
-            const rest = category.progress - variables;
-            category.progress = 0 < rest ? rest : 0;
-            return category;
+          return old.map((item) => {
+            const rest = item.progress - variables;
+            item.progress = 0 < rest ? rest : 0;
+            return item;
           });
         }
       );

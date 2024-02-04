@@ -1,5 +1,5 @@
 import { useConsumableInventoryQuery } from '@/apis/queries/memberQueries';
-import { StreakItemCard } from '@/components/cards/StreakItemCard';
+import { ConsumableItemInventoryCard } from '@/components/cards/ConsumableInventoryCard';
 
 interface Props {
   memberId: string;
@@ -24,7 +24,12 @@ export const UseItemInventorySection = ({ memberId }: Props) => {
       <p className="font-semibold pb-4">사용 아이템</p>
       <div className="grid grid-cols-3 gap-2">
         {items.map((item, idx) => {
-          return <StreakItemCard key={idx} count={item.quantity} />;
+          return (
+            <ConsumableItemInventoryCard
+              key={idx}
+              consumableItemInventory={item}
+            />
+          );
         })}
       </div>
     </section>

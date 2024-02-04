@@ -1,6 +1,7 @@
 import { IConsumableItem, IFoodItem } from '@/models/item.model';
-import { nestHttpRequest } from '../common/httpRequest';
+import { nestHttpRequest, springHttpRequest } from '../common/httpRequest';
 import { ApiSuccessResponse } from '../interface/apiResponse.type';
+import { ITransactionRecord } from '@/models/transaction.model';
 
 // 상점 음식아이템 조회
 export const fetchShopFoodItems = async () => {
@@ -16,4 +17,32 @@ export const fetchShopConsumableItems = async () => {
     ApiSuccessResponse<{ items: IConsumableItem[] }>
   >(`/timer-api/items?item_type=${'Consumable'}`);
   return response.data.data.items;
+};
+
+// 상점 구매
+export const purchaseItem = async (body: {
+  item_id: number;
+  count: number;
+}) => {
+  const response = await springHttpRequest.post<
+    ApiSuccessResponse<{ transaction_record: ITransactionRecord }>
+  >(`/v2/shop/purchase`, {
+    item_id: body.item_id,
+    count: body.count,
+  });
+  return response.data.data.transaction_record;
+};
+
+// 상점 캐릭터 판매
+export const sellCharacter = async (body: {
+  character_id: number;
+  count: number;
+}) => {
+  const response = await springHttpRequest.post<
+    ApiSuccessResponse<{ transaction_record: ITransactionRecord }>
+  >(`/v2/shop/sell`, {
+    character_id: body.character_id,
+    count: body.count,
+  });
+  return response.data.data.transaction_record;
 };
