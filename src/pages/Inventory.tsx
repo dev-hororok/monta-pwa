@@ -30,8 +30,9 @@ export function Inventory() {
       <main className="h-full overflow-y-scroll scrollbar-hide pb-10">
         <div className="w-full h-full py-4 px-4 space-y-6">
           {/* 사용아이템 Section */}
-          <UseItemInventorySection />
+          <UseItemInventorySection memberId={data.member_id} />
 
+          {/* 캐릭터 Section */}
           <CharacterInventorySection memberId={data.member_id} />
         </div>
       </main>

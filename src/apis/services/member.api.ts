@@ -18,7 +18,7 @@ export const fetchCurrentMember = async () => {
   return response.data.data.member;
 };
 
-// 보유중인 알 조회
+// 보유중인 알 조회 (안씀)
 export const fetchEggInventory = async (memberId: string) => {
   const response = await nestHttpRequest.get<
     ApiSuccessResponse<{ egg_inventory: IEggInventory[] }>
