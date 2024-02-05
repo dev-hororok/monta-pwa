@@ -15,7 +15,7 @@ import { useEditStudyCategoryMutation } from '@/apis/mutations/studyCategoryMuta
 import { ModalHeader } from '../headers/ModalHeader';
 import { IStudyCategory } from '@/models/study.model';
 import { Trash } from 'lucide-react';
-import { DeleteCategoryDialog } from '../modals/timer/DeleteCategoryDialog';
+import { useModalStore } from '@/stores/useModalStore';
 
 const editCategoryFormSchema = z.object({
   subject: z
@@ -36,17 +36,16 @@ export const EditCategoryForm = ({
   studyCategory,
   closeModal,
 }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<EditCategoryFormSchemaType>({
     resolver: zodResolver(editCategoryFormSchema),
     defaultValues: {
       subject: studyCategory.subject,
     },
   });
-  const { mutate: editCategory } = useEditStudyCategoryMutation(
-    memberId,
-    studyCategory.study_category_id
-  );
+  const { mutate: editCategory } = useEditStudyCategoryMutation();
+  const openModal = useModalStore((state) => state.openModal);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<EditCategoryFormSchemaType> = async (
     data: EditCategoryFormSchemaType
@@ -54,13 +53,24 @@ export const EditCategoryForm = ({
     if (isLoading) return;
     setIsLoading(true);
     try {
-      editCategory({ data });
+      editCategory({
+        memberId,
+        categoryId: studyCategory.study_category_id,
+        data,
+      });
       closeModal();
     } catch (e) {
       // 네트워크 에러나 기타 예외 처리
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const onClickDeleteCategoryHandler = () => {
+    openModal('deleteCategory', {
+      memberId: memberId,
+      category: studyCategory,
+    });
   };
 
   return (
@@ -74,12 +84,9 @@ export const EditCategoryForm = ({
           closeModal={closeModal}
           rightButton={
             <div className="flex items-center gap-4">
-              <DeleteCategoryDialog
-                memberId={memberId}
-                studyCategory={studyCategory}
-              >
+              <Button onClick={onClickDeleteCategoryHandler} variant={'ghost'}>
                 <Trash className="text-destructive" />
-              </DeleteCategoryDialog>
+              </Button>
               <Button variant={'default'} type="submit">
                 완료
               </Button>

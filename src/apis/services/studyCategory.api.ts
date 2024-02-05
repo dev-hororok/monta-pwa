@@ -28,13 +28,11 @@ export const editStudyCategory = async (
   categoryId: string,
   updatedCategoryData: { subject: string }
 ) => {
-  const response = await nestHttpRequest.patch<
-    ApiSuccessResponse<{ study_category: IStudyCategory }>
-  >(
+  const response = await nestHttpRequest.patch<ApiSuccessResponse<null>>(
     `/timer-api/members/${memberId}/study-categories/${categoryId}`,
     updatedCategoryData
   );
-  return response.data.data.study_category;
+  return response.data.data;
 };
 
 // 유저 공부 카테고리 삭제

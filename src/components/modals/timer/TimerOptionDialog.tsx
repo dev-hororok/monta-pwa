@@ -1,13 +1,4 @@
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import { formatTime } from '@/lib/date-format';
 import TimePicker from './TimePicker';
 import { Badge } from '@/components/ui/badge';
@@ -16,6 +7,15 @@ import { Link } from 'react-router-dom';
 import { Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 interface Props {
   memberId: string;
@@ -24,8 +24,8 @@ interface Props {
 export const TimerOptionDialog = ({ memberId }: Props) => {
   const timerOptions = useTimerOptionsStore((state) => state.timerOptions);
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
         <div className="flex flex-col items-center gap-2">
           <Button variant="ghost" className="text-6xl h-auto">
             {formatTime(timerOptions.pomodoroTime * 60)}
@@ -36,15 +36,15 @@ export const TimerOptionDialog = ({ memberId }: Props) => {
               : '선택 안함'}
           </Badge>
         </div>
-      </DialogTrigger>
-      <DialogContent
+      </AlertDialogTrigger>
+      <AlertDialogContent
         className={cn(
-          `w-full h-screen sm:max-w-[416px] sm:max-h-[736px] flex flex-col justify-start items-center pt-safe-offset-14`
+          `w-full h-screen md:max-w-[416px] md:max-h-[736px] flex flex-col justify-start items-center pt-safe-offset-14`
         )}
       >
-        <DialogHeader>
-          <DialogTitle>타이머 설정</DialogTitle>
-        </DialogHeader>
+        <AlertDialogHeader>
+          <AlertDialogTitle>타이머 설정</AlertDialogTitle>
+        </AlertDialogHeader>
         <div className="pb-6">
           <div className="w-full space-y-4 font-semibold py-3">
             <p className="">집중 시간(분)</p>
@@ -60,12 +60,12 @@ export const TimerOptionDialog = ({ memberId }: Props) => {
             <CategoryPicker memberId={memberId} />
           </div>
         </div>
-        <DialogFooter>
-          <DialogClose asChild>
+        <AlertDialogFooter>
+          <AlertDialogAction asChild>
             <Button type="submit">확인</Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

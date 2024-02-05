@@ -27,7 +27,7 @@ export const CharacterAcquisitionDialog = () => {
     <AlertDialog open={isOpen}>
       <AlertDialogContent
         className={cn(
-          `w-full h-screen sm:max-w-[416px] sm:max-h-[736px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
+          `w-full h-screen md:max-w-[416px] md:max-h-[736px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
         )}
       >
         <AlertDialogTitle className="text-3xl">캐릭터 획득</AlertDialogTitle>

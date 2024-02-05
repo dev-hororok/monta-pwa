@@ -23,7 +23,7 @@ export const TimerAlarmDialog = () => {
     <AlertDialog open={isOpen}>
       <AlertDialogContent
         className={cn(
-          `w-full h-screen sm:max-w-[416px] sm:max-h-[736px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
+          `w-full h-screen md:max-w-[416px] md:max-h-[736px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
         )}
       >
         <AlertDialogTitle>어디서 맛있는 냄새가 납니다</AlertDialogTitle>

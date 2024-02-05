@@ -38,7 +38,7 @@ export const CreateCategoryForm = ({ memberId, closeModal }: Props) => {
       subject: '',
     },
   });
-  const { mutate: createCategory } = useCreateStudyCategoryMutation(memberId);
+  const { mutate: createCategory } = useCreateStudyCategoryMutation();
   const { toast } = useToast();
 
   const onSubmit: SubmitHandler<CreateCategoryFormSchemaType> = async (
@@ -53,7 +53,7 @@ export const CreateCategoryForm = ({ memberId, closeModal }: Props) => {
         });
         return;
       }
-      createCategory({ data });
+      createCategory({ memberId, data });
       closeModal();
     } catch (e) {
       // 네트워크 에러나 기타 예외 처리
