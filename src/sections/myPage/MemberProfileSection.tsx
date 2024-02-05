@@ -9,7 +9,7 @@ interface Props {
 
 export const MemberProfileSection = ({ member }: Props) => {
   return (
-    <section className="flex flex-col items-center gap-2 py-4 px-4">
+    <section className="flex flex-col items-center gap-2 py-4">
       <Avatar className="w-20 h-20">
         <AvatarImage src={member.image_url} />
         <AvatarFallback>CN</AvatarFallback>
