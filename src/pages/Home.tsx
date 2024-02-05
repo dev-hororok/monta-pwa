@@ -1,7 +1,7 @@
 import { useStartStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { HomeHeader } from '@/components/headers/HomeHeader';
-import { TimerOptionDialog } from '@/components/modals/timer/TimerOptionDialog';
+import { OpenTimerOptionsButton } from '@/components/modals/timerOptions/OpenTimerOptionsButton';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { FoodInventorySection } from '@/sections/FoodInventorySection';
@@ -37,7 +37,7 @@ export const Home = () => {
               className="h-1/2 mx-auto"
             />
             <div className="flex items-center justify-center h-1/4">
-              <TimerOptionDialog memberId={data.member_id} />
+              <OpenTimerOptionsButton memberId={data.member_id} />
             </div>
             <div className="flex items-center justify-center h-1/4">
               <Button

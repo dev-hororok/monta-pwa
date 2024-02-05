@@ -12,6 +12,7 @@ interface ModalsState {
   characterAcquisition: ModalState<ICharacter>;
   // 타이머
   timer: ModalState;
+  timerOptions: ModalState<{ memberId: string }>;
   timerAlarm: ModalState;
   pauseTimer: ModalState<{ duration: number; startTimer: () => void }>;
 
@@ -34,6 +35,7 @@ export const useModalStore = create<ModalStore>()((set) => ({
     characterAcquisition: { isOpen: false },
     timerAlarm: { isOpen: false },
     timer: { isOpen: false },
+    timerOptions: { isOpen: false },
     pauseTimer: { isOpen: false },
     createCategory: { isOpen: false },
     editCategory: { isOpen: false },

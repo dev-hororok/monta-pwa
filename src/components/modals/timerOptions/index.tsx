@@ -1,12 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { formatTime } from '@/lib/date-format';
-import TimePicker from './TimePicker';
-import { Badge } from '@/components/ui/badge';
-import CategoryPicker from './CategoryPicker';
 import { Link } from 'react-router-dom';
 import { Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,29 +9,25 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import TimePicker from './TimePicker';
+import CategoryPicker from './CategoryPicker';
+import { useModalStore } from '@/stores/useModalStore';
 
-interface Props {
-  memberId: string;
-}
+export const TimerOptionDialog = () => {
+  const { data, isOpen } = useModalStore((state) => state.modals.timerOptions);
+  const closeModal = useModalStore((state) => state.closeModal);
 
-export const TimerOptionDialog = ({ memberId }: Props) => {
-  const timerOptions = useTimerOptionsStore((state) => state.timerOptions);
+  const onClickCloseHandler = () => {
+    closeModal('timerOptions');
+  };
+
+  if (!isOpen || !data) {
+    return null;
+  }
+
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <div className="flex flex-col items-center gap-2">
-          <Button variant="ghost" className="text-6xl h-auto">
-            {formatTime(timerOptions.pomodoroTime * 60)}
-          </Button>
-          <Badge>
-            {timerOptions.selectedCategory
-              ? timerOptions.selectedCategory.subject
-              : '선택 안함'}
-          </Badge>
-        </div>
-      </AlertDialogTrigger>
+    <AlertDialog open={isOpen}>
       <AlertDialogContent
         className={cn(
           `w-full h-screen md:max-w-[416px] md:max-h-[736px] flex flex-col justify-start items-center pt-safe-offset-14`
@@ -57,12 +48,14 @@ export const TimerOptionDialog = ({ memberId }: Props) => {
                 <Settings />
               </Link>
             </div>
-            <CategoryPicker memberId={memberId} />
+            <CategoryPicker memberId={data.memberId} />
           </div>
         </div>
         <AlertDialogFooter>
           <AlertDialogAction asChild>
-            <Button type="submit">확인</Button>
+            <Button type="button" onClick={onClickCloseHandler}>
+              확인
+            </Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
