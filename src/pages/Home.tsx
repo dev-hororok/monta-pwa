@@ -34,7 +34,7 @@ export const Home = () => {
           <div className="h-2/3 flex flex-col justify-center items-center">
             <img
               onContextMenu={(e) => e.preventDefault()}
-              src="./pots/pot_2.png"
+              src="./fire.png"
               alt="main"
               className="h-1/2 mx-auto"
             />

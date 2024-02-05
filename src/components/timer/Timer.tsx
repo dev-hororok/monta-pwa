@@ -40,7 +40,7 @@ export const Timer = ({ onClose }: Props) => {
       <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe">
         <main className="h-full overflow-y-scroll scrollbar-hide">
           <img
-            src="./pots/pot_2.png"
+            src="./fire.png"
             alt="main"
             className="h-1/2 mx-auto animate-soft-bounce"
           />
