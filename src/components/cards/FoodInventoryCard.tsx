@@ -5,31 +5,38 @@ import { IFoodItemInventory } from '@/models/item.model';
 import { ICharacter } from '@/models/character.model';
 import { useModalStore } from '@/stores/useModalStore';
 import { toast } from '../ui/use-toast';
+import { useConsumeFoodItemMutation } from '@/apis/mutations/itemInventoryMutations';
+import { useState } from 'react';
 
 interface Props {
   foodItemInventory: IFoodItemInventory;
 }
 
 export const FoodInventoryCard = ({ foodItemInventory }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const isActive = foodItemInventory.progress === 0;
 
   const openModal = useModalStore((state) => state.openModal);
-  const onClickHandler = () => {
+  const { mutateAsync: consumeItem } = useConsumeFoodItemMutation();
+
+  const onClickHandler = async () => {
+    if (isLoading) return;
     if (!isActive) {
       toast({
         title: '아직 음식이 다 익지 않았습니다.',
       });
       return;
     }
-    // 임시
-    openModal<ICharacter>('characterAcquisition', {
-      character_id: '1',
-      name: '쬐끔한 거북이',
-      description: '쬐끔한 거북이입니다.',
-      sell_price: 100,
-      image_url: './turtle.png',
-      grade: 'B',
-    });
+    try {
+      setIsLoading(true);
+      const result = await consumeItem({
+        item_inventory_id: foodItemInventory.item_inventory_id,
+      });
+      setIsLoading(false);
+      openModal<ICharacter>('characterAcquisition', result.character);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -42,7 +49,7 @@ export const FoodInventoryCard = ({ foodItemInventory }: Props) => {
         isActive && 'hover:-translate-y-1 duration-200 transition-transform'
       )}
     >
-      {isActive ? <p>Open</p> : null}
+      {isActive ? <p>{isLoading ? 'Loading ...' : 'Open'}</p> : null}
       <img
         src={foodItemInventory.item.image_url}
         alt={'FoodItem'}
