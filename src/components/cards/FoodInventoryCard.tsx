@@ -27,7 +27,7 @@ export const FoodInventoryCard = ({ foodItemInventory }: Props) => {
       name: '쬐끔한 거북이',
       description: '쬐끔한 거북이입니다.',
       sell_price: 100,
-      image_url: '/turtle.png',
+      image_url: './turtle.png',
       grade: 'B',
     });
   };

@@ -9,30 +9,31 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { formatTime } from '@/lib/date-format';
-import useBoundStore from '@/stores/useBoundStore';
 import TimePicker from './TimePicker';
-import { Badge } from '../ui/badge';
+import { Badge } from '@/components/ui/badge';
 import CategoryPicker from './CategoryPicker';
 import { Link } from 'react-router-dom';
 import { Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
 
 interface Props {
   memberId: string;
 }
 
 export const TimerOptionDialog = ({ memberId }: Props) => {
-  const initialTime = useBoundStore((state) => state.initialTime);
-  const selectedCategory = useBoundStore((state) => state.selectedCategory);
+  const timerOptions = useTimerOptionsStore((state) => state.timerOptions);
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div className="flex flex-col items-center gap-2">
           <Button variant="ghost" className="text-6xl h-auto">
-            {formatTime(initialTime)}
+            {formatTime(timerOptions.pomodoroTime * 60)}
           </Button>
           <Badge>
-            {selectedCategory ? selectedCategory.subject : '선택 안함'}
+            {timerOptions.selectedCategory
+              ? timerOptions.selectedCategory.subject
+              : '선택 안함'}
           </Badge>
         </div>
       </DialogTrigger>

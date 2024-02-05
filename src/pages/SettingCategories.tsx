@@ -1,8 +1,8 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
 import { PrevHeader } from '@/components/headers/PrevHeader';
-import { CreateCategoryDialog } from '@/components/timer/CreateCategoryDialog';
-import { EditCategoryDialog } from '@/components/timer/EditCategoryDialog';
+import { CreateCategoryDialog } from '@/components/modals/timer/CreateCategoryDialog';
+import { EditCategoryDialog } from '@/components/modals/timer/EditCategoryDialog';
 
 export const SettingCategories = () => {
   const { data: currentMember } = useCurrentMemberQuery();

@@ -5,18 +5,28 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
-import useBoundStore from '@/stores/useBoundStore';
+import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
 
 const TimePicker = () => {
-  const initialTime = useBoundStore((state) => state.initialTime);
-  const setInitialTime = useBoundStore((state) => state.setInitialTime);
+  const timerOptions = useTimerOptionsStore((state) => state.timerOptions);
+  const setTimerOptions = useTimerOptionsStore(
+    (state) => state.setTimerOptions
+  );
+
+  const updatePomodoroTime = (time: number) => {
+    setTimerOptions({ ...timerOptions, pomodoroTime: time });
+  };
+
   return (
     <Carousel
       opts={{
         align: 'center',
         loop: true,
         skipSnaps: true,
-        startIndex: initialTime === 10 ? 0 : initialTime / 60 / 5 - 1,
+        startIndex:
+          timerOptions.pomodoroTime === 0.2
+            ? 0
+            : timerOptions.pomodoroTime / 5 - 1,
       }}
       className="w-full max-w-[368px] mx-auto"
     >
@@ -25,9 +35,10 @@ const TimePicker = () => {
         <Card
           className={cn(
             'cursor-pointer h-12 flex items-center justify-center',
-            initialTime === 10 && 'bg-primary text-primary-foreground'
+            timerOptions.pomodoroTime === 0.2 &&
+              'bg-primary text-primary-foreground'
           )}
-          onClick={() => setInitialTime(10)}
+          onClick={() => updatePomodoroTime(0.2)}
         >
           <CardContent className="flex aspect-square items-center justify-center p-6 shrink-0">
             <span className="text-xl font-semibold">테스트용 </span>
@@ -36,7 +47,7 @@ const TimePicker = () => {
 
         {Array.from({ length: 24 }).map((_, index) => {
           const minutes = (index + 1) * 5;
-          const isSelected = minutes * 60 === initialTime;
+          const isSelected = minutes === timerOptions.pomodoroTime;
           return (
             <CarouselItem key={index} className={cn('basis-1/4')}>
               <div className="p-1">
@@ -45,7 +56,7 @@ const TimePicker = () => {
                     'cursor-pointer h-12 flex items-center justify-center',
                     isSelected && 'bg-primary text-primary-foreground'
                   )}
-                  onClick={() => setInitialTime(minutes * 60)}
+                  onClick={() => updatePomodoroTime(minutes)}
                 >
                   <CardContent className="flex aspect-square items-center justify-center p-6">
                     <span className="text-xl font-semibold">{minutes}</span>

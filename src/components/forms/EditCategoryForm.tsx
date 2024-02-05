@@ -14,8 +14,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEditStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
 import { ModalHeader } from '../headers/ModalHeader';
 import { IStudyCategory } from '@/models/study.model';
-import { DeleteCategoryDialog } from '../timer/DeleteCategoryDialog';
 import { Trash } from 'lucide-react';
+import { DeleteCategoryDialog } from '../modals/timer/DeleteCategoryDialog';
 
 const editCategoryFormSchema = z.object({
   subject: z

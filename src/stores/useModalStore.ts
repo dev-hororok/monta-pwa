@@ -8,7 +8,9 @@ interface ModalState<T = undefined> {
 
 interface ModalsState {
   characterAcquisition: ModalState<ICharacter>;
+  timer: ModalState;
   timerAlarm: ModalState;
+  pauseTimer: ModalState<{ duration: number; startTimer: () => void }>;
 }
 
 type ModalType = keyof ModalsState;
@@ -23,6 +25,8 @@ export const useModalStore = create<ModalStore>()((set) => ({
   modals: {
     characterAcquisition: { isOpen: false },
     timerAlarm: { isOpen: false },
+    timer: { isOpen: false },
+    pauseTimer: { isOpen: false },
   },
   openModal: (modalType, data) =>
     set((state) => ({

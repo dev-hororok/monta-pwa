@@ -1,8 +1,8 @@
-import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import { ReactNode, useState } from 'react';
-import { EditCategoryForm } from '../forms/EditCategoryForm';
 import { IStudyCategory } from '@/models/study.model';
+import { EditCategoryForm } from '@/components/forms/EditCategoryForm';
 
 interface Props {
   memberId: string;

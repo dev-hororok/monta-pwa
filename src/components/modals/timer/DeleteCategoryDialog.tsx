@@ -10,7 +10,7 @@ import {
   AlertDialogFooter,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '../ui/alert-dialog';
+} from '@/components/ui/alert-dialog';
 
 interface Props {
   memberId: string;

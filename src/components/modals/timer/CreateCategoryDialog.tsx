@@ -1,6 +1,6 @@
-import { CreateCategoryForm } from '../forms/CreateCategoryForm';
-import { Dialog, DialogContent } from '../ui/dialog';
-import { Button } from '../ui/button';
+import { CreateCategoryForm } from '@/components/forms/CreateCategoryForm';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
