@@ -17,6 +17,7 @@ import { AgreeToTermsPage } from './pages/AgreeToTerms';
 import { RegisterPage } from './pages/Register';
 import { UnAuthedRoute } from './components/layouts/UnAuthedRoute';
 import { SettingCategories } from './pages/SettingCategories';
+import { MyPage } from './pages/MyPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
         }
       >
         <Route path="/" element={<Home />} />
+        <Route path="/my" element={<MyPage />} />
         <Route path="/more" element={<More />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/shop" element={<Shop />} />
