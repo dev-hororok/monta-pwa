@@ -23,7 +23,14 @@ export const CharacterItemCard = ({
       className="h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm"
     >
       <Badge variant={'secondary'}>{grade} 등급</Badge>
-      <img src={imgSrc} alt={alt} width={200} height={200} className="p-2" />
+      <img
+        onContextMenu={(e) => e.preventDefault()}
+        src={imgSrc}
+        alt={alt}
+        width={200}
+        height={200}
+        className="p-2"
+      />
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
         <p className="w-full font-semibold truncate">{name}</p>
         <p className="flex items-center gap-1 text-foreground/60">{price} 원</p>

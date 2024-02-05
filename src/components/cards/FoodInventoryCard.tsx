@@ -19,11 +19,10 @@ export const FoodInventoryCard = ({ foodItemInventory }: Props) => {
     >
       {isActive ? <p>Open</p> : null}
       <img
-        width={200}
-        height={200}
         src={foodItemInventory.item.image_url}
         alt={'FoodItem'}
         className="p-0"
+        onContextMenu={(e) => e.preventDefault()}
       />
       <p>{formatTime(foodItemInventory.progress)}</p>
     </Button>

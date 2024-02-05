@@ -20,6 +20,7 @@ export const ConsumableItemInventoryCard = ({
         src={consumableItemInventory.item.image_url}
         alt={consumableItemInventory.item.name}
         className="p-2"
+        onContextMenu={(e) => e.preventDefault()}
       />
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
         <p className="w-full font-semibold truncate text-center">

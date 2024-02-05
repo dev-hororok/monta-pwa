@@ -19,7 +19,12 @@ export const ProductCard = ({ imgSrc, alt, price, name }: ProductCardProps) => {
       )}
     >
       {/* {grade ? <Badge variant={'secondary'}>{grade} 등급</Badge> : null} */}
-      <img src={imgSrc} alt={alt} className="p-2" />
+      <img
+        src={imgSrc}
+        alt={alt}
+        className="p-2"
+        onContextMenu={(e) => e.preventDefault()}
+      />
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
         <p className="w-full font-semibold truncate text-center">{name}</p>
         <p className="flex items-center gap-1 text-foreground/60">{price} 원</p>

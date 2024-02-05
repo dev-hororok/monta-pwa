@@ -32,7 +32,12 @@ export const Home = () => {
         <HomeHeader />
         <main className="h-full overflow-y-scroll scrollbar-hide">
           <div className="h-2/3 flex flex-col justify-center items-center">
-            <img src="./pots/pot_2.png" alt="main" className="h-1/2 mx-auto" />
+            <img
+              onContextMenu={(e) => e.preventDefault()}
+              src="./pots/pot_2.png"
+              alt="main"
+              className="h-1/2 mx-auto"
+            />
             <div className="flex items-center justify-center h-1/4">
               <TimerOptionDialog memberId={data.member_id} />
             </div>
