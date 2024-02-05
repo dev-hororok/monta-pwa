@@ -4,7 +4,6 @@ import {
   CHARACTER_INVENTORY_QUERY_KEY,
   FOOD_INVENTORY_QUERY_KEY,
 } from '../queries/memberQueries';
-import { ICharacterInventory } from '@/models/character.model';
 import { IFoodItemInventory } from '@/models/item.model';
 
 // 음식 아이템 사용 (로딩 표시)
@@ -15,7 +14,7 @@ export const useConsumeFoodItemMutation = () => {
     mutationFn: (data: { item_inventory_id: number }) => {
       return consumeFoodItem(data.item_inventory_id);
     },
-    onSuccess: async (result, variables) => {
+    onSuccess: async (_result, variables) => {
       await queryClient.cancelQueries({
         queryKey: [FOOD_INVENTORY_QUERY_KEY],
       });
@@ -25,12 +24,11 @@ export const useConsumeFoodItemMutation = () => {
 
       queryClient.setQueryData(
         [FOOD_INVENTORY_QUERY_KEY],
-        (old: IFoodItemInventory[]) =>
-          old.filter((o) => o.item_inventory_id !== variables.item_inventory_id)
-      );
-      queryClient.setQueryData(
-        [CHARACTER_INVENTORY_QUERY_KEY],
-        (old: ICharacterInventory[]) => [...old, result]
+        (old: IFoodItemInventory[]) => {
+          return old.filter(
+            (o) => o.item_inventory_id !== variables.item_inventory_id
+          );
+        }
       );
     },
   });

@@ -1,6 +1,7 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { MyPageHeader } from '@/components/headers/MyPageHeader';
 import { MemberProfileSection } from '@/sections/myPage/MemberProfileSection';
+import { StudyRecordTabs } from '@/sections/myPage/StudyRecordTabs';
 
 export const MyPage = () => {
   const { data, isPending } = useCurrentMemberQuery();
@@ -15,6 +16,7 @@ export const MyPage = () => {
         <MyPageHeader />
         <main className="h-full overflow-y-scroll scrollbar-hide px-4">
           <MemberProfileSection member={data} />
+          <StudyRecordTabs member={data} />
         </main>
       </div>
     </>
