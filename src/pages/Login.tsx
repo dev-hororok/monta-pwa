@@ -7,7 +7,7 @@ export const LoginPage = () => {
       <PrevHeader to="/" />
       <LoginForm />
       <div className="flex gap-2 items-center justify-center">
-        <img src="/characters/cat_1.png" alt="character" className="w-1/2" />
+        <img src="/turtle.png" alt="character" className="w-1/2" />
       </div>
     </div>
   );

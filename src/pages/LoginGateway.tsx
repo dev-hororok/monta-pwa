@@ -7,14 +7,14 @@ export const LoginGateway = () => {
     <div className="grid grid-rows-3 items-center justify-center bg-background h-full gap-2 px-4 space-y-20 md:rounded-md pb-safe-offset-14 pt-safe-offset-14 overflow-hidden">
       <div className="row-span-2 relative flex flex-col justify-center items-center">
         <img
-          src="/foods/tofu_1.png"
+          src="/fire.png"
           width={640}
           height={640}
           alt="monta-main"
           className="px-14 pb-6 pt-10"
         />
         <p className="text-4xl font-semibold text-foreground tracking-wider">
-          네모네모 타이머
+          타이머
         </p>
       </div>
       <div className="row-span-1 w-full flex flex-col gap-2 items-center py-20">
