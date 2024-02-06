@@ -45,7 +45,7 @@ export const StudyRecordTabs = ({ member }: Props) => {
         </TabsList>
       </div>
       <TabsContent value="calendar">
-        <CalendarSection records={records || []} />
+        <CalendarSection heatMapData={heatMapData} />
       </TabsContent>
       <TabsContent value="streak">
         <StreakSection

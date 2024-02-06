@@ -9,6 +9,7 @@ interface Props {
   streakInfo: IStudyStreak | null;
 }
 
+// 임시
 export const StudyStreak = ({ heatMapData, streakInfo }: Props) => {
   useEffect(() => {
     if (!streakInfo?.palette) return;
@@ -31,23 +32,27 @@ export const StudyStreak = ({ heatMapData, streakInfo }: Props) => {
   }, [streakInfo]);
 
   return (
-    <ReactCalendarHeatmap
-      values={heatMapData}
-      classForValue={(value) => {
-        if (!value) {
-          return 'color-empty';
-        }
-        const hours = value.count / 3600;
-        if (hours < 2) {
-          return `color-scale-1`;
-        } else if (hours < 4) {
-          return `color-scale-2`;
-        } else if (hours < 6) {
-          return `color-scale-3`;
-        } else {
-          return `color-scale-4`;
-        }
-      }}
-    />
+    <div className="transform rotate-180">
+      <ReactCalendarHeatmap
+        values={heatMapData}
+        horizontal={false}
+        showMonthLabels={false}
+        classForValue={(value) => {
+          if (!value) {
+            return 'color-empty';
+          }
+          const hours = value.count / 3600;
+          if (hours < 2) {
+            return `color-scale-1`;
+          } else if (hours < 4) {
+            return `color-scale-2`;
+          } else if (hours < 6) {
+            return `color-scale-3`;
+          } else {
+            return `color-scale-4`;
+          }
+        }}
+      />
+    </div>
   );
 };

@@ -53,3 +53,9 @@ export const formatTime = (seconds: number) => {
     .map((num) => String(num).padStart(2, '0'))
     .join(':');
 };
+
+export const formatDateStr = (date: Date) => {
+  return `${date.getFullYear()}-${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+};

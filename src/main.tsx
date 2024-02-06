@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
+
 import App from './App';
 import { ThemeProvider } from './components/providers/theme-provider';
 import { ReactQueryProvider } from './components/providers/ReactQueryProvider';

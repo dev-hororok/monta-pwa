@@ -1,4 +1,5 @@
 import { IStudyRecord } from '@/models/study.model';
+import { formatDateStr } from './date-format';
 
 export interface HeatMapData {
   date: string;
@@ -10,9 +11,9 @@ export const processStudyRecords = (records: IStudyRecord[]): HeatMapData[] => {
 
   records.forEach((record) => {
     const date = new Date(record.created_at);
-    const dateStr = date.toISOString().split('T')[0];
-
+    const dateStr = formatDateStr(date);
     const currentTotal = dailyTotals.get(dateStr) || 0;
+
     dailyTotals.set(dateStr, currentTotal + record.duration);
   });
   return Array.from(dailyTotals).map(([key, value]) => ({
