@@ -1,4 +1,5 @@
 import { ICharacter } from '@/models/character.model';
+import { IPalette } from '@/models/palette.model';
 import { IStudyCategory } from '@/models/study.model';
 import { create } from 'zustand';
 
@@ -10,6 +11,9 @@ interface ModalState<T = undefined> {
 interface ModalsState {
   // 캐릭터 획득
   characterAcquisition: ModalState<ICharacter>;
+
+  // 팔레트 획득
+  paletteAcquisition: ModalState<IPalette>;
   // 타이머
   timer: ModalState;
   timerOptions: ModalState<{ memberId: string }>;
@@ -33,6 +37,7 @@ interface ModalStore {
 export const useModalStore = create<ModalStore>()((set) => ({
   modals: {
     characterAcquisition: { isOpen: false },
+    paletteAcquisition: { isOpen: false },
     timerAlarm: { isOpen: false },
     timer: { isOpen: false },
     timerOptions: { isOpen: false },

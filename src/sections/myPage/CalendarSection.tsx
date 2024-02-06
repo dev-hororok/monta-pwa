@@ -68,7 +68,7 @@ export const CalendarSection = ({ heatMapData }: Props) => {
           tileContent={({ date, view }) => {
             const dateStr = formatDateStr(date);
             return view === 'month' && studiedDays.has(dateStr) ? (
-              <img src="public/문어_1.png" className="w-8 h-8 mx-auto" />
+              <img src="/public/문어_1.png" className="w-8 h-8 mx-auto" />
             ) : (
               <div className="w-8 h-8" />
             );
