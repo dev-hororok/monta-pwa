@@ -27,7 +27,7 @@ export const PaletteAcquisitionDialog = () => {
     <AlertDialog open={isOpen}>
       <AlertDialogContent
         className={cn(
-          `w-full md:max-w-[416px] md:max-h-[300px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
+          `w-full md:max-w-[416px] max-h-[400px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
         )}
       >
         <AlertDialogTitle className="text-2xl">팔레트 변경</AlertDialogTitle>
