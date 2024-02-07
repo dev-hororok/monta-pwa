@@ -1,5 +1,5 @@
 export interface ICharacter {
-  character_id: string;
+  character_id: number;
   name: string;
   description: string;
   image_url: string;
@@ -8,6 +8,7 @@ export interface ICharacter {
 }
 
 export interface ICharacterInventory {
-  character_inventory_id: number;
+  character_inventory_id: string; // bigint라 string으로 옴
   character: ICharacter;
+  quantity: number;
 }

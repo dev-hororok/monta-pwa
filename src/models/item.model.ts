@@ -22,7 +22,7 @@ export interface IConsumableItem extends IBaseItem {
 export type Item = IFoodItem | IConsumableItem;
 
 interface IBaseItemInventory {
-  item_inventory_id: number;
+  item_inventory_id: string; // bigint라 string으로 옴
   item_type: ItemType;
   quantity: number;
   item: Item;

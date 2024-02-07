@@ -8,7 +8,4 @@ export interface IMember {
   active_record_id: number | null;
 }
 
-export enum MemberRole {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-}
+export type MemberRole = 'ADMIN' | 'USER';
