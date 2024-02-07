@@ -1,39 +1,37 @@
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
+import { ICharacterInventory } from '@/models/character.model';
 
 interface Props {
-  imgSrc: string;
-  alt: string;
-  price: number;
-  name: string;
-  grade: string;
+  characterInventory: ICharacterInventory;
 }
 
-export const CharacterItemCard = ({
-  imgSrc,
-  alt,
-  price,
-  name,
-  grade,
-}: Props) => {
+export const CharacterItemCard = ({ characterInventory }: Props) => {
   return (
     <Button
       type="button"
       variant={'ghost'}
       className="h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm"
     >
-      <Badge variant={'secondary'}>{grade} 등급</Badge>
+      <Badge variant={'secondary'}>
+        {characterInventory.character.grade} 등급
+      </Badge>
       <img
         onContextMenu={(e) => e.preventDefault()}
-        src={imgSrc}
-        alt={alt}
+        src={characterInventory.character.image_url}
+        alt={characterInventory.character.name}
         width={200}
         height={200}
         className="p-2"
       />
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
-        <p className="w-full font-semibold truncate">{name}</p>
-        <p className="flex items-center gap-1 text-foreground/60">{price} 원</p>
+        <p className="w-full font-semibold truncate">
+          {characterInventory.character.name}
+        </p>
+        <p className="flex items-center gap-1 text-foreground/60">
+          {characterInventory.character.sell_price}원 |{' '}
+          {characterInventory.quantity}개
+        </p>
       </div>
     </Button>
   );

@@ -30,16 +30,7 @@ export const CharacterInventorySection = ({ memberId }: Props) => {
       </div>
       <div className="grid grid-cols-3 gap-2">
         {data.map((item, idx) => {
-          return (
-            <CharacterItemCard
-              key={idx}
-              imgSrc={item.character.image_url}
-              alt={item.character.name}
-              price={item.character.sell_price}
-              name={item.character.name}
-              grade={item.character.grade}
-            />
-          );
+          return <CharacterItemCard key={idx} characterInventory={item} />;
         })}
       </div>
     </section>
