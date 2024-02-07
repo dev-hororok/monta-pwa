@@ -31,7 +31,10 @@ export const useCreateStudyCategoryMutation = () => {
       };
       queryClient.setQueryData(
         [STUDY_CATEGORIES_QUERY_KEY, variables.memberId],
-        (old: IStudyCategory[]) => [optimisticCategory, ...old]
+        (old: IStudyCategory[] | null) => {
+          if (!old) return [];
+          return [optimisticCategory, ...old];
+        }
       );
       return { optimisticCategory };
     },
@@ -39,7 +42,8 @@ export const useCreateStudyCategoryMutation = () => {
     onSuccess: (result, variables, context) => {
       queryClient.setQueryData(
         [STUDY_CATEGORIES_QUERY_KEY, variables.memberId],
-        (old: IStudyCategory[]) => {
+        (old: IStudyCategory[] | null) => {
+          if (!old) return [];
           return old.map((category) =>
             category.study_category_id ===
             context.optimisticCategory.study_category_id

@@ -2,7 +2,6 @@ import {
   fetchCharacterInventory,
   fetchConsumableInventory,
   fetchCurrentMember,
-  fetchEggInventory,
   fetchFoodInventory,
   fetchStudyRecords,
   fetchStudyStreak,
@@ -16,17 +15,6 @@ export const useCurrentMemberQuery = () => {
     queryKey: [CURRENT_MEMBER_QUERY_KEY],
     queryFn: () => fetchCurrentMember(),
     staleTime: 10 * 60 * 1000,
-  });
-};
-
-// 보유중인 알 조회
-export const EGG_INVENTORY_QUERY_KEY = 'eggInventory';
-export const useEggInventoryQuery = (memberId: string) => {
-  return useQuery({
-    queryKey: [CURRENT_MEMBER_QUERY_KEY],
-    queryFn: () => fetchEggInventory(memberId),
-    staleTime: 10 * 60 * 1000,
-    enabled: !!memberId,
   });
 };
 

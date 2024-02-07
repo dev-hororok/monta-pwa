@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { endStudyTimer, startStudyTimer } from '../services/studyTimer.api';
 import { FOOD_INVENTORY_QUERY_KEY } from '../queries/memberQueries';
 import { IFoodItemInventory } from '@/models/item.model';
+import { StudyRecordStatusType } from '@/models/study.model';
 
 export const useStartStudyTimerMutation = () => {
   return useMutation({
@@ -15,8 +16,13 @@ export const useEndStudyTimerMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (duration: number) => {
-      return endStudyTimer(duration);
+    mutationFn: ({
+      status,
+    }: {
+      status: StudyRecordStatusType;
+      duration: number;
+    }) => {
+      return endStudyTimer({ status });
     },
     // 음식 남은시간 즉시적용
     onMutate: async (variables) => {
@@ -25,9 +31,10 @@ export const useEndStudyTimerMutation = () => {
       });
       queryClient.setQueryData(
         [FOOD_INVENTORY_QUERY_KEY],
-        (old: IFoodItemInventory[]) => {
+        (old: IFoodItemInventory[] | null) => {
+          if (!old) return [];
           return old.map((item) => {
-            const rest = item.progress - variables;
+            const rest = item.progress - variables.duration;
             item.progress = 0 < rest ? rest : 0;
             return item;
           });
@@ -38,9 +45,10 @@ export const useEndStudyTimerMutation = () => {
     onError: (_error, variables) => {
       queryClient.setQueryData(
         [FOOD_INVENTORY_QUERY_KEY],
-        (old: IFoodItemInventory[]) => {
+        (old: IFoodItemInventory[] | null) => {
+          if (!old) return [];
           return old.map((inventory) => {
-            const prevProgress = inventory.progress + variables;
+            const prevProgress = inventory.progress + variables.duration;
             inventory.progress = prevProgress;
             return inventory;
           });

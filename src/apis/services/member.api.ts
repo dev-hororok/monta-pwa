@@ -1,5 +1,4 @@
 import { IStudyStreak } from './../../models/streak.model';
-import { IEggInventory } from '@/models/egg.model';
 import { nestHttpRequest } from '../common/httpRequest';
 import { ApiSuccessResponse } from '../interface/apiResponse.type';
 import { IMember } from '@/models/member.model';
@@ -16,14 +15,6 @@ export const fetchCurrentMember = async () => {
     ApiSuccessResponse<{ member: IMember }>
   >('/timer-api/members/me');
   return response.data.data.member;
-};
-
-// 보유중인 알 조회 (안씀)
-export const fetchEggInventory = async (memberId: string) => {
-  const response = await nestHttpRequest.get<
-    ApiSuccessResponse<{ egg_inventory: IEggInventory[] }>
-  >(`/timer-api/members/${memberId}/egg-inventory`);
-  return response.data.data.egg_inventory;
 };
 
 // 보유중인 음식 조회

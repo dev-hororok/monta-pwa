@@ -20,7 +20,7 @@ export const useConsumeFoodItemMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: { item_inventory_id: number }) => {
+    mutationFn: (data: { item_inventory_id: string }) => {
       return consumeFoodItem(data.item_inventory_id);
     },
     onSuccess: async (_result, variables) => {
@@ -33,7 +33,8 @@ export const useConsumeFoodItemMutation = () => {
 
       queryClient.setQueryData(
         [FOOD_INVENTORY_QUERY_KEY],
-        (old: IFoodItemInventory[]) => {
+        (old: IFoodItemInventory[] | null) => {
+          if (!old) return [];
           return old.filter(
             (o) => o.item_inventory_id !== variables.item_inventory_id
           );
@@ -48,7 +49,7 @@ export const useConsumeConsumableItemMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: { item_inventory_id: number }) => {
+    mutationFn: (data: { item_inventory_id: string }) => {
       return consumeConsumableItem(data.item_inventory_id);
     },
     onSuccess: async (result, variables) => {
@@ -61,8 +62,8 @@ export const useConsumeConsumableItemMutation = () => {
 
       queryClient.setQueryData(
         [CONSUMABLE_INVENTORY_QUERY_KEY],
-        (old: IConsumableItemInventory[]) => {
-          console.log(old);
+        (old: IConsumableItemInventory[] | null) => {
+          if (!old) return [];
           return old.map((inven) => {
             if (inven.item_inventory_id === variables.item_inventory_id) {
               return {
@@ -76,7 +77,8 @@ export const useConsumeConsumableItemMutation = () => {
       );
       queryClient.setQueryData(
         [STUDY_STREAK_QUERY_KEY],
-        (old: IStudyStreak) => {
+        (old: IStudyStreak | null) => {
+          if (!old) return null;
           return {
             ...old,
             palette: result.palette,

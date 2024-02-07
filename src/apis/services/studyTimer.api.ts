@@ -1,3 +1,4 @@
+import { StudyRecordStatusType } from '@/models/study.model';
 import { nestHttpRequest } from '../common/httpRequest';
 import { ApiSuccessResponse } from '../interface/apiResponse.type';
 
@@ -13,12 +14,12 @@ export const startStudyTimer = async (body: { category_id?: string }) => {
 };
 
 // 스터디 타이머 종료
-export const endStudyTimer = async (duration: number) => {
+export const endStudyTimer = async (body: {
+  status: StudyRecordStatusType;
+}) => {
   const response = await nestHttpRequest.post<ApiSuccessResponse<null>>(
     `/timer-api/study-timer/end`,
-    {
-      duration,
-    }
+    body
   );
   return response.data.data;
 };

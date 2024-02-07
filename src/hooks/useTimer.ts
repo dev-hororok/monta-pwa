@@ -28,7 +28,7 @@ export const useTimer = () => {
   // 타이머 종료 처리
   useEffect(() => {
     if (0 < duration) return;
-    endStudyTimer(pomodoroTime * 60); // 공부시간 기록
+    endStudyTimer({ status: 'Completed', duration: pomodoroTime * 60 }); // 공부시간 기록
     openModal('timerAlarm'); // 알람 모달 열기
     setIsActive(false); // 타이머 중지
   }, [duration, endStudyTimer, openModal, pomodoroTime]);
