@@ -1,11 +1,11 @@
 import { useStartStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
 import { OpenTimerOptionsButton } from '@/components/modals/timerOptions/OpenTimerOptionsButton';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
 import { useTimerStateStore } from '@/stores/timerStateStore';
 import { useModalStore } from '@/stores/useModalStore';
-import { PlayIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { PlayIcon, StepForwardIcon } from 'lucide-react';
 import { useMemo } from 'react';
 import { TimerImage } from './TimerImage';
 
@@ -44,13 +44,23 @@ export const TimerSection = () => {
     if (timerType === 'Work') {
       startStudyTimer({ category_id: selectedCategory?.study_category_id });
     }
+
     setTimerState({
-      ...timerState,
+      timerType: timerState.timerType,
       targetTime: targetTime,
       duration: 0,
       isActive: true,
     });
     openModal('timer');
+  };
+
+  const passRestTime = () => {
+    setTimerState({
+      timerType: 'Work',
+      targetTime: timerOptions.pomodoroTime * 60,
+      duration: 0,
+      isActive: false,
+    });
   };
 
   return (
@@ -59,7 +69,16 @@ export const TimerSection = () => {
       <div className="flex items-center justify-center h-1/4">
         <OpenTimerOptionsButton targetTime={targetTime} />
       </div>
-      <div className="flex items-center justify-center h-1/4">
+      <div className="flex items-center justify-center h-1/4 gap-2">
+        {timerType !== 'Work' ? (
+          <Button
+            onClick={passRestTime}
+            variant={'ghost'}
+            className={cn('p-2 h-auto')}
+          >
+            <StepForwardIcon className="w-10 h-10" />
+          </Button>
+        ) : null}
         <Button
           onClick={startAndOpenTimerModal}
           variant={'ghost'}

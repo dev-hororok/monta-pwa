@@ -41,6 +41,8 @@ export const useTimer = () => {
         targetTime: restTime * 60,
         duration: 0,
       });
+
+      openModal('timerAlarm'); // 알람 모달 열기
     } else if (
       timerState.timerType === 'Rest' ||
       timerState.timerType === 'LongRest'
@@ -51,8 +53,9 @@ export const useTimer = () => {
         targetTime: pomodoroTime * 60,
         duration: 0,
       });
+
+      openModal('timerAlarm'); // 알람 모달 열기
     }
-    openModal('timerAlarm'); // 알람 모달 열기
   }, [
     endStudyTimer,
     openModal,
@@ -73,8 +76,18 @@ export const useTimer = () => {
       isActive: false,
     });
 
+  const passRestTime = () => {
+    setTimerState({
+      timerType: 'Work',
+      targetTime: pomodoroTime * 60,
+      duration: 0,
+      isActive: false,
+    });
+  };
+
   return {
     startTimer,
     pauseTimer,
+    passRestTime,
   };
 };

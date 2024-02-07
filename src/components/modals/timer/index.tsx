@@ -8,10 +8,12 @@ import { useModalStore } from '@/stores/useModalStore';
 import { useTimerStateStore } from '@/stores/timerStateStore';
 import { useMemo } from 'react';
 import { TimerImage } from '@/sections/home/TimerImage';
+import { XIcon } from 'lucide-react';
 
 export const TimerModal = () => {
-  const { pauseTimer, startTimer } = useTimer();
+  const { pauseTimer, startTimer, passRestTime } = useTimer();
   const openModal = useModalStore((state) => state.openModal);
+  const closeModal = useModalStore((state) => state.closeModal);
   const timerState = useTimerStateStore((state) => state.timerState);
   const selectedCategory = useTimerStateStore(
     (state) => state.selectedCategory
@@ -36,6 +38,11 @@ export const TimerModal = () => {
     pauseTimer();
   };
 
+  const onClickCloseHandler = () => {
+    passRestTime();
+    closeModal('timer');
+  };
+
   return (
     <div className="absolute top-0 z-40 w-full h-full md:w-[414px] md:h-[734px] md:rounded-md bg-background">
       <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe">
@@ -54,19 +61,32 @@ export const TimerModal = () => {
             <p className="text-7xl text-primary dark:text-foreground font-semibold">
               {formatTime(timerState.targetTime - timerState.duration)}
             </p>
-            <Badge>
-              {selectedCategory ? selectedCategory.subject : '선택 안함'}
-            </Badge>
+            {timerType === 'Work' ? (
+              <Badge>
+                {selectedCategory ? selectedCategory.subject : '선택 안함'}
+              </Badge>
+            ) : null}
           </div>
           <div className="flex items-center justify-center py-10 h-1/4">
-            <Button
-              type="button"
-              onClick={onClickPauseHandler}
-              variant={'ghost'}
-              className={cn('p-2 h-auto')}
-            >
-              <PauseIcon className="w-10 h-10" />
-            </Button>
+            {timerType === 'Work' ? (
+              <Button
+                type="button"
+                onClick={onClickPauseHandler}
+                variant={'ghost'}
+                className={cn('p-2 h-auto')}
+              >
+                <PauseIcon className="w-10 h-10" />
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                onClick={onClickCloseHandler}
+                variant={'ghost'}
+                className={cn('p-2 h-auto')}
+              >
+                <XIcon className="w-10 h-10" />
+              </Button>
+            )}
           </div>
         </main>
       </div>

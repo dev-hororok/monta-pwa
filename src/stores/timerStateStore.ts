@@ -41,6 +41,9 @@ export const useTimerStateStore = create<TimerStateStore>()(
       name: 'timer-state-storage',
       partialize: (state) => ({
         selectedCategory: state.selectedCategory,
+        timerState: {
+          timerType: state.timerState.timerType,
+        },
       }),
     }
   )

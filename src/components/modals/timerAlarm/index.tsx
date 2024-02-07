@@ -7,10 +7,13 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useModalStore } from '@/stores/useModalStore';
+import { useTimerStateStore } from '@/stores/timerStateStore';
 
 export const TimerAlarmDialog = () => {
   const isOpen = useModalStore((state) => state.modals.timerAlarm.isOpen);
   const closeModal = useModalStore((state) => state.closeModal);
+
+  const timerType = useTimerStateStore((state) => state.timerState.timerType);
 
   // 푸시, 진동, 알람 등 worker 실행
 
@@ -26,8 +29,17 @@ export const TimerAlarmDialog = () => {
           `w-full h-screen md:max-w-[416px] md:max-h-[736px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
         )}
       >
-        <AlertDialogTitle>어디서 맛있는 냄새가 납니다</AlertDialogTitle>
-        <img src="./alarm.png" alt="main" className="h-1/2 mx-auto" />
+        <AlertDialogTitle>
+          {timerType === 'Work'
+            ? '쉬는시간 끝!!!'
+            : '어디서 맛있는 냄새가 납니다'}
+        </AlertDialogTitle>
+
+        {timerType === 'Work' ? (
+          <img src="./whale.png" alt="main" className="h-1/2 mx-auto" />
+        ) : (
+          <img src="./shrimp.png" alt="main" className="h-1/2 mx-auto" />
+        )}
 
         <div className="w-full flex flex-col justify-end h-full gap-2">
           <AlertDialogFooter className="w-full">
