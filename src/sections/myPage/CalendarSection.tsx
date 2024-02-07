@@ -1,8 +1,9 @@
 import Calendar from 'react-calendar';
-import '@/styles/calendar.css';
 import { useMemo, useState } from 'react';
 import { HeatMapData } from '@/lib/study-records';
 import { formatDateStr, formatTime } from '@/lib/date-format';
+
+import '@/styles/calendar.css';
 
 interface Props {
   heatMapData: HeatMapData[];
@@ -68,7 +69,7 @@ export const CalendarSection = ({ heatMapData }: Props) => {
           tileContent={({ date, view }) => {
             const dateStr = formatDateStr(date);
             return view === 'month' && studiedDays.has(dateStr) ? (
-              <img src="/문어_1.png" className="w-8 h-8 mx-auto" />
+              <img src="/octopus.png" className="w-8 h-8 mx-auto" />
             ) : (
               <div className="w-8 h-8" />
             );
