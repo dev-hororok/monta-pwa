@@ -5,15 +5,32 @@ import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { useTimer } from '@/hooks/useTimer';
 import { useModalStore } from '@/stores/useModalStore';
+import { useTimerStateStore } from '@/stores/timerStateStore';
+import { useMemo } from 'react';
+import { TimerImage } from '@/sections/home/TimerImage';
 
 export const TimerModal = () => {
-  const { pomodoroTime, duration, pauseTimer, startTimer, selectedCategory } =
-    useTimer();
+  const { pauseTimer, startTimer } = useTimer();
   const openModal = useModalStore((state) => state.openModal);
+  const timerState = useTimerStateStore((state) => state.timerState);
+  const selectedCategory = useTimerStateStore(
+    (state) => state.selectedCategory
+  );
+  const timerType = useTimerStateStore((state) => state.timerState.timerType);
+
+  const timerImageSrc = useMemo(() => {
+    if (timerType === 'Work') {
+      return './fire.png';
+    } else if (timerType === 'Rest') {
+      return './octopus.png';
+    } else {
+      return './turtle.png';
+    }
+  }, [timerType]);
 
   const onClickPauseHandler = () => {
     openModal('pauseTimer', {
-      duration: pomodoroTime * 60 - duration,
+      duration: timerState.duration,
       startTimer: startTimer,
     });
     pauseTimer();
@@ -23,15 +40,19 @@ export const TimerModal = () => {
     <div className="absolute top-0 z-40 w-full h-full md:w-[414px] md:h-[734px] md:rounded-md bg-background">
       <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe">
         <main className="h-full overflow-y-scroll scrollbar-hide">
-          <img
-            src="./fire.png"
-            alt="main"
-            className="h-1/2 mx-auto animate-soft-bounce"
-          />
+          <TimerImage src={timerImageSrc} animation />
           <div className="flex flex-col items-center justify-center pt-4 h-1/4 gap-4">
-            <p className="text-center">맛있게 익히는중..</p>
+            {timerType === 'Work' ? (
+              <p className="text-center">맛있게 익히는중..</p>
+            ) : null}
+            {timerType === 'Rest' ? (
+              <p className="text-center">쉬는중..</p>
+            ) : null}
+            {timerType === 'LongRest' ? (
+              <p className="text-center">겁나 쉬는중..</p>
+            ) : null}
             <p className="text-7xl text-primary dark:text-foreground font-semibold">
-              {formatTime(duration)}
+              {formatTime(timerState.targetTime - timerState.duration)}
             </p>
             <Badge>
               {selectedCategory ? selectedCategory.subject : '선택 안함'}

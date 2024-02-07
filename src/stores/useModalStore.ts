@@ -16,7 +16,7 @@ interface ModalsState {
   paletteAcquisition: ModalState<IPalette>;
   // 타이머
   timer: ModalState;
-  timerOptions: ModalState<{ memberId: string }>;
+  timerOptions: ModalState;
   timerAlarm: ModalState;
   pauseTimer: ModalState<{ duration: number; startTimer: () => void }>;
 

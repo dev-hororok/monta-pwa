@@ -1,18 +1,15 @@
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { formatTime } from '@/lib/date-format';
-import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
 import { useModalStore } from '@/stores/useModalStore';
 
 interface Props {
-  memberId: string;
+  targetTime: number;
 }
 
-export const OpenTimerOptionsButton = ({ memberId }: Props) => {
-  const timerOptions = useTimerOptionsStore((state) => state.timerOptions);
+export const OpenTimerOptionsButton = ({ targetTime }: Props) => {
   const openModal = useModalStore((state) => state.openModal);
   const openTimerOptionsModal = () => {
-    openModal('timerOptions', { memberId });
+    openModal('timerOptions');
   };
   return (
     <div
@@ -20,13 +17,8 @@ export const OpenTimerOptionsButton = ({ memberId }: Props) => {
       onClick={openTimerOptionsModal}
     >
       <Button variant="ghost" className="text-6xl h-auto">
-        {formatTime(timerOptions.pomodoroTime * 60)}
+        {formatTime(targetTime)}
       </Button>
-      <Badge>
-        {timerOptions.selectedCategory
-          ? timerOptions.selectedCategory.subject
-          : '선택 안함'}
-      </Badge>
     </div>
   );
 };

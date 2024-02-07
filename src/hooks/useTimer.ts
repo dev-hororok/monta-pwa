@@ -1,51 +1,80 @@
 import { useEndStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
 import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
+import { useTimerStateStore } from '@/stores/timerStateStore';
 import { useModalStore } from '@/stores/useModalStore';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export const useTimer = () => {
-  const { pomodoroTime, selectedCategory } = useTimerOptionsStore(
+  const { pomodoroTime, restTime } = useTimerOptionsStore(
     (state) => state.timerOptions
   );
+
+  const timerState = useTimerStateStore((state) => state.timerState);
+  const setTimerState = useTimerStateStore((state) => state.setTimerState);
+
   const openModal = useModalStore((state) => state.openModal);
   const { mutate: endStudyTimer } = useEndStudyTimerMutation();
 
-  const [isActive, setIsActive] = useState(true);
-  const [duration, setDuration] = useState(pomodoroTime * 60); // 초단위로 변환
-
   // 타이머 시간
   useEffect(() => {
-    if (!isActive) return;
+    if (!timerState.isActive) return;
     const interval = setInterval(() => {
-      setDuration((prev) => {
-        if (0 < prev) return prev - 1;
-        return 0;
+      setTimerState({
+        ...timerState,
+        duration:
+          timerState.duration < timerState.targetTime
+            ? timerState.duration + 1
+            : timerState.targetTime,
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [isActive]);
+  }, [timerState, setTimerState]);
 
   // 타이머 종료 처리
   useEffect(() => {
-    if (0 < duration) return;
-    endStudyTimer({ status: 'Completed', duration: pomodoroTime * 60 }); // 공부시간 기록
+    if (timerState.duration < timerState.targetTime) return;
+    if (timerState.timerType === 'Work') {
+      endStudyTimer({ status: 'Completed', duration: timerState.targetTime }); // 공부시간 기록
+      setTimerState({
+        isActive: false,
+        timerType: 'Rest',
+        targetTime: restTime * 60,
+        duration: 0,
+      });
+    } else if (
+      timerState.timerType === 'Rest' ||
+      timerState.timerType === 'LongRest'
+    ) {
+      setTimerState({
+        isActive: false,
+        timerType: 'Work',
+        targetTime: pomodoroTime * 60,
+        duration: 0,
+      });
+    }
     openModal('timerAlarm'); // 알람 모달 열기
-    setIsActive(false); // 타이머 중지
-  }, [duration, endStudyTimer, openModal, pomodoroTime]);
+  }, [
+    endStudyTimer,
+    openModal,
+    setTimerState,
+    timerState,
+    pomodoroTime,
+    restTime,
+  ]);
 
-  const startTimer = () => setIsActive(true);
-  const pauseTimer = () => setIsActive(false);
-  const resetTimer = () => {
-    setDuration(pomodoroTime * 60);
-    setIsActive(false);
-  };
+  const startTimer = () =>
+    setTimerState({
+      ...timerState,
+      isActive: true,
+    });
+  const pauseTimer = () =>
+    setTimerState({
+      ...timerState,
+      isActive: false,
+    });
 
   return {
-    duration,
-    pomodoroTime,
     startTimer,
     pauseTimer,
-    resetTimer,
-    selectedCategory,
   };
 };

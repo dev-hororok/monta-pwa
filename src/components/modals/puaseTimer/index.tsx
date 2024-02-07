@@ -20,7 +20,7 @@ export const PuaseTimerDialog = () => {
 
   const onClickHandler = () => {
     if (data && data.duration) {
-      endStudyTimer(data.duration);
+      endStudyTimer({ duration: data.duration, status: 'Incompleted' });
     }
     closeModal('pauseTimer');
     closeModal('timer');

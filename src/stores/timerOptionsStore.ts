@@ -1,12 +1,11 @@
-import { IStudyCategory } from '@/models/study.model';
 import { create } from 'zustand';
-
-type TimerType = 'Pomodoro' | 'Standard';
+import { persist } from 'zustand/middleware';
 
 interface TimerOptions {
-  timerType: TimerType;
   pomodoroTime: number;
-  selectedCategory: IStudyCategory | null;
+  sectionCount: number;
+  restTime: number;
+  longRestTime: number;
 }
 
 interface TimerOptionsStore {
@@ -14,14 +13,22 @@ interface TimerOptionsStore {
   setTimerOptions: (options: TimerOptions) => void;
 }
 
-export const useTimerOptionsStore = create<TimerOptionsStore>()((set) => ({
-  timerOptions: {
-    timerType: 'Pomodoro',
-    pomodoroTime: 25, // 기본 뽀모도로 시간 25분
-    selectedCategory: null,
-  },
-  setTimerOptions: (options) =>
-    set(() => ({
-      timerOptions: options,
-    })),
-}));
+export const useTimerOptionsStore = create<TimerOptionsStore>()(
+  persist(
+    (set) => ({
+      timerOptions: {
+        pomodoroTime: 25, // 기본 뽀모도로 시간 25분
+        sectionCount: 4, // 기본 섹션 4회
+        restTime: 5, // 쉬는시간
+        longRestTime: 15, // 긴 쉬는시간
+      },
+      setTimerOptions: (options) =>
+        set(() => ({
+          timerOptions: options,
+        })),
+    }),
+    {
+      name: 'timer-option-storage',
+    }
+  )
+);
