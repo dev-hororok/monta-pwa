@@ -1,8 +1,8 @@
 import { formatDateStr } from '@/lib/date-format';
 import { HeatMapData } from '@/lib/study-records';
-import { cn } from '@/lib/utils';
 import { IStudyStreak } from '@/models/streak.model';
 import { useEffect, useMemo } from 'react';
+import { StreakItem } from './StreakItem';
 
 const generateYearDates = () => {
   const dates = [];
@@ -101,19 +101,7 @@ export const Streak = ({ heatMapData, streakInfo }: Props) => {
                 .map((_n, idx) => <div key={`null-${idx}`}></div>)
             : null}
           {week.dates.map((date) => {
-            const hours = date.value ? date.value / 3600 : 0;
-            return (
-              <div
-                key={date.date}
-                className={cn(
-                  'day w-full aspect-square bg-accent rounded-sm',
-                  date.value && hours < 2 && 'color-scale-1',
-                  2 < hours && hours < 4 && 'color-scale-2',
-                  4 < hours && hours < 6 && 'color-scale-3',
-                  6 < hours && 'color-scale-4'
-                )}
-              />
-            );
+            return <StreakItem date={date} />;
           })}
         </div>
       ))}
