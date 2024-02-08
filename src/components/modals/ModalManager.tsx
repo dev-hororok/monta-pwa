@@ -8,6 +8,7 @@ import { EditCategoryDialog } from './categories/EditCategoryDialog';
 import { DeleteCategoryDialog } from './categories/DeleteCategoryDialog';
 import { TimerOptionDialog } from './timerOptions';
 import { PaletteAcquisitionDialog } from './paletteAcquisition';
+import { PurchaseItemDialog } from './purchaseItem';
 
 export const ModalManager = () => {
   const { modals } = useModalStore();
@@ -26,6 +27,8 @@ export const ModalManager = () => {
       {modals.createCategory.isOpen ? <CreateCategoryDialog /> : null}
       {modals.editCategory.isOpen ? <EditCategoryDialog /> : null}
       {modals.deleteCategory.isOpen ? <DeleteCategoryDialog /> : null}
+
+      {modals.purchaseItem.isOpen ? <PurchaseItemDialog /> : null}
     </>
   );
 };

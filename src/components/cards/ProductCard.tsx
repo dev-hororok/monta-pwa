@@ -1,16 +1,12 @@
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '../ui/button';
+import { Item } from '@/models/item.model';
 
 export interface ProductCardProps {
-  imgSrc: string;
-  alt: string;
-  price: number;
-  description: string;
-  name: string;
-  grade?: string;
+  item: Item;
 }
 
-export const ProductCard = ({ imgSrc, alt, price, name }: ProductCardProps) => {
+export const ProductCard = ({ item }: ProductCardProps) => {
   return (
     <div
       className={cn(
@@ -18,16 +14,17 @@ export const ProductCard = ({ imgSrc, alt, price, name }: ProductCardProps) => {
         'h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
     >
-      {/* {grade ? <Badge variant={'secondary'}>{grade} 등급</Badge> : null} */}
       <img
-        src={imgSrc}
-        alt={alt}
+        src={item.image_url}
+        alt={item.name}
         className="p-2"
         onContextMenu={(e) => e.preventDefault()}
       />
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
-        <p className="w-full font-semibold truncate text-center">{name}</p>
-        <p className="flex items-center gap-1 text-foreground/60">{price} 원</p>
+        <p className="w-full font-semibold truncate text-center">{item.name}</p>
+        <p className="flex items-center gap-1 text-foreground/60">
+          {item.cost} 원
+        </p>
       </div>
     </div>
   );

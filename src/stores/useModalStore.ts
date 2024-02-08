@@ -1,4 +1,6 @@
 import { ICharacter } from '@/models/character.model';
+import { Item } from '@/models/item.model';
+import { IMember } from '@/models/member.model';
 import { IPalette } from '@/models/palette.model';
 import { IStudyCategory } from '@/models/study.model';
 import { create } from 'zustand';
@@ -11,7 +13,6 @@ interface ModalState<T = undefined> {
 interface ModalsState {
   // 캐릭터 획득
   characterAcquisition: ModalState<ICharacter>;
-
   // 팔레트 획득
   paletteAcquisition: ModalState<IPalette>;
   // 타이머
@@ -24,6 +25,9 @@ interface ModalsState {
   createCategory: ModalState<{ memberId: string }>;
   editCategory: ModalState<{ memberId: string; category: IStudyCategory }>;
   deleteCategory: ModalState<{ memberId: string; category: IStudyCategory }>;
+
+  // 아이템 구매
+  purchaseItem: ModalState<{ member: IMember; item: Item }>;
 }
 
 type ModalType = keyof ModalsState;
@@ -45,6 +49,7 @@ export const useModalStore = create<ModalStore>()((set) => ({
     createCategory: { isOpen: false },
     editCategory: { isOpen: false },
     deleteCategory: { isOpen: false },
+    purchaseItem: { isOpen: false },
   },
   openModal: (modalType, data) =>
     set((state) => ({

@@ -1,4 +1,5 @@
 import { Streak } from '@/components/streaks/Streak';
+import { StreakInfo } from '@/components/streaks/StreakInfo';
 import { HeatMapData } from '@/lib/study-records';
 import { IStudyStreak } from '@/models/streak.model';
 
@@ -13,6 +14,7 @@ export const StreakSection = ({ heatMapData, streakInfo }: Props) => {
       <p className="text-center text-sm font-bold pb-4">스트릭</p>
       <div className="flex items-center justify-center">
         <div className="w-2/3">
+          <StreakInfo streakInfo={streakInfo} />
           <Streak heatMapData={heatMapData} streakInfo={streakInfo} />
         </div>
       </div>

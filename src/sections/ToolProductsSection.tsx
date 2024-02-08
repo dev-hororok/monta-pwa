@@ -1,7 +1,8 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { useShopConsumableItemsQuery } from '@/apis/queries/shopQueries';
 import { ProductCard } from '@/components/cards/ProductCard';
-import { PurchaseDrawer } from '@/components/shop/PurchaseDrawer';
+import { Item } from '@/models/item.model';
+import { useModalStore } from '@/stores/useModalStore';
 
 export const ToolProductsSection = () => {
   const {
@@ -14,6 +15,7 @@ export const ToolProductsSection = () => {
     isPending: itemsIsPending,
     isError: itemsIsError,
   } = useShopConsumableItemsQuery();
+  const openModal = useModalStore((state) => state.openModal);
 
   if (itemsIsPending || memberIdPending) {
     return <div>Loading...</div>;
@@ -22,24 +24,17 @@ export const ToolProductsSection = () => {
   if (itemsIsError || memberIsError) {
     return <div>Error</div>;
   }
-
+  const openPurchaseModal = (item: Item) => {
+    openModal('purchaseItem', { member, item });
+  };
   return (
     <section>
       <div className="grid grid-cols-3 gap-2">
         {items.map((item, idx) => {
           return (
-            <PurchaseDrawer key={idx} item={item} member={member}>
-              <div>
-                <ProductCard
-                  key={idx}
-                  imgSrc={item.image_url}
-                  alt={item.name}
-                  price={item.cost}
-                  name={item.name}
-                  description={item.description}
-                />
-              </div>
-            </PurchaseDrawer>
+            <div key={idx} onClick={() => openPurchaseModal(item)}>
+              <ProductCard item={item} />
+            </div>
           );
         })}
       </div>
