@@ -9,6 +9,7 @@ import { DeleteCategoryDialog } from './categories/DeleteCategoryDialog';
 import { TimerOptionDialog } from './timerOptions';
 import { PaletteAcquisitionDialog } from './paletteAcquisition';
 import { PurchaseItemDialog } from './purchaseItem';
+import { SellCharacterDialog } from './sellCharacter';
 
 export const ModalManager = () => {
   const { modals } = useModalStore();
@@ -29,6 +30,7 @@ export const ModalManager = () => {
       {modals.deleteCategory.isOpen ? <DeleteCategoryDialog /> : null}
 
       {modals.purchaseItem.isOpen ? <PurchaseItemDialog /> : null}
+      {modals.sellCharacter.isOpen ? <SellCharacterDialog /> : null}
     </>
   );
 };

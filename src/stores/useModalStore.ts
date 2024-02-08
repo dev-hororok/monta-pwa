@@ -1,4 +1,4 @@
-import { ICharacter } from '@/models/character.model';
+import { ICharacter, ICharacterInventory } from '@/models/character.model';
 import { Item } from '@/models/item.model';
 import { IMember } from '@/models/member.model';
 import { IPalette } from '@/models/palette.model';
@@ -28,6 +28,8 @@ interface ModalsState {
 
   // 아이템 구매
   purchaseItem: ModalState<{ member: IMember; item: Item }>;
+  // 캐릭터 판매
+  sellCharacter: ModalState<{ characterInventory: ICharacterInventory }>;
 }
 
 type ModalType = keyof ModalsState;
@@ -50,6 +52,7 @@ export const useModalStore = create<ModalStore>()((set) => ({
     editCategory: { isOpen: false },
     deleteCategory: { isOpen: false },
     purchaseItem: { isOpen: false },
+    sellCharacter: { isOpen: false },
   },
   openModal: (modalType, data) =>
     set((state) => ({

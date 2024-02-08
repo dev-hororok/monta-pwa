@@ -23,6 +23,7 @@ export const useConsumeFoodItemMutation = () => {
     mutationFn: (data: { item_inventory_id: string }) => {
       return consumeFoodItem(data.item_inventory_id);
     },
+
     onSuccess: async (_result, variables) => {
       await queryClient.cancelQueries({
         queryKey: [FOOD_INVENTORY_QUERY_KEY],

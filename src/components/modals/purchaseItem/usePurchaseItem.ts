@@ -4,7 +4,7 @@ import { useModalStore } from '@/stores/useModalStore';
 import { useToast } from '@/components/ui/use-toast';
 import { Item } from '@/models/item.model';
 
-export const usePurchase = (item: Item | null) => {
+export const usePurchaseItem = (item: Item | null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(1);
   const { mutateAsync: purchaseItem } = usePurchaseItemMutation();

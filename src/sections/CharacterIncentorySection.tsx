@@ -1,5 +1,7 @@
 import { useCharacterInventoryQuery } from '@/apis/queries/memberQueries';
 import { CharacterItemCard } from '@/components/cards/CharacterCard';
+import { ICharacterInventory } from '@/models/character.model';
+import { useModalStore } from '@/stores/useModalStore';
 
 interface Props {
   memberId: string;
@@ -7,6 +9,7 @@ interface Props {
 
 export const CharacterInventorySection = ({ memberId }: Props) => {
   const { data, isPending, isError } = useCharacterInventoryQuery(memberId);
+  const openModal = useModalStore((state) => state.openModal);
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -14,6 +17,10 @@ export const CharacterInventorySection = ({ memberId }: Props) => {
   if (isError) {
     return <div>Error</div>;
   }
+  const openSellModal = (characterInventory: ICharacterInventory) => {
+    openModal('sellCharacter', { characterInventory });
+  };
+
   return (
     <section>
       <div className="flex items-center justify-between pb-4">
@@ -29,8 +36,12 @@ export const CharacterInventorySection = ({ memberId }: Props) => {
         </p>
       </div>
       <div className="grid grid-cols-3 gap-2">
-        {data.map((item, idx) => {
-          return <CharacterItemCard key={idx} characterInventory={item} />;
+        {data.map((inventory, idx) => {
+          return (
+            <div key={idx} onClick={() => openSellModal(inventory)}>
+              <CharacterItemCard characterInventory={inventory} />
+            </div>
+          );
         })}
       </div>
     </section>

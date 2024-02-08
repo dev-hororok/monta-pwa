@@ -35,13 +35,13 @@ export const purchaseItem = async (body: {
 
 // 상점 캐릭터 판매
 export const sellCharacter = async (body: {
-  character_id: number;
+  character_inventory_id: string;
   count: number;
 }) => {
   const response = await springHttpRequest.post<
     ApiSuccessResponse<{ transaction_record: ITransactionRecord }>
   >(`/v2/shop/sell`, {
-    character_id: body.character_id,
+    character_id: body.character_inventory_id,
     count: body.count,
   });
   return response.data.data.transaction_record;

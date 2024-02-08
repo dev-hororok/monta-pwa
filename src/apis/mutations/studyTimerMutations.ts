@@ -33,10 +33,13 @@ export const useEndStudyTimerMutation = () => {
         [FOOD_INVENTORY_QUERY_KEY],
         (old: IFoodItemInventory[] | null) => {
           if (!old) return [];
+
           return old.map((item) => {
             const rest = item.progress - variables.duration;
-            item.progress = 0 < rest ? rest : 0;
-            return item;
+            return {
+              ...item,
+              progress: (item.progress = 0 < rest ? rest : 0),
+            };
           });
         }
       );

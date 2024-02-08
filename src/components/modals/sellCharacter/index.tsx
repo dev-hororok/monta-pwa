@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { usePurchaseItem } from './usePurchaseItem';
+import { useSellCharacter } from './useSellCharacter';
 
-export const PurchaseItemDialog = () => {
-  const { isOpen, data } = useModalStore((state) => state.modals.purchaseItem);
+export const SellCharacterDialog = () => {
+  const { isOpen, data } = useModalStore((state) => state.modals.sellCharacter);
   const closeModal = useModalStore((state) => state.closeModal);
 
   const {
@@ -20,9 +20,9 @@ export const PurchaseItemDialog = () => {
     count,
     incrementCount,
     decrementCount,
-    onSubmitPurchase,
+    onSubmitSell,
     MaxCount,
-  } = usePurchaseItem(data ? data.item : null);
+  } = useSellCharacter(data ? data.characterInventory : null);
 
   if (!isOpen || !data) {
     return null;
@@ -35,7 +35,9 @@ export const PurchaseItemDialog = () => {
       >
         <div className="mx-auto w-full max-w-sm">
           <DialogHeader>
-            <DialogTitle>{data.item.name} 구매</DialogTitle>
+            <DialogTitle>
+              {data.characterInventory.character.name} 판매
+            </DialogTitle>
             <DialogDescription>수량을 선택해주세요.</DialogDescription>
           </DialogHeader>
           <div className="p-4 pb-0">
@@ -63,10 +65,7 @@ export const PurchaseItemDialog = () => {
                 size="icon"
                 className="h-8 w-8 shrink-0 rounded-full"
                 onClick={incrementCount}
-                disabled={
-                  count >= MaxCount ||
-                  (count + 1) * data.item.cost > data.member.point
-                }
+                disabled={count >= MaxCount}
               >
                 <PlusIcon className="h-4 w-4" />
                 <span className="sr-only">Increase</span>
@@ -74,17 +73,13 @@ export const PurchaseItemDialog = () => {
             </div>
           </div>
           <DialogFooter>
-            <Button
-              type="button"
-              onClick={onSubmitPurchase}
-              disabled={isLoading}
-            >
-              {isLoading ? '구매중 ...' : '구매하기'}
+            <Button type="button" onClick={onSubmitSell} disabled={isLoading}>
+              {isLoading ? '판매중 ...' : '판매하기'}
             </Button>
             <Button
               type="button"
               variant="outline"
-              onClick={() => closeModal('purchaseItem')}
+              onClick={() => closeModal('sellCharacter')}
             >
               취소
             </Button>
