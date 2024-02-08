@@ -36,16 +36,16 @@ body {
   }
 
   /* 스트릭 기본색상 */
-  .react-calendar-heatmap .color-scale-1 {
-    fill: var(--color-scale-1);
+  .streak-container .color-scale-1 {
+    background: var(--color-scale-1);
   }
-  .react-calendar-heatmap .color-scale-2 {
-    fill: var(--color-scale-2);
+  .streak-container .color-scale-2 {
+    background: var(--color-scale-2);
   }
-  .react-calendar-heatmap .color-scale-3 {
-    fill: var(--color-scale-3);
+  .streak-container .color-scale-3 {
+    background: var(--color-scale-3);
   }
-  .react-calendar-heatmap .color-scale-4 {
-    fill: var(--color-scale-4);
+  .streak-container .color-scale-4 {
+    background: var(--color-scale-4);
   }
 }
