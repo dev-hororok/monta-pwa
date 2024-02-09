@@ -8,13 +8,14 @@ import { DailyStatisticSection } from './DailyStatisticSection';
 
 interface Props {
   heatMapData: HeatMapData[];
+  memberId: string;
 }
 
 type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export const CalendarSection = ({ heatMapData }: Props) => {
+export const CalendarSection = ({ heatMapData, memberId }: Props) => {
   const [value, onChange] = useState<Value>(new Date());
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
@@ -92,8 +93,8 @@ export const CalendarSection = ({ heatMapData }: Props) => {
       </div>
 
       <DailyStatisticSection
-        date={selectedDateRecord.dateStr}
-        studyTime={selectedDateRecord.studyTime}
+        dateStr={selectedDateRecord.dateStr}
+        memberId={memberId}
       />
     </section>
   );

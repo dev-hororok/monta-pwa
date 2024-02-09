@@ -8,6 +8,7 @@ import {
   IConsumableItemInventory,
   IFoodItemInventory,
 } from '@/models/item.model';
+import { IDailyStatistic } from '@/models/statistic.model';
 
 // 현재유저 조회
 export const fetchCurrentMember = async () => {
@@ -55,4 +56,15 @@ export const fetchStudyRecords = async (memberId: string) => {
     ApiSuccessResponse<{ study_records: IStudyRecord[] }>
   >(`/timer-api/members/${memberId}/study-records`);
   return response.data.data.study_records;
+};
+
+// 유저 공부기록 통계 조회(daily)
+export const fetchDailyStatistic = async (
+  memberId: string,
+  dateStr: string
+) => {
+  const response = await nestHttpRequest.get<
+    ApiSuccessResponse<IDailyStatistic>
+  >(`/timer-api/members/${memberId}/statistics?date=${dateStr}`);
+  return response.data.data;
 };

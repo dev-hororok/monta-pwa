@@ -2,6 +2,7 @@ import {
   fetchCharacterInventory,
   fetchConsumableInventory,
   fetchCurrentMember,
+  fetchDailyStatistic,
   fetchFoodInventory,
   fetchStudyRecords,
   fetchStudyStreak,
@@ -69,6 +70,17 @@ export const useStudyRecordsQuery = (memberId: string) => {
     queryKey: [STUDY_RECORDS_QUERY_KEY],
     queryFn: () => fetchStudyRecords(memberId),
     staleTime: 10 * 60 * 1000,
+    enabled: !!memberId,
+  });
+};
+
+// 공부 기록 조회
+export const STATISTIC_DAILY = 'statisticDaily';
+export const useDailyStatisticQuery = (memberId: string, dateStr: string) => {
+  return useQuery({
+    queryKey: [STATISTIC_DAILY, dateStr],
+    queryFn: () => fetchDailyStatistic(memberId, dateStr),
+    staleTime: 24 * 60 * 1000,
     enabled: !!memberId,
   });
 };
