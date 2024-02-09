@@ -1,8 +1,8 @@
 import { formatDateStr } from '@/lib/date-format';
-import { HeatMapData } from '@/lib/study-records';
 import { IStudyStreak } from '@/models/streak.model';
 import { useEffect, useMemo } from 'react';
 import { StreakItem } from './StreakItem';
+import { IStatisticHeatMapData } from '@/models/statistic.model';
 
 const generateYearDates = () => {
   const dates = [];
@@ -15,7 +15,7 @@ const generateYearDates = () => {
   return dates;
 };
 
-const groupByWeeks = (dates: Date[], heatMapData: HeatMapData[]) => {
+const groupByWeeks = (dates: Date[], heatMapData: IStatisticHeatMapData[]) => {
   const weeks: {
     dates: { date: string; value?: number }[];
     month: number;
@@ -41,7 +41,10 @@ const groupByWeeks = (dates: Date[], heatMapData: HeatMapData[]) => {
 
       lastMonth = month;
     }
-    week.push({ date: dateStr, value: heatMapNode ? heatMapNode.count : 0 });
+    week.push({
+      date: dateStr,
+      value: heatMapNode ? heatMapNode.totalSeconds : 0,
+    });
     if (idx === dates.length - 1) {
       weeks.push({
         dates: week,
@@ -55,11 +58,11 @@ const groupByWeeks = (dates: Date[], heatMapData: HeatMapData[]) => {
 };
 
 interface Props {
-  heatMapData: HeatMapData[];
-  streakInfo: IStudyStreak | null;
+  heatMapData: IStatisticHeatMapData[];
+  streakInfo?: IStudyStreak;
 }
 
-export const Streak = ({ heatMapData, streakInfo }: Props) => {
+export const StudyStreak = ({ heatMapData, streakInfo }: Props) => {
   const dates = useMemo(() => generateYearDates(), []); // 12달치 Date객체 생성
   const weeks = useMemo(
     () => groupByWeeks(dates, heatMapData),

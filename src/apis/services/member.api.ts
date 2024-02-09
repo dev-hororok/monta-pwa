@@ -8,7 +8,11 @@ import {
   IConsumableItemInventory,
   IFoodItemInventory,
 } from '@/models/item.model';
-import { IDailyStatistic, IMontlyStatistic } from '@/models/statistic.model';
+import {
+  IDailyStatistic,
+  IMontlyStatistic,
+  IStatisticHeatMapData,
+} from '@/models/statistic.model';
 
 // 현재유저 조회
 export const fetchCurrentMember = async () => {
@@ -79,6 +83,20 @@ export const fetchMonthlyStatistic = async (
     ApiSuccessResponse<IMontlyStatistic>
   >(
     `/timer-api/members/${memberId}/statistics/monthly?year=${year}&month=${month}`
+  );
+  return response.data.data;
+};
+
+// 유저 공부기록 통계 조회(heat-map)
+export const fetchStatisticHeatMap = async (
+  memberId: string,
+  start: string,
+  end: string
+) => {
+  const response = await nestHttpRequest.get<
+    ApiSuccessResponse<IStatisticHeatMapData[]>
+  >(
+    `/timer-api/members/${memberId}/statistics/heat-map?start=${start}&end=${end}`
   );
   return response.data.data;
 };

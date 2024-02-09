@@ -2,7 +2,7 @@ import { IStudyStreak } from '@/models/streak.model';
 import { Badge } from '../ui/badge';
 
 interface Props {
-  streakInfo: IStudyStreak | null;
+  streakInfo?: IStudyStreak;
 }
 
 export const StreakInfo = ({ streakInfo }: Props) => {

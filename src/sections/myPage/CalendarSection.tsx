@@ -1,14 +1,15 @@
 import Calendar from 'react-calendar';
 import { useMemo, useState } from 'react';
-import { HeatMapData } from '@/lib/study-records';
 import { formatDateStr, formatTime } from '@/lib/date-format';
 
 import '@/styles/calendar.css';
 import { DailyStatisticSection } from './DailyStatisticSection';
-import { useMonthlyStatisticQuery } from '@/apis/queries/memberQueries';
+import {
+  useMonthlyStatisticQuery,
+  useStatisticHeatMapQuery,
+} from '@/apis/queries/memberQueries';
 
 interface Props {
-  heatMapData: HeatMapData[];
   memberId: string;
 }
 
@@ -16,10 +17,12 @@ type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export const CalendarSection = ({ heatMapData, memberId }: Props) => {
+export const CalendarSection = ({ memberId }: Props) => {
   const [value, onChange] = useState<Value>(new Date());
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());
+  const startDate = useMemo(() => new Date(year, month - 1, 23), [year, month]);
+  const endDate = useMemo(() => new Date(year, month + 1, 7), [year, month]);
 
   const selectedDateStr = useMemo(() => {
     if (value instanceof Date) {
@@ -28,26 +31,27 @@ export const CalendarSection = ({ heatMapData, memberId }: Props) => {
     return formatDateStr(new Date());
   }, [value]);
 
-  const {
-    data: monthlyStatistic,
-    isLoading,
-    isError,
-  } = useMonthlyStatisticQuery(memberId, year, month + 1);
+  const { data: heatMapData } = useStatisticHeatMapQuery(
+    memberId,
+    formatDateStr(startDate),
+    formatDateStr(endDate)
+  );
+
+  const { data: monthlyStatistic } = useMonthlyStatisticQuery(
+    memberId,
+    year,
+    month + 1
+  );
 
   const studiedDays = useMemo(() => {
     const map = new Map<string, number>();
-    heatMapData.forEach((data) => {
-      map.set(data.date, data.count);
-    });
+    if (heatMapData) {
+      heatMapData.forEach((data) => {
+        map.set(data.date, data.totalSeconds);
+      });
+    }
     return map;
   }, [heatMapData]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (isError || !monthlyStatistic) {
-    return <div>Error</div>;
-  }
 
   return (
     <section className="px-4">
@@ -81,8 +85,8 @@ export const CalendarSection = ({ heatMapData, memberId }: Props) => {
           }}
         />
         <p className="text-right text-sm text-foreground/70">
-          <span>{formatTime(monthlyStatistic.totalSeconds)}</span> /
-          <span> {monthlyStatistic.uniqueStudyDays}일</span>
+          <span>{formatTime(monthlyStatistic?.totalSeconds || 0)}</span> /
+          <span> {monthlyStatistic?.uniqueStudyDays || 0}일</span>
         </p>
       </div>
 

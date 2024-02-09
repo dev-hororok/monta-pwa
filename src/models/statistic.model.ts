@@ -9,3 +9,8 @@ export interface IMontlyStatistic {
   totalSeconds: number;
   uniqueStudyDays: number;
 }
+
+export interface IStatisticHeatMapData {
+  date: string;
+  totalSeconds: number;
+}
