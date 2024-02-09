@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -31,7 +30,7 @@ export const SellCharacterDialog = () => {
   return (
     <Dialog open={isOpen}>
       <DialogContent
-        className={`w-full md:max-w-[416px] max-h-[400px] flex flex-col justify-start items-center pt-safe-offset-14`}
+        className={`w-full md:max-w-[416px] max-h-[400px] flex flex-col justify-start items-center`}
       >
         <div className="mx-auto w-full max-w-sm">
           <DialogHeader>
@@ -53,7 +52,7 @@ export const SellCharacterDialog = () => {
                 <span className="sr-only">Decrease</span>
               </Button>
               <div className="flex-1 text-center">
-                <div className="text-7xl font-bold tracking-tighter">
+                <div className="text-4xl font-bold tracking-tighter">
                   {count}
                 </div>
                 <div className="text-[0.70rem] uppercase text-muted-foreground">
@@ -72,18 +71,24 @@ export const SellCharacterDialog = () => {
               </Button>
             </div>
           </div>
-          <DialogFooter>
-            <Button type="button" onClick={onSubmitSell} disabled={isLoading}>
-              {isLoading ? '판매중 ...' : '판매하기'}
-            </Button>
+          <div className="flex items-center gap-2 pt-4">
             <Button
               type="button"
               variant="outline"
               onClick={() => closeModal('sellCharacter')}
+              className="w-full"
             >
               취소
             </Button>
-          </DialogFooter>
+            <Button
+              type="button"
+              onClick={onSubmitSell}
+              disabled={isLoading}
+              className="w-full"
+            >
+              {isLoading ? '판매중 ...' : '판매하기'}
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

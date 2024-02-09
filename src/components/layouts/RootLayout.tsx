@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import { DarkModeToggle } from '../DarkmodeToggle';
-import { Toaster } from '../ui/toaster';
 import useViewport from '@/hooks/useViewport';
 import { useCloseAppHandler } from '@/hooks/useCloseAppHandler';
 import { ModalManager } from '../modals/ModalManager';
@@ -21,7 +20,6 @@ export const RootLayout = () => {
           </div>
         </div>
       </div>
-      <Toaster />
     </div>
   );
 };

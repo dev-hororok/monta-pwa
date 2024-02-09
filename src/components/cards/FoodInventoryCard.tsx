@@ -4,9 +4,9 @@ import { formatTime } from '@/lib/date-format';
 import { IFoodItemInventory } from '@/models/item.model';
 import { ICharacter } from '@/models/character.model';
 import { useModalStore } from '@/stores/useModalStore';
-import { toast } from '../ui/use-toast';
 import { useConsumeFoodItemMutation } from '@/apis/mutations/itemInventoryMutations';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 interface Props {
   foodItemInventory: IFoodItemInventory;
@@ -22,9 +22,7 @@ export const FoodInventoryCard = ({ foodItemInventory }: Props) => {
   const onClickHandler = async () => {
     if (isLoading) return;
     if (!isActive) {
-      toast({
-        title: '아직 음식이 다 익지 않았습니다.',
-      });
+      toast.error('아직 음식이 다 익지 않았습니다.');
       return;
     }
     try {

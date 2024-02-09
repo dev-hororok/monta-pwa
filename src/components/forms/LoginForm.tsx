@@ -2,7 +2,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import authService from '@/apis/services/authService';
-import { useToast } from '@/components/ui/use-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Form,
@@ -21,6 +20,7 @@ import {
   FigmaLogoIcon,
   GitHubLogoIcon,
 } from '@radix-ui/react-icons';
+import { toast } from 'sonner';
 
 const loginFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
@@ -41,7 +41,6 @@ const LoginForm = () => {
     },
   });
 
-  const { toast } = useToast();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -55,23 +54,19 @@ const LoginForm = () => {
 
       if (result.success) {
         // 로그인 성공
-        toast({ title: '로그인에 성공하였습니다.' });
+        toast.success('로그인에 성공하였습니다.');
         // 전에 리다이렉팅으로 왔다면 다시 보내주기
         const origin = location.state?.from?.pathname || '/';
         navigate(origin);
       } else {
         // 로그인 실패
-        toast({
-          title: '이메일 또는 패스워드가 잘못되었습니다.',
-          variant: 'destructive',
-        });
+        toast.error('이메일 또는 패스워드가 잘못되었습니다.');
       }
     } catch (e) {
       // 네트워크 에러나 기타 예외 처리
-      toast({
-        title: e instanceof Error ? e.message : '서버에 문제가 발생했습니다.',
-        variant: 'destructive',
-      });
+      toast.error(
+        e instanceof Error ? e.message : '서버에 문제가 발생했습니다.'
+      );
     } finally {
       setIsLoading(false);
     }

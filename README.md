@@ -1,7 +1,6 @@
 #### Task
 
 - Shadcn/ui Drawer 제거 (버그 존재)
-  - Drawer에서 react-query mutation 사용 시 QueryClient 망가짐
   - 구매/판매 모달 작업
 - zustand - slice 패턴 -> 개별 스토어 (관련 상태 집중화)
 - react-query
@@ -61,3 +60,11 @@
 #### 이미지 업로드 (Hororok 서버)
 
 - S3, cloudFront
+
+### TroubleShooting
+
+#### 1. Shadcn/ui - Toast + reactQuery 사용시 충돌
+
+sonner 라이브러리로 교체함
+
+[https://stackoverflow.com/questions/77923557]("https://stackoverflow.com/questions/77923557/why-does-my-shadcn-ui-datatable-not-reload-on-invalidating-query")

@@ -1,33 +1,19 @@
-import { useToast } from '@/components/ui/use-toast';
 import { useCallback, useMemo } from 'react';
 import axios from 'axios';
+import { toast } from 'sonner';
 
 const useApiError = () => {
-  const { toast } = useToast();
-
-  const defaultHandler = useCallback(
-    (httpMessage: string | string[]) => {
-      if (Array.isArray(httpMessage)) {
-        toast({
-          variant: 'destructive',
-          title: httpMessage[0],
-        });
-      } else {
-        toast({
-          variant: 'destructive',
-          title: httpMessage,
-        });
-      }
-    },
-    [toast]
-  );
+  const defaultHandler = useCallback((httpMessage: string | string[]) => {
+    if (Array.isArray(httpMessage)) {
+      toast.error(httpMessage[0]);
+    } else {
+      toast.error(httpMessage);
+    }
+  }, []);
 
   const handler500 = useCallback(() => {
-    toast({
-      variant: 'destructive',
-      title: '서버에서 알 수 없는 문제가 발생하였습니다.',
-    });
-  }, [toast]);
+    toast.error('서버에서 알 수 없는 문제가 발생하였습니다.');
+  }, []);
 
   const handlers = useMemo(() => {
     return {

@@ -4,8 +4,8 @@ import { cn } from '@/lib/utils';
 import { IConsumableItemInventory } from '@/models/item.model';
 import { useModalStore } from '@/stores/useModalStore';
 import { useState } from 'react';
-import { useToast } from '../ui/use-toast';
 import { IPalette } from '@/models/palette.model';
+import { toast } from 'sonner';
 
 interface Props {
   consumableItemInventory: IConsumableItemInventory;
@@ -14,7 +14,6 @@ interface Props {
 export const ConsumableItemInventoryCard = ({
   consumableItemInventory,
 }: Props) => {
-  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const openModal = useModalStore((state) => state.openModal);
   const { mutateAsync: consumeItem } = useConsumeConsumableItemMutation();
@@ -22,9 +21,7 @@ export const ConsumableItemInventoryCard = ({
   const onClickHandler = async () => {
     if (isLoading) return;
     if (consumableItemInventory.quantity < 1) {
-      toast({
-        title: '개수가 부족합니다.',
-      });
+      toast.error('개수가 부족합니다.');
       return;
     }
     try {

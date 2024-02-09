@@ -13,8 +13,8 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useCreateStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
 import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
-import { useToast } from '../ui/use-toast';
 import { ModalHeader } from '../headers/ModalHeader';
+import { toast } from 'sonner';
 
 const createCategoryFormSchema = z.object({
   subject: z
@@ -39,7 +39,6 @@ export const CreateCategoryForm = ({ memberId, closeModal }: Props) => {
     },
   });
   const { mutate: createCategory } = useCreateStudyCategoryMutation();
-  const { toast } = useToast();
 
   const onSubmit: SubmitHandler<CreateCategoryFormSchemaType> = async (
     data: CreateCategoryFormSchemaType
@@ -48,9 +47,7 @@ export const CreateCategoryForm = ({ memberId, closeModal }: Props) => {
     setIsLoading(true);
     try {
       if (categories?.map((c) => c.subject).includes(data.subject)) {
-        toast({
-          title: '중복 된 카테고리가 존재합니다.',
-        });
+        toast.warning('중복 된 카테고리가 존재합니다.');
         return;
       }
       createCategory({ memberId, data });

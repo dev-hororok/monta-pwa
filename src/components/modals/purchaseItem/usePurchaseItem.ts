@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { usePurchaseItemMutation } from '@/apis/mutations/shopMutations';
 import { useModalStore } from '@/stores/useModalStore';
-import { useToast } from '@/components/ui/use-toast';
 import { Item } from '@/models/item.model';
+import { toast } from 'sonner';
 
 export const usePurchaseItem = (item: Item | null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(1);
   const { mutateAsync: purchaseItem } = usePurchaseItemMutation();
   const closeModal = useModalStore((state) => state.closeModal);
-  const { toast } = useToast();
 
   const MaxCount = item?.item_type === 'Food' ? 4 : 20;
 
@@ -26,7 +25,7 @@ export const usePurchaseItem = (item: Item | null) => {
         item_id: item.item_id,
         count,
       });
-      toast({ title: result.notes });
+      toast.success(result.notes);
       closeModal('purchaseItem');
     } catch (e) {
       console.error('Error', e);

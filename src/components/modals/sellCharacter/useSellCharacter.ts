@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSellCharacterMutation } from '@/apis/mutations/shopMutations';
 import { useModalStore } from '@/stores/useModalStore';
-import { useToast } from '@/components/ui/use-toast';
 import { ICharacterInventory } from '@/models/character.model';
+import { toast } from 'sonner';
 
 export const useSellCharacter = (
   characterInventory: ICharacterInventory | null
@@ -11,7 +11,6 @@ export const useSellCharacter = (
   const [count, setCount] = useState(1);
   const { mutateAsync: sellCharacter } = useSellCharacterMutation();
   const closeModal = useModalStore((state) => state.closeModal);
-  const { toast } = useToast();
 
   const MaxCount = characterInventory ? characterInventory.quantity : 0;
 
@@ -28,7 +27,7 @@ export const useSellCharacter = (
         character_inventory_id: characterInventory.character.character_id + '', // API 변경전이라 character_id받는중
         count,
       });
-      toast({ title: result.notes });
+      toast.success(result.notes);
       closeModal('sellCharacter');
     } catch (e) {
       console.error('Error', e);

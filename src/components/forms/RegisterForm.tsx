@@ -2,7 +2,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import authService from '@/apis/services/authService';
-import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
 import {
   Form,
@@ -21,6 +20,7 @@ import {
   FigmaLogoIcon,
   GitHubLogoIcon,
 } from '@radix-ui/react-icons';
+import { toast } from 'sonner';
 
 const registerFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
@@ -41,7 +41,6 @@ const RegisterForm = () => {
     },
   });
 
-  const { toast } = useToast();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<RegisterFormSchemaType> = async (
@@ -55,21 +54,17 @@ const RegisterForm = () => {
 
       if (result.success) {
         // 회원가입 성공
-        toast({ title: '회원가입에 성공하였습니다.' });
+        toast.success('회원가입에 성공하였습니다.');
         navigate('/', { replace: true });
       } else {
         // 회원가입 실패
-        toast({
-          title: result.error,
-          variant: 'destructive',
-        });
+        toast.error(result.error);
       }
     } catch (e) {
       // 네트워크 에러나 기타 예외 처리
-      toast({
-        title: e instanceof Error ? e.message : '서버에 문제가 발생했습니다.',
-        variant: 'destructive',
-      });
+      toast.error(
+        e instanceof Error ? e.message : '서버에 문제가 발생했습니다.'
+      );
     } finally {
       setIsLoading(false);
     }

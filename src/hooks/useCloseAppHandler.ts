@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import useBoundStore from '@/stores/useBoundStore';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 
 //* 뒤로가기를 {delay}초안에 안누르면 종료방지 history를 복구하는 훅 */
-export const useCloseAppHandler = (delay = 2000) => {
-  const { toast } = useToast();
+export const useCloseAppHandler = (delay = 1500) => {
   const setBackButtonPressed = useBoundStore(
     (state) => state.setBackButtonPressed
   );
@@ -25,10 +24,7 @@ export const useCloseAppHandler = (delay = 2000) => {
 
       if (!useBoundStore.getState().backButtonPressed) {
         setBackButtonPressed(true);
-        toast({
-          title: '한번 더 누르면 앱이 종료됩니다.',
-          duration: 2000,
-        });
+        toast('한번 더 누르면 앱이 종료됩니다.', { duration: delay });
 
         timeout = setTimeout(() => {
           setBackButtonPressed(false);
@@ -48,7 +44,7 @@ export const useCloseAppHandler = (delay = 2000) => {
         clearTimeout(timeout);
       }
     };
-  }, [setBackButtonPressed, delay, toast]);
+  }, [setBackButtonPressed, delay]);
 
   return null;
 };
