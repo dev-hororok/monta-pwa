@@ -101,7 +101,7 @@ export const Streak = ({ heatMapData, streakInfo }: Props) => {
                 .map((_n, idx) => <div key={`null-${idx}`}></div>)
             : null}
           {week.dates.map((date) => {
-            return <StreakItem date={date} />;
+            return <StreakItem key={date.date} date={date} />;
           })}
         </div>
       ))}

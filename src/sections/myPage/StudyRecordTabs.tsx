@@ -38,7 +38,7 @@ export const StudyRecordTabs = ({ member }: Props) => {
 
   return (
     <Tabs defaultValue="calendar" className="w-full py-2 relative">
-      <div className="sticky top-0 bg-background py-2">
+      <div className="sticky top-0 bg-background py-2 z-40">
         <TabsList className="grid grid-cols-2">
           <TabsTrigger value="calendar">캘린더</TabsTrigger>
           <TabsTrigger value="streak">스트릭</TabsTrigger>

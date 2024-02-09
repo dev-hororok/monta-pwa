@@ -4,6 +4,7 @@ import { HeatMapData } from '@/lib/study-records';
 import { formatDateStr, formatTime } from '@/lib/date-format';
 
 import '@/styles/calendar.css';
+import { DailyStatisticSection } from './DailyStatisticSection';
 
 interface Props {
   heatMapData: HeatMapData[];
@@ -23,13 +24,14 @@ export const CalendarSection = ({ heatMapData }: Props) => {
     return map;
   }, [heatMapData]);
 
-  const selectedDateRecord = useMemo(() => {
-    if (value instanceof Date) {
-      const dateStr = formatDateStr(value);
-      return studiedDays.get(dateStr) || 0;
-    }
-    return 0;
-  }, [value, studiedDays]);
+  const selectedDateRecord: { dateStr: string; studyTime: number } =
+    useMemo(() => {
+      if (value instanceof Date) {
+        const dateStr = formatDateStr(value);
+        return { dateStr, studyTime: studiedDays.get(dateStr) || 0 };
+      }
+      return { dateStr: '', studyTime: 0 };
+    }, [value, studiedDays]);
 
   const thisMonthStatistics = useMemo(() => {
     if (!(value instanceof Date)) {
@@ -75,12 +77,16 @@ export const CalendarSection = ({ heatMapData }: Props) => {
             );
           }}
         />
+        <p className="text-right text-sm text-foreground/70">
+          <span>{formatTime(thisMonthStatistics.totalMinutes)}</span> /
+          <span> {thisMonthStatistics.studiedDayCount}일</span>
+        </p>
       </div>
-      <div>오늘 공부 기록</div>
-      {formatTime(selectedDateRecord)}
-      <div>이달 통계</div>
-      <p>총 공부시간: {formatTime(thisMonthStatistics.totalMinutes)}</p>
-      <p>총 공부일: {thisMonthStatistics.studiedDayCount}일</p>
+
+      <DailyStatisticSection
+        date={selectedDateRecord.dateStr}
+        studyTime={selectedDateRecord.studyTime}
+      />
     </section>
   );
 };
