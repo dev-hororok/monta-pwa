@@ -4,7 +4,6 @@ import {
   consumeFoodItem,
 } from '../services/itemInventory.api';
 import {
-  CHARACTER_INVENTORY_QUERY_KEY,
   CONSUMABLE_INVENTORY_QUERY_KEY,
   FOOD_INVENTORY_QUERY_KEY,
   STUDY_STREAK_QUERY_KEY,
@@ -15,7 +14,7 @@ import {
 } from '@/models/item.model';
 import { IStudyStreak } from '@/models/streak.model';
 
-// 음식 아이템 사용 (로딩 표시)
+// 음식 아이템 사용
 export const useConsumeFoodItemMutation = () => {
   const queryClient = useQueryClient();
 
@@ -25,13 +24,6 @@ export const useConsumeFoodItemMutation = () => {
     },
 
     onSuccess: async (_result, variables) => {
-      await queryClient.cancelQueries({
-        queryKey: [FOOD_INVENTORY_QUERY_KEY],
-      });
-      await queryClient.cancelQueries({
-        queryKey: [CHARACTER_INVENTORY_QUERY_KEY],
-      });
-
       queryClient.setQueryData(
         [FOOD_INVENTORY_QUERY_KEY],
         (old: IFoodItemInventory[] | null) => {
@@ -45,7 +37,7 @@ export const useConsumeFoodItemMutation = () => {
   });
 };
 
-// 사용 아이템 사용 (로딩 표시)
+// 사용 아이템 사용
 export const useConsumeConsumableItemMutation = () => {
   const queryClient = useQueryClient();
 
@@ -54,12 +46,9 @@ export const useConsumeConsumableItemMutation = () => {
       return consumeConsumableItem(data.item_inventory_id);
     },
     onSuccess: async (result, variables) => {
-      await queryClient.cancelQueries({
-        queryKey: [CONSUMABLE_INVENTORY_QUERY_KEY],
-      });
-      await queryClient.cancelQueries({
-        queryKey: [STUDY_STREAK_QUERY_KEY],
-      });
+      // await queryClient.cancelQueries({
+      //   queryKey: [STUDY_STREAK_QUERY_KEY],
+      // });
 
       queryClient.setQueryData(
         [CONSUMABLE_INVENTORY_QUERY_KEY],
@@ -80,6 +69,7 @@ export const useConsumeConsumableItemMutation = () => {
         [STUDY_STREAK_QUERY_KEY],
         (old: IStudyStreak | null) => {
           if (!old) return null;
+          console.log(old);
           return {
             ...old,
             palette: result.palette,
