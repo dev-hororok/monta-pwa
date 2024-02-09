@@ -4,6 +4,7 @@ import {
   consumeFoodItem,
 } from '../services/itemInventory.api';
 import {
+  CHARACTER_INVENTORY_QUERY_KEY,
   CONSUMABLE_INVENTORY_QUERY_KEY,
   FOOD_INVENTORY_QUERY_KEY,
   STUDY_STREAK_QUERY_KEY,
@@ -24,6 +25,9 @@ export const useConsumeFoodItemMutation = () => {
     },
 
     onSuccess: async (_result, variables) => {
+      await queryClient.invalidateQueries({
+        queryKey: [CHARACTER_INVENTORY_QUERY_KEY],
+      });
       queryClient.setQueryData(
         [FOOD_INVENTORY_QUERY_KEY],
         (old: IFoodItemInventory[] | null) => {
