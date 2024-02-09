@@ -16,6 +16,8 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export const CalendarSection = ({ heatMapData }: Props) => {
   const [value, onChange] = useState<Value>(new Date());
+  const [month, setMonth] = useState(new Date().getMonth());
+  const [year, setYear] = useState(new Date().getFullYear());
   const studiedDays = useMemo(() => {
     const map = new Map<string, number>();
     heatMapData.forEach((data) => {
@@ -34,17 +36,10 @@ export const CalendarSection = ({ heatMapData }: Props) => {
     }, [value, studiedDays]);
 
   const thisMonthStatistics = useMemo(() => {
-    if (!(value instanceof Date)) {
-      return { totalMinutes: 0, studiedDayCount: 0 };
-    }
-    const selectedMonth = value.getMonth();
-    const selectedYear = value.getFullYear();
-
     const thisMonthRecords = heatMapData.filter((data) => {
       const recordDate = new Date(data.date);
       return (
-        recordDate.getMonth() === selectedMonth &&
-        recordDate.getFullYear() === selectedYear
+        recordDate.getMonth() === month && recordDate.getFullYear() === year
       );
     });
     const totalMinutes = thisMonthRecords.reduce(
@@ -57,7 +52,7 @@ export const CalendarSection = ({ heatMapData }: Props) => {
       totalMinutes,
       studiedDayCount: uniqueDays,
     };
-  }, [heatMapData, value]);
+  }, [heatMapData, month, year]);
 
   return (
     <section className="px-4">
@@ -66,6 +61,19 @@ export const CalendarSection = ({ heatMapData }: Props) => {
           value={value}
           onChange={onChange}
           view="month"
+          onActiveStartDateChange={({ action, activeStartDate }) => {
+            if (
+              action === 'prev' ||
+              action === 'next' ||
+              action === 'prev2' ||
+              action === 'next2'
+            ) {
+              if (activeStartDate) {
+                setMonth(activeStartDate.getMonth());
+                setYear(activeStartDate.getFullYear());
+              }
+            }
+          }}
           formatDay={(_locale, date) => date.getDate().toString()}
           maxDate={new Date()} // 오늘까지만 조회가능
           tileContent={({ date, view }) => {
