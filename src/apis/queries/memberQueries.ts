@@ -4,6 +4,7 @@ import {
   fetchCurrentMember,
   fetchDailyStatistic,
   fetchFoodInventory,
+  fetchMonthlyStatistic,
   fetchStudyRecords,
   fetchStudyStreak,
 } from '@/apis/services/member.api';
@@ -74,12 +75,26 @@ export const useStudyRecordsQuery = (memberId: string) => {
   });
 };
 
-// 공부 기록 조회
+// 공부 통계 조회(daily)
 export const STATISTIC_DAILY = 'statisticDaily';
 export const useDailyStatisticQuery = (memberId: string, dateStr: string) => {
   return useQuery({
     queryKey: [STATISTIC_DAILY, dateStr],
     queryFn: () => fetchDailyStatistic(memberId, dateStr),
+    staleTime: 24 * 60 * 1000,
+    enabled: !!memberId,
+  });
+};
+
+export const STATISTIC_Monthly = 'statisticMonthly';
+export const useMonthlyStatisticQuery = (
+  memberId: string,
+  year: number,
+  month: number
+) => {
+  return useQuery({
+    queryKey: [STATISTIC_Monthly, year, month],
+    queryFn: () => fetchMonthlyStatistic(memberId, year, month),
     staleTime: 24 * 60 * 1000,
     enabled: !!memberId,
   });

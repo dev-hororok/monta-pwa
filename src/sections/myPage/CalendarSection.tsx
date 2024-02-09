@@ -5,6 +5,7 @@ import { formatDateStr, formatTime } from '@/lib/date-format';
 
 import '@/styles/calendar.css';
 import { DailyStatisticSection } from './DailyStatisticSection';
+import { useMonthlyStatisticQuery } from '@/apis/queries/memberQueries';
 
 interface Props {
   heatMapData: HeatMapData[];
@@ -17,8 +18,22 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export const CalendarSection = ({ heatMapData, memberId }: Props) => {
   const [value, onChange] = useState<Value>(new Date());
-  const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState(new Date().getMonth());
+
+  const selectedDateStr = useMemo(() => {
+    if (value instanceof Date) {
+      return formatDateStr(value);
+    }
+    return formatDateStr(new Date());
+  }, [value]);
+
+  const {
+    data: monthlyStatistic,
+    isLoading,
+    isError,
+  } = useMonthlyStatisticQuery(memberId, year, month + 1);
+
   const studiedDays = useMemo(() => {
     const map = new Map<string, number>();
     heatMapData.forEach((data) => {
@@ -27,33 +42,12 @@ export const CalendarSection = ({ heatMapData, memberId }: Props) => {
     return map;
   }, [heatMapData]);
 
-  const selectedDateRecord: { dateStr: string; studyTime: number } =
-    useMemo(() => {
-      if (value instanceof Date) {
-        const dateStr = formatDateStr(value);
-        return { dateStr, studyTime: studiedDays.get(dateStr) || 0 };
-      }
-      return { dateStr: '', studyTime: 0 };
-    }, [value, studiedDays]);
-
-  const thisMonthStatistics = useMemo(() => {
-    const thisMonthRecords = heatMapData.filter((data) => {
-      const recordDate = new Date(data.date);
-      return (
-        recordDate.getMonth() === month && recordDate.getFullYear() === year
-      );
-    });
-    const totalMinutes = thisMonthRecords.reduce(
-      (acc, cur) => acc + cur.count,
-      0
-    );
-    const uniqueDays = new Set(thisMonthRecords.map((data) => data.date)).size;
-
-    return {
-      totalMinutes,
-      studiedDayCount: uniqueDays,
-    };
-  }, [heatMapData, month, year]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError || !monthlyStatistic) {
+    return <div>Error</div>;
+  }
 
   return (
     <section className="px-4">
@@ -87,15 +81,12 @@ export const CalendarSection = ({ heatMapData, memberId }: Props) => {
           }}
         />
         <p className="text-right text-sm text-foreground/70">
-          <span>{formatTime(thisMonthStatistics.totalMinutes)}</span> /
-          <span> {thisMonthStatistics.studiedDayCount}일</span>
+          <span>{formatTime(monthlyStatistic.totalSeconds)}</span> /
+          <span> {monthlyStatistic.uniqueStudyDays}일</span>
         </p>
       </div>
 
-      <DailyStatisticSection
-        dateStr={selectedDateRecord.dateStr}
-        memberId={memberId}
-      />
+      <DailyStatisticSection dateStr={selectedDateStr} memberId={memberId} />
     </section>
   );
 };
