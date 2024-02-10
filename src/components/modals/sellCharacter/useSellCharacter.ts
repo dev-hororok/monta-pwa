@@ -24,7 +24,7 @@ export const useSellCharacter = (
     setIsLoading(true);
     try {
       const result = await sellCharacter({
-        character_inventory_id: characterInventory.character.character_id + '', // API 변경전이라 character_id받는중
+        character_inventory_id: characterInventory.character_inventory_id,
         count,
       });
       toast.success(result.notes);
