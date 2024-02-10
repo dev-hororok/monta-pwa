@@ -1,5 +1,5 @@
 import { ICharacter, ICharacterInventory } from '@/models/character.model';
-import { Item } from '@/models/item.model';
+import { IConsumableItemInventory, Item } from '@/models/item.model';
 import { IMember } from '@/models/member.model';
 import { IPalette } from '@/models/palette.model';
 import { IStudyCategory } from '@/models/study.model';
@@ -14,7 +14,10 @@ interface ModalsState {
   // 캐릭터 획득
   characterAcquisition: ModalState<ICharacter>;
   // 팔레트 획득
-  paletteAcquisition: ModalState<IPalette>;
+  paletteAcquisition: ModalState<{
+    palette: IPalette;
+    consumableItemInventory: IConsumableItemInventory;
+  }>;
   // 타이머
   timer: ModalState;
   timerOptions: ModalState;
