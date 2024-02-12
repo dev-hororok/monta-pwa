@@ -1,10 +1,10 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { useShopConsumableItemsQuery } from '@/apis/queries/shopQueries';
 import ProductCard from '@/components/cards/product-card';
-import { Item } from '@/models/item.model';
+import type { Item } from '@/models/item.model';
 import { useModalStore } from '@/stores/use-modal-store';
 
-export const ToolProductsSection = () => {
+const ToolProductsSection = () => {
   const {
     data: member,
     isPending: memberIdPending,
@@ -41,3 +41,5 @@ export const ToolProductsSection = () => {
     </section>
   );
 };
+
+export default ToolProductsSection;

@@ -5,7 +5,7 @@ interface Props {
   animation?: boolean;
 }
 
-export const TimerImage = ({ src, animation }: Props) => {
+const TimerImage = ({ src, animation }: Props) => {
   return (
     <img
       onContextMenu={(e) => e.preventDefault()}
@@ -15,3 +15,5 @@ export const TimerImage = ({ src, animation }: Props) => {
     />
   );
 };
+
+export default TimerImage;

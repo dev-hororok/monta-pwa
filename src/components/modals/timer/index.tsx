@@ -4,12 +4,12 @@ import { PauseIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useTimer } from '@/hooks/useTimer';
+import { useTimer } from '@/hooks/use-timer';
 import { useModalStore } from '@/stores/use-modal-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
-import { TimerImage } from '@/sections/home/TimerImage';
 import { cn } from '@/lib/utils';
 import { formatTime } from '@/lib/date-format';
+import TimerImage from '@/sections/home/timer-image';
 
 const TimerModal = () => {
   const { pauseTimer, startTimer, passRestTime } = useTimer();

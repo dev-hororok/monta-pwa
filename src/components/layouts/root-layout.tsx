@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import { useCloseAppHandler } from '@/hooks/useCloseAppHandler';
-import useViewport from '@/hooks/useViewport';
+import { useCloseAppHandler } from '@/hooks/use-close-app-handler';
+import { useViewport } from '@/hooks/use-viewport';
 import ModalManager from '@/components/modals/modal-manager';
 import DarkModeToggle from '@/components/darkmode-toggle';
 

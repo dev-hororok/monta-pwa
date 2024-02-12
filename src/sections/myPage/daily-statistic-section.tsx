@@ -6,7 +6,7 @@ interface Props {
   memberId: string;
 }
 
-export const DailyStatisticSection = ({ memberId, dateStr }: Props) => {
+const DailyStatisticSection = ({ memberId, dateStr }: Props) => {
   const { data, isLoading, isError } = useDailyStatisticQuery(
     memberId,
     dateStr
@@ -34,3 +34,5 @@ export const DailyStatisticSection = ({ memberId, dateStr }: Props) => {
     </div>
   );
 };
+
+export default DailyStatisticSection;

@@ -5,7 +5,7 @@ interface Props {
   memberId: string;
 }
 
-export const UseItemInventorySection = ({ memberId }: Props) => {
+const ItemInventorySection = ({ memberId }: Props) => {
   const {
     data: items,
     isPending,
@@ -35,3 +35,5 @@ export const UseItemInventorySection = ({ memberId }: Props) => {
     </section>
   );
 };
+
+export default ItemInventorySection;

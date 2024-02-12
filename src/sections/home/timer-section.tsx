@@ -6,10 +6,10 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { PlayIcon, StepForwardIcon } from 'lucide-react';
 import { useMemo } from 'react';
-import { TimerImage } from './TimerImage';
 import OpenTimerOptionsButton from '@/components/modals/timer-options/open-timer-options-button';
+import TimerImage from './timer-image';
 
-export const TimerSection = () => {
+const TimerSection = () => {
   const { mutate: startStudyTimer } = useStartStudyTimerMutation();
   const openModal = useModalStore((state) => state.openModal);
   const selectedCategory = useTimerStateStore(
@@ -90,3 +90,5 @@ export const TimerSection = () => {
     </div>
   );
 };
+
+export default TimerSection;

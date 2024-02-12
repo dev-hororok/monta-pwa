@@ -10,7 +10,7 @@ interface Props {
   memberId: string;
 }
 
-export const StreakSection = ({ memberId }: Props) => {
+const StreakSection = ({ memberId }: Props) => {
   const endDate = new Date();
   const startDate = new Date(new Date().setFullYear(endDate.getFullYear() - 1));
   const {
@@ -50,3 +50,5 @@ export const StreakSection = ({ memberId }: Props) => {
     </section>
   );
 };
+
+export default StreakSection;

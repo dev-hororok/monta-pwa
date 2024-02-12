@@ -1,7 +1,7 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import MyPageHeader from '@/components/headers/my-page-header';
-import { MemberProfileSection } from '@/sections/myPage/MemberProfileSection';
-import { StudyRecordTabs } from '@/sections/myPage/StudyRecordTabs';
+import MemberProfileSection from '@/sections/myPage/member-profile-section';
+import StudyRecordTabs from '@/sections/myPage/study-record-tabs';
 
 const MyPage = () => {
   const { data, isPending } = useCurrentMemberQuery();

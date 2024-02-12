@@ -1,7 +1,7 @@
 import HomeHeader from '@/components/headers/home-header';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FoodProductsSection } from '@/sections/FoodProductsSection';
-import { ToolProductsSection } from '@/sections/ToolProductsSection';
+import FoodProductsSection from '@/sections/food-products-section';
+import ToolProductsSection from '@/sections/tool-products-section';
 
 const ShopPage = () => {
   return (

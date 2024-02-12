@@ -4,7 +4,7 @@ import ProductCard from '@/components/cards/product-card';
 import { Item } from '@/models/item.model';
 import { useModalStore } from '@/stores/use-modal-store';
 
-export const FoodProductsSection = () => {
+const FoodProductsSection = () => {
   const {
     data: member,
     isPending: memberIdPending,
@@ -43,3 +43,5 @@ export const FoodProductsSection = () => {
     </section>
   );
 };
+
+export default FoodProductsSection;

@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react';
-import axios from 'axios';
 import { toast } from 'sonner';
+import axios from 'axios';
 
-const useApiError = () => {
+export const useApiError = () => {
   const defaultHandler = useCallback((httpMessage: string | string[]) => {
     if (Array.isArray(httpMessage)) {
       toast.error(httpMessage[0]);
@@ -46,5 +46,3 @@ const useApiError = () => {
 
   return { handleError };
 };
-
-export default useApiError;

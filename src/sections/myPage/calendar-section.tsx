@@ -1,15 +1,15 @@
 import Calendar from 'react-calendar';
-import { formatTime } from '@/lib/date-format';
-import { DailyStatisticSection } from './DailyStatisticSection';
-import { useCalendar } from '@/hooks/useCalendar';
 
 import '@/styles/calendar.css';
+import { formatTime } from '@/lib/date-format';
+import { useCalendar } from '@/hooks/use-calendar';
+import DailyStatisticSection from './daily-statistic-section';
 
 interface Props {
   memberId: string;
 }
 
-export const CalendarSection = ({ memberId }: Props) => {
+const CalendarSection = ({ memberId }: Props) => {
   const {
     value,
     onChange,
@@ -41,3 +41,5 @@ export const CalendarSection = ({ memberId }: Props) => {
     </section>
   );
 };
+
+export default CalendarSection;

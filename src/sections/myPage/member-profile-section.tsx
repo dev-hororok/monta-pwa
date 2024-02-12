@@ -1,13 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { IMember } from '@/models/member.model';
+import type { IMember } from '@/models/member.model';
 
 interface Props {
   member: IMember;
 }
 
-export const MemberProfileSection = ({ member }: Props) => {
+const MemberProfileSection = ({ member }: Props) => {
   return (
     <section className="flex flex-col items-center gap-2 py-4">
       <Avatar className="w-20 h-20">
@@ -66,3 +66,5 @@ export const MemberProfileSection = ({ member }: Props) => {
     </section>
   );
 };
+
+export default MemberProfileSection;

@@ -1,13 +1,13 @@
 import type { IMember } from '@/models/member.model';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CalendarSection } from '@/sections/myPage/CalendarSection';
-import { StreakSection } from '@/sections/myPage/StreakSection';
+import CalendarSection from './calendar-section';
+import StreakSection from './streak-section';
 
 interface Props {
   member: IMember;
 }
 
-export const StudyRecordTabs = ({ member }: Props) => {
+const StudyRecordTabs = ({ member }: Props) => {
   return (
     <Tabs defaultValue="calendar" className="w-full py-2 relative">
       <div className="sticky top-0 bg-background py-2 z-40">
@@ -25,3 +25,5 @@ export const StudyRecordTabs = ({ member }: Props) => {
     </Tabs>
   );
 };
+
+export default StudyRecordTabs;

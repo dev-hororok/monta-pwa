@@ -1,7 +1,7 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import HomeHeader from '@/components/headers/home-header';
-import { CharacterInventorySection } from '@/sections/CharacterIncentorySection';
-import { UseItemInventorySection } from '@/sections/UseItemInventorySection';
+import CharacterInventorySection from '@/sections/character-incentory-section';
+import ItemInventorySection from '@/sections/item-inventory-section';
 
 export interface InventoryUseItem {
   itemType: 'streak-color-change';
@@ -30,7 +30,7 @@ const InventoryPage = () => {
       <main className="h-full overflow-y-scroll scrollbar-hide pb-10">
         <div className="w-full h-full py-4 px-4 space-y-6">
           {/* 사용아이템 Section */}
-          <UseItemInventorySection memberId={data.member_id} />
+          <ItemInventorySection memberId={data.member_id} />
 
           {/* 캐릭터 Section */}
           <CharacterInventorySection memberId={data.member_id} />

@@ -1,10 +1,11 @@
-import useApiError from '@/hooks/useApiError';
 import {
   QueryCache,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactNode } from 'react';
+
+import { useApiError } from '@/hooks/use-api-error';
 
 const MINUTE = 1000 * 60;
 

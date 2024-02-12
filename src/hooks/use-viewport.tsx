@@ -1,8 +1,9 @@
-import useBoundStore from '@/stores/use-bound-store';
 import { useEffect } from 'react';
 
+import useBoundStore from '@/stores/use-bound-store';
+
 // 사용자 뷰포트(모바일) 저장
-const useViewport = () => {
+export const useViewport = () => {
   const setViewportSize = useBoundStore((state) => state.setViewportSize);
 
   useEffect(() => {
@@ -30,5 +31,3 @@ const useViewport = () => {
     };
   }, [setViewportSize]);
 };
-
-export default useViewport;

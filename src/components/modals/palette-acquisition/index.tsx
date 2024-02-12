@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useModalStore } from '@/stores/use-modal-store';
 import { Badge } from '@/components/ui/badge';
-import { useConsumeItem } from '@/hooks/useConsumeItem';
+import { useConsumeItem } from '@/hooks/use-consume-item';
 
 const PaletteAcquisitionDialog = () => {
   const { isOpen, data } = useModalStore(

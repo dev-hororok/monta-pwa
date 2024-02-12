@@ -1,7 +1,7 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import HomeHeader from '@/components/headers/home-header';
-import { FoodInventorySection } from '@/sections/FoodInventorySection';
-import { TimerSection } from '@/sections/home/TimerSection';
+import { FoodInventorySection } from '@/sections/food-inventory-section';
+import TimerSection from '@/sections/home/timer-section';
 
 const MainPage = () => {
   const { data, isPending } = useCurrentMemberQuery();

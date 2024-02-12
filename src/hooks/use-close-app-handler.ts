@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import useBoundStore from '@/stores/use-bound-store';
 import { toast } from 'sonner';
+
+import useBoundStore from '@/stores/use-bound-store';
 
 //* 뒤로가기를 {delay}초안에 안누르면 종료방지 history를 복구하는 훅 */
 export const useCloseAppHandler = (delay = 1500) => {

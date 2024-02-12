@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 
 import type { IConsumableItemInventory } from '@/models/item.model';
 import { Button } from '@/components/ui/button';
-import { useConsumeItem } from '@/hooks/useConsumeItem';
+import { useConsumeItem } from '@/hooks/use-consume-item';
 import { cn } from '@/lib/utils';
 
 interface Props {

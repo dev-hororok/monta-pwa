@@ -7,7 +7,7 @@ interface Props {
   memberId: string;
 }
 
-export const CharacterInventorySection = ({ memberId }: Props) => {
+const CharacterInventorySection = ({ memberId }: Props) => {
   const { data, isPending, isError } = useCharacterInventoryQuery(memberId);
   const openModal = useModalStore((state) => state.openModal);
 
@@ -47,3 +47,5 @@ export const CharacterInventorySection = ({ memberId }: Props) => {
     </section>
   );
 };
+
+export default CharacterInventorySection;
