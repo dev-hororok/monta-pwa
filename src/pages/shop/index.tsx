@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FoodProductsSection } from '@/sections/FoodProductsSection';
 import { ToolProductsSection } from '@/sections/ToolProductsSection';
 
-export const Shop = () => {
+const ShopPage = () => {
   return (
     <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe-offset-14">
       <HomeHeader />
@@ -26,3 +26,5 @@ export const Shop = () => {
     </div>
   );
 };
+
+export default ShopPage;

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
 
-export const LoginGateway = () => {
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+const LoginGatewayPage = () => {
   return (
     <div className="grid grid-rows-3 items-center justify-center bg-background h-full gap-2 px-4 space-y-20 md:rounded-md pb-safe-offset-14 pt-safe-offset-14 overflow-hidden">
       <div className="row-span-2 relative flex flex-col justify-center items-center">
@@ -39,3 +40,5 @@ export const LoginGateway = () => {
     </div>
   );
 };
+
+export default LoginGatewayPage;

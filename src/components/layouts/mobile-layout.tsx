@@ -1,12 +1,13 @@
-import { Footer } from '../Footer';
 import {
   BackpackIcon,
   DotsHorizontalIcon,
   HomeIcon,
 } from '@radix-ui/react-icons';
-import { NavItem } from '@/interfaces/app.interface';
-import { Outlet } from 'react-router-dom';
 import { ShoppingBagIcon, User } from 'lucide-react';
+import { Outlet } from 'react-router-dom';
+
+import type { NavItem } from '@/interfaces/app.interface';
+import { Footer } from '@/components/Footer';
 
 const navItems: NavItem[] = [
   {
@@ -36,7 +37,7 @@ const navItems: NavItem[] = [
   },
 ];
 
-export const MobileLayout = () => {
+const MobileLayout = () => {
   return (
     <>
       <Outlet />
@@ -44,3 +45,5 @@ export const MobileLayout = () => {
     </>
   );
 };
+
+export default MobileLayout;

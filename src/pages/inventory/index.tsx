@@ -16,7 +16,7 @@ export interface InventoryCharacter {
   grade: string;
 }
 
-export function Inventory() {
+const InventoryPage = () => {
   const { data, isPending } = useCurrentMemberQuery();
 
   if (isPending || !data) {
@@ -38,4 +38,6 @@ export function Inventory() {
       </main>
     </div>
   );
-}
+};
+
+export default InventoryPage;

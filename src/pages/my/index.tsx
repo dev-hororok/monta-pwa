@@ -3,7 +3,7 @@ import { MyPageHeader } from '@/components/headers/MyPageHeader';
 import { MemberProfileSection } from '@/sections/myPage/MemberProfileSection';
 import { StudyRecordTabs } from '@/sections/myPage/StudyRecordTabs';
 
-export const MyPage = () => {
+const MyPage = () => {
   const { data, isPending } = useCurrentMemberQuery();
 
   if (isPending || !data) {
@@ -22,3 +22,5 @@ export const MyPage = () => {
     </>
   );
 };
+
+export default MyPage;

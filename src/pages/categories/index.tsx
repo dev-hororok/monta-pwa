@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { IStudyCategory } from '@/models/study.model';
 import { useModalStore } from '@/stores/useModalStore';
 
-export const SettingCategories = () => {
+const SettingCategoriesPage = () => {
   const { data: currentMember } = useCurrentMemberQuery();
   const {
     data: categories,
@@ -65,3 +65,5 @@ export const SettingCategories = () => {
     </div>
   );
 };
+
+export default SettingCategoriesPage;

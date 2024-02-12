@@ -1,7 +1,7 @@
 import LoginForm from '@/components/forms/LoginForm';
 import { PrevHeader } from '@/components/headers/PrevHeader';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <div className="h-full md:rounded-md overflow-hidden pt-safe-offset-14 pb-safe-offset-14">
       <PrevHeader to="/" />
@@ -12,3 +12,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export default LoginPage;

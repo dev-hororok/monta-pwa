@@ -1,8 +1,9 @@
-import useBoundStore from '@/stores/useBoundStore';
 import { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
-export const UnAuthedRoute = ({ children }: { children: ReactNode }) => {
+import useBoundStore from '@/stores/useBoundStore';
+
+const UnAuthedRoute = ({ children }: { children: ReactNode }) => {
   const { accessToken } = useBoundStore((state) => state.tokens);
   const location = useLocation();
 
@@ -12,3 +13,5 @@ export const UnAuthedRoute = ({ children }: { children: ReactNode }) => {
 
   return children;
 };
+
+export default UnAuthedRoute;

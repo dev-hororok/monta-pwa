@@ -3,7 +3,7 @@ import { HomeHeader } from '@/components/headers/HomeHeader';
 import { FoodInventorySection } from '@/sections/FoodInventorySection';
 import { TimerSection } from '@/sections/home/TimerSection';
 
-export const Home = () => {
+const MainPage = () => {
   const { data, isPending } = useCurrentMemberQuery();
 
   if (isPending || !data) {
@@ -25,3 +25,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default MainPage;

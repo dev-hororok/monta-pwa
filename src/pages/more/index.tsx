@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import useBoundStore from '@/stores/useBoundStore';
 
-export const More = () => {
+const MorePage = () => {
   const logout = useBoundStore((state) => state.logout);
   return (
     <div>
@@ -11,3 +11,5 @@ export const More = () => {
     </div>
   );
 };
+
+export default MorePage;
