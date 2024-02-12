@@ -1,8 +1,9 @@
+import axios, { InternalAxiosRequestConfig } from 'axios';
+
+import type { ApiSuccessResponse } from '../types/api-response';
 import { API_URL_NEST, API_URL_SPRING } from '@/constants';
 import useBoundStore from '@/stores/use-bound-store';
-import axios, { InternalAxiosRequestConfig } from 'axios';
-import { ApiSuccessResponse } from '../interface/apiResponse.type';
-import { AuthData } from '../services/authService';
+import { AuthData } from '../services/auth-service';
 
 // 인터셉터로 만료 시간 확인 및 토큰 리프레시
 async function refreshTokenIfNeeded() {

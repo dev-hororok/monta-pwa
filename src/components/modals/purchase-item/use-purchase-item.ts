@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { usePurchaseItemMutation } from '@/apis/mutations/shopMutations';
+import { usePurchaseItemMutation } from '@/apis/mutations/shop-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
 import { Item } from '@/models/item.model';
 

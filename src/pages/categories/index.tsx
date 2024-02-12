@@ -1,5 +1,5 @@
-import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
-import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
+import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
+import { useStudyCategoriesQuery } from '@/apis/queries/study-category-queries';
 import PrevHeader from '@/components/headers/prev-header';
 import { Button } from '@/components/ui/button';
 import { IStudyCategory } from '@/models/study.model';

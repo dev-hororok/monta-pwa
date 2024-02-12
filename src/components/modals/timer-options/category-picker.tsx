@@ -1,5 +1,5 @@
 import { Badge } from '@/components/ui/badge';
-import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
+import { useStudyCategoriesQuery } from '@/apis/queries/study-category-queries';
 import { IStudyCategory } from '@/models/study.model';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 

@@ -1,4 +1,4 @@
-import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
+import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import MyPageHeader from '@/components/headers/my-page-header';
 import MemberProfileSection from '@/sections/myPage/member-profile-section';
 import StudyRecordTabs from '@/sections/myPage/study-record-tabs';

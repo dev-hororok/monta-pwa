@@ -1,6 +1,6 @@
-import { StudyRecordStatusType } from '@/models/study.model';
-import { nestHttpRequest } from '../common/httpRequest';
-import { ApiSuccessResponse } from '../interface/apiResponse.type';
+import type { StudyRecordStatusType } from '@/models/study.model';
+import type { ApiSuccessResponse } from '../types/api-response';
+import { nestHttpRequest } from '../common/http-request';
 
 // 스터디 타이머 시작
 export const startStudyTimer = async (body: { category_id?: string }) => {

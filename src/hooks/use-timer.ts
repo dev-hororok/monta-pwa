@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useEndStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
+import { useEndStudyTimerMutation } from '@/apis/mutations/study-timer-mutations';
 import { useTimerOptionsStore } from '@/stores/timer-options-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useModalStore } from '@/stores/use-modal-store';

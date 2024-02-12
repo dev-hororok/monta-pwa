@@ -1,5 +1,6 @@
-import { fetchStudyCategory } from '@/apis/services/studyCategory.api';
 import { useQuery } from '@tanstack/react-query';
+
+import { fetchStudyCategory } from '@/apis/services/study-category.api';
 
 // 유저 카테고리 조회
 export const STUDY_CATEGORIES_QUERY_KEY = 'studyCategories';

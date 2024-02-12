@@ -1,6 +1,5 @@
+import type { NavItem } from '@/types/nav';
 import { NavLink } from 'react-router-dom';
-
-import type { NavItem } from '@/interfaces/app.interface';
 
 interface Props {
   navItems: NavItem[];

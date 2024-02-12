@@ -1,18 +1,18 @@
-import { IStudyStreak } from './../../models/streak.model';
-import { nestHttpRequest } from '../common/httpRequest';
-import { ApiSuccessResponse } from '../interface/apiResponse.type';
-import { IMember } from '@/models/member.model';
-import { ICharacterInventory } from '@/models/character.model';
-import { IStudyRecord } from '@/models/study.model';
-import {
+import { nestHttpRequest } from '../common/http-request';
+import type { ApiSuccessResponse } from '../types/api-response';
+import type { IMember } from '@/models/member.model';
+import type { ICharacterInventory } from '@/models/character.model';
+import type { IStudyRecord } from '@/models/study.model';
+import type {
   IConsumableItemInventory,
   IFoodItemInventory,
 } from '@/models/item.model';
-import {
+import type {
   IDailyStatistic,
   IMontlyStatistic,
   IStatisticHeatMapData,
 } from '@/models/statistic.model';
+import type { IStudyStreak } from '@/models/streak.model';
 
 // 현재유저 조회
 export const fetchCurrentMember = async () => {

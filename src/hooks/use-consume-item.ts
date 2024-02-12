@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 
 import type { IPalette } from '@/models/palette.model';
 import type { IConsumableItemInventory } from '@/models/item.model';
-import { useConsumeConsumableItemMutation } from '@/apis/mutations/itemInventoryMutations';
+import { useConsumeConsumableItemMutation } from '@/apis/mutations/item-inventory-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
 
 interface UseConsumeItemArgs {

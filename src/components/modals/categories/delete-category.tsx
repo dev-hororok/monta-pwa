@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { useDeleteStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
+import { useDeleteStudyCategoryMutation } from '@/apis/mutations/study-category-mutations';
 import {
   AlertDialog,
   AlertDialogAction,

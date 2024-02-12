@@ -1,7 +1,7 @@
-import { IConsumableItem, IFoodItem } from '@/models/item.model';
-import { nestHttpRequest, springHttpRequest } from '../common/httpRequest';
-import { ApiSuccessResponse } from '../interface/apiResponse.type';
-import { ITransactionRecord } from '@/models/transaction.model';
+import { nestHttpRequest, springHttpRequest } from '../common/http-request';
+import type { ApiSuccessResponse } from '../types/api-response';
+import type { IConsumableItem, IFoodItem } from '@/models/item.model';
+import type { ITransactionRecord } from '@/models/transaction.model';
 
 // 상점 음식아이템 조회
 export const fetchShopFoodItems = async () => {

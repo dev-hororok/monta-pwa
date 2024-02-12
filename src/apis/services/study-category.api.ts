@@ -1,6 +1,6 @@
-import { IStudyCategory } from '@/models/study.model';
-import { nestHttpRequest } from '../common/httpRequest';
-import { ApiSuccessResponse } from '../interface/apiResponse.type';
+import { nestHttpRequest } from '../common/http-request';
+import type { IStudyCategory } from '@/models/study.model';
+import type { ApiSuccessResponse } from '../types/api-response';
 
 // 유저 공부 카테고리 조회
 export const fetchStudyCategory = async (memberId?: string) => {

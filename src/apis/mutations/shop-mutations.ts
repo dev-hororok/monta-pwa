@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import type { IMember } from '@/models/member.model';
 import { purchaseItem, sellCharacter } from '../services/shop.api';
 import {
   CHARACTER_INVENTORY_QUERY_KEY,
   CURRENT_MEMBER_QUERY_KEY,
   FOOD_INVENTORY_QUERY_KEY,
-} from '../queries/memberQueries';
-import { IMember } from '@/models/member.model';
+} from '../queries/member-queries';
 
 // 아이템 구매
 export const usePurchaseItemMutation = () => {

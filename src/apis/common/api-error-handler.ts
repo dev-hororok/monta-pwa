@@ -1,5 +1,5 @@
 import { isAxiosError } from 'axios';
-import { ServiceFailResponse } from '../interface/serviceResponse.type';
+import type { ServiceFailResponse } from '../types/service-response';
 
 export const handleApiError = (error: unknown): ServiceFailResponse => {
   if (isAxiosError(error)) {

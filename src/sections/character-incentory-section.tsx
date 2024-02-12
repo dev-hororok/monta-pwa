@@ -1,4 +1,4 @@
-import { useCharacterInventoryQuery } from '@/apis/queries/memberQueries';
+import { useCharacterInventoryQuery } from '@/apis/queries/member-queries';
 import CharacterItemCard from '@/components/cards/character-card';
 import { ICharacterInventory } from '@/models/character.model';
 import { useModalStore } from '@/stores/use-modal-store';

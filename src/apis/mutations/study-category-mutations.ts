@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import {
   createStudyCategory,
   deleteStudyCategory,
   editStudyCategory,
-} from '../services/studyCategory.api';
-import { STUDY_CATEGORIES_QUERY_KEY } from '../queries/studyCategoryQueries';
+} from '../services/study-category.api';
+import { STUDY_CATEGORIES_QUERY_KEY } from '../queries/study-category-queries';
 
 export const useCreateStudyCategoryMutation = () => {
   const queryClient = useQueryClient();

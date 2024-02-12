@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { useSellCharacterMutation } from '@/apis/mutations/shopMutations';
+import { useSellCharacterMutation } from '@/apis/mutations/shop-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
 import type { ICharacterInventory } from '@/models/character.model';
 

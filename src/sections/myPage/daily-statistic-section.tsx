@@ -1,4 +1,4 @@
-import { useDailyStatisticQuery } from '@/apis/queries/memberQueries';
+import { useDailyStatisticQuery } from '@/apis/queries/member-queries';
 import { formatTime } from '@/lib/date-format';
 
 interface Props {

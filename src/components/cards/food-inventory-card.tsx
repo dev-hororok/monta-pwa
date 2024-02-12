@@ -6,7 +6,7 @@ import { formatTime } from '@/lib/date-format';
 import type { IFoodItemInventory } from '@/models/item.model';
 import type { ICharacter } from '@/models/character.model';
 import { useModalStore } from '@/stores/use-modal-store';
-import { useConsumeFoodItemMutation } from '@/apis/mutations/itemInventoryMutations';
+import { useConsumeFoodItemMutation } from '@/apis/mutations/item-inventory-mutations';
 import { cn } from '@/lib/utils';
 
 interface Props {

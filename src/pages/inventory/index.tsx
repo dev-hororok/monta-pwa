@@ -1,4 +1,4 @@
-import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
+import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import HomeHeader from '@/components/headers/home-header';
 import CharacterInventorySection from '@/sections/character-incentory-section';
 import ItemInventorySection from '@/sections/item-inventory-section';

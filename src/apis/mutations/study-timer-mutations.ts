@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { endStudyTimer, startStudyTimer } from '../services/studyTimer.api';
-import { FOOD_INVENTORY_QUERY_KEY } from '../queries/memberQueries';
-import { StudyRecordStatusType } from '@/models/study.model';
+
+import { endStudyTimer, startStudyTimer } from '../services/study-timer.api';
+import { FOOD_INVENTORY_QUERY_KEY } from '../queries/member-queries';
+import type { StudyRecordStatusType } from '@/models/study.model';
 
 export const useStartStudyTimerMutation = () => {
   return useMutation({

@@ -14,7 +14,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useModalStore } from '@/stores/use-modal-store';
-import { useEditStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
+import { useEditStudyCategoryMutation } from '@/apis/mutations/study-category-mutations';
 import ModalHeader from '@/components/headers/modal-header';
 import type { IStudyCategory } from '@/models/study.model';
 

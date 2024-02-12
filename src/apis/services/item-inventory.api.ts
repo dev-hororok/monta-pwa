@@ -1,7 +1,7 @@
-import { ICharacter } from '@/models/character.model';
-import { springHttpRequest } from '../common/httpRequest';
-import { ApiSuccessResponse } from '../interface/apiResponse.type';
-import { IPalette } from '@/models/palette.model';
+import type { ICharacter } from '@/models/character.model';
+import type { ApiSuccessResponse } from '../types/api-response';
+import type { IPalette } from '@/models/palette.model';
+import { springHttpRequest } from '../common/http-request';
 
 // 음식 아이템 사용
 export const consumeFoodItem = async (item_inventory_id: string) => {

@@ -1,19 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import {
   consumeConsumableItem,
   consumeFoodItem,
-} from '../services/itemInventory.api';
+} from '../services/item-inventory.api';
 import {
   CHARACTER_INVENTORY_QUERY_KEY,
   CONSUMABLE_INVENTORY_QUERY_KEY,
   FOOD_INVENTORY_QUERY_KEY,
   STUDY_STREAK_QUERY_KEY,
-} from '../queries/memberQueries';
-import {
+} from '../queries/member-queries';
+import type {
   IConsumableItemInventory,
   IFoodItemInventory,
 } from '@/models/item.model';
-import { IStudyStreak } from '@/models/streak.model';
+import type { IStudyStreak } from '@/models/streak.model';
 
 // 음식 아이템 사용
 export const useConsumeFoodItemMutation = () => {

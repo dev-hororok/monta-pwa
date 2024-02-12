@@ -11,7 +11,7 @@ import {
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-import authService from '@/apis/services/authService';
+import authService from '@/apis/services/auth-service';
 import {
   Form,
   FormControl,

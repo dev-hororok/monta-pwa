@@ -14,8 +14,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ModalHeader from '@/components/headers/modal-header';
-import { useCreateStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
-import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
+import { useCreateStudyCategoryMutation } from '@/apis/mutations/study-category-mutations';
+import { useStudyCategoriesQuery } from '@/apis/queries/study-category-queries';
 
 const createCategoryFormSchema = z.object({
   subject: z

@@ -6,7 +6,7 @@ import {
 import { ShoppingBagIcon, User } from 'lucide-react';
 import { Outlet } from 'react-router-dom';
 
-import type { NavItem } from '@/interfaces/app.interface';
+import type { NavItem } from '@/types/nav';
 import Footer from '@/components/footer';
 
 const navItems: NavItem[] = [

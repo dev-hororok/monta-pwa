@@ -1,4 +1,4 @@
-import { useFoodInventoryQuery } from '@/apis/queries/memberQueries';
+import { useFoodInventoryQuery } from '@/apis/queries/member-queries';
 import AddFoodCard from '@/components/cards/add-food-card';
 import FoodInventoryCard from '@/components/cards/food-inventory-card';
 

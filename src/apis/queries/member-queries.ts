@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+
 import {
   fetchCharacterInventory,
   fetchConsumableInventory,
@@ -9,7 +11,6 @@ import {
   fetchStudyRecords,
   fetchStudyStreak,
 } from '@/apis/services/member.api';
-import { useQuery } from '@tanstack/react-query';
 
 // 현재유저 조회
 export const CURRENT_MEMBER_QUERY_KEY = 'currentUser';

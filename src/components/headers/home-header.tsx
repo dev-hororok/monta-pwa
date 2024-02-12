@@ -1,4 +1,4 @@
-import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
+import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { Button } from '../ui/button';
 
 const HomeHeader = () => {
