@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
-import { DarkModeToggle } from '@/components/DarkmodeToggle';
 import { useCloseAppHandler } from '@/hooks/useCloseAppHandler';
 import useViewport from '@/hooks/useViewport';
 import ModalManager from '@/components/modals/modal-manager';
+import DarkModeToggle from '@/components/darkmode-toggle';
 
 const RootLayout = () => {
   useCloseAppHandler();

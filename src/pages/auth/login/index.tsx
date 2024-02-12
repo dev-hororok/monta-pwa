@@ -1,5 +1,5 @@
-import LoginForm from '@/components/forms/LoginForm';
-import { PrevHeader } from '@/components/headers/PrevHeader';
+import LoginForm from '@/components/forms/login-form';
+import PrevHeader from '@/components/headers/prev-header';
 
 const LoginPage = () => {
   return (

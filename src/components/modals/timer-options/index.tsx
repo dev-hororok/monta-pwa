@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useModalStore } from '@/stores/use-modal-store';
 import OptionPicker from './option-picker';
-import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
+import { useTimerOptionsStore } from '@/stores/timer-options-store';
 
 const pomodoroTimeOptions = [
   0.1, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 90, 120,

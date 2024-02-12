@@ -8,7 +8,7 @@ import { ReactNode } from 'react';
 
 const MINUTE = 1000 * 60;
 
-export const ReactQueryProvider = ({ children }: { children: ReactNode }) => {
+const ReactQueryProvider = ({ children }: { children: ReactNode }) => {
   const { handleError } = useApiError();
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -29,3 +29,5 @@ export const ReactQueryProvider = ({ children }: { children: ReactNode }) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
+
+export default ReactQueryProvider;

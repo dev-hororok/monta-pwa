@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useTimer } from '@/hooks/useTimer';
 import { useModalStore } from '@/stores/use-modal-store';
-import { useTimerStateStore } from '@/stores/timerStateStore';
+import { useTimerStateStore } from '@/stores/timer-state-store';
 import { TimerImage } from '@/sections/home/TimerImage';
 import { cn } from '@/lib/utils';
 import { formatTime } from '@/lib/date-format';

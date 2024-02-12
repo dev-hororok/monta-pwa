@@ -1,5 +1,5 @@
+import type { IMember } from '@/models/member.model';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { IMember } from '@/models/member.model';
 import { CalendarSection } from '@/sections/myPage/CalendarSection';
 import { StreakSection } from '@/sections/myPage/StreakSection';
 

@@ -1,5 +1,5 @@
-import RegisterForm from '@/components/forms/RegisterForm';
-import { PrevHeader } from '@/components/headers/PrevHeader';
+import RegisterForm from '@/components/forms/register-form';
+import PrevHeader from '@/components/headers/prev-header';
 
 const RegisterPage = () => {
   return (

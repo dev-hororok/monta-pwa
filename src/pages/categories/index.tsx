@@ -1,6 +1,6 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
-import { PrevHeader } from '@/components/headers/PrevHeader';
+import PrevHeader from '@/components/headers/prev-header';
 import { Button } from '@/components/ui/button';
 import { IStudyCategory } from '@/models/study.model';
 import { useModalStore } from '@/stores/use-modal-store';

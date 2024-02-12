@@ -1,4 +1,4 @@
-import useBoundStore from '@/stores/useBoundStore';
+import useBoundStore from '@/stores/use-bound-store';
 import { nestHttpRequest } from '../common/httpRequest';
 import { ServiceResponse } from '../interface/serviceResponse.type';
 import { ApiSuccessResponse } from '../interface/apiResponse.type';

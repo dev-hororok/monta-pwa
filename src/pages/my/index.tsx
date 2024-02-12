@@ -1,5 +1,5 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
-import { MyPageHeader } from '@/components/headers/MyPageHeader';
+import MyPageHeader from '@/components/headers/my-page-header';
 import { MemberProfileSection } from '@/sections/myPage/MemberProfileSection';
 import { StudyRecordTabs } from '@/sections/myPage/StudyRecordTabs';
 

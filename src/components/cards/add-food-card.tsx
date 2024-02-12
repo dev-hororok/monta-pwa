@@ -1,9 +1,10 @@
-import { PlusIcon } from '@radix-ui/react-icons';
-import { buttonVariants } from '../ui/button';
 import { Link } from 'react-router-dom';
+import { PlusIcon } from '@radix-ui/react-icons';
+
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export const FoodAddCard = () => {
+const AddFoodCard = () => {
   return (
     <Link
       replace
@@ -17,3 +18,5 @@ export const FoodAddCard = () => {
     </Link>
   );
 };
+
+export default AddFoodCard;

@@ -2,8 +2,8 @@ import {
   useStatisticHeatMapQuery,
   useStudyStreakQuery,
 } from '@/apis/queries/memberQueries';
-import { StreakInfo } from '@/components/streaks/StreakInfo';
-import { StudyStreak } from '@/components/streaks/StudyStreak';
+import StreakInfo from '@/components/streaks/streak-info';
+import StudyStreak from '@/components/streaks/study-streak';
 import { formatDateStr } from '@/lib/date-format';
 
 interface Props {

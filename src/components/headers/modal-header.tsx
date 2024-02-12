@@ -7,7 +7,7 @@ interface Props {
   title: string;
 }
 
-export const ModalHeader = ({ closeModal, title, rightButton }: Props) => {
+const ModalHeader = ({ closeModal, title, rightButton }: Props) => {
   return (
     <div className="flex items-end fixed top-0 left-0 right-0 md:absolute h-14 px-6 mt-safe md:rounded-t-md bg-background z-50 text-sm font-semibold">
       <div className="flex items-center justify-between w-full">
@@ -25,3 +25,5 @@ export const ModalHeader = ({ closeModal, title, rightButton }: Props) => {
     </div>
   );
 };
+
+export default ModalHeader;

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import useBoundStore from '@/stores/useBoundStore';
+import useBoundStore from '@/stores/use-bound-store';
 
 const UnAuthedRoute = ({ children }: { children: ReactNode }) => {
   const { accessToken } = useBoundStore((state) => state.tokens);

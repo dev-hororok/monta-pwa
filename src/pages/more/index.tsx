@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import useBoundStore from '@/stores/useBoundStore';
+import useBoundStore from '@/stores/use-bound-store';
 
 const MorePage = () => {
   const logout = useBoundStore((state) => state.logout);

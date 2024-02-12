@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useBoundStore from '@/stores/useBoundStore';
+import useBoundStore from '@/stores/use-bound-store';
 import { toast } from 'sonner';
 
 //* 뒤로가기를 {delay}초안에 안누르면 종료방지 history를 복구하는 훅 */

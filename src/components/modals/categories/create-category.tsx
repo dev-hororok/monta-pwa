@@ -1,5 +1,5 @@
-import { CreateCategoryForm } from '@/components/forms/CreateCategoryForm';
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
+import CreateCategoryForm from '@/components/forms/create-category-form';
 import { useModalStore } from '@/stores/use-modal-store';
 import { cn } from '@/lib/utils';
 

@@ -1,6 +1,6 @@
 import { useFoodInventoryQuery } from '@/apis/queries/memberQueries';
-import { FoodAddCard } from '@/components/cards/FoodAddCard';
-import { FoodInventoryCard } from '@/components/cards/FoodInventoryCard';
+import AddFoodCard from '@/components/cards/add-food-card';
+import FoodInventoryCard from '@/components/cards/food-inventory-card';
 
 interface Props {
   memberId: string;
@@ -24,7 +24,7 @@ export const FoodInventorySection = ({ memberId }: Props) => {
                 <FoodInventoryCard key={idx} foodItemInventory={inventory} />
               );
             })}
-            {foodItemInventory.length < 4 ? <FoodAddCard /> : null}
+            {foodItemInventory.length < 4 ? <AddFoodCard /> : null}
           </>
         ) : (
           <div></div>

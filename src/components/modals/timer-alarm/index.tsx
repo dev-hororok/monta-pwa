@@ -7,7 +7,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useModalStore } from '@/stores/use-modal-store';
-import { useTimerStateStore } from '@/stores/timerStateStore';
+import { useTimerStateStore } from '@/stores/timer-state-store';
 
 const TimerAlarmDialog = () => {
   const isOpen = useModalStore((state) => state.modals.timerAlarm.isOpen);

@@ -1,18 +1,19 @@
-import { Button } from '../ui/button';
-import { cn } from '@/lib/utils';
-import { formatTime } from '@/lib/date-format';
-import { IFoodItemInventory } from '@/models/item.model';
-import { ICharacter } from '@/models/character.model';
-import { useModalStore } from '@/stores/use-modal-store';
-import { useConsumeFoodItemMutation } from '@/apis/mutations/itemInventoryMutations';
 import { useState } from 'react';
 import { toast } from 'sonner';
+
+import { Button } from '@/components/ui/button';
+import { formatTime } from '@/lib/date-format';
+import type { IFoodItemInventory } from '@/models/item.model';
+import type { ICharacter } from '@/models/character.model';
+import { useModalStore } from '@/stores/use-modal-store';
+import { useConsumeFoodItemMutation } from '@/apis/mutations/itemInventoryMutations';
+import { cn } from '@/lib/utils';
 
 interface Props {
   foodItemInventory: IFoodItemInventory;
 }
 
-export const FoodInventoryCard = ({ foodItemInventory }: Props) => {
+const FoodInventoryCard = ({ foodItemInventory }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const isActive = foodItemInventory.progress === 0;
 
@@ -58,3 +59,5 @@ export const FoodInventoryCard = ({ foodItemInventory }: Props) => {
     </Button>
   );
 };
+
+export default FoodInventoryCard;

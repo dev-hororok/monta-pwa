@@ -1,8 +1,9 @@
-import { formatDateStr } from '@/lib/date-format';
-import { IStudyStreak } from '@/models/streak.model';
 import { useEffect, useMemo } from 'react';
-import { StreakItem } from './StreakItem';
-import { IStatisticHeatMapData } from '@/models/statistic.model';
+
+import type { IStudyStreak } from '@/models/streak.model';
+import type { IStatisticHeatMapData } from '@/models/statistic.model';
+import { formatDateStr } from '@/lib/date-format';
+import StreakItem from '@/components/streaks/streak-item';
 
 const generateYearDates = () => {
   const dates = [];
@@ -62,7 +63,7 @@ interface Props {
   streakInfo?: IStudyStreak;
 }
 
-export const StudyStreak = ({ heatMapData, streakInfo }: Props) => {
+const StudyStreak = ({ heatMapData, streakInfo }: Props) => {
   const dates = useMemo(() => generateYearDates(), []); // 12달치 Date객체 생성
   const weeks = useMemo(
     () => groupByWeeks(dates, heatMapData),
@@ -111,3 +112,5 @@ export const StudyStreak = ({ heatMapData, streakInfo }: Props) => {
     </div>
   );
 };
+
+export default StudyStreak;

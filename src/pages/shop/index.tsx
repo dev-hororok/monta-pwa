@@ -1,4 +1,4 @@
-import { HomeHeader } from '@/components/headers/HomeHeader';
+import HomeHeader from '@/components/headers/home-header';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FoodProductsSection } from '@/sections/FoodProductsSection';
 import { ToolProductsSection } from '@/sections/ToolProductsSection';

@@ -1,16 +1,15 @@
-import { Button } from '../ui/button';
-import { cn } from '@/lib/utils';
-import { IConsumableItemInventory } from '@/models/item.model';
 import { toast } from 'sonner';
+
+import type { IConsumableItemInventory } from '@/models/item.model';
+import { Button } from '@/components/ui/button';
 import { useConsumeItem } from '@/hooks/useConsumeItem';
+import { cn } from '@/lib/utils';
 
 interface Props {
   consumableItemInventory: IConsumableItemInventory;
 }
 
-export const ConsumableItemInventoryCard = ({
-  consumableItemInventory,
-}: Props) => {
+const ConsumableItemInventoryCard = ({ consumableItemInventory }: Props) => {
   const { consume } = useConsumeItem();
 
   const onClickHandler = () => {
@@ -46,3 +45,5 @@ export const ConsumableItemInventoryCard = ({
     </Button>
   );
 };
+
+export default ConsumableItemInventoryCard;

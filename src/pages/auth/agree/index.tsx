@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 
 import { Button, buttonVariants } from '@/components/ui/button';
-import { PrevHeader } from '@/components/headers/PrevHeader';
 import { Checkbox } from '@/components/ui/checkbox';
 import { cn } from '@/lib/utils';
+import PrevHeader from '@/components/headers/prev-header';
 
 const AgreeToTermsPage = () => {
   const [allChecked, setAllChecked] = useState(false);

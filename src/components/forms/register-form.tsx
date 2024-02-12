@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import {
+  DiscordLogoIcon,
+  FigmaLogoIcon,
+  GitHubLogoIcon,
+} from '@radix-ui/react-icons';
+import { toast } from 'sonner';
 import { z } from 'zod';
-import authService from '@/apis/services/authService';
-import { useLocation, useNavigate } from 'react-router-dom';
+
 import {
   Form,
   FormControl,
@@ -12,55 +20,46 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import {
-  DiscordLogoIcon,
-  FigmaLogoIcon,
-  GitHubLogoIcon,
-} from '@radix-ui/react-icons';
-import { toast } from 'sonner';
+import authService from '@/apis/services/authService';
 
-const loginFormSchema = z.object({
+const registerFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
   password: z
     .string()
     .min(4, { message: '비밀번호는 최소 4자 이상이어야 합니다.' }),
 });
 
-type LoginFormSchemaType = z.infer<typeof loginFormSchema>;
+type RegisterFormSchemaType = z.infer<typeof registerFormSchema>;
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm<LoginFormSchemaType>({
-    resolver: zodResolver(loginFormSchema),
+  const form = useForm<RegisterFormSchemaType>({
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<LoginFormSchemaType> = async (
-    data: LoginFormSchemaType
+  const onSubmit: SubmitHandler<RegisterFormSchemaType> = async (
+    data: RegisterFormSchemaType
   ) => {
     if (isLoading) return;
     setIsLoading(true);
+
     try {
-      const result = await authService.login(data);
+      const result = await authService.register(data);
 
       if (result.success) {
-        // 로그인 성공
-        toast.success('로그인에 성공하였습니다.');
-        // 전에 리다이렉팅으로 왔다면 다시 보내주기
-        const origin = location.state?.from?.pathname || '/';
-        navigate(origin);
+        // 회원가입 성공
+        toast.success('회원가입에 성공하였습니다.');
+        navigate('/', { replace: true });
       } else {
-        // 로그인 실패
-        toast.error('이메일 또는 패스워드가 잘못되었습니다.');
+        // 회원가입 실패
+        toast.error(result.error);
       }
     } catch (e) {
       // 네트워크 에러나 기타 예외 처리
@@ -75,24 +74,19 @@ const LoginForm = () => {
   return (
     <div className={'grid gap-6 bg-card w-full py-10 px-6'}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem className="">
                 <FormControl>
-                  <Input
-                    placeholder="이메일"
-                    {...field}
-                    className="h-12 mb-2"
-                  />
+                  <Input placeholder="이메일" {...field} className="h-12" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Input placeholder="이메일" className="h-0 w-0 border-0 p-0" />
           <FormField
             control={form.control}
             name="password"
@@ -103,7 +97,7 @@ const LoginForm = () => {
                     type="password"
                     placeholder="패스워드"
                     {...field}
-                    className="h-12 mb-2"
+                    className="h-12"
                     autoComplete="off"
                   />
                 </FormControl>
@@ -112,43 +106,22 @@ const LoginForm = () => {
             )}
           />
           <Button disabled={isLoading} className="w-full h-12">
-            로그인
+            회원가입
           </Button>
         </form>
       </Form>
+
       <div className="flex justify-center items-center text-sm">
         <div className="flex justify-center items-center text-sm">
-          <span className="text-muted-foreground">아직 계정이 없으신가요?</span>
+          <span className="text-muted-foreground">이미 계정이 있나요?</span>
           <Link
             replace
-            to="/auth/agree"
+            to="/auth/login"
             className={cn(buttonVariants({ variant: 'link' }), 'h-auto py-0')}
           >
-            회원가입
+            로그인
           </Link>
         </div>
-      </div>
-      <div className="flex justify-center items-center text-sm">
-        <Link
-          replace
-          to="/auth/register"
-          className={cn(
-            buttonVariants({ variant: 'link' }),
-            'h-auto py-0 text-foreground/50'
-          )}
-        >
-          계정 찾기
-        </Link>
-        <Link
-          replace
-          to="/auth/register"
-          className={cn(
-            buttonVariants({ variant: 'link' }),
-            'h-auto py-0 text-foreground/50'
-          )}
-        >
-          비밀번호 찾기
-        </Link>
       </div>
 
       <div className="relative">
@@ -160,19 +133,22 @@ const LoginForm = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-6">
-        <Button variant={'outline'} className="w-12 h-12 p-0">
-          <GitHubLogoIcon className="w-8 h-8" />
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Button variant={'outline'} className="w-full h-12 gap-4">
+          <GitHubLogoIcon className="w-6 h-6" />
+          <p>깃허브 로그인</p>
         </Button>
-        <Button variant={'outline'} className="w-12 h-12 p-0">
-          <DiscordLogoIcon className="w-8 h-8" />
+        <Button variant={'outline'} className="w-full h-12 gap-4">
+          <DiscordLogoIcon className="w-6 h-6" />
+          <p>구글 로그인</p>
         </Button>
-        <Button variant={'outline'} className="w-12 h-12 p-0">
-          <FigmaLogoIcon className="w-8 h-8" />
+        <Button variant={'outline'} className="w-full h-12 gap-4">
+          <FigmaLogoIcon className="w-6 h-6" />
+          <p>카카오 로그인</p>
         </Button>
       </div>
     </div>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

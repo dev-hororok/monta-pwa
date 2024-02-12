@@ -1,5 +1,9 @@
 import { cn } from '@/lib/utils';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { formatTime } from '@/lib/date-format';
 
 interface Props {
@@ -9,7 +13,7 @@ interface Props {
   };
 }
 
-export const StreakItem = ({ date }: Props) => {
+const StreakItem = ({ date }: Props) => {
   const hours = date.value ? date.value / 3600 : 0;
   return (
     <Popover>
@@ -34,3 +38,5 @@ export const StreakItem = ({ date }: Props) => {
     </Popover>
   );
 };
+
+export default StreakItem;

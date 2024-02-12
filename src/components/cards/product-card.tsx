@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
-import { buttonVariants } from '../ui/button';
-import { Item } from '@/models/item.model';
+import { buttonVariants } from '@/components/ui/button';
+import type { Item } from '@/models/item.model';
 
-export interface ProductCardProps {
+interface ProductCardProps {
   item: Item;
 }
 
-export const ProductCard = ({ item }: ProductCardProps) => {
+const ProductCard = ({ item }: ProductCardProps) => {
   return (
     <div
       className={cn(
@@ -29,3 +29,5 @@ export const ProductCard = ({ item }: ProductCardProps) => {
     </div>
   );
 };
+
+export default ProductCard;

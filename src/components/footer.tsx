@@ -1,11 +1,12 @@
-import { NavItem } from '@/interfaces/app.interface';
 import { NavLink } from 'react-router-dom';
+
+import type { NavItem } from '@/interfaces/app.interface';
 
 interface Props {
   navItems: NavItem[];
 }
 
-export const Footer = ({ navItems }: Props) => {
+const Footer = ({ navItems }: Props) => {
   return (
     <nav className="fixed bottom-0 left-0 right-0 md:absolute h-14 flex items-center mb-safe md:rounded-b-md bg-accent">
       {navItems.map((nav) => {
@@ -30,3 +31,5 @@ export const Footer = ({ navItems }: Props) => {
     </nav>
   );
 };
+
+export default Footer;

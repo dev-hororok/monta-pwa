@@ -1,3 +1,9 @@
+import { z } from 'zod';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 import {
   Form,
   FormControl,
@@ -7,14 +13,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import ModalHeader from '@/components/headers/modal-header';
 import { useCreateStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
 import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
-import { ModalHeader } from '../headers/ModalHeader';
-import { toast } from 'sonner';
 
 const createCategoryFormSchema = z.object({
   subject: z
@@ -29,7 +30,7 @@ interface Props {
   closeModal: () => void;
 }
 
-export const CreateCategoryForm = ({ memberId, closeModal }: Props) => {
+const CreateCategoryForm = ({ memberId, closeModal }: Props) => {
   const { data: categories } = useStudyCategoriesQuery(memberId);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<CreateCategoryFormSchemaType>({
@@ -94,3 +95,5 @@ export const CreateCategoryForm = ({ memberId, closeModal }: Props) => {
     </Form>
   );
 };
+
+export default CreateCategoryForm;

@@ -1,5 +1,5 @@
 import { useConsumableInventoryQuery } from '@/apis/queries/memberQueries';
-import { ConsumableItemInventoryCard } from '@/components/cards/ConsumableInventoryCard';
+import ConsumableItemInventoryCard from '@/components/cards/consumable-inventory-card';
 
 interface Props {
   memberId: string;

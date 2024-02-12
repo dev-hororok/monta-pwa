@@ -1,4 +1,4 @@
-import useBoundStore from '@/stores/useBoundStore';
+import useBoundStore from '@/stores/use-bound-store';
 import { useEffect } from 'react';
 
 // 사용자 뷰포트(모바일) 저장

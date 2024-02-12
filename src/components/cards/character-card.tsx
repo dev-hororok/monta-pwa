@@ -1,12 +1,12 @@
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { ICharacterInventory } from '@/models/character.model';
+import type { ICharacterInventory } from '@/models/character.model';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 interface Props {
   characterInventory: ICharacterInventory;
 }
 
-export const CharacterItemCard = ({ characterInventory }: Props) => {
+const CharacterItemCard = ({ characterInventory }: Props) => {
   return (
     <Button
       type="button"
@@ -36,3 +36,5 @@ export const CharacterItemCard = ({ characterInventory }: Props) => {
     </Button>
   );
 };
+
+export default CharacterItemCard;

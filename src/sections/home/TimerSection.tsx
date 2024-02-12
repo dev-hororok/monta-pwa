@@ -1,6 +1,6 @@
 import { useStartStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
-import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
-import { useTimerStateStore } from '@/stores/timerStateStore';
+import { useTimerOptionsStore } from '@/stores/timer-options-store';
+import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useModalStore } from '@/stores/use-modal-store';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';

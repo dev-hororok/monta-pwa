@@ -7,7 +7,7 @@ interface Props {
   rightButton?: ReactNode;
 }
 
-export const PrevHeader = ({ to, rightButton }: Props) => {
+const PrevHeader = ({ to, rightButton }: Props) => {
   return (
     <div className="flex items-end justify-between fixed top-0 left-0 right-0 md:absolute h-14 px-3 mt-safe md:rounded-t-md bg-background">
       <Link to={to} replace>
@@ -17,3 +17,5 @@ export const PrevHeader = ({ to, rightButton }: Props) => {
     </div>
   );
 };
+
+export default PrevHeader;

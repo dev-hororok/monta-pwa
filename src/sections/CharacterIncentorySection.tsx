@@ -1,5 +1,5 @@
 import { useCharacterInventoryQuery } from '@/apis/queries/memberQueries';
-import { CharacterItemCard } from '@/components/cards/CharacterCard';
+import CharacterItemCard from '@/components/cards/character-card';
 import { ICharacterInventory } from '@/models/character.model';
 import { useModalStore } from '@/stores/use-modal-store';
 

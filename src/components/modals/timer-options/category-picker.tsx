@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
 import { IStudyCategory } from '@/models/study.model';
-import { useTimerStateStore } from '@/stores/timerStateStore';
+import { useTimerStateStore } from '@/stores/timer-state-store';
 
 // const categories = ['공부', '코딩', '알고리즘', 'CS'];
 

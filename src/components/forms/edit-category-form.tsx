@@ -1,3 +1,9 @@
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Trash } from 'lucide-react';
+
 import {
   Form,
   FormControl,
@@ -7,15 +13,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useEditStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
-import { ModalHeader } from '../headers/ModalHeader';
-import { IStudyCategory } from '@/models/study.model';
-import { Trash } from 'lucide-react';
 import { useModalStore } from '@/stores/use-modal-store';
+import { useEditStudyCategoryMutation } from '@/apis/mutations/studyCategoryMutations';
+import ModalHeader from '@/components/headers/modal-header';
+import type { IStudyCategory } from '@/models/study.model';
 
 const editCategoryFormSchema = z.object({
   subject: z
@@ -31,11 +32,7 @@ interface Props {
   closeModal: () => void;
 }
 
-export const EditCategoryForm = ({
-  memberId,
-  studyCategory,
-  closeModal,
-}: Props) => {
+const EditCategoryForm = ({ memberId, studyCategory, closeModal }: Props) => {
   const form = useForm<EditCategoryFormSchemaType>({
     resolver: zodResolver(editCategoryFormSchema),
     defaultValues: {
@@ -113,3 +110,5 @@ export const EditCategoryForm = ({
     </Form>
   );
 };
+
+export default EditCategoryForm;

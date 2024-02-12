@@ -1,7 +1,7 @@
 import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { Button } from '../ui/button';
 
-export const HomeHeader = () => {
+const HomeHeader = () => {
   const { data } = useCurrentMemberQuery();
   return (
     <div className="flex items-end fixed top-0 left-0 right-0 md:absolute h-14 px-3 mt-safe md:rounded-t-md">
@@ -11,3 +11,5 @@ export const HomeHeader = () => {
     </div>
   );
 };
+
+export default HomeHeader;
