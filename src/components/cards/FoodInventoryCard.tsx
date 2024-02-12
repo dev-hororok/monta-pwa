@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { formatTime } from '@/lib/date-format';
 import { IFoodItemInventory } from '@/models/item.model';
 import { ICharacter } from '@/models/character.model';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import { useConsumeFoodItemMutation } from '@/apis/mutations/itemInventoryMutations';
 import { useState } from 'react';
 import { toast } from 'sonner';

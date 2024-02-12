@@ -6,10 +6,10 @@ import {
   AlertDialogFooter,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import { Badge } from '@/components/ui/badge';
 
-export const CharacterAcquisitionDialog = () => {
+const CharacterAcquisitionDialog = () => {
   const { isOpen, data: character } = useModalStore(
     (state) => state.modals.characterAcquisition
   );
@@ -56,3 +56,5 @@ export const CharacterAcquisitionDialog = () => {
     </AlertDialog>
   );
 };
+
+export default CharacterAcquisitionDialog;

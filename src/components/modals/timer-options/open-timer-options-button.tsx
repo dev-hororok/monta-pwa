@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { formatTime } from '@/lib/date-format';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 
 interface Props {
   targetTime: number;
 }
 
-export const OpenTimerOptionsButton = ({ targetTime }: Props) => {
+const OpenTimerOptionsButton = ({ targetTime }: Props) => {
   const openModal = useModalStore((state) => state.openModal);
   const openTimerOptionsModal = () => {
     openModal('timerOptions');
@@ -22,3 +22,5 @@ export const OpenTimerOptionsButton = ({ targetTime }: Props) => {
     </div>
   );
 };
+
+export default OpenTimerOptionsButton;

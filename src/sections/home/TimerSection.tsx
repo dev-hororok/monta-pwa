@@ -1,13 +1,13 @@
 import { useStartStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
-import { OpenTimerOptionsButton } from '@/components/modals/timerOptions/OpenTimerOptionsButton';
 import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
 import { useTimerStateStore } from '@/stores/timerStateStore';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { PlayIcon, StepForwardIcon } from 'lucide-react';
 import { useMemo } from 'react';
 import { TimerImage } from './TimerImage';
+import OpenTimerOptionsButton from '@/components/modals/timer-options/open-timer-options-button';
 
 export const TimerSection = () => {
   const { mutate: startStudyTimer } = useStartStudyTimerMutation();

@@ -10,9 +10,9 @@ import {
 import { useEndStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
 import { formatTime } from '@/lib/date-format';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 
-export const PuaseTimerDialog = () => {
+const PuaseTimerDialog = () => {
   const { isOpen, data } = useModalStore((state) => state.modals.pauseTimer);
   const closeModal = useModalStore((state) => state.closeModal);
 
@@ -67,3 +67,5 @@ export const PuaseTimerDialog = () => {
     </AlertDialog>
   );
 };
+
+export default PuaseTimerDialog;

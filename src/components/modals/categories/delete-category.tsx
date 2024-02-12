@@ -8,9 +8,9 @@ import {
   AlertDialogFooter,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 
-export const DeleteCategoryDialog = () => {
+const DeleteCategoryDialog = () => {
   const { isOpen, data } = useModalStore(
     (state) => state.modals.deleteCategory
   );
@@ -52,3 +52,5 @@ export const DeleteCategoryDialog = () => {
     </AlertDialog>
   );
 };
+
+export default DeleteCategoryDialog;

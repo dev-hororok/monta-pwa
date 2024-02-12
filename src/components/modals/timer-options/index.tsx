@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+
 import { cn } from '@/lib/utils';
 import {
   Dialog,
@@ -7,10 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useModalStore } from '@/stores/useModalStore';
-import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { useModalStore } from '@/stores/use-modal-store';
+import OptionPicker from './option-picker';
 import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
-import OptionPicker from './OptionPicker';
 
 const pomodoroTimeOptions = [
   0.1, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 90, 120,
@@ -19,7 +20,7 @@ const sectionCountOptions = [1, 2, 3, 4, 5, 6, 7, 8];
 const restTimeOptions = [0.1, 3, 5, 10, 15, 20, 25, 30, 35, 40];
 const longRestTimeOptions = [3, 5, 10, 15, 20, 25, 30, 35, 40];
 
-export const TimerOptionDialog = () => {
+const TimerOptionDialog = () => {
   const { isOpen } = useModalStore((state) => state.modals.timerOptions);
   const closeModal = useModalStore((state) => state.closeModal);
   const timerOptions = useTimerOptionsStore((state) => state.timerOptions);
@@ -107,3 +108,5 @@ export const TimerOptionDialog = () => {
     </Dialog>
   );
 };
+
+export default TimerOptionDialog;

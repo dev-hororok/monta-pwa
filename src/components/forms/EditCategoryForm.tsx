@@ -15,7 +15,7 @@ import { useEditStudyCategoryMutation } from '@/apis/mutations/studyCategoryMuta
 import { ModalHeader } from '../headers/ModalHeader';
 import { IStudyCategory } from '@/models/study.model';
 import { Trash } from 'lucide-react';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 
 const editCategoryFormSchema = z.object({
   subject: z

@@ -6,10 +6,10 @@ import {
   AlertDialogFooter,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import { useTimerStateStore } from '@/stores/timerStateStore';
 
-export const TimerAlarmDialog = () => {
+const TimerAlarmDialog = () => {
   const isOpen = useModalStore((state) => state.modals.timerAlarm.isOpen);
   const closeModal = useModalStore((state) => state.closeModal);
 
@@ -52,3 +52,5 @@ export const TimerAlarmDialog = () => {
     </AlertDialog>
   );
 };
+
+export default TimerAlarmDialog;

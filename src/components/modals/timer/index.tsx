@@ -1,16 +1,17 @@
-import { Button } from '@/components/ui/button';
-import { formatTime } from '@/lib/date-format';
+import { useMemo } from 'react';
+import { XIcon } from 'lucide-react';
 import { PauseIcon } from '@radix-ui/react-icons';
-import { cn } from '@/lib/utils';
+
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useTimer } from '@/hooks/useTimer';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import { useTimerStateStore } from '@/stores/timerStateStore';
-import { useMemo } from 'react';
 import { TimerImage } from '@/sections/home/TimerImage';
-import { XIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { formatTime } from '@/lib/date-format';
 
-export const TimerModal = () => {
+const TimerModal = () => {
   const { pauseTimer, startTimer, passRestTime } = useTimer();
   const openModal = useModalStore((state) => state.openModal);
   const closeModal = useModalStore((state) => state.closeModal);
@@ -93,3 +94,5 @@ export const TimerModal = () => {
     </div>
   );
 };
+
+export default TimerModal;

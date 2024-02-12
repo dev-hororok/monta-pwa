@@ -1,3 +1,6 @@
+import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
+import { toast } from 'sonner';
+
 import { cn } from '@/lib/utils';
 import {
   AlertDialog,
@@ -7,13 +10,11 @@ import {
   AlertDialogFooter,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import { Badge } from '@/components/ui/badge';
-import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import { useConsumeItem } from '@/hooks/useConsumeItem';
-import { toast } from 'sonner';
 
-export const PaletteAcquisitionDialog = () => {
+const PaletteAcquisitionDialog = () => {
   const { isOpen, data } = useModalStore(
     (state) => state.modals.paletteAcquisition
   );
@@ -100,3 +101,5 @@ export const PaletteAcquisitionDialog = () => {
     </>
   );
 };
+
+export default PaletteAcquisitionDialog;

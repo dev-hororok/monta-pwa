@@ -1,6 +1,7 @@
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
+
 import { Button } from '@/components/ui/button';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import {
   Dialog,
   DialogContent,
@@ -8,9 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { usePurchaseItem } from './usePurchaseItem';
+import { usePurchaseItem } from './use-purchase-item';
 
-export const PurchaseItemDialog = () => {
+const PurchaseItemDialog = () => {
   const { isOpen, data } = useModalStore((state) => state.modals.purchaseItem);
   const closeModal = useModalStore((state) => state.closeModal);
 
@@ -95,3 +96,5 @@ export const PurchaseItemDialog = () => {
     </Dialog>
   );
 };
+
+export default PurchaseItemDialog;

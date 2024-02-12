@@ -3,7 +3,7 @@ import { useStudyCategoriesQuery } from '@/apis/queries/studyCategoryQueries';
 import { PrevHeader } from '@/components/headers/PrevHeader';
 import { Button } from '@/components/ui/button';
 import { IStudyCategory } from '@/models/study.model';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 
 const SettingCategoriesPage = () => {
   const { data: currentMember } = useCurrentMemberQuery();

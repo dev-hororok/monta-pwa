@@ -2,7 +2,7 @@ import { useCurrentMemberQuery } from '@/apis/queries/memberQueries';
 import { useShopFoodItemsQuery } from '@/apis/queries/shopQueries';
 import { ProductCard } from '@/components/cards/ProductCard';
 import { Item } from '@/models/item.model';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 
 export const FoodProductsSection = () => {
   const {

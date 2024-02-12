@@ -1,7 +1,7 @@
 import { useCharacterInventoryQuery } from '@/apis/queries/memberQueries';
 import { CharacterItemCard } from '@/components/cards/CharacterCard';
 import { ICharacterInventory } from '@/models/character.model';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 
 interface Props {
   memberId: string;

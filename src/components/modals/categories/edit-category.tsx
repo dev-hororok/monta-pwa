@@ -1,17 +1,16 @@
-import { CreateCategoryForm } from '@/components/forms/CreateCategoryForm';
 import { cn } from '@/lib/utils';
+import { EditCategoryForm } from '@/components/forms/EditCategoryForm';
+import { useModalStore } from '@/stores/use-modal-store';
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
-import { useModalStore } from '@/stores/useModalStore';
 
-export const CreateCategoryDialog = () => {
-  const { isOpen, data } = useModalStore(
-    (state) => state.modals.createCategory
-  );
+const EditCategoryDialog = () => {
+  const { isOpen, data } = useModalStore((state) => state.modals.editCategory);
   const closeModal = useModalStore((state) => state.closeModal);
 
   if (!isOpen || !data) {
     return null;
   }
+
   return (
     <AlertDialog open={isOpen}>
       <AlertDialogContent
@@ -19,11 +18,14 @@ export const CreateCategoryDialog = () => {
           `w-full h-screen md:max-w-[416px] md:max-h-[736px] flex flex-col justify-start items-center pt-safe-offset-14`
         )}
       >
-        <CreateCategoryForm
+        <EditCategoryForm
           memberId={data.memberId}
-          closeModal={() => closeModal('createCategory')}
+          studyCategory={data.category}
+          closeModal={() => closeModal('editCategory')}
         />
       </AlertDialogContent>
     </AlertDialog>
   );
 };
+
+export default EditCategoryDialog;

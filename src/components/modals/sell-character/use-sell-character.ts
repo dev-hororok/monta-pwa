@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useSellCharacterMutation } from '@/apis/mutations/shopMutations';
-import { useModalStore } from '@/stores/useModalStore';
-import { ICharacterInventory } from '@/models/character.model';
 import { toast } from 'sonner';
 
-export const useSellCharacter = (
-  characterInventory: ICharacterInventory | null
-) => {
+import { useSellCharacterMutation } from '@/apis/mutations/shopMutations';
+import { useModalStore } from '@/stores/use-modal-store';
+import type { ICharacterInventory } from '@/models/character.model';
+
+const useSellCharacter = (characterInventory: ICharacterInventory | null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(1);
   const { mutateAsync: sellCharacter } = useSellCharacterMutation();
@@ -45,3 +44,5 @@ export const useSellCharacter = (
     MaxCount,
   };
 };
+
+export default useSellCharacter;

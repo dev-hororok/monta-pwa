@@ -1,6 +1,7 @@
-import { Button } from '@/components/ui/button';
-import { MinusIcon, PlusIcon } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
+import { MinusIcon, PlusIcon } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 
 interface Props {
   state: number;

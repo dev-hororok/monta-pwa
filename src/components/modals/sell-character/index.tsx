@@ -1,6 +1,7 @@
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
+
 import { Button } from '@/components/ui/button';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import {
   Dialog,
   DialogContent,
@@ -8,9 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useSellCharacter } from './useSellCharacter';
+import useSellCharacter from './use-sell-character';
 
-export const SellCharacterDialog = () => {
+const SellCharacterDialog = () => {
   const { isOpen, data } = useModalStore((state) => state.modals.sellCharacter);
   const closeModal = useModalStore((state) => state.closeModal);
 
@@ -94,3 +95,5 @@ export const SellCharacterDialog = () => {
     </Dialog>
   );
 };
+
+export default SellCharacterDialog;

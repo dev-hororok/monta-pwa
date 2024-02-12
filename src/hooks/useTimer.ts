@@ -1,7 +1,7 @@
 import { useEndStudyTimerMutation } from '@/apis/mutations/studyTimerMutations';
 import { useTimerOptionsStore } from '@/stores/timerOptionsStore';
 import { useTimerStateStore } from '@/stores/timerStateStore';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import { useEffect } from 'react';
 
 export const useTimer = () => {

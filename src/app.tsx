@@ -10,10 +10,10 @@ import LoginPage from '@/pages/auth/login';
 import RegisterPage from '@/pages/auth/register';
 import AgreeToTermsPage from '@/pages/auth/agree';
 import SettingCategoriesPage from '@/pages/categories';
-import { MobileLayout } from '@/components/layouts/mobile-layout';
 import ProtectedRoute from '@/components/auth/protected-route';
 import UnAuthedRoute from '@/components/auth/unauthed-route';
 import RootLayout from '@/components/layouts/root-layout';
+import MobileLayout from '@/components/layouts/mobile-layout';
 
 const router = createBrowserRouter(
   [

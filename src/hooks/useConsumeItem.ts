@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useConsumeConsumableItemMutation } from '@/apis/mutations/itemInventoryMutations';
-import { useModalStore } from '@/stores/useModalStore';
+import { useModalStore } from '@/stores/use-modal-store';
 import { toast } from 'sonner';
 
 import { IPalette } from '@/models/palette.model';
