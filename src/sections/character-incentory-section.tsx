@@ -1,48 +1,55 @@
 import { useCharacterInventoryQuery } from '@/apis/queries/member-queries';
-import CharacterItemCard from '@/components/cards/character-card';
+import { CharacterItemCard } from '@/components/cards/character-card';
 import { ICharacterInventory } from '@/models/character.model';
 import { useModalStore } from '@/stores/use-modal-store';
 
-interface Props {
+interface CharacterInventorySectionProps {
   memberId: string;
 }
 
-const CharacterInventorySection = ({ memberId }: Props) => {
+const CharacterInventorySection = ({
+  memberId,
+}: CharacterInventorySectionProps) => {
   const { data, isPending, isError } = useCharacterInventoryQuery(memberId);
   const openModal = useModalStore((state) => state.openModal);
 
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
-  if (isError) {
-    return <div>Error</div>;
-  }
-  const openSellModal = (characterInventory: ICharacterInventory) => {
+  const handleCharacterItemCardClick = (
+    characterInventory: ICharacterInventory
+  ) => {
     openModal('sellCharacter', { characterInventory });
   };
 
+  if (isPending) {
+    return <div className="text-center">로딩 중...</div>;
+  }
+  if (isError) {
+    return <div className="text-center text-red-500">오류가 발생했습니다.</div>;
+  }
+
+  const totalSellPrice = data.reduce(
+    (acc, cur) => acc + cur.character.sell_price,
+    0
+  );
+
   return (
     <section>
-      <div className="flex items-center justify-between pb-4">
-        <div className="flex items-center gap-2 text-sm">
-          <p className="font-semibold">캐릭터</p>
-
-          <p className="flex items-center gap-1 text-foreground/60">
-            {data.reduce((acc, cur) => acc + cur.character.sell_price, 0)}원
-          </p>
+      <header className="flex items-center justify-between pb-4">
+        <div>
+          <h2 className="font-semibold">캐릭터</h2>
+          <p className="text-foreground/60">{totalSellPrice}원</p>
         </div>
-        <p className="font-semibold text-sm text-muted-foreground">
+        <span className="font-semibold text-muted-foreground">
           {data.length} 개
-        </p>
-      </div>
+        </span>
+      </header>
       <div className="grid grid-cols-3 gap-2">
-        {data.map((inventory, idx) => {
-          return (
-            <div key={idx} onClick={() => openSellModal(inventory)}>
-              <CharacterItemCard characterInventory={inventory} />
-            </div>
-          );
-        })}
+        {data.map((inventory) => (
+          <CharacterItemCard
+            key={inventory.character_inventory_id}
+            characterInventory={inventory}
+            onClick={() => handleCharacterItemCardClick(inventory)}
+          />
+        ))}
       </div>
     </section>
   );

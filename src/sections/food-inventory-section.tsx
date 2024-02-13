@@ -1,18 +1,25 @@
 import { useFoodInventoryQuery } from '@/apis/queries/member-queries';
-import AddFoodCard from '@/components/cards/add-food-card';
-import FoodInventoryCard from '@/components/cards/food-inventory-card';
+import { AddFoodCard } from '@/components/cards/add-food-card';
+import { FoodInventoryCard } from '@/components/cards/food-inventory-card';
 
 interface Props {
   memberId: string;
 }
 
 export const FoodInventorySection = ({ memberId }: Props) => {
-  const { data: foodItemInventory, isPending } =
-    useFoodInventoryQuery(memberId);
+  const {
+    data: foodItemInventory,
+    isPending,
+    isError,
+  } = useFoodInventoryQuery(memberId);
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <div className="text-center">로딩 중...</div>;
   }
+  if (isError) {
+    return <div className="text-center text-red-500">오류가 발생했습니다.</div>;
+  }
+
   return (
     <section className="px-4">
       <p className="text-center text-sm font-bold pb-4">재료 (최대 4개)</p>

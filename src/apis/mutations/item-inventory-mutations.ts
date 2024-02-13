@@ -32,7 +32,7 @@ export const useConsumeFoodItemMutation = () => {
       queryClient.setQueryData(
         [FOOD_INVENTORY_QUERY_KEY],
         (old: IFoodItemInventory[] | null) => {
-          if (!old) return [];
+          if (!old) return old;
           return old.filter(
             (o) => o.item_inventory_id !== variables.item_inventory_id
           );
@@ -51,14 +51,10 @@ export const useConsumeConsumableItemMutation = () => {
       return consumeConsumableItem(data.item_inventory_id);
     },
     onSuccess: async (result, variables) => {
-      // await queryClient.cancelQueries({
-      //   queryKey: [STUDY_STREAK_QUERY_KEY],
-      // });
-
       queryClient.setQueryData(
         [CONSUMABLE_INVENTORY_QUERY_KEY],
         (old: IConsumableItemInventory[] | null) => {
-          if (!old) return [];
+          if (!old) return old;
           return old.map((inven) => {
             if (inven.item_inventory_id === variables.item_inventory_id) {
               return {
@@ -73,7 +69,7 @@ export const useConsumeConsumableItemMutation = () => {
       queryClient.setQueryData(
         [STUDY_STREAK_QUERY_KEY],
         (old: IStudyStreak | null) => {
-          if (!old) return null;
+          if (!old) return old;
           console.log(old);
           return {
             ...old,

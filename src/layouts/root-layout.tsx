@@ -7,7 +7,7 @@ import { DarkModeToggle } from '@/components/darkmode-toggle';
 import { ModalManager } from '@/components/modals/modal-manager';
 import { cn } from '@/lib/utils';
 
-export const RootLayout = () => {
+const RootLayout = () => {
   useCloseAppHandler();
   useViewport();
 
@@ -29,3 +29,5 @@ export const RootLayout = () => {
     </div>
   );
 };
+
+export default RootLayout;

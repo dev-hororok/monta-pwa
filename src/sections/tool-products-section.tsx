@@ -1,6 +1,6 @@
 import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { useShopConsumableItemsQuery } from '@/apis/queries/shop-queries';
-import ProductCard from '@/components/cards/product-card';
+import { ProductCard } from '@/components/cards/product-card';
 import type { Item } from '@/models/item.model';
 import { useModalStore } from '@/stores/use-modal-store';
 

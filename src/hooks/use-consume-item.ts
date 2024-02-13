@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import type { IPalette } from '@/models/palette.model';
 import type { IConsumableItemInventory } from '@/models/item.model';
 import { useConsumeConsumableItemMutation } from '@/apis/mutations/item-inventory-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
@@ -23,16 +22,13 @@ export const useConsumeItem = () => {
       const result = await consumeItem({
         item_inventory_id: itemInventory.item_inventory_id,
       });
-      openModal<{
-        palette: IPalette;
-        consumableItemInventory: IConsumableItemInventory;
-      }>('paletteAcquisition', {
+      openModal('paletteAcquisition', {
         palette: result.palette,
         consumableItemInventory: itemInventory,
       });
-    } catch (e) {
-      toast.error('오류가 발생했습니다.');
-      console.error(e);
+    } catch (error) {
+      toast.error('아이템 사용 중 오류가 발생했습니다.');
+      console.error(error);
     } finally {
       setIsLoading(false);
     }

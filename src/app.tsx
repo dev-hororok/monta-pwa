@@ -11,9 +11,9 @@ import RegisterPage from '@/pages/auth/register';
 import AgreeToTermsPage from '@/pages/auth/agree';
 import SettingCategoriesPage from '@/pages/categories';
 import ProtectedRoute from '@/components/auth/protected-route';
-import UnAuthedRoute from '@/components/auth/unauthed-route';
-import { RootLayout } from '@/components/layouts/root-layout';
-import { MobileLayout } from '@/components/layouts/mobile-layout';
+import UnauthedRoute from '@/components/auth/unauthed-route';
+import RootLayout from './layouts/root-layout';
+import MobileLayout from './layouts/mobile-layout';
 
 const router = createBrowserRouter(
   [
@@ -39,9 +39,9 @@ const router = createBrowserRouter(
         {
           path: 'auth',
           element: (
-            <UnAuthedRoute>
+            <UnauthedRoute>
               <Outlet />
-            </UnAuthedRoute>
+            </UnauthedRoute>
           ),
           children: [
             { index: true, element: <LoginGatewayPage /> },

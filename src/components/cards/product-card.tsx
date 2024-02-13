@@ -6,7 +6,7 @@ interface ProductCardProps {
   item: Item;
 }
 
-const ProductCard = ({ item }: ProductCardProps) => {
+export const ProductCard = ({ item }: ProductCardProps) => {
   return (
     <div
       className={cn(
@@ -17,17 +17,13 @@ const ProductCard = ({ item }: ProductCardProps) => {
       <img
         src={item.image_url}
         alt={item.name}
-        className="p-2"
-        onContextMenu={(e) => e.preventDefault()}
+        className="mb-2 w-full max-w-[200px] object-cover" // 이미지 크기 및 비율 조정
+        onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
       />
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
-        <p className="w-full font-semibold truncate text-center">{item.name}</p>
-        <p className="flex items-center gap-1 text-foreground/60">
-          {item.cost} 원
-        </p>
+        <p className="font-semibold truncate text-center">{item.name}</p>
+        <p className="text-foreground/60">{item.cost} 원</p>
       </div>
     </div>
   );
 };
-
-export default ProductCard;

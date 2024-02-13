@@ -24,7 +24,7 @@ export const usePurchaseItemMutation = () => {
       queryClient.setQueryData(
         [CURRENT_MEMBER_QUERY_KEY],
         (old: IMember | null) => {
-          if (!old) return null;
+          if (!old) return old;
           return {
             ...old,
             point: result.balance_after_transaction,
@@ -51,7 +51,7 @@ export const useSellCharacterMutation = () => {
       queryClient.setQueryData(
         [CURRENT_MEMBER_QUERY_KEY],
         (old: IMember | null) => {
-          if (!old) return null;
+          if (!old) return old;
           return {
             ...old,
             point: result.balance_after_transaction,

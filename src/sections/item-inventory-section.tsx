@@ -1,5 +1,5 @@
 import { useConsumableInventoryQuery } from '@/apis/queries/member-queries';
-import ConsumableItemInventoryCard from '@/components/cards/consumable-inventory-card';
+import { ConsumableItemInventoryCard } from '@/components/cards/consumable-inventory-card';
 
 interface Props {
   memberId: string;
@@ -13,10 +13,10 @@ const ItemInventorySection = ({ memberId }: Props) => {
   } = useConsumableInventoryQuery(memberId);
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <div className="text-center">로딩 중...</div>;
   }
   if (isError) {
-    return <div>Error</div>;
+    return <div className="text-center text-red-500">오류가 발생했습니다.</div>;
   }
 
   return (
