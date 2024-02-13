@@ -1,28 +1,31 @@
 import { Outlet } from 'react-router-dom';
+import { Toaster } from 'sonner';
 
 import { useCloseAppHandler } from '@/hooks/use-close-app-handler';
 import { useViewport } from '@/hooks/use-viewport';
-import ModalManager from '@/components/modals/modal-manager';
-import DarkModeToggle from '@/components/darkmode-toggle';
+import { DarkModeToggle } from '@/components/darkmode-toggle';
+import { ModalManager } from '@/components/modals/modal-manager';
+import { cn } from '@/lib/utils';
 
-const RootLayout = () => {
+export const RootLayout = () => {
   useCloseAppHandler();
   useViewport();
 
   return (
-    <div className="w-full">
-      <div className="w-full fixed top-0 md:top-1/2 md:left-1/2 md:-ml-[213px] md:-mt-[368px]">
-        <div className="relative w-full h-screen md:w-[416px] md:h-[736px] md:border md:rounded-md bg-background select-none">
-          <Outlet />
-
-          <ModalManager />
-          <div className="absolute -bottom-16 -right-16">
-            <DarkModeToggle />
-          </div>
+    <div className="w-full flex justify-center items-center h-screen">
+      <div
+        className={cn(
+          'relative w-full h-full border rounded-md bg-background select-none',
+          'md:max-w-mobile md:max-h-mobile md:border md:rounded-md'
+        )}
+      >
+        <Outlet />
+        <ModalManager />
+        <div className="hidden md:block absolute -bottom-12">
+          <DarkModeToggle />
         </div>
       </div>
+      <Toaster position="top-center" />
     </div>
   );
 };
-
-export default RootLayout;

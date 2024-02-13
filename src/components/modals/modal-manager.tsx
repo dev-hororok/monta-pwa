@@ -11,7 +11,7 @@ import TimerAlarmDialog from './timer-alarm';
 import PaletteAcquisitionDialog from './palette-acquisition';
 import CharacterAcquisitionDialog from './character-acquisition';
 
-const ModalManager = () => {
+export const ModalManager = () => {
   const { modals } = useModalStore();
 
   return (
@@ -35,5 +35,3 @@ const ModalManager = () => {
     </>
   );
 };
-
-export default ModalManager;

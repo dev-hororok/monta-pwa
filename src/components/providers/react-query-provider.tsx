@@ -9,7 +9,7 @@ import { useApiError } from '@/hooks/use-api-error';
 
 const MINUTE = 1000 * 60;
 
-const ReactQueryProvider = ({ children }: { children: ReactNode }) => {
+export const ReactQueryProvider = ({ children }: { children: ReactNode }) => {
   const { handleError } = useApiError();
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -30,5 +30,3 @@ const ReactQueryProvider = ({ children }: { children: ReactNode }) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
-
-export default ReactQueryProvider;

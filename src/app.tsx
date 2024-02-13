@@ -12,8 +12,8 @@ import AgreeToTermsPage from '@/pages/auth/agree';
 import SettingCategoriesPage from '@/pages/categories';
 import ProtectedRoute from '@/components/auth/protected-route';
 import UnAuthedRoute from '@/components/auth/unauthed-route';
-import RootLayout from '@/components/layouts/root-layout';
-import MobileLayout from '@/components/layouts/mobile-layout';
+import { RootLayout } from '@/components/layouts/root-layout';
+import { MobileLayout } from '@/components/layouts/mobile-layout';
 
 const router = createBrowserRouter(
   [
@@ -56,8 +56,6 @@ const router = createBrowserRouter(
   { basename: import.meta.env.BASE_URL }
 );
 
-const App = () => {
+export const App = () => {
   return <RouterProvider router={router} />;
 };
-
-export default App;

@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
 import type { ApiSuccessResponse } from '../types/api-response';
-import { API_URL_NEST, API_URL_SPRING } from '@/constants';
+import { API_URL_NEST, API_URL_SPRING } from '@/constants/constants';
 import useBoundStore from '@/stores/use-bound-store';
 import { AuthData } from '../services/auth-service';
 

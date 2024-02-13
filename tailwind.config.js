@@ -17,6 +17,12 @@ module.exports = {
       },
     },
     extend: {
+      maxHeight: {
+        mobile: '736px',
+      },
+      maxWidth: {
+        mobile: '416px',
+      },
       fontFamily: {
         nanum: ['"Nanum Gothic"', 'sans-serif'],
       },
