@@ -36,7 +36,7 @@ export const ConsumableItemInventoryCard = ({
         src={image_url}
         alt={name}
         className="p-2"
-        onContextMenu={(e) => e.preventDefault()}
+        onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
       />
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
         <p className="w-full font-semibold truncate text-center">{name}</p>

@@ -25,7 +25,7 @@ export const CharacterItemCard = ({
     >
       <Badge variant="secondary">{grade} 등급</Badge>
       <img
-        onContextMenu={(e) => e.preventDefault()}
+        onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
         src={image_url}
         alt={name}
         width={200}

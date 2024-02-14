@@ -38,7 +38,7 @@ export const FoodInventoryCard = ({
         src={foodItemInventory.item.image_url}
         alt={'FoodItem'}
         className="p-0"
-        onContextMenu={(e) => e.preventDefault()}
+        onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
       />
       <p>{formatTime(foodItemInventory.progress)}</p>
     </div>
