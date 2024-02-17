@@ -13,7 +13,7 @@ async function refreshTokenIfNeeded() {
   if (now >= expiresIn) {
     try {
       const response = await axios.post<ApiSuccessResponse<AuthData>>(
-        `${API_URL_NEST}/hororok-api/auth/refresh`,
+        `${API_URL_NEST}/timer-api/auth/refresh`,
         {},
         {
           headers: {
@@ -27,7 +27,7 @@ async function refreshTokenIfNeeded() {
           accessToken: response.data.data.access_token,
           refreshToken: response.data.data.refresh_token,
         },
-        response.data.data.expiresIn
+        response.data.data.expires_in
       );
       return response.data.data.access_token;
     } catch (error) {

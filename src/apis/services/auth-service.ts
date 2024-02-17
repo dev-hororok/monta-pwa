@@ -7,7 +7,7 @@ import useBoundStore from '@/stores/use-bound-store';
 export interface AuthData {
   access_token: string;
   refresh_token: string;
-  expiresIn: number;
+  expires_in: number;
 }
 
 class AuthService {
@@ -17,7 +17,7 @@ class AuthService {
   }): Promise<ServiceResponse<null>> {
     try {
       const response = await nestHttpRequest.post<ApiSuccessResponse<AuthData>>(
-        '/hororok-api/auth/login',
+        '/timer-api/auth/email/login',
         credentials
       );
 
@@ -26,7 +26,7 @@ class AuthService {
           accessToken: response.data.data.access_token,
           refreshToken: response.data.data.refresh_token,
         },
-        response.data.data.expiresIn
+        response.data.data.expires_in
       );
 
       return {
@@ -45,7 +45,7 @@ class AuthService {
   }): Promise<ServiceResponse<null>> {
     try {
       await nestHttpRequest.post<ApiSuccessResponse<null>>(
-        '/hororok-api/auth/register',
+        '/timer-api/auth/email/register',
         body
       );
 
