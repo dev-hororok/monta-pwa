@@ -17,7 +17,7 @@ async function refreshTokenIfNeeded() {
         {},
         {
           headers: {
-            Authorization: `Refresh ${tokens.refreshToken}`,
+            Authorization: `Bearer ${tokens.refreshToken}`,
           },
         }
       );
