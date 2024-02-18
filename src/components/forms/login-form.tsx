@@ -33,6 +33,7 @@ interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 const LoginForm = ({ className, ...props }: LoginFormProps) => {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
+    defaultValues: { email: '', password: '' },
   });
   const [isLoading, setIsLoading] = React.useState(false);
   const location = useLocation();
@@ -82,7 +83,6 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
               </FormItem>
             )}
           />
-          <Input placeholder="이메일" className="h-0 w-0 border-0 p-0" />
           <FormField
             control={form.control}
             name="password"

@@ -15,7 +15,7 @@ const RootLayout = () => {
     <div className="w-full flex justify-center items-center h-screen">
       <div
         className={cn(
-          'relative w-full h-full border rounded-md bg-background select-none',
+          'relative w-full h-full bg-background select-none transition-colors',
           'md:max-w-mobile md:max-h-mobile md:border md:rounded-md'
         )}
       >

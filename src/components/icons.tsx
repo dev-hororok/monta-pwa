@@ -14,6 +14,14 @@ import {
   User,
   X,
   MoreHorizontal,
+  LogOut,
+  UserRoundX,
+  Vibrate,
+  AlertCircle,
+  ChevronsLeftRight,
+  FileText,
+  Star,
+  ShieldEllipsis,
   type LucideIcon,
   type LucideProps,
 } from 'lucide-react';
@@ -25,6 +33,7 @@ export const Icons = {
   spinner: Loader2,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
+  chevronLeftRight: ChevronsLeftRight,
   trash: Trash,
   settings: Settings,
   home: Home,
@@ -36,6 +45,13 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   add: Plus,
+  logout: LogOut,
+  removeUser: UserRoundX,
+  vibrate: Vibrate,
+  alert: AlertCircle,
+  fileText: FileText,
+  star: Star,
+  shield: ShieldEllipsis,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

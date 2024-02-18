@@ -19,7 +19,6 @@ async function refreshTokenIfNeeded() {
           headers: {
             Authorization: `Bearer ${tokens.refreshToken}`,
           },
-          withCredentials: true,
         }
       );
 
@@ -47,11 +46,9 @@ const requestInterceptor = async (config: InternalAxiosRequestConfig) => {
 
 const nestHttpRequest = axios.create({
   baseURL: API_URL_NEST,
-  withCredentials: true,
 });
 const springHttpRequest = axios.create({
   baseURL: API_URL_SPRING,
-  withCredentials: true,
 });
 
 nestHttpRequest.interceptors.request.use(requestInterceptor);
