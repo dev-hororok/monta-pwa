@@ -13,7 +13,16 @@ const ItemInventorySection = ({ memberId }: Props) => {
   } = useConsumableInventoryQuery(memberId);
 
   if (isPending) {
-    return <div className="text-center">로딩 중...</div>;
+    return (
+      <section>
+        <p className="font-semibold pb-4">사용 아이템</p>
+        <div className="grid grid-cols-3 gap-2">
+          <ConsumableItemInventoryCard.Skeleton />
+          <ConsumableItemInventoryCard.Skeleton />
+          <ConsumableItemInventoryCard.Skeleton />
+        </div>
+      </section>
+    );
   }
   if (isError) {
     return <div className="text-center text-red-500">오류가 발생했습니다.</div>;

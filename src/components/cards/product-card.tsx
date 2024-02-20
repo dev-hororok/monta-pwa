@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import type { Item } from '@/models/item.model';
+import { Skeleton } from '../ui/skeleton';
 
 interface ProductCardProps {
   item: Item;
@@ -10,7 +11,7 @@ export const ProductCard = ({ item }: ProductCardProps) => {
   return (
     <div
       className={cn(
-        buttonVariants({ variant: 'outline' }),
+        buttonVariants({ variant: 'ghost' }),
         'h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
     >
@@ -26,4 +27,8 @@ export const ProductCard = ({ item }: ProductCardProps) => {
       </div>
     </div>
   );
+};
+
+ProductCard.Skeleton = () => {
+  return <Skeleton className="w-full aspect-[3/4]"></Skeleton>;
 };

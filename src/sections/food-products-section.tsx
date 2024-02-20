@@ -18,7 +18,13 @@ const FoodProductsSection = () => {
   const openModal = useModalStore((state) => state.openModal);
 
   if (itemsIsPending || memberIdPending) {
-    return <div>Loading...</div>;
+    return (
+      <div className="grid grid-cols-3 gap-2">
+        <ProductCard.Skeleton />
+        <ProductCard.Skeleton />
+        <ProductCard.Skeleton />
+      </div>
+    );
   }
 
   if (itemsIsError || memberIsError) {

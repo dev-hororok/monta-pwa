@@ -3,12 +3,14 @@ import { Icons } from '@/components/icons';
 import { useTheme } from '@/components/providers/theme-provider';
 import { useAppSettingsStore } from '@/stores/app-setting-store';
 import useBoundStore from '@/stores/use-bound-store';
+import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 const MorePage = () => {
   const logout = useBoundStore((state) => state.logout);
   const { setTheme } = useTheme();
   const appSettings = useAppSettingsStore((state) => state.appSettings);
+  const queryClient = useQueryClient();
   const setAppSettings = useAppSettingsStore((state) => state.setAppSettings);
 
   const handleVibrationToggle = () => {
@@ -32,6 +34,11 @@ const MorePage = () => {
         vibrationEnabled: true,
       });
     }
+  };
+
+  const handleLogoutClick = () => {
+    queryClient.clear();
+    logout();
   };
 
   const handleDummyClick = () => {
@@ -92,7 +99,7 @@ const MorePage = () => {
               </div>
             </li>
             <li
-              onClick={logout}
+              onClick={handleLogoutClick}
               className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm"
             >
               <div className="flex items-center gap-2">

@@ -42,15 +42,23 @@ const CharacterInventorySection = ({
           {data.length} 개
         </span>
       </header>
-      <div className="grid grid-cols-3 gap-2">
-        {data.map((inventory) => (
-          <CharacterItemCard
-            key={inventory.character_inventory_id}
-            characterInventory={inventory}
-            onClick={() => handleCharacterItemCardClick(inventory)}
-          />
-        ))}
-      </div>
+      {isPending ? (
+        <div className="grid grid-cols-3 gap-2">
+          <CharacterItemCard.Skeleton />
+          <CharacterItemCard.Skeleton />
+          <CharacterItemCard.Skeleton />
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 gap-2">
+          {data.map((inventory) => (
+            <CharacterItemCard
+              key={inventory.character_inventory_id}
+              characterInventory={inventory}
+              onClick={() => handleCharacterItemCardClick(inventory)}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

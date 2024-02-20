@@ -4,6 +4,7 @@ import type { IConsumableItemInventory } from '@/models/item.model';
 import { buttonVariants } from '@/components/ui/button';
 import { useConsumeItem } from '@/hooks/use-consume-item';
 import { cn } from '@/lib/utils';
+import { Skeleton } from '../ui/skeleton';
 
 interface ConsumableItemInventoryCardProps {
   consumableItemInventory: IConsumableItemInventory;
@@ -46,4 +47,8 @@ export const ConsumableItemInventoryCard = ({
       </div>
     </div>
   );
+};
+
+ConsumableItemInventoryCard.Skeleton = () => {
+  return <Skeleton className="w-full aspect-[3/4]"></Skeleton>;
 };

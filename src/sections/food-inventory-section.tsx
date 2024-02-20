@@ -14,7 +14,16 @@ export const FoodInventorySection = ({ memberId }: Props) => {
   } = useFoodInventoryQuery(memberId);
 
   if (isPending) {
-    return <div className="text-center">로딩 중...</div>;
+    return (
+      <section className="px-4">
+        <p className="text-center text-sm font-bold pb-4">재료 (최대 4개)</p>{' '}
+        <div className="grid grid-cols-4 gap-1">
+          <FoodInventoryCard.Skeleton />
+          <FoodInventoryCard.Skeleton />
+          <FoodInventoryCard.Skeleton />
+        </div>
+      </section>
+    );
   }
   if (isError) {
     return <div className="text-center text-red-500">오류가 발생했습니다.</div>;

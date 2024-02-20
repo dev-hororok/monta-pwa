@@ -5,6 +5,7 @@ import { formatTime } from '@/lib/date-format';
 import type { IFoodItemInventory } from '@/models/item.model';
 import { cn } from '@/lib/utils';
 import { useConsumeFoodItem } from '@/hooks/use-food-item';
+import { Skeleton } from '../ui/skeleton';
 
 interface FoodInventoryCardProps {
   foodItemInventory: IFoodItemInventory;
@@ -43,4 +44,7 @@ export const FoodInventoryCard = ({
       <p>{formatTime(foodItemInventory.progress)}</p>
     </div>
   );
+};
+FoodInventoryCard.Skeleton = () => {
+  return <Skeleton className="w-full aspect-[3/4]"></Skeleton>;
 };

@@ -2,6 +2,7 @@ import type { ICharacterInventory } from '@/models/character.model';
 import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { Skeleton } from '../ui/skeleton';
 
 interface CharacterItemCardProps {
   characterInventory: ICharacterInventory;
@@ -51,3 +52,7 @@ const CharacterInfo = ({ name, sellPrice, quantity }: CharacterInfoProps) => (
     </p>
   </div>
 );
+
+CharacterItemCard.Skeleton = () => {
+  return <Skeleton className="w-full aspect-[3/4]"></Skeleton>;
+};
