@@ -6,10 +6,12 @@ import { useViewport } from '@/hooks/use-viewport';
 import { DarkModeToggle } from '@/components/darkmode-toggle';
 import { ModalManager } from '@/components/modals/modal-manager';
 import { cn } from '@/lib/utils';
+import { useCheckDevice } from '@/hooks/use-check-device';
 
 const RootLayout = () => {
   useCloseAppHandler();
   useViewport();
+  useCheckDevice();
 
   return (
     <div className="w-full flex justify-center items-center h-screen">

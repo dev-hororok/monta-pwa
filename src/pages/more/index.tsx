@@ -12,6 +12,11 @@ const MorePage = () => {
   const setAppSettings = useAppSettingsStore((state) => state.setAppSettings);
 
   const handleVibrationToggle = () => {
+    if (!appSettings.isMobileDevice) {
+      toast.error('모바일 환경에서 접속해주세요!');
+      return;
+    }
+
     if (appSettings.vibrationEnabled) {
       setAppSettings({
         ...appSettings,

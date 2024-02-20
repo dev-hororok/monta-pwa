@@ -2,8 +2,8 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface AppSettings {
+  isMobileDevice: boolean;
   vibrationEnabled: boolean;
-  notificationEnabled: boolean;
 }
 
 interface AppSettingsStore {
@@ -15,8 +15,8 @@ export const useAppSettingsStore = create<AppSettingsStore>()(
   persist(
     (set) => ({
       appSettings: {
+        isMobileDevice: false, // 모바일 환경인지 체크
         vibrationEnabled: false, // 진동 허용
-        notificationEnabled: false, // 알림 허용
       },
       setAppSettings: (settings) =>
         set(() => ({

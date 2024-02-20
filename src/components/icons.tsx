@@ -22,9 +22,11 @@ import {
   FileText,
   Star,
   ShieldEllipsis,
+  VibrateOff,
+  Bell,
+  BellOff,
   type LucideIcon,
   type LucideProps,
-  VibrateOff,
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -54,6 +56,8 @@ export const Icons = {
   fileText: FileText,
   star: Star,
   shield: ShieldEllipsis,
+  bell: Bell,
+  bellOff: BellOff,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
