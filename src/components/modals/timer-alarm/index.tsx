@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import {
   AlertDialog,
@@ -8,16 +10,26 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useModalStore } from '@/stores/use-modal-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
+import { useAppSettingsStore } from '@/stores/app-setting-store';
 
 const TimerAlarmDialog = () => {
+  const { vibrationEnabled } = useAppSettingsStore(
+    (state) => state.appSettings
+  );
   const isOpen = useModalStore((state) => state.modals.timerAlarm.isOpen);
   const closeModal = useModalStore((state) => state.closeModal);
 
   const timerType = useTimerStateStore((state) => state.timerState.timerType);
 
-  // 푸시, 진동, 알람 등 worker 실행
+  React.useEffect(() => {
+    if (vibrationEnabled) {
+      const vibrationPattern = [400, 100, 400, 100];
+      window.navigator.vibrate(vibrationPattern);
+    }
+  }, [vibrationEnabled]);
 
   const handleOnClick = () => {
+    if (vibrationEnabled) window.navigator.vibrate(0);
     closeModal('timerAlarm');
     closeModal('timer');
   };

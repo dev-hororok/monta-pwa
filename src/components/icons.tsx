@@ -24,6 +24,7 @@ import {
   ShieldEllipsis,
   type LucideIcon,
   type LucideProps,
+  VibrateOff,
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -48,6 +49,7 @@ export const Icons = {
   logout: LogOut,
   removeUser: UserRoundX,
   vibrate: Vibrate,
+  vibrateOff: VibrateOff,
   alert: AlertCircle,
   fileText: FileText,
   star: Star,

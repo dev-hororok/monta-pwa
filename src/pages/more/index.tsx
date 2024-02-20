@@ -1,12 +1,33 @@
 import { MorePageHeader } from '@/components/headers/more-page-header';
 import { Icons } from '@/components/icons';
 import { useTheme } from '@/components/providers/theme-provider';
+import { useAppSettingsStore } from '@/stores/app-setting-store';
 import useBoundStore from '@/stores/use-bound-store';
 import { toast } from 'sonner';
 
 const MorePage = () => {
   const logout = useBoundStore((state) => state.logout);
   const { setTheme } = useTheme();
+  const appSettings = useAppSettingsStore((state) => state.appSettings);
+  const setAppSettings = useAppSettingsStore((state) => state.setAppSettings);
+
+  const handleVibrationToggle = () => {
+    if (appSettings.vibrationEnabled) {
+      setAppSettings({
+        ...appSettings,
+        vibrationEnabled: false,
+      });
+    } else {
+      toast.info('디바이스의 진동이 켜져있나 확인해주세요!', {
+        duration: 1000,
+      });
+      window.navigator.vibrate([100]);
+      setAppSettings({
+        ...appSettings,
+        vibrationEnabled: true,
+      });
+    }
+  };
 
   const handleDummyClick = () => {
     toast.error('미구현', { duration: 1000 });
@@ -36,13 +57,20 @@ const MorePage = () => {
               </div>
             </li>
             <li
-              onClick={handleDummyClick}
+              onClick={handleVibrationToggle}
               className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm"
             >
-              <div className="flex items-center gap-2">
-                <Icons.vibrate className="h-[1.2rem] w-[1.2rem]" />
-                진동
-              </div>
+              {appSettings.vibrationEnabled ? (
+                <div className="flex items-center gap-2">
+                  <Icons.vibrate className="h-[1.2rem] w-[1.2rem]" />
+                  진동 On
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Icons.vibrateOff className="h-[1.2rem] w-[1.2rem]" />
+                  진동 Off
+                </div>
+              )}
             </li>
           </ul>
         </div>
