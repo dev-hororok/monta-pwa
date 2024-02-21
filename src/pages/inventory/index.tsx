@@ -20,7 +20,6 @@ const InventoryPage = () => {
   const { data, isPending } = useCurrentMemberQuery();
 
   if (isPending || !data) {
-    console.log('Pending');
     return 'Loading...';
   }
 
@@ -33,7 +32,7 @@ const InventoryPage = () => {
           <ItemInventorySection memberId={data.member_id} />
 
           {/* 캐릭터 Section */}
-          <CharacterInventorySection memberId={data.member_id} />
+          <CharacterInventorySection member={data} />
         </div>
       </main>
     </div>

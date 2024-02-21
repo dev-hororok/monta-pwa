@@ -4,8 +4,12 @@ import { toast } from 'sonner';
 import { useSellCharacterMutation } from '@/apis/mutations/shop-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
 import type { ICharacterInventory } from '@/models/character.model';
+import { IMember } from '@/models/member.model';
 
-const useSellCharacter = (characterInventory: ICharacterInventory | null) => {
+const useSellCharacter = (
+  characterInventory: ICharacterInventory | null,
+  member: IMember | null
+) => {
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(1);
   const { mutateAsync: sellCharacter } = useSellCharacterMutation();
@@ -19,7 +23,16 @@ const useSellCharacter = (characterInventory: ICharacterInventory | null) => {
     setCount((prevCount) => Math.max(prevCount - 1, 1));
 
   const onSubmitSell = async () => {
-    if (!characterInventory) return;
+    if (!characterInventory || !member) return;
+    if (
+      member.image_url === characterInventory.character.image_url &&
+      characterInventory.quantity - count <= 0
+    ) {
+      toast.error(
+        '현재 사용중인 캐릭터입니다. 최소 하나의 캐릭터를 남겨주세요.'
+      );
+      return;
+    }
     setIsLoading(true);
     try {
       const result = await sellCharacter({

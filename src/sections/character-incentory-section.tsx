@@ -1,22 +1,25 @@
 import { useCharacterInventoryQuery } from '@/apis/queries/member-queries';
 import { CharacterItemCard } from '@/components/cards/character-card';
 import { ICharacterInventory } from '@/models/character.model';
+import { IMember } from '@/models/member.model';
 import { useModalStore } from '@/stores/use-modal-store';
 
 interface CharacterInventorySectionProps {
-  memberId: string;
+  member: IMember;
 }
 
 const CharacterInventorySection = ({
-  memberId,
+  member,
 }: CharacterInventorySectionProps) => {
-  const { data, isPending, isError } = useCharacterInventoryQuery(memberId);
+  const { data, isPending, isError } = useCharacterInventoryQuery(
+    member.member_id
+  );
   const openModal = useModalStore((state) => state.openModal);
 
   const handleCharacterItemCardClick = (
     characterInventory: ICharacterInventory
   ) => {
-    openModal('sellCharacter', { characterInventory });
+    openModal('sellCharacter', { characterInventory, member });
   };
 
   if (isPending) {

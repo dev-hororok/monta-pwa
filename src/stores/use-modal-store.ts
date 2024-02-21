@@ -32,7 +32,10 @@ interface ModalsState {
   // 아이템 구매
   purchaseItem: ModalState<{ member: IMember; item: Item }>;
   // 캐릭터 판매
-  sellCharacter: ModalState<{ characterInventory: ICharacterInventory }>;
+  sellCharacter: ModalState<{
+    member: IMember;
+    characterInventory: ICharacterInventory;
+  }>;
 }
 
 type ModalType = keyof ModalsState;

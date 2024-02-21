@@ -22,7 +22,10 @@ const SellCharacterDialog = () => {
     decrementCount,
     onSubmitSell,
     MaxCount,
-  } = useSellCharacter(data ? data.characterInventory : null);
+  } = useSellCharacter(
+    data ? data.characterInventory : null,
+    data ? data.member : null
+  );
 
   if (!isOpen || !data) {
     return null;
