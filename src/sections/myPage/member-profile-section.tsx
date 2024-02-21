@@ -1,4 +1,5 @@
 import { EditNicknameDialog } from '@/components/dialogs/edit-nickname-dialog';
+import { EditProfileImageDialog } from '@/components/dialogs/edit-profile-img-dialog';
 import { EditStatusMessageDialog } from '@/components/dialogs/edit-status-message-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -12,10 +13,12 @@ interface Props {
 const MemberProfileSection = ({ member }: Props) => {
   return (
     <section className="flex flex-col items-center gap-2 py-4">
-      <Avatar className="w-20 h-20">
-        <AvatarImage src={member.image_url} />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+      <EditProfileImageDialog member={member}>
+        <Avatar className="w-28 h-28 hover:bg-accent cursor-pointer">
+          <AvatarImage src={member.image_url} />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      </EditProfileImageDialog>
 
       <div className="flex flex-col items-center">
         <EditNicknameDialog member={member}>

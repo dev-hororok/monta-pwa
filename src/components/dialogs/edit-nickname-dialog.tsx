@@ -5,6 +5,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -68,9 +69,10 @@ export function EditNicknameDialog({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-mobile">
         <DialogHeader className="justify-center items-center">
           <DialogTitle>닉네임 변경</DialogTitle>
+          <DialogDescription>변경할 닉네임을 입력해주세요</DialogDescription>
         </DialogHeader>
         <div className={'w-full py-4'}>
           <Form {...form}>

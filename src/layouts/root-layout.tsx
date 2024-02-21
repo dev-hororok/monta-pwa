@@ -27,7 +27,7 @@ const RootLayout = () => {
           <DarkModeToggle />
         </div>
       </div>
-      <Toaster position="top-center" />
+      <Toaster position="top-center" duration={1500} />
     </div>
   );
 };

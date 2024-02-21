@@ -5,6 +5,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -66,9 +67,12 @@ export function EditStatusMessageDialog({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-mobile">
         <DialogHeader className="justify-center items-center">
           <DialogTitle>상태 메시지 변경</DialogTitle>
+          <DialogDescription>
+            남들에게 보여줄 상태 메시지를 작성해보세요
+          </DialogDescription>
         </DialogHeader>
         <div className={'w-full py-4'}>
           <Form {...form}>
