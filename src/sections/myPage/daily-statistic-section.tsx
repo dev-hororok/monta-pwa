@@ -1,4 +1,5 @@
 import { useDailyStatisticQuery } from '@/apis/queries/member-queries';
+import { Skeleton } from '@/components/ui/skeleton';
 import { formatTime } from '@/lib/date-format';
 
 interface Props {
@@ -13,7 +14,21 @@ const DailyStatisticSection = ({ memberId, dateStr }: Props) => {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col items-center py-4 space-y-2">
+        <Skeleton className="w-24 h-5" />
+        <div className="grid grid-cols-2 w-full">
+          <div className="w-full flex flex-col items-center justify-center space-y-2">
+            <Skeleton className="w-24 h-6" />
+            <Skeleton className="w-24 h-6" />
+          </div>
+          <div className="w-full flex flex-col items-center justify-center space-y-2">
+            <Skeleton className="w-24 h-6" />
+            <Skeleton className="w-24 h-6" />
+          </div>
+        </div>
+      </div>
+    );
   }
   if (isError || !data) {
     return <div>Error</div>;
