@@ -4,43 +4,34 @@ import {
 } from '@/apis/queries/member-queries';
 import StreakInfo from '@/components/streaks/streak-info';
 import StudyStreak from '@/components/streaks/study-streak';
+import { Skeleton } from '@/components/ui/skeleton';
 import { formatDateStr } from '@/lib/date-format';
 
-interface Props {
+interface StreakSectionProps {
   memberId: string;
 }
 
-const StreakSection = ({ memberId }: Props) => {
+const StreakSection = ({ memberId }: StreakSectionProps) => {
   const endDate = new Date();
   const startDate = new Date(new Date().setFullYear(endDate.getFullYear() - 1));
-  const {
-    data: streakInfo,
-    isLoading: isStreakLoading,
-    isError: isStreakError,
-  } = useStudyStreakQuery(memberId);
-  const {
-    data: heatMapData,
-    isLoading: isHeatMapDataLoading,
-    isError: isHeatMapDataError,
-  } = useStatisticHeatMapQuery(
+  const { data: streakInfo, isLoading: isStreakLoading } =
+    useStudyStreakQuery(memberId);
+  const { data: heatMapData } = useStatisticHeatMapQuery(
     memberId,
     formatDateStr(startDate),
     formatDateStr(endDate)
   );
 
-  if (isStreakLoading || isHeatMapDataLoading) {
-    return <div>Loading...</div>;
-  }
-  if (isStreakError || isHeatMapDataError) {
-    return <div>Error</div>;
-  }
-
   return (
     <section className="px-4">
       <p className="text-center text-sm font-bold pb-4">스트릭</p>
       <div className="flex items-center justify-center">
-        <div className="w-2/3">
-          <StreakInfo streakInfo={streakInfo} />
+        <div className="w-2/3 space-y-4">
+          {isStreakLoading ? (
+            <Skeleton className="w-32 h-6 ml-auto mt-2 mb-5" />
+          ) : (
+            <StreakInfo streakInfo={streakInfo} />
+          )}
           <StudyStreak
             heatMapData={heatMapData || []}
             streakInfo={streakInfo}

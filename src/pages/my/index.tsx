@@ -1,13 +1,17 @@
 import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import MyPageHeader from '@/components/headers/my-page-header';
+import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import MemberProfileSection from '@/sections/myPage/member-profile-section';
 import StudyRecordTabs from '@/sections/myPage/study-record-tabs';
 
 const MyPage = () => {
-  const { data, isPending } = useCurrentMemberQuery();
+  const { data, isPending, isError } = useCurrentMemberQuery();
 
-  if (isPending || !data) {
-    return 'Loading...';
+  if (isPending) {
+    return <MobileLoadingSpinner />;
+  }
+  if (isError) {
+    return <div>Error</div>;
   }
 
   return (

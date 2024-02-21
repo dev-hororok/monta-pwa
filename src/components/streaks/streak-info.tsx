@@ -8,7 +8,7 @@ interface Props {
 const StreakInfo = ({ streakInfo }: Props) => {
   const palette = streakInfo?.palette;
   return (
-    <div className="flex flex-col items-end justify-end gap-1 streak-container pb-4">
+    <div className="flex flex-col items-end justify-end gap-1 streak-container">
       <div>
         <div className="flex items-center gap-1 streak-container py-2">
           {!palette ? (

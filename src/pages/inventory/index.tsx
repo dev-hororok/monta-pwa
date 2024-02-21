@@ -1,5 +1,6 @@
 import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import HomeHeader from '@/components/headers/home-header';
+import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import CharacterInventorySection from '@/sections/character-incentory-section';
 import ItemInventorySection from '@/sections/item-inventory-section';
 
@@ -17,12 +18,14 @@ export interface InventoryCharacter {
 }
 
 const InventoryPage = () => {
-  const { data, isPending } = useCurrentMemberQuery();
+  const { data, isPending, isError } = useCurrentMemberQuery();
 
-  if (isPending || !data) {
-    return 'Loading...';
+  if (isPending) {
+    return <MobileLoadingSpinner />;
   }
-
+  if (isError) {
+    return <div>Error</div>;
+  }
   return (
     <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe-offset-14">
       <HomeHeader />
