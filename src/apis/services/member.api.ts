@@ -100,3 +100,15 @@ export const fetchStatisticHeatMap = async (
   );
   return response.data.data;
 };
+
+// 유저 정보 수정
+export const editMember = async (
+  memberId: string,
+  body: { nickname?: string; status_message?: string; image_url?: string }
+) => {
+  const response = await nestHttpRequest.patch<ApiSuccessResponse<null>>(
+    `/timer-api/members/${memberId}`,
+    body
+  );
+  return response.data.data;
+};

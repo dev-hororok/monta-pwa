@@ -1,3 +1,5 @@
+import { EditNicknameDialog } from '@/components/dialogs/edit-nickname-dialog';
+import { EditStatusMessageDialog } from '@/components/dialogs/edit-status-message-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -16,16 +18,22 @@ const MemberProfileSection = ({ member }: Props) => {
       </Avatar>
 
       <div className="flex flex-col items-center">
-        <Button type="button" variant={'ghost'}>
-          {member.nickname}
-        </Button>
-        <Button
-          type="button"
-          variant={'ghost'}
-          className="font-normal text-sm text-foreground/70"
-        >
-          상태 메세지
-        </Button>
+        <EditNicknameDialog member={member}>
+          <Button type="button" variant={'ghost'}>
+            {member.nickname}
+          </Button>
+        </EditNicknameDialog>
+        <EditStatusMessageDialog member={member}>
+          <Button
+            type="button"
+            variant={'ghost'}
+            className="font-normal text-sm text-foreground/70"
+          >
+            {member.status_message
+              ? member.status_message
+              : '상태 메시지를 입력해주세요.'}
+          </Button>
+        </EditStatusMessageDialog>
       </div>
 
       <div className="w-full grid grid-cols-3 divide-x pt-2">
