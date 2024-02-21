@@ -1,3 +1,7 @@
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
@@ -11,9 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { ReactNode, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { IMember } from '@/models/member.model';
 import { useEditMemberMutation } from '@/apis/mutations/member-mutations';
 import {
@@ -24,7 +25,6 @@ import {
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import { toast } from 'sonner';
 
 const editStatusMessageFormSchema = z.object({
   statusMessage: z.string(),
@@ -34,14 +34,14 @@ type EditStatusMessageFormValues = z.infer<typeof editStatusMessageFormSchema>;
 
 interface EditStatusMessageDialogProps {
   member: IMember;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export function EditStatusMessageDialog({
   children,
   member,
 }: EditStatusMessageDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const form = useForm<EditStatusMessageFormValues>({
     resolver: zodResolver(editStatusMessageFormSchema),
     defaultValues: {
@@ -67,7 +67,7 @@ export function EditStatusMessageDialog({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-mobile">
+      <DialogContent className="top-[35%] md:top-[50%]">
         <DialogHeader className="justify-center items-center">
           <DialogTitle>상태 메시지 변경</DialogTitle>
           <DialogDescription>

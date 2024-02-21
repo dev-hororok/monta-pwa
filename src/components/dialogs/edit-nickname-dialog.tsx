@@ -1,4 +1,8 @@
+import * as React from 'react';
 import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -11,9 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { ReactNode, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { IMember } from '@/models/member.model';
 import { useEditMemberMutation } from '@/apis/mutations/member-mutations';
 import {
@@ -24,7 +25,6 @@ import {
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import { toast } from 'sonner';
 
 const editNicknameFormSchema = z.object({
   nickname: z
@@ -36,14 +36,14 @@ type EditNicknameFormValues = z.infer<typeof editNicknameFormSchema>;
 
 interface EditNicknameDialogProps {
   member: IMember;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export function EditNicknameDialog({
   children,
   member,
 }: EditNicknameDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const form = useForm<EditNicknameFormValues>({
     resolver: zodResolver(editNicknameFormSchema),
     defaultValues: {
@@ -69,7 +69,7 @@ export function EditNicknameDialog({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-mobile">
+      <DialogContent className="top-[35%] md:top-[50%]">
         <DialogHeader className="justify-center items-center">
           <DialogTitle>닉네임 변경</DialogTitle>
           <DialogDescription>변경할 닉네임을 입력해주세요</DialogDescription>

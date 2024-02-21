@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { toast } from 'sonner';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -9,24 +12,24 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { ReactNode, useState } from 'react';
 import { IMember } from '@/models/member.model';
 import { useEditMemberMutation } from '@/apis/mutations/member-mutations';
-import { toast } from 'sonner';
 import { useCharacterInventoryQuery } from '@/apis/queries/member-queries';
 import { ScrollArea } from '../ui/scroll-area';
 
 interface EditProfileImageDialogProps {
   member: IMember;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export function EditProfileImageDialog({
   children,
   member,
 }: EditProfileImageDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedImageUrl, setSelectedImageUrl] = useState(member.image_url);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [selectedImageUrl, setSelectedImageUrl] = React.useState(
+    member.image_url
+  );
 
   const { data: characterInventory } = useCharacterInventoryQuery(
     member.member_id
@@ -58,8 +61,8 @@ export function EditProfileImageDialog({
             선택한 캐릭터로 공부에 참여할 수 있어요
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className={'w-full h-64 p-4'}>
-          <div className="grid grid-cols-4 gap-2">
+        <ScrollArea className={'w-full h-48 p-4'}>
+          <div className="grid grid-cols-3 gap-2">
             {characterInventory?.map((characterInventory) => {
               const isSelected =
                 characterInventory.character.image_url === selectedImageUrl;
