@@ -22,7 +22,7 @@ const TimerSection = () => {
 
   const timerImageSrc = useMemo(() => {
     if (timerType === 'Work') {
-      return './fire.png';
+      return './fire-1.png';
     } else if (timerType === 'Rest') {
       return './octopus.png';
     } else {
