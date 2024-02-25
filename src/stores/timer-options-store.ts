@@ -1,30 +1,40 @@
+import { IStudyCategory } from '@/models/study.model';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface TimerOptions {
+interface TimerOptionsStore {
   pomodoroTime: number;
   sectionCount: number;
   restTime: number;
   longRestTime: number;
-}
-
-interface TimerOptionsStore {
-  timerOptions: TimerOptions;
-  setTimerOptions: (options: TimerOptions) => void;
+  selectedCategory: IStudyCategory | null;
+  setTimerOptions: (options: {
+    pomodoroTime: number;
+    sectionCount: number;
+    restTime: number;
+    longRestTime: number;
+  }) => void;
+  setSelectedCategory: (category: IStudyCategory | null) => void;
 }
 
 export const useTimerOptionsStore = create<TimerOptionsStore>()(
   persist(
     (set) => ({
-      timerOptions: {
-        pomodoroTime: 25, // 기본 뽀모도로 시간 25분
-        sectionCount: 4, // 기본 섹션 4회
-        restTime: 5, // 쉬는시간
-        longRestTime: 15, // 긴 쉬는시간
-      },
+      pomodoroTime: 25, // 기본 뽀모도로 시간 25분
+      sectionCount: 4, // 기본 섹션 4회
+      restTime: 5, // 쉬는시간
+      longRestTime: 15, // 긴 쉬는시간
+      selectedCategory: null,
       setTimerOptions: (options) =>
         set(() => ({
-          timerOptions: options,
+          pomodoroTime: options.pomodoroTime,
+          sectionCount: options.sectionCount,
+          restTime: options.restTime,
+          longRestTime: options.longRestTime,
+        })),
+      setSelectedCategory: (category) =>
+        set(() => ({
+          selectedCategory: category,
         })),
     }),
     {

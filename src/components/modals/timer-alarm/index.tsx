@@ -19,7 +19,7 @@ const TimerAlarmDialog = () => {
   const isOpen = useModalStore((state) => state.modals.timerAlarm.isOpen);
   const closeModal = useModalStore((state) => state.closeModal);
 
-  const timerType = useTimerStateStore((state) => state.timerState.timerType);
+  const timerType = useTimerStateStore((state) => state.timerType);
 
   React.useEffect(() => {
     if (vibrationEnabled) {

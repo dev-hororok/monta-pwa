@@ -1,9 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { useStudyCategoriesQuery } from '@/apis/queries/study-category-queries';
-import { IStudyCategory } from '@/models/study.model';
-import { useTimerStateStore } from '@/stores/timer-state-store';
-
-// const categories = ['공부', '코딩', '알고리즘', 'CS'];
+import { useTimerOptionsStore } from '@/stores/timer-options-store';
 
 interface Props {
   memberId: string;
@@ -12,16 +9,12 @@ interface Props {
 const CategoryPicker = ({ memberId }: Props) => {
   const { data: categories, status, error } = useStudyCategoriesQuery(memberId);
 
-  const selectedCategory = useTimerStateStore(
+  const selectedCategory = useTimerOptionsStore(
     (state) => state.selectedCategory
   );
-  const setSelectedCategory = useTimerStateStore(
+  const setTimerOptions = useTimerOptionsStore(
     (state) => state.setSelectedCategory
   );
-
-  const updateStudyCategory = (category: IStudyCategory | null) => {
-    setSelectedCategory(category);
-  };
 
   if (status === 'pending') {
     return <span>Loading...</span>;
@@ -35,7 +28,7 @@ const CategoryPicker = ({ memberId }: Props) => {
     <div className="w-full md:max-w-[368px] overflow-hidden">
       <div className="flex items-center flex-wrap gap-3 overflow-x-scroll scrollbar-hide">
         <Badge
-          onClick={() => updateStudyCategory(null)}
+          onClick={() => setTimerOptions(null)}
           variant={selectedCategory === null ? 'default' : 'outline'}
           className="shrink-0 text-md"
         >
@@ -45,7 +38,7 @@ const CategoryPicker = ({ memberId }: Props) => {
           const isSelected = selectedCategory?.subject === category.subject;
           return (
             <Badge
-              onClick={() => updateStudyCategory(category)}
+              onClick={() => setTimerOptions(category)}
               key={idx}
               variant={isSelected ? 'default' : 'outline'}
               className="shrink-0 text-md"

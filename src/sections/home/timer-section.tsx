@@ -1,26 +1,27 @@
+import * as React from 'react';
+import { PlayIcon, StepForwardIcon } from 'lucide-react';
+
 import { useStartStudyTimerMutation } from '@/apis/mutations/study-timer-mutations';
 import { useTimerOptionsStore } from '@/stores/timer-options-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useModalStore } from '@/stores/use-modal-store';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { PlayIcon, StepForwardIcon } from 'lucide-react';
-import { useMemo } from 'react';
-import OpenTimerOptionsButton from '@/components/modals/timer-options/open-timer-options-button';
-import TimerImage from './timer-image';
+import { OpenTimerOptionsButton } from '@/components/modals/timer-options/open-timer-options-button';
+import { TimerImage } from './timer-image';
 
-const TimerSection = () => {
+export const TimerSection = () => {
   const { mutate: startStudyTimer } = useStartStudyTimerMutation();
   const openModal = useModalStore((state) => state.openModal);
-  const selectedCategory = useTimerStateStore(
+
+  const selectedCategory = useTimerOptionsStore(
     (state) => state.selectedCategory
   );
-  const timerOptions = useTimerOptionsStore((state) => state.timerOptions);
-  const timerState = useTimerStateStore((state) => state.timerState);
-  const setTimerState = useTimerStateStore((state) => state.setTimerState);
-  const timerType = useTimerStateStore((state) => state.timerState.timerType);
+  const timerType = useTimerStateStore((state) => state.timerType);
+  const startTimer = useTimerStateStore((state) => state.startTimer);
+  const resetTimer = useTimerStateStore((state) => state.resetTimer);
 
-  const timerImageSrc = useMemo(() => {
+  const timerImageSrc = React.useMemo(() => {
     if (timerType === 'Work') {
       return './fire-1.png';
     } else if (timerType === 'Rest') {
@@ -30,49 +31,27 @@ const TimerSection = () => {
     }
   }, [timerType]);
 
-  const targetTime = useMemo(() => {
+  const startAndOpenTimerModal = React.useCallback(() => {
     if (timerType === 'Work') {
-      return timerOptions.pomodoroTime * 60;
-    } else if (timerType === 'Rest') {
-      return timerOptions.restTime * 60;
-    } else {
-      return timerOptions.longRestTime * 60;
-    }
-  }, [timerType, timerOptions]);
-
-  const startAndOpenTimerModal = () => {
-    if (timerType === 'Work') {
-      startStudyTimer({ category_id: selectedCategory?.study_category_id });
+      startStudyTimer({
+        category_id: selectedCategory?.study_category_id,
+      });
     }
 
-    setTimerState({
-      timerType: timerState.timerType,
-      targetTime: targetTime,
-      duration: 0,
-      isActive: true,
-    });
+    startTimer();
     openModal('timer');
-  };
-
-  const passRestTime = () => {
-    setTimerState({
-      timerType: 'Work',
-      targetTime: timerOptions.pomodoroTime * 60,
-      duration: 0,
-      isActive: false,
-    });
-  };
+  }, [openModal, startTimer, startStudyTimer, timerType, selectedCategory]);
 
   return (
-    <div className="h-2/3 flex flex-col justify-center items-center">
+    <div className="h-2/3 flex-center flex-col">
       <TimerImage src={timerImageSrc} />
-      <div className="flex items-center justify-center h-1/4">
-        <OpenTimerOptionsButton targetTime={targetTime} />
+      <div className="flex-center h-1/4">
+        <OpenTimerOptionsButton />
       </div>
-      <div className="flex items-center justify-center h-1/4 gap-2">
+      <div className="flex-center h-1/4 gap-2">
         {timerType !== 'Work' ? (
           <Button
-            onClick={passRestTime}
+            onClick={resetTimer}
             variant={'ghost'}
             className={cn('p-2 h-auto')}
           >
@@ -90,5 +69,3 @@ const TimerSection = () => {
     </div>
   );
 };
-
-export default TimerSection;

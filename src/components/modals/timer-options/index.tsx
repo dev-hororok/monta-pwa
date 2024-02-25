@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -12,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { useModalStore } from '@/stores/use-modal-store';
 import OptionPicker from './option-picker';
 import { useTimerOptionsStore } from '@/stores/timer-options-store';
+import { useTimerStateStore } from '@/stores/timer-state-store';
 
 const pomodoroTimeOptions = [
   0.1, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 90, 120,
@@ -23,10 +25,11 @@ const longRestTimeOptions = [3, 5, 10, 15, 20, 25, 30, 35, 40];
 const TimerOptionDialog = () => {
   const { isOpen } = useModalStore((state) => state.modals.timerOptions);
   const closeModal = useModalStore((state) => state.closeModal);
-  const timerOptions = useTimerOptionsStore((state) => state.timerOptions);
+  const timerOptions = useTimerOptionsStore();
   const setTimerOptions = useTimerOptionsStore(
     (state) => state.setTimerOptions
   );
+  const initTimer = useTimerStateStore((state) => state.initTimer);
 
   const [pomodoroTime, setPomodoro] = useState(
     pomodoroTimeOptions.findIndex((o) => o === timerOptions.pomodoroTime)
@@ -48,6 +51,7 @@ const TimerOptionDialog = () => {
       restTime: restTimeOptions[restTime],
       longRestTime: longRestTimeOptions[longRestTime],
     });
+    initTimer();
     closeModal('timerOptions');
   };
   if (!isOpen) {
@@ -58,11 +62,14 @@ const TimerOptionDialog = () => {
     <Dialog open={isOpen}>
       <DialogContent
         className={cn(
-          `w-full md:max-w-[416px] max-h-[400px] flex flex-col justify-start items-center pt-safe-offset-14`
+          `w-full md:max-w-mobile max-h-mobile flex-center flex-col`
         )}
       >
-        <DialogHeader>
+        <DialogHeader className="items-center gap-2">
           <DialogTitle>타이머 설정</DialogTitle>
+          <DialogDescription>
+            타이머 설정을 변경하면 진행 중인 포모도로가 초기화됩니다.
+          </DialogDescription>
         </DialogHeader>
         <div className="pb-6 w-full">
           <div className="flex justify-between items-center w-full font-semibold py-2">
@@ -100,7 +107,7 @@ const TimerOptionDialog = () => {
           </div>
         </div>
         <DialogFooter>
-          <Button type="button" onClick={onClickSubmit}>
+          <Button type="button" onClick={onClickSubmit} className="w-full">
             확인
           </Button>
         </DialogFooter>

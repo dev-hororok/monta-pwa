@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 
 interface Props {
@@ -5,7 +7,7 @@ interface Props {
   animation?: boolean;
 }
 
-const TimerImage = ({ src, animation }: Props) => {
+export const TimerImage = React.memo(({ src, animation }: Props) => {
   return (
     <img
       onContextMenu={(e) => e.preventDefault()}
@@ -15,6 +17,4 @@ const TimerImage = ({ src, animation }: Props) => {
       className={cn('h-1/2 mx-auto', animation ? 'animate-soft-bounce' : null)}
     />
   );
-};
-
-export default TimerImage;
+});

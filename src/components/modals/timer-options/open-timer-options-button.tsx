@@ -1,12 +1,12 @@
+import * as React from 'react';
+
 import { Button } from '@/components/ui/button';
 import { formatTime } from '@/lib/date-format';
+import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useModalStore } from '@/stores/use-modal-store';
 
-interface Props {
-  targetTime: number;
-}
-
-const OpenTimerOptionsButton = ({ targetTime }: Props) => {
+export const OpenTimerOptionsButton = React.memo(() => {
+  const targetTime = useTimerStateStore((state) => state.targetTime);
   const openModal = useModalStore((state) => state.openModal);
   const openTimerOptionsModal = () => {
     openModal('timerOptions');
@@ -21,6 +21,4 @@ const OpenTimerOptionsButton = ({ targetTime }: Props) => {
       </Button>
     </div>
   );
-};
-
-export default OpenTimerOptionsButton;
+});

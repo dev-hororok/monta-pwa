@@ -1,30 +1,19 @@
 import * as React from 'react';
 
 import { IMemberInfo } from '.';
+import { useTimerStateStore } from '@/stores/timer-state-store';
+import { formatTime } from '@/lib/date-format';
 
 interface MemberTimerProps {
   member: IMemberInfo;
 }
 
-export const StudyGroupMember = ({ member }: MemberTimerProps) => {
-  const [elapsedTime, setElapsedTime] = React.useState('');
-
-  React.useEffect(() => {
-    const updateElapsedTime = () => {
-      setElapsedTime(calculateElapsedTime(member.joinedAtUTC));
-    };
-
-    updateElapsedTime(); // 초기 렌더링 시 경과 시간 계산
-    const intervalId = setInterval(updateElapsedTime, 1000); // 1초마다 경과 시간 업데이트
-
-    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 인터벌 정리
-  }, [member.joinedAtUTC]);
-
+export const StudyGroupMember = React.memo(({ member }: MemberTimerProps) => {
   return (
     <div className="relative flex-center flex-col hover:bg-accent cursor-pointer py-2">
-      <span className="absolute top-1 text-xs font-semibold text-foreground/70">
-        {elapsedTime}
-      </span>
+      <div className="absolute top-1">
+        <TimerDisplay joinedAtUTC={member.joinedAtUTC} />
+      </div>
       <img
         src={member.image_url}
         alt={member.nickname}
@@ -35,17 +24,24 @@ export const StudyGroupMember = ({ member }: MemberTimerProps) => {
       </span>
     </div>
   );
-};
+});
 
-const calculateElapsedTime = (joinedAtUTC: string) => {
-  const now = new Date().getTime(); // 현재 시간 타임스탬프 (밀리초)
-  const joinedTime = new Date(joinedAtUTC).getTime(); // 멤버의 입장 시간 타임스탬프 (밀리초)
-  const differenceInSeconds = Math.floor((now - joinedTime) / 1000);
-  const hours = Math.floor(differenceInSeconds / 3600);
-  const minutes = Math.floor((differenceInSeconds % 3600) / 60);
-  const seconds = differenceInSeconds % 60;
+const TimerDisplay = ({ joinedAtUTC }: { joinedAtUTC: string }) => {
+  const globalDuration = useTimerStateStore((state) => state.duration);
+  // 멤버 첫 렌더링 시 현재시간을 기준으로 공부시간 계산
+  const initialElapsedSeconds = React.useMemo(() => {
+    // 내 기준으로 그룹 시작 시간
+    const groupStartTimeUTC = new Date().getTime() - globalDuration * 1000;
+    const joinedTimeUTC = new Date(joinedAtUTC).getTime();
+    return Math.floor((groupStartTimeUTC - joinedTimeUTC) / 1000);
+  }, [joinedAtUTC]);
 
-  return `${hours.toString().padStart(2, '0')}:${minutes
-    .toString()
-    .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  // 멤버의 경과 시간에 글로벌 duration(타이머가 가동된 시간)을 더함
+  const totalElapsedSeconds = initialElapsedSeconds + globalDuration;
+  const formattedElapsedTime = formatTime(totalElapsedSeconds);
+  return (
+    <span className="text-xs font-semibold text-foreground/70">
+      {formattedElapsedTime}
+    </span>
+  );
 };

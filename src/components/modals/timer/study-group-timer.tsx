@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { formatTime } from '@/lib/date-format';
 import { IMemberInfo } from '.';
 import { Button } from '@/components/ui/button';
@@ -5,62 +7,85 @@ import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { StudyGroupMember } from './study-group-member';
+import { useModalStore } from '@/stores/use-modal-store';
 
 interface StudyGroupTimerProps extends React.HTMLAttributes<HTMLDivElement> {
   classNames?: string;
-  onClick: () => void;
   members: IMemberInfo[];
 }
 
-export const StudyGroupTimer = ({
-  onClick,
-  classNames,
-  members,
-  ...props
-}: StudyGroupTimerProps) => {
-  const timerState = useTimerStateStore((state) => state.timerState);
+export const StudyGroupTimer = React.memo(
+  ({ classNames, members, ...props }: StudyGroupTimerProps) => {
+    return (
+      <div className={cn('h-full', classNames)} {...props}>
+        <div className="grid grid-cols-3 grid-rows-3 gap-2 w-full h-3/5 p-4">
+          {Array.from({ length: 9 }).map((_, index) => {
+            const isCenterCell = index === 4;
+            const member = members[4 < index ? index - 1 : index];
 
+            return isCenterCell ? (
+              <img
+                key="fire"
+                src="./fire-1.png"
+                alt="모닥불"
+                className="w-full aspect-square"
+              />
+            ) : member ? (
+              <StudyGroupMember key={member.member_id} member={member} />
+            ) : (
+              <img
+                key={`empty-${index}`}
+                src="./chair.png"
+                alt="빈 자리"
+                className="w-full aspect-square"
+              />
+            );
+          })}
+        </div>
+        <div className="flex-center h-1/5">
+          <TimerDisplay />
+        </div>
+        <div className="flex-center h-1/5">
+          <TimerPauseButton />
+        </div>
+      </div>
+    );
+  }
+);
+
+// 타이머 시간 표시
+const TimerDisplay = () => {
+  const targetTime = useTimerStateStore((state) => state.targetTime);
+  const duration = useTimerStateStore((state) => state.duration);
   return (
-    <div className={cn('h-full', classNames)} {...props}>
-      <div className="grid grid-cols-3 grid-rows-3 gap-2 w-full h-3/5 p-4">
-        {Array.from({ length: 9 }).map((_, index) => {
-          const isCenterCell = index === 4;
-          const member = members[4 < index ? index - 1 : index];
+    <p className="text-7xl text-primary dark:text-foreground antialiased font-semibold">
+      {formatTime(targetTime - duration)}
+    </p>
+  );
+};
 
-          return isCenterCell ? (
-            <img
-              key="fire"
-              src="./fire-1.png"
-              alt="모닥불"
-              className="w-full aspect-square"
-            />
-          ) : member ? (
-            <StudyGroupMember member={member} />
-          ) : (
-            <img
-              key={`empty-${index}`}
-              src="./chair.png"
-              alt="빈 자리"
-              className="w-full aspect-square"
-            />
-          );
-        })}
-      </div>
-      <div className="flex-center h-1/5">
-        <p className="text-7xl text-primary dark:text-foreground antialiased font-semibold">
-          {formatTime(timerState.targetTime - timerState.duration)}
-        </p>
-      </div>
-      <div className="flex-center h-1/5">
-        <Button
-          type="button"
-          onClick={onClick}
-          variant={'ghost'}
-          className={'p-2 h-auto'}
-        >
-          <Icons.pause className="w-10 h-10" />
-        </Button>
-      </div>
-    </div>
+// 타이머 일시정지 후 타이머 종료 확인 모달 열기
+const TimerPauseButton = () => {
+  const duration = useTimerStateStore((state) => state.duration);
+  const pauseTimer = useTimerStateStore((state) => state.pauseTimer);
+  const startTimer = useTimerStateStore((state) => state.startTimer);
+  const openModal = useModalStore((state) => state.openModal);
+
+  const handlePauseClick = () => {
+    pauseTimer();
+    openModal('pauseTimer', {
+      duration: duration,
+      startTimer: startTimer,
+    });
+  };
+  return (
+    <Button
+      type="button"
+      onClick={handlePauseClick}
+      variant={'ghost'}
+      className={'p-2 h-auto'}
+    >
+      <Icons.pause className="w-10 h-10" />
+    </Button>
   );
 };

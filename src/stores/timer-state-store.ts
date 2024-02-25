@@ -1,50 +1,77 @@
-import { IStudyCategory } from '@/models/study.model';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { useTimerOptionsStore } from './timer-options-store';
 
 export type TimerType = 'Work' | 'Rest' | 'LongRest';
 
-interface TimerState {
-  targetTime: number; // 목표 시간
-  duration: number; // 지속 시간 (초)
+interface TimerStateStore {
+  duration: number;
   isActive: boolean;
   timerType: TimerType;
+  sectionCompleted: number;
+  targetTime: number;
+  startTimer: () => void;
+  pauseTimer: () => void;
+  interuptTimer: () => void;
+  resetTimer: () => void;
+  initTimer: () => void;
+  _updateTimer: () => void;
 }
 
-interface TimerStateStore {
-  selectedCategory: IStudyCategory | null;
-  timerState: TimerState;
-  setTimerState: (state: TimerState) => void;
-  setSelectedCategory: (category: IStudyCategory | null) => void;
-}
+export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
+  duration: 0,
+  isActive: false,
+  timerType: 'Work',
+  sectionCompleted: 0,
+  targetTime: useTimerOptionsStore.getState().pomodoroTime * 60,
+  startTimer: () => set({ isActive: true }),
+  pauseTimer: () => set({ isActive: false }),
+  interuptTimer: () => {
+    set({
+      isActive: false,
+      duration: 0,
+      targetTime: useTimerOptionsStore.getState().pomodoroTime * 60,
+    });
+  },
+  resetTimer: () => {
+    const { pomodoroTime, restTime, longRestTime, sectionCount } =
+      useTimerOptionsStore.getState();
+    const { timerType, sectionCompleted } = get();
 
-export const useTimerStateStore = create<TimerStateStore>()(
-  persist(
-    (set) => ({
-      selectedCategory: null,
-      timerState: {
-        targetTime: 0,
-        timerType: 'Work',
-        duration: 0, // 타이머 지속시간
-        isActive: false,
-      },
-      setTimerState: (state) =>
-        set(() => ({
-          timerState: state,
-        })),
-      setSelectedCategory: (category) =>
-        set(() => ({
-          selectedCategory: category,
-        })),
-    }),
-    {
-      name: 'timer-state-storage',
-      partialize: (state) => ({
-        selectedCategory: state.selectedCategory,
-        timerState: {
-          timerType: state.timerState.timerType,
-        },
-      }),
+    let newTimerType: TimerType = 'Work';
+    let newTargetTime = pomodoroTime * 60;
+    let newSectionCompleted = sectionCompleted;
+
+    if (timerType === 'Work') {
+      newTimerType = sectionCompleted + 1 < sectionCount ? 'Rest' : 'LongRest';
+      newTargetTime =
+        newTimerType === 'Rest' ? restTime * 60 : longRestTime * 60;
+      newSectionCompleted += 1;
+    } else {
+      newTimerType = 'Work';
+      newTargetTime = pomodoroTime * 60;
+      newSectionCompleted = timerType === 'LongRest' ? 0 : sectionCompleted;
     }
-  )
-);
+
+    set({
+      timerType: newTimerType,
+      targetTime: newTargetTime,
+      duration: 0,
+      isActive: false,
+      sectionCompleted: newSectionCompleted,
+    });
+  },
+  initTimer: () => {
+    set({
+      timerType: 'Work',
+      targetTime: useTimerOptionsStore.getState().pomodoroTime * 60,
+      duration: 0,
+      isActive: false,
+      sectionCompleted: 0,
+    });
+  },
+  _updateTimer: () => {
+    const { duration, targetTime, isActive } = get();
+    if (!isActive || duration >= targetTime) return;
+    set({ duration: duration + 1 });
+  },
+}));

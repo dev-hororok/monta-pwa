@@ -11,9 +11,11 @@ import { useEndStudyTimerMutation } from '@/apis/mutations/study-timer-mutations
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
 import { formatTime } from '@/lib/date-format';
 import { useModalStore } from '@/stores/use-modal-store';
+import { useTimerStateStore } from '@/stores/timer-state-store';
 
 const PuaseTimerDialog = () => {
   const { isOpen, data } = useModalStore((state) => state.modals.pauseTimer);
+  const interuptTimer = useTimerStateStore((state) => state.interuptTimer);
   const closeModal = useModalStore((state) => state.closeModal);
 
   const { mutate: endStudyTimer } = useEndStudyTimerMutation();
@@ -22,6 +24,7 @@ const PuaseTimerDialog = () => {
     if (data && data.duration) {
       endStudyTimer({ duration: data.duration, status: 'Incompleted' });
     }
+    interuptTimer();
     closeModal('pauseTimer');
     closeModal('timer');
   };
