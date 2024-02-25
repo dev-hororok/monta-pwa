@@ -27,12 +27,14 @@ import {
   BellOff,
   type LucideIcon,
   type LucideProps,
+  Pause,
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
 
 export const Icons = {
   close: X,
+  pause: Pause,
   spinner: Loader2,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,

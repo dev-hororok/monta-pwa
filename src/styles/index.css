@@ -30,6 +30,10 @@ body {
     height: -webkit-fill-available;
   }
 
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
   /* If using React, set height on the root div as well */
   #root {
     height: -webkit-fill-available;

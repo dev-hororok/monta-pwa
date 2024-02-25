@@ -35,6 +35,7 @@ export const useTimer = () => {
   useEffect(() => {
     if (timerState.duration < timerState.targetTime) return;
     if (timerState.timerType === 'Work') {
+      // 공부시간 기록 후 휴식시간 타이머로 전환
       endStudyTimer({ status: 'Completed', duration: timerState.targetTime }); // 공부시간 기록
       setTimerState({
         isActive: false,
@@ -48,6 +49,7 @@ export const useTimer = () => {
       timerState.timerType === 'Rest' ||
       timerState.timerType === 'LongRest'
     ) {
+      // 공부시간 타이머로 전환
       setTimerState({
         isActive: false,
         timerType: 'Work',
