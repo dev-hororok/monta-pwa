@@ -2,7 +2,7 @@ import type { ServiceResponse } from '../types/service-response';
 import type { ApiSuccessResponse } from '../types/api-response';
 import { nestHttpRequest } from '../common/http-request';
 import { handleApiError } from '../common/api-error-handler';
-import useBoundStore from '@/stores/use-bound-store';
+import { useAuthStore } from '@/stores/auth-store';
 
 export interface AuthData {
   access_token: string;
@@ -21,7 +21,7 @@ class AuthService {
         credentials
       );
 
-      useBoundStore.getState().authenticate(
+      useAuthStore.getState().authenticate(
         {
           accessToken: response.data.data.access_token,
           refreshToken: response.data.data.refresh_token,
@@ -69,11 +69,11 @@ class AuthService {
   }
 
   logout() {
-    useBoundStore.getState().logout();
+    useAuthStore.getState().logout();
   }
 
   isAuthenticated() {
-    const { expiresIn } = useBoundStore.getState();
+    const expiresIn = useAuthStore.getState().expiresIn;
     return new Date().getTime() < expiresIn;
   }
 }

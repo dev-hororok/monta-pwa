@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import useBoundStore from '@/stores/use-bound-store';
+import { useAuthStore } from '@/stores/auth-store';
 
 interface UnauthedRouteProps {
   children: React.ReactNode;
 }
 
 const UnauthedRoute = ({ children }: UnauthedRouteProps) => {
-  const { accessToken } = useBoundStore((state) => state.tokens);
+  const accessToken = useAuthStore((state) => state.tokens.accessToken);
   const location = useLocation();
 
   if (accessToken) {

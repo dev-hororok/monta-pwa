@@ -1,17 +1,18 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
+
 import { MorePageHeader } from '@/components/headers/more-page-header';
 import { Icons } from '@/components/icons';
 import { useTheme } from '@/components/providers/theme-provider';
 import { useAppSettingsStore } from '@/stores/app-setting-store';
-import useBoundStore from '@/stores/use-bound-store';
-import { useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useAuthStore } from '@/stores/auth-store';
 
 const MorePage = () => {
-  const logout = useBoundStore((state) => state.logout);
   const { setTheme } = useTheme();
+  const logout = useAuthStore((state) => state.logout);
   const appSettings = useAppSettingsStore((state) => state.appSettings);
-  const queryClient = useQueryClient();
   const setAppSettings = useAppSettingsStore((state) => state.setAppSettings);
+  const queryClient = useQueryClient();
 
   const handleVibrationToggle = () => {
     if (!appSettings.isMobileDevice) {

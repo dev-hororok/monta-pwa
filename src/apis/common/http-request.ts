@@ -2,12 +2,12 @@ import axios, { InternalAxiosRequestConfig } from 'axios';
 
 import type { ApiSuccessResponse } from '../types/api-response';
 import { API_URL_NEST, API_URL_SPRING } from '@/constants/constants';
-import useBoundStore from '@/stores/use-bound-store';
 import { AuthData } from '../services/auth-service';
+import { useAuthStore } from '@/stores/auth-store';
 
 // 인터셉터로 만료 시간 확인 및 토큰 리프레시
 async function refreshTokenIfNeeded() {
-  const { tokens, expiresIn, authenticate } = useBoundStore.getState();
+  const { tokens, expiresIn, authenticate } = useAuthStore.getState();
   const now = new Date().getTime();
 
   if (now >= expiresIn) {
@@ -31,7 +31,7 @@ async function refreshTokenIfNeeded() {
       );
       return response.data.data.access_token;
     } catch (error) {
-      useBoundStore.getState().logout();
+      useAuthStore.getState().logout();
     }
   }
   return tokens.accessToken;

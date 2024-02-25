@@ -1,6 +1,6 @@
-import { StateCreator } from 'zustand';
+import { create } from 'zustand';
 
-export interface AppSlice {
+interface AppStore {
   backButtonPressed: boolean;
   setBackButtonPressed: (pressed: boolean) => void;
 
@@ -9,12 +9,12 @@ export interface AppSlice {
   setViewportSize: (width: number, height: number) => void;
 }
 
-export const createAppSlice: StateCreator<AppSlice> = (set) => ({
+export const useAppStore = create<AppStore>()((set) => ({
   backButtonPressed: false,
-  setBackButtonPressed: (pressed: boolean) =>
-    set(() => ({ backButtonPressed: pressed })),
+  setBackButtonPressed: (pressed) => set({ backButtonPressed: pressed }),
+
   viewportWidth: window.innerWidth,
   viewportHeight: window.innerHeight,
   setViewportSize: (width, height) =>
     set({ viewportWidth: width, viewportHeight: height }),
-});
+}));

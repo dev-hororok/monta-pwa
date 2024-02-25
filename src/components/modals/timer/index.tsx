@@ -5,10 +5,10 @@ import { useTimer } from '@/hooks/use-timer';
 import { useModalStore } from '@/stores/use-modal-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { API_URL_NEST } from '@/constants/constants';
-import useBoundStore from '@/stores/use-bound-store';
 import type { IMember } from '@/models/member.model';
 import { StudyGroupTimer } from './study-group-timer';
 import { RestTimer } from './rest-timer';
+import { useAuthStore } from '@/stores/auth-store';
 
 export interface IMemberInfo {
   member_id: IMember['member_id'];
@@ -18,7 +18,7 @@ export interface IMemberInfo {
 }
 
 const TimerModal = () => {
-  const accessToken = useBoundStore((state) => state.tokens.accessToken);
+  const accessToken = useAuthStore((state) => state.tokens.accessToken);
   const { pauseTimer, startTimer, passRestTime } = useTimer();
   const { duration, timerType } = useTimerStateStore(
     (state) => state.timerState
