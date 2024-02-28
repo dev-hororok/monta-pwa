@@ -14,6 +14,7 @@ import ProtectedRoute from '@/components/auth/protected-route';
 import UnauthedRoute from '@/components/auth/unauthed-route';
 import RootLayout from './layouts/root-layout';
 import MobileLayout from './layouts/mobile-layout';
+import { KakaoLoginCallback } from './pages/auth/login/callback/kakao';
 
 const router = createBrowserRouter(
   [
@@ -48,6 +49,7 @@ const router = createBrowserRouter(
             { path: 'login', element: <LoginPage /> },
             { path: 'agree', element: <AgreeToTermsPage /> },
             { path: 'register', element: <RegisterPage /> },
+            { path: 'login/callback/kakao', element: <KakaoLoginCallback /> },
           ],
         },
       ],

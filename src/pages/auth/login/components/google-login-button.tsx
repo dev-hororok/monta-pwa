@@ -1,14 +1,15 @@
-import { useGoogleLogin } from '@react-oauth/google';
-import { Icons } from '../icons';
-import { Button } from '../ui/button';
 import axios from 'axios';
-import { useAuthStore } from '@/stores/auth-store';
-import { toast } from 'sonner';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
-import { API_URL_NEST } from '@/constants/constants';
-import { handleApiError } from '@/apis/common/api-error-handler';
+import { toast } from 'sonner';
 
-export const OAuthList = () => {
+import { handleApiError } from '@/apis/common/api-error-handler';
+import { Icons } from '@/components/icons';
+import { Button } from '@/components/ui/button';
+import { API_URL_NEST } from '@/constants/constants';
+import { useAuthStore } from '@/stores/auth-store';
+
+export const GoogleLoginButton = () => {
   const navigate = useNavigate();
   const googleSocialLogin = useGoogleLogin({
     flow: 'auth-code',
@@ -38,15 +39,13 @@ export const OAuthList = () => {
     },
   });
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <Button
-        variant={'outline'}
-        className="w-full h-12 gap-4"
-        onClick={() => googleSocialLogin()}
-      >
-        <Icons.google className="w-6 h-6" />
-        <p>구글 로그인</p>
-      </Button>
-    </div>
+    <Button
+      variant={'outline'}
+      className="w-full h-12 gap-4 bg-white dark:bg-white hover:bg-accent"
+      onClick={() => googleSocialLogin()}
+    >
+      <Icons.google className="w-6 h-6 fill-foreground" />
+      <p className="text-black">구글 로그인</p>
+    </Button>
   );
 };

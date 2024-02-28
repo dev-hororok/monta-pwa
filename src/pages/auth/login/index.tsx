@@ -1,5 +1,5 @@
 import LoginForm from '@/components/forms/login-form';
-import { OAuthList } from '@/components/forms/oauth-list';
+import { OAuthLoginList } from '@/pages/auth/login/components/oauth-login-list';
 import PrevHeader from '@/components/headers/prev-header';
 
 const LoginPage = () => {
@@ -18,7 +18,7 @@ const LoginPage = () => {
             </span>
           </div>
         </div>
-        <OAuthList />
+        <OAuthLoginList />
       </div>
     </div>
   );
