@@ -15,7 +15,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { Icons } from '@/components/icons';
 import authService from '@/apis/services/auth-service';
 import { cn } from '@/lib/utils';
 
@@ -111,22 +110,6 @@ const RegisterForm = ({ className, ...props }: RegisterFormProps) => {
             로그인
           </Link>
         </div>
-      </div>
-
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">또는</span>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center justify-center gap-2">
-        <Button variant={'outline'} className="w-full h-12 gap-4">
-          <Icons.gitHub className="w-6 h-6" />
-          <p>깃허브 로그인</p>
-        </Button>
       </div>
     </div>
   );

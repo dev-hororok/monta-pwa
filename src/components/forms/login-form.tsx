@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 
 const loginFormSchema = z.object({
@@ -49,7 +48,7 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
         const origin = location.state?.from?.pathname || '/';
         navigate(origin);
       } else {
-        toast.error('이메일 또는 패스워드가 잘못되었습니다.');
+        toast.error(result.error);
       }
     } catch (e) {
       toast.error(
@@ -61,10 +60,7 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
   };
 
   return (
-    <div
-      className={cn('grid gap-6 bg-card w-full py-10 px-6', className)}
-      {...props}
-    >
+    <div className={cn('grid gap-6 bg-card w-full', className)} {...props}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField
@@ -139,21 +135,6 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
         >
           비밀번호 찾기
         </Link>
-      </div>
-
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">또는</span>
-        </div>
-      </div>
-
-      <div className="flex justify-center">
-        <Button variant={'outline'} className="w-12 h-12 p-0">
-          <Icons.gitHub className="w-8 h-8" />
-        </Button>
       </div>
     </div>
   );
