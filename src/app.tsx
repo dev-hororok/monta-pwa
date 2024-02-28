@@ -15,6 +15,7 @@ import UnauthedRoute from '@/components/auth/unauthed-route';
 import RootLayout from './layouts/root-layout';
 import MobileLayout from './layouts/mobile-layout';
 import { KakaoLoginCallback } from './pages/auth/login/callback/kakao';
+import { GoogleLoginCallback } from './pages/auth/login/callback/google';
 
 const router = createBrowserRouter(
   [
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
             { path: 'agree', element: <AgreeToTermsPage /> },
             { path: 'register', element: <RegisterPage /> },
             { path: 'login/callback/kakao', element: <KakaoLoginCallback /> },
+            { path: 'login/callback/google', element: <GoogleLoginCallback /> },
           ],
         },
       ],
