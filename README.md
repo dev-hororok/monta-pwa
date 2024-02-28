@@ -6,6 +6,7 @@
   - 로그인
   - 토큰 리프레시
   - 구글 간편로그인
+  - 카카오 간편로그인
 
 - 유저
   - 이름, 상태 메시지 수정
@@ -60,20 +61,24 @@
 ### 📱 PWA - 모바일 흉내
 
 - 모바일 안전영역(safe area) 고려
-  - tailwindcss-safe-area 플러그인 사용
+  - `tailwindcss-safe-area` 플러그인 사용
 - 스크롤바 감추기
-  - tailwind-scrollbar-hide 플러그인 사용
+  - `tailwind-scrollbar-hide` 플러그인 사용
 - 모바일 앱종료 구현
 
   - 첫 접속 시 `dummy history` 생성
-  - 라우터 이동 간 `history` 저장 X
-  - `global state`로 `backButtonPressed` 생성
+  - 라우터 이동 간 `history` 저장 X (해도 상관없는데 앱 특성상 탭 이동이 잦아 불필요한 히스토리가 많이쌓임)
+  - `ref`로 `backButtonPressed` 생성
   - 로직 (`use-close-app-handler.ts`)
     - 1. 뒤로가기 혹은 이전 키 누를 시 `dummy history` 제거(못막음) 후 즉시 `dummy history` 추가
     - 2. `backButtonPressed` 상태에 따라 분기
       - false: `backButtonPressed`를 true로 변경하고 false로 변경하는 로직을 `setTimeout`으로 이벤트큐에 담고 `toast UI` 표시 (한번더 누르면 종료됩니다.)
         - `setTimeout`은 `dealy`초 후 실행, `toast`는 `delay`초 후 사라짐
       - true: `window.history.go(-(window.history.length + 2))`로 앱 종료
+  - +브라우저 동작 (크롬 기준)
+    - 자바스크립트로 history를 조작 한 후 사용자의 실제 상호작용(터치 등)이 없으면 pop 동작 시 현재 도메인의 히스토리가 몇개든 전체(같은 도메인)가 pop됨
+      (이로인해 뒤로가기 후 상호작용 없이 5초 뒤 뒤로가기를 누르면 앱 종료 - 못막음)
+    - window.history로 이동할 수 있는 최대는 같은 도메인에서만 이동 가능
 
 ### ⚡️ 성능 개선
 
