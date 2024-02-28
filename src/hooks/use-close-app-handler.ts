@@ -22,18 +22,17 @@ export const useCloseAppHandler = (delay = 1500) => {
 
     const handleBackButtonEvent = (e: PopStateEvent) => {
       e.preventDefault();
-
+      window.history.pushState({}, '');
       if (!backButtonPressed) {
         setBackButtonPressed(true);
         toast('한번 더 누르면 앱이 종료됩니다.', { duration: delay });
 
         timeout = setTimeout(() => {
           setBackButtonPressed(false);
-          window.history.pushState(null, 'current', '/');
         }, delay);
       } else {
         // 사용자가 지정된 시간 내에 다시 뒤로 가기를 누르면 앱 종료 로직 추가
-        window.history.back();
+        window.history.go(-(window.history.length + 2));
       }
     };
 

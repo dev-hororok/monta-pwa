@@ -28,13 +28,12 @@ export const GoogleLoginCallback = () => {
         toast.success('로그인에 성공하였습니다.');
         navigate('/');
       } catch (e) {
-        console.log(e);
         const result = handleApiError(e);
         toast.error(result.error);
         navigate('/auth/login');
       }
     };
     fetch();
-  }, []);
+  }, [navigate]);
   return null;
 };

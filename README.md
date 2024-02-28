@@ -69,11 +69,11 @@
   - 라우터 이동 간 `history` 저장 X
   - `global state`로 `backButtonPressed` 생성
   - 로직 (`use-close-app-handler.ts`)
-    - 1. 뒤로가기 혹은 이전 키 누를 시 `dummy history` 제거 (못막음)
+    - 1. 뒤로가기 혹은 이전 키 누를 시 `dummy history` 제거(못막음) 후 즉시 `dummy history` 추가
     - 2. `backButtonPressed` 상태에 따라 분기
-      - false: `dummy history` 심는 로직을 `setTimeout`으로 이벤트큐에 담고 `toast UI` 표시 (한번더 누르면 종료됩니다.)
+      - false: `backButtonPressed`를 true로 변경하고 false로 변경하는 로직을 `setTimeout`으로 이벤트큐에 담고 `toast UI` 표시 (한번더 누르면 종료됩니다.)
         - `setTimeout`은 `dealy`초 후 실행, `toast`는 `delay`초 후 사라짐
-      - true: 종료를 막아줄 `dummy`가 없어서 자연스럽게 종료됨
+      - true: `window.history.go(-(window.history.length + 2))`로 앱 종료
 
 ### ⚡️ 성능 개선
 
@@ -134,3 +134,19 @@
 sonner 라이브러리로 교체함
 
 [https://stackoverflow.com/questions/77923557]("https://stackoverflow.com/questions/77923557/why-does-my-shadcn-ui-datatable-not-reload-on-invalidating-query")
+
+#### 2. OAuth 간편로그인 시 리다이렉트로 구현하여 모바일 종료 동작 X
+
+##### 문제
+
+브라우저 정책이 많이 강화되어서 window.close()도 안되고 여러 꼼수들이 전부 막혔음
+
+pwa앱을 종료하기 위해서는 최상위 history에서 pop이 수행되어야함
+
+유일하게 남은 방법이 위에서 기술한 방법인데 간편로그인을 redirect uri를 통해 구현하니 중간에 외부 history가 낑김
+
+window.history.go(-100)을 하더라도 같은 도메인 까지만 이동하고 중간에 다른 도메인이 껴있으면 해당 페이지로 이동함
+
+##### 해결책
+
+- oauth 구현시 history가 쌓이지 않도록 redirect 대신 popup 방식으로 구현

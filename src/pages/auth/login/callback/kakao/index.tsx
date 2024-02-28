@@ -34,6 +34,6 @@ export const KakaoLoginCallback = () => {
       }
     };
     fetch();
-  }, []);
+  }, [navigate]);
   return null;
 };
