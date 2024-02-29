@@ -15,7 +15,7 @@ export const StudyGroupMember = React.memo(({ member }: MemberTimerProps) => {
         <TimerDisplay joinedAtUTC={member.joinedAtUTC} />
       </div>
       <img
-        src={member.image_url}
+        src={member.image_url ? member.image_url : '/octopus.png'}
         alt={member.nickname}
         className="w-4/5 aspect-square"
       />
