@@ -5,7 +5,7 @@ interface Props {
   streakInfo?: IStudyStreak;
 }
 
-const StreakInfo = ({ streakInfo }: Props) => {
+export const StreakInfo = ({ streakInfo }: Props) => {
   const palette = streakInfo?.palette;
   return (
     <div className="flex flex-col items-end justify-end gap-1 streak-container">
@@ -32,5 +32,3 @@ const StreakInfo = ({ streakInfo }: Props) => {
     </div>
   );
 };
-
-export default StreakInfo;

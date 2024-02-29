@@ -15,7 +15,7 @@ import {
 import { IMember } from '@/models/member.model';
 import { useEditMemberMutation } from '@/apis/mutations/member-mutations';
 import { useCharacterInventoryQuery } from '@/apis/queries/member-queries';
-import { ScrollArea } from '../ui/scroll-area';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface EditProfileImageDialogProps {
   member: IMember;
@@ -44,7 +44,7 @@ export function EditProfileImageDialog({
         memberId: member.member_id,
         body: { image_url: selectedImageUrl },
       });
-      toast.error('성공적으로 캐릭터를 변경했습니다.');
+      toast.success('성공적으로 캐릭터를 변경했습니다.');
       setIsOpen(false);
     } catch (e) {
       // 네트워크 에러나 기타 예외 처리
@@ -64,7 +64,7 @@ export function EditProfileImageDialog({
         <ScrollArea className={'w-full h-48 p-4'}>
           <div className="grid grid-cols-3 gap-2">
             <DefaultCharacter
-              setSelectedImageUrl={setSelectedImageUrl}
+              onClick={() => setSelectedImageUrl('')}
               isSelected={'' === selectedImageUrl}
             />
             {characterInventory?.map((characterInventory) => {
@@ -112,16 +112,13 @@ export function EditProfileImageDialog({
 }
 
 interface DefaultCharacterProps {
-  setSelectedImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  onClick: () => void;
   isSelected: boolean;
 }
 
-const DefaultCharacter = ({
-  setSelectedImageUrl,
-  isSelected,
-}: DefaultCharacterProps) => {
+const DefaultCharacter = ({ onClick, isSelected }: DefaultCharacterProps) => {
   return (
-    <div key={'0'} onClick={() => setSelectedImageUrl('')} className="relative">
+    <div key={'0'} onClick={onClick} className="relative">
       <img
         src={'/octopus.png'}
         alt={`default-image`}

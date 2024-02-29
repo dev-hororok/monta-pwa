@@ -14,9 +14,9 @@ import ProtectedRoute from '@/components/auth/protected-route';
 import UnauthedRoute from '@/components/auth/unauthed-route';
 import RootLayout from './layouts/root-layout';
 import MobileLayout from './layouts/mobile-layout';
-import { KakaoLoginCallback } from './pages/auth/login/callback/kakao';
-import { GoogleLoginCallback } from './pages/auth/login/callback/google';
-import { NaverLoginCallback } from './pages/auth/login/callback/naver';
+import KakaoLoginCallback from './pages/auth/login/callback/kakao';
+import GoogleLoginCallback from './pages/auth/login/callback/google';
+import NaverLoginCallback from './pages/auth/login/callback/naver';
 
 const router = createBrowserRouter(
   [

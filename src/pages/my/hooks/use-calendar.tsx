@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import * as React from 'react';
 import { OnArgs, TileArgs } from 'react-calendar';
 
 import {
@@ -11,27 +11,29 @@ type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export const useCalendar = (memberId: string) => {
-  const [value, setValue] = useState<Value>(new Date());
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth());
+  const [value, setValue] = React.useState<Value>(new Date());
+  const [year, setYear] = React.useState(new Date().getFullYear());
+  const [month, setMonth] = React.useState(new Date().getMonth());
 
-  const startDate = useMemo(() => new Date(year, month - 1, 23), [year, month]);
-  const endDate = useMemo(() => new Date(year, month + 1, 7), [year, month]);
+  const selectedDateStr = React.useMemo(
+    () => formatDateStr(value instanceof Date ? value : new Date()),
+    [value]
+  );
 
-  const selectedDateStr = useMemo(() => {
-    if (value instanceof Date) {
-      return formatDateStr(value);
-    }
-    return formatDateStr(new Date());
-  }, [value]);
+  // 날짜 범위 계산
+  const { startDate, endDate } = React.useMemo(() => {
+    const start = new Date(year, month - 1, 23);
+    const end = new Date(year, month + 1, 7);
+    return { startDate: start, endDate: end };
+  }, [year, month]);
 
-  // react-calendar date 클릭 시 호출
-  const onChange = useCallback((newValue: Value) => {
+  // 날짜 선택 (react-calendar date 클릭 시 호출)
+  const onChange = React.useCallback((newValue: Value) => {
     setValue(newValue);
   }, []);
 
-  // react-calendar 달/연도 변경 시 호출
-  const onActiveStartDateChange = useCallback(
+  // 뷰 변경 (react-calendar 달/연도 변경 시 호출)
+  const onActiveStartDateChange = React.useCallback(
     ({ action, activeStartDate }: OnArgs) => {
       if (
         action === 'prev' ||
@@ -59,8 +61,8 @@ export const useCalendar = (memberId: string) => {
     month + 1
   );
 
-  // heatMap 해시맵 (조회용)
-  const studiedDays = useMemo(() => {
+  // heatMap 해시맵 (스티커 생성 시 조회용)
+  const studiedDays = React.useMemo(() => {
     const map = new Map<string, number>();
     heatMapData?.forEach((data) => {
       map.set(data.date, data.totalSeconds);
@@ -68,8 +70,8 @@ export const useCalendar = (memberId: string) => {
     return map;
   }, [heatMapData]);
 
-  // 타일의 date값이 heatMap에 존재할 시 스티커 붙여줌
-  const tileContent = useCallback(
+  // 타일의 date값이 heatMap에 존재할 시 스티커를 붙여줌
+  const tileContent = React.useCallback(
     ({ date, view }: TileArgs) => {
       if (view === 'month') {
         const dateStr = formatDateStr(date);

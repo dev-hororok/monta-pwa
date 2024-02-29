@@ -92,14 +92,17 @@ export const useDailyStatisticQuery = (memberId: string, dateStr: string) => {
 export const STATISTIC_MONTHLY = 'statisticMonthly';
 export const useMonthlyStatisticQuery = (
   memberId: string,
-  year: number,
-  month: number
+  year: number | null,
+  month: number | null
 ) => {
   return useQuery({
     queryKey: [STATISTIC_MONTHLY, year, month],
-    queryFn: () => fetchMonthlyStatistic(memberId, year, month),
+    queryFn: () => {
+      if (!memberId || year === null || month === null) return;
+      return fetchMonthlyStatistic(memberId, year, month);
+    },
     staleTime: 24 * 60 * 1000,
-    enabled: !!memberId,
+    enabled: !!memberId && !!year && !!month,
   });
 };
 

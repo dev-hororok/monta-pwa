@@ -7,7 +7,7 @@ import { handleApiError } from '@/apis/common/api-error-handler';
 import { API_URL_NEST } from '@/constants/constants';
 import { useAuthStore } from '@/stores/auth-store';
 
-export const NaverLoginCallback = () => {
+const NaverLoginCallback = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
@@ -38,3 +38,5 @@ export const NaverLoginCallback = () => {
   }, [navigate]);
   return null;
 };
+
+export default NaverLoginCallback;

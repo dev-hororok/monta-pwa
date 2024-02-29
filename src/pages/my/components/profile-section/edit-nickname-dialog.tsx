@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -23,41 +23,43 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
+} from '../../../../components/ui/form';
+import { Input } from '../../../../components/ui/input';
 
-const editStatusMessageFormSchema = z.object({
-  statusMessage: z.string(),
+const editNicknameFormSchema = z.object({
+  nickname: z
+    .string()
+    .min(2, { message: '닉네임 최소 2자 이상이어야 합니다.' }),
 });
 
-type EditStatusMessageFormValues = z.infer<typeof editStatusMessageFormSchema>;
+type EditNicknameFormValues = z.infer<typeof editNicknameFormSchema>;
 
-interface EditStatusMessageDialogProps {
+interface EditNicknameDialogProps {
   member: IMember;
   children: React.ReactNode;
 }
 
-export function EditStatusMessageDialog({
+export function EditNicknameDialog({
   children,
   member,
-}: EditStatusMessageDialogProps) {
+}: EditNicknameDialogProps) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const form = useForm<EditStatusMessageFormValues>({
-    resolver: zodResolver(editStatusMessageFormSchema),
+  const form = useForm<EditNicknameFormValues>({
+    resolver: zodResolver(editNicknameFormSchema),
     defaultValues: {
-      statusMessage: member.status_message,
+      nickname: member.nickname,
     },
   });
   const { mutateAsync: editMember } = useEditMemberMutation();
 
-  const handleSubmit = async (data: EditStatusMessageFormValues) => {
-    if (data.statusMessage === member.status_message) return setIsOpen(false);
+  const handleSubmit = async (data: EditNicknameFormValues) => {
+    if (data.nickname === member.nickname) return setIsOpen(false);
     try {
       await editMember({
         memberId: member.member_id,
-        body: { status_message: data.statusMessage },
+        body: { nickname: data.nickname },
       });
-      toast.error('성공적으로 상태 메시지를 변경했습니다.');
+      toast.success('성공적으로 닉네임을 변경했습니다.');
       setIsOpen(false);
     } catch (e) {
       // 네트워크 에러나 기타 예외 처리
@@ -69,10 +71,8 @@ export function EditStatusMessageDialog({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="top-[35%] md:top-[50%]">
         <DialogHeader className="justify-center items-center">
-          <DialogTitle>상태 메시지 변경</DialogTitle>
-          <DialogDescription>
-            남들에게 보여줄 상태 메시지를 작성해보세요
-          </DialogDescription>
+          <DialogTitle>닉네임 변경</DialogTitle>
+          <DialogDescription>변경할 닉네임을 입력해주세요</DialogDescription>
         </DialogHeader>
         <div className={'w-full py-4'}>
           <Form {...form}>
@@ -82,12 +82,12 @@ export function EditStatusMessageDialog({
             >
               <FormField
                 control={form.control}
-                name="statusMessage"
+                name="nickname"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
                       <Input
-                        placeholder="상태 메시지"
+                        placeholder="닉네임"
                         {...field}
                         className="w-full h-12 text-center"
                       />

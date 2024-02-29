@@ -2,16 +2,16 @@ import {
   useStatisticHeatMapQuery,
   useStudyStreakQuery,
 } from '@/apis/queries/member-queries';
-import StreakInfo from '@/components/streaks/streak-info';
-import StudyStreak from '@/components/streaks/study-streak';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatDateStr } from '@/lib/date-format';
+import { StreakInfo } from './streak-info';
+import { StudyStreak } from './study-streak';
 
 interface StreakSectionProps {
   memberId: string;
 }
 
-const StreakSection = ({ memberId }: StreakSectionProps) => {
+export const StreakSection = ({ memberId }: StreakSectionProps) => {
   const endDate = new Date();
   const startDate = new Date(new Date().setFullYear(endDate.getFullYear() - 1));
   const { data: streakInfo, isLoading: isStreakLoading } =
@@ -41,5 +41,3 @@ const StreakSection = ({ memberId }: StreakSectionProps) => {
     </section>
   );
 };
-
-export default StreakSection;
