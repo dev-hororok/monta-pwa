@@ -63,6 +63,10 @@ export function EditProfileImageDialog({
         </DialogHeader>
         <ScrollArea className={'w-full h-48 p-4'}>
           <div className="grid grid-cols-3 gap-2">
+            <DefaultCharacter
+              setSelectedImageUrl={setSelectedImageUrl}
+              isSelected={'' === selectedImageUrl}
+            />
             {characterInventory?.map((characterInventory) => {
               const isSelected =
                 characterInventory.character.image_url === selectedImageUrl;
@@ -106,3 +110,31 @@ export function EditProfileImageDialog({
     </Dialog>
   );
 }
+
+interface DefaultCharacterProps {
+  setSelectedImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  isSelected: boolean;
+}
+
+const DefaultCharacter = ({
+  setSelectedImageUrl,
+  isSelected,
+}: DefaultCharacterProps) => {
+  return (
+    <div key={'0'} onClick={() => setSelectedImageUrl('')} className="relative">
+      <img
+        src={'/octopus.png'}
+        alt={`default-image`}
+        className="w-full aspect-square cursor-pointer rounded-full"
+      />
+      {isSelected ? (
+        <span className="absolute top-0 right-0 flex h-3 w-3">
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+        </span>
+      ) : null}
+      <p className="w-full text-xs font-semibold text-center line-clamp-2">
+        기본 문어
+      </p>
+    </div>
+  );
+};

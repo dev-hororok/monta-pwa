@@ -15,7 +15,9 @@ const MemberProfileSection = ({ member }: Props) => {
     <section className="flex flex-col items-center gap-2 py-4">
       <EditProfileImageDialog member={member}>
         <Avatar className="w-28 h-28 hover:bg-accent cursor-pointer">
-          <AvatarImage src={member.image_url} />
+          <AvatarImage
+            src={member.image_url ? member.image_url : '/octopus.png'}
+          />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </EditProfileImageDialog>
