@@ -4,3 +4,4 @@ export const API_URL_SPRING = import.meta.env.VITE_URL_SPRING;
 
 export const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 export const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+export const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID;

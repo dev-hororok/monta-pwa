@@ -13,7 +13,7 @@ export const GoogleLoginButton = () => {
   return (
     <Button
       variant={'outline'}
-      className="w-full h-12 gap-4 bg-white dark:bg-white hover:bg-accent"
+      className="w-full h-12 gap-4 bg-white dark:bg-white hover:bg-white"
       onClick={() => handleLogin()}
     >
       <Icons.google className="w-6 h-6 fill-foreground" />
