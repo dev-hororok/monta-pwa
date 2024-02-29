@@ -1,15 +1,14 @@
-import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { useShopConsumableItemsQuery } from '@/apis/queries/shop-queries';
-import { ProductCard } from '@/components/cards/product-card';
-import type { Item } from '@/models/item.model';
+import { ProductCard } from '@/pages/shop/components/product-card';
 import { useModalStore } from '@/stores/use-modal-store';
+import type { Item } from '@/models/item.model';
+import type { IMember } from '@/models/member.model';
 
-const ToolProductsSection = () => {
-  const {
-    data: member,
-    isPending: memberIdPending,
-    isError: memberIsError,
-  } = useCurrentMemberQuery();
+interface ToolProductsSectionProps {
+  member: IMember;
+}
+
+const ToolProductsSection = ({ member }: ToolProductsSectionProps) => {
   const {
     data: items,
     isPending: itemsIsPending,
@@ -17,9 +16,12 @@ const ToolProductsSection = () => {
   } = useShopConsumableItemsQuery();
   const openModal = useModalStore((state) => state.openModal);
 
-  if (itemsIsPending || memberIdPending) {
+  if (itemsIsPending) {
     return (
       <div className="grid grid-cols-3 gap-2">
+        <ProductCard.Skeleton />
+        <ProductCard.Skeleton />
+        <ProductCard.Skeleton />
         <ProductCard.Skeleton />
         <ProductCard.Skeleton />
         <ProductCard.Skeleton />
@@ -27,7 +29,7 @@ const ToolProductsSection = () => {
     );
   }
 
-  if (itemsIsError || memberIsError) {
+  if (itemsIsError) {
     return <div>Error</div>;
   }
   const openPurchaseModal = (item: Item) => {

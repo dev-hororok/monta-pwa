@@ -1,9 +1,20 @@
+import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import HomeHeader from '@/components/headers/home-header';
+import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import FoodProductsSection from '@/sections/food-products-section';
-import ToolProductsSection from '@/sections/tool-products-section';
+import FoodProductsSection from '@/pages/shop/components/food-products-section';
+import ToolProductsSection from '@/pages/shop/components/tool-products-section';
 
 const ShopPage = () => {
+  const { data: member, isPending, isError } = useCurrentMemberQuery();
+
+  if (isPending) {
+    return <MobileLoadingSpinner />;
+  }
+  if (isError) {
+    return <div>Error</div>;
+  }
+
   return (
     <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe-offset-14">
       <HomeHeader />
@@ -16,10 +27,10 @@ const ShopPage = () => {
             </TabsList>
           </div>
           <TabsContent value="foods">
-            <FoodProductsSection />
+            <FoodProductsSection member={member} />
           </TabsContent>
           <TabsContent value="tools">
-            <ToolProductsSection />
+            <ToolProductsSection member={member} />
           </TabsContent>
         </Tabs>
       </main>
