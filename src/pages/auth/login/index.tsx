@@ -1,6 +1,6 @@
-import LoginForm from '@/components/forms/login-form';
+import { LoginForm } from '@/pages/auth/login/components/login-form';
 import { OAuthLoginList } from '@/pages/auth/login/components/oauth-login-list';
-import PrevHeader from '@/components/headers/prev-header';
+import { PrevHeader } from '@/components/headers/prev-header';
 
 const LoginPage = () => {
   return (

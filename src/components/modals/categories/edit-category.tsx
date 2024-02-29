@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { useModalStore } from '@/stores/use-modal-store';
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
-import EditCategoryForm from '@/components/forms/edit-category-form';
+import { EditCategoryForm } from '@/pages/categories/components/edit-category-form';
 
 const EditCategoryDialog = () => {
   const { isOpen, data } = useModalStore((state) => state.modals.editCategory);

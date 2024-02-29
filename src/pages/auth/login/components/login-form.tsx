@@ -29,7 +29,7 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const LoginForm = ({ className, ...props }: LoginFormProps) => {
+export const LoginForm = ({ className, ...props }: LoginFormProps) => {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: { email: '', password: '' },
@@ -139,5 +139,3 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
     </div>
   );
 };
-
-export default LoginForm;

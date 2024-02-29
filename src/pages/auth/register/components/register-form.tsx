@@ -29,7 +29,7 @@ type RegisterFormValues = z.infer<typeof registerFormSchema>;
 
 interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const RegisterForm = ({ className, ...props }: RegisterFormProps) => {
+export const RegisterForm = ({ className, ...props }: RegisterFormProps) => {
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: { email: '', password: '' },
@@ -114,5 +114,3 @@ const RegisterForm = ({ className, ...props }: RegisterFormProps) => {
     </div>
   );
 };
-
-export default RegisterForm;

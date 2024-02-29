@@ -1,6 +1,6 @@
 import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { useStudyCategoriesQuery } from '@/apis/queries/study-category-queries';
-import PrevHeader from '@/components/headers/prev-header';
+import { PrevHeader } from '@/components/headers/prev-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { Button } from '@/components/ui/button';
 import { IStudyCategory } from '@/models/study.model';

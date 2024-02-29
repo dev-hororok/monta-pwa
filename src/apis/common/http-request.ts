@@ -7,7 +7,8 @@ import { useAuthStore } from '@/stores/auth-store';
 
 // 인터셉터로 만료 시간 확인 및 토큰 리프레시
 async function refreshTokenIfNeeded() {
-  const { tokens, expiresIn, authenticate } = useAuthStore.getState();
+  const { tokens, expiresIn, authenticate, accountId } =
+    useAuthStore.getState();
   const now = new Date().getTime();
 
   if (now >= expiresIn) {
@@ -23,6 +24,7 @@ async function refreshTokenIfNeeded() {
       );
 
       authenticate(
+        accountId,
         {
           accessToken: response.data.data.access_token,
           refreshToken: response.data.data.refresh_token,

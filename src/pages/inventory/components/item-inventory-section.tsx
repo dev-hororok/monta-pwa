@@ -1,16 +1,17 @@
 import { useConsumableInventoryQuery } from '@/apis/queries/member-queries';
-import { ConsumableItemInventoryCard } from '@/components/cards/consumable-inventory-card';
+import { ConsumableItemInventoryCard } from '@/pages/inventory/components/consumable-inventory-card';
+import type { IMember } from '@/models/member.model';
 
-interface Props {
-  memberId: string;
+interface ItemInventorySectionProps {
+  member: IMember;
 }
 
-const ItemInventorySection = ({ memberId }: Props) => {
+const ItemInventorySection = ({ member }: ItemInventorySectionProps) => {
   const {
     data: items,
     isPending,
     isError,
-  } = useConsumableInventoryQuery(memberId);
+  } = useConsumableInventoryQuery(member.member_id);
 
   if (isPending) {
     return (

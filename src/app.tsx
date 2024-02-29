@@ -1,6 +1,6 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
-import MainPage from '@/pages';
+import MainPage from '@/pages/(home)';
 import MyPage from '@/pages/my';
 import ShopPage from '@/pages/shop';
 import MorePage from '@/pages/more';

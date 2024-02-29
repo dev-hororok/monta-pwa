@@ -1,7 +1,7 @@
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
-import CreateCategoryForm from '@/components/forms/create-category-form';
 import { useModalStore } from '@/stores/use-modal-store';
 import { cn } from '@/lib/utils';
+import { CreateCategoryForm } from '@/pages/categories/components/create-category-form';
 
 const CreateCategoryDialog = () => {
   const { isOpen, data } = useModalStore(

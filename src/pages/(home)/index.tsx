@@ -1,5 +1,5 @@
 import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
-import HomeHeader from '@/components/headers/home-header';
+import { HomeHeader } from '@/components/headers/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { FoodInventorySection } from '@/sections/food-inventory-section';
 import { TimerSection } from '@/sections/home/timer-section';

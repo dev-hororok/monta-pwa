@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import ModalHeader from '@/components/headers/modal-header';
+import { ModalHeader } from '@/components/headers/modal-header';
 import { useCreateStudyCategoryMutation } from '@/apis/mutations/study-category-mutations';
 import { useStudyCategoriesQuery } from '@/apis/queries/study-category-queries';
 import { cn } from '@/lib/utils';
@@ -31,7 +31,7 @@ interface CreateCategoryFormProps extends React.HTMLAttributes<HTMLDivElement> {
   closeModal: () => void;
 }
 
-const CreateCategoryForm = ({
+export const CreateCategoryForm = ({
   memberId,
   closeModal,
   className,
@@ -94,5 +94,3 @@ const CreateCategoryForm = ({
     </div>
   );
 };
-
-export default CreateCategoryForm;

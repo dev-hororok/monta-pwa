@@ -2,7 +2,7 @@ import type { ICharacterInventory } from '@/models/character.model';
 import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Skeleton } from '../ui/skeleton';
+import { Skeleton } from '../../../components/ui/skeleton';
 
 interface CharacterItemCardProps {
   characterInventory: ICharacterInventory;

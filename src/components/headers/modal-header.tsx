@@ -1,13 +1,13 @@
-import { ReactNode } from 'react';
+import * as React from 'react';
 import { Button } from '../ui/button';
 
 interface Props {
   closeModal: () => void;
-  rightButton?: ReactNode;
+  rightButton?: React.ReactNode;
   title: string;
 }
 
-const ModalHeader = ({ closeModal, title, rightButton }: Props) => {
+export const ModalHeader = ({ closeModal, title, rightButton }: Props) => {
   return (
     <div className="flex items-end fixed top-0 left-0 right-0 md:absolute h-14 px-6 mt-safe md:rounded-t-md bg-background z-50 text-sm font-semibold">
       <div className="flex items-center justify-between w-full">
@@ -25,5 +25,3 @@ const ModalHeader = ({ closeModal, title, rightButton }: Props) => {
     </div>
   );
 };
-
-export default ModalHeader;

@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useModalStore } from '@/stores/use-modal-store';
 import { useEditStudyCategoryMutation } from '@/apis/mutations/study-category-mutations';
-import ModalHeader from '@/components/headers/modal-header';
+import { ModalHeader } from '@/components/headers/modal-header';
 import type { IStudyCategory } from '@/models/study.model';
 import { cn } from '@/lib/utils';
 
@@ -33,7 +33,7 @@ interface EditCategoryFormFormProps
   studyCategory: IStudyCategory;
   closeModal: () => void;
 }
-const EditCategoryForm = ({
+export const EditCategoryForm = ({
   memberId,
   studyCategory,
   closeModal,
@@ -120,5 +120,3 @@ const EditCategoryForm = ({
     </div>
   );
 };
-
-export default EditCategoryForm;

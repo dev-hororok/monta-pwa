@@ -5,7 +5,7 @@ import { formatTime } from '@/lib/date-format';
 import type { IFoodItemInventory } from '@/models/item.model';
 import { cn } from '@/lib/utils';
 import { useConsumeFoodItem } from '@/hooks/use-food-item';
-import { Skeleton } from '../ui/skeleton';
+import { Skeleton } from '../../../components/ui/skeleton';
 
 interface FoodInventoryCardProps {
   foodItemInventory: IFoodItemInventory;
