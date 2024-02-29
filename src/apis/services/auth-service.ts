@@ -5,6 +5,9 @@ import { handleApiError } from '../common/api-error-handler';
 import { useAuthStore } from '@/stores/auth-store';
 
 export interface AuthData {
+  account: {
+    account_id: string;
+  };
   access_token: string;
   refresh_token: string;
   expires_in: number;
@@ -22,6 +25,7 @@ class AuthService {
       );
 
       useAuthStore.getState().authenticate(
+        response.data.data.account.account_id,
         {
           accessToken: response.data.data.access_token,
           refreshToken: response.data.data.refresh_token,

@@ -13,12 +13,14 @@ import type {
   IStatisticHeatMapData,
 } from '@/models/statistic.model';
 import type { IStudyStreak } from '@/models/streak.model';
+import { useAuthStore } from '@/stores/auth-store';
 
 // 현재유저 조회
 export const fetchCurrentMember = async () => {
   const response = await nestHttpRequest.get<
     ApiSuccessResponse<{ member: IMember }>
   >('/timer-api/members/me');
+  useAuthStore.getState().setMemberId(response.data.data.member.member_id);
   return response.data.data.member;
 };
 

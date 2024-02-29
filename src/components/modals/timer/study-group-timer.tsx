@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { StudyGroupMember } from './study-group-member';
 import { useModalStore } from '@/stores/use-modal-store';
+import { useAuthStore } from '@/stores/auth-store';
 
 interface StudyGroupTimerProps extends React.HTMLAttributes<HTMLDivElement> {
   classNames?: string;
@@ -16,6 +17,7 @@ interface StudyGroupTimerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const StudyGroupTimer = React.memo(
   ({ classNames, members, ...props }: StudyGroupTimerProps) => {
+    const curMemberId = useAuthStore((state) => state.memberId);
     return (
       <div className={cn('h-full', classNames)} {...props}>
         <div className="grid grid-cols-3 grid-rows-3 gap-2 w-full h-3/5 p-4">
@@ -31,7 +33,11 @@ export const StudyGroupTimer = React.memo(
                 className="w-full aspect-square"
               />
             ) : member ? (
-              <StudyGroupMember key={member.member_id} member={member} />
+              <StudyGroupMember
+                key={member.member_id}
+                member={member}
+                isCurrentUser={curMemberId === member.member_id}
+              />
             ) : (
               <img
                 key={`empty-${index}`}

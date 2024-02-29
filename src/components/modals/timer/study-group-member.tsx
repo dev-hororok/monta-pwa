@@ -3,28 +3,36 @@ import * as React from 'react';
 import { IMemberInfo } from '.';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { formatTime } from '@/lib/date-format';
+import { Badge } from '@/components/ui/badge';
 
 interface MemberTimerProps {
   member: IMemberInfo;
+  isCurrentUser: boolean;
 }
 
-export const StudyGroupMember = React.memo(({ member }: MemberTimerProps) => {
-  return (
-    <div className="relative flex-center flex-col hover:bg-accent cursor-pointer py-2">
-      <div className="absolute top-1">
-        <TimerDisplay joinedAtUTC={member.joinedAtUTC} />
+export const StudyGroupMember = React.memo(
+  ({ member, isCurrentUser }: MemberTimerProps) => {
+    return (
+      <div className="relative flex-center flex-col hover:bg-accent cursor-pointer py-2">
+        <div className="absolute top-1">
+          <TimerDisplay joinedAtUTC={member.joinedAtUTC} />
+        </div>
+        <img
+          src={member.image_url ? member.image_url : '/octopus.png'}
+          alt={member.nickname}
+          className="w-4/5 aspect-square"
+        />
+        <span className="absolute bottom-1 text-sm antialiased font-semibold">
+          {isCurrentUser ? (
+            <Badge className="">{member.nickname}</Badge>
+          ) : (
+            member.nickname
+          )}
+        </span>
       </div>
-      <img
-        src={member.image_url ? member.image_url : '/octopus.png'}
-        alt={member.nickname}
-        className="w-4/5 aspect-square"
-      />
-      <span className="absolute bottom-1 text-sm antialiased font-semibold">
-        {member.nickname}
-      </span>
-    </div>
-  );
-});
+    );
+  }
+);
 
 const TimerDisplay = ({ joinedAtUTC }: { joinedAtUTC: string }) => {
   const globalDuration = useTimerStateStore((state) => state.duration);

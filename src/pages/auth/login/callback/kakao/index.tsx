@@ -18,6 +18,7 @@ export const KakaoLoginCallback = () => {
           { code }
         );
         useAuthStore.getState().authenticate(
+          response.data.data.account.account_id,
           {
             accessToken: response.data.data.access_token,
             refreshToken: response.data.data.refresh_token,
