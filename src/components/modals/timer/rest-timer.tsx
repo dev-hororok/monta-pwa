@@ -46,11 +46,11 @@ const TimerDisplay = () => {
 
 // 쉬는 시간 타이머 생략 후 현재 모달 닫기
 const TimerPassButton = () => {
-  const resetTimer = useTimerStateStore((state) => state.resetTimer);
+  const nextTimer = useTimerStateStore((state) => state.nextTimer);
   const closeModal = useModalStore((state) => state.closeModal);
 
   const handleButtonClick = () => {
-    resetTimer();
+    nextTimer();
     closeModal('timer');
   };
   return (

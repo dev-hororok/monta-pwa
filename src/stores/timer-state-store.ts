@@ -4,35 +4,48 @@ import { useTimerOptionsStore } from './timer-options-store';
 export type TimerType = 'Work' | 'Rest' | 'LongRest';
 
 interface TimerStateStore {
-  duration: number;
-  isActive: boolean;
+  startTime: number | null; // 타이머를 시작한 시간 (Unix timestamp)
+  duration: number; // 타이머 시작 후 경과 시간
+  isActive: boolean; // 초마다 타이머를 업데이트할지 여부
   timerType: TimerType;
-  sectionCompleted: number;
-  targetTime: number;
-  startTimer: () => void;
-  pauseTimer: () => void;
-  interuptTimer: () => void;
-  resetTimer: () => void;
-  initTimer: () => void;
-  _updateTimer: () => void;
+  sectionCompleted: number; // 타이머를 완료한 카운트
+  targetTime: number; // 타이머 목표시간
+  startTimer: () => void; // 타이머 시작
+  pauseTimer: () => void; // 타이머 일시정지
+  interuptTimer: () => void; // 타이머 중지 (공부 타이머로 세팅)
+  nextTimer: () => void; // 다음 타이머로 초기화 (목표 시간 완료 시 호출)
+  initTimer: () => void; // 타이머 기록 초기화 (타이머 옵션 변경 시 호출)
+  _updateTimer: () => void; // 1초 업데이트
 }
 
 export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
+  startTime: null,
   duration: 0,
   isActive: false,
   timerType: 'Work',
   sectionCompleted: 0,
   targetTime: useTimerOptionsStore.getState().pomodoroTime * 60,
-  startTimer: () => set({ isActive: true }),
+  startTimer: () => {
+    const now = Date.now();
+    const { startTime } = get();
+
+    if (startTime) {
+      const elapsedSeconds = Math.floor((now - startTime) / 1000);
+      set({ duration: elapsedSeconds, isActive: true });
+      return;
+    }
+    set({ startTime: now, isActive: true });
+  },
   pauseTimer: () => set({ isActive: false }),
   interuptTimer: () => {
     set({
+      startTime: null,
       isActive: false,
       duration: 0,
       targetTime: useTimerOptionsStore.getState().pomodoroTime * 60,
     });
   },
-  resetTimer: () => {
+  nextTimer: () => {
     const { pomodoroTime, restTime, longRestTime, sectionCount } =
       useTimerOptionsStore.getState();
     const { timerType, sectionCompleted } = get();
@@ -41,18 +54,21 @@ export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
     let newTargetTime = pomodoroTime * 60;
     let newSectionCompleted = sectionCompleted;
 
-    if (timerType === 'Work') {
-      newTimerType = sectionCompleted + 1 < sectionCount ? 'Rest' : 'LongRest';
-      newTargetTime =
-        newTimerType === 'Rest' ? restTime * 60 : longRestTime * 60;
+    if (timerType === 'Work' && sectionCompleted + 1 < sectionCount) {
+      newTimerType = 'Rest';
+      newTargetTime = restTime * 60;
       newSectionCompleted += 1;
+    } else if (timerType === 'Work') {
+      newTimerType = 'LongRest';
+      newTargetTime = longRestTime * 60;
+      newSectionCompleted = 0;
     } else {
       newTimerType = 'Work';
       newTargetTime = pomodoroTime * 60;
-      newSectionCompleted = timerType === 'LongRest' ? 0 : sectionCompleted;
     }
 
     set({
+      startTime: null,
       timerType: newTimerType,
       targetTime: newTargetTime,
       duration: 0,
@@ -62,6 +78,7 @@ export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
   },
   initTimer: () => {
     set({
+      startTime: null,
       timerType: 'Work',
       targetTime: useTimerOptionsStore.getState().pomodoroTime * 60,
       duration: 0,
@@ -70,8 +87,12 @@ export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
     });
   },
   _updateTimer: () => {
-    const { duration, targetTime, isActive } = get();
-    if (!isActive || duration >= targetTime) return;
-    set({ duration: duration + 1 });
+    const { startTime, isActive, targetTime, duration } = get();
+    if (!isActive || !startTime || duration === targetTime) return;
+
+    const now = Date.now();
+    const elapsedSeconds = Math.floor((now - startTime) / 1000);
+    const newDuration = Math.min(elapsedSeconds, targetTime);
+    set({ duration: newDuration });
   },
 }));

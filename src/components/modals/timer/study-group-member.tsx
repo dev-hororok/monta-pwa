@@ -35,14 +35,15 @@ export const StudyGroupMember = React.memo(
 );
 
 const TimerDisplay = ({ joinedAtUTC }: { joinedAtUTC: string }) => {
+  const startTime = useTimerStateStore((state) => state.startTime);
   const globalDuration = useTimerStateStore((state) => state.duration);
-  // 멤버 첫 렌더링 시 현재시간을 기준으로 공부시간 계산
+  // 멤버 첫 렌더링 시 현재 유저가 그룹에 참여한 시간을 기준으로 차이 계산 (먼저들어온 유저: + | 나중에 들어온 유저: - )
   const initialElapsedSeconds = React.useMemo(() => {
-    // 내 기준으로 그룹 시작 시간
-    const groupStartTimeUTC = new Date().getTime() - globalDuration * 1000;
+    if (!startTime) return 0;
     const joinedTimeUTC = new Date(joinedAtUTC).getTime();
-    return Math.floor((groupStartTimeUTC - joinedTimeUTC) / 1000);
-  }, [joinedAtUTC]);
+    // 내 기준으로 그룹 시작 시간
+    return Math.ceil((startTime - joinedTimeUTC) / 1000);
+  }, [joinedAtUTC, startTime]);
 
   // 멤버의 경과 시간에 글로벌 duration(타이머가 가동된 시간)을 더함
   const totalElapsedSeconds = initialElapsedSeconds + globalDuration;

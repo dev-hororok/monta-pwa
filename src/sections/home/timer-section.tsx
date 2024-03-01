@@ -19,7 +19,7 @@ export const TimerSection = () => {
   );
   const timerType = useTimerStateStore((state) => state.timerType);
   const startTimer = useTimerStateStore((state) => state.startTimer);
-  const resetTimer = useTimerStateStore((state) => state.resetTimer);
+  const nextTimer = useTimerStateStore((state) => state.nextTimer);
 
   const timerImageSrc = React.useMemo(() => {
     if (timerType === 'Work') {
@@ -51,7 +51,7 @@ export const TimerSection = () => {
       <div className="flex-center h-1/4 gap-2">
         {timerType !== 'Work' ? (
           <Button
-            onClick={resetTimer}
+            onClick={nextTimer}
             variant={'ghost'}
             className={cn('p-2 h-auto')}
           >

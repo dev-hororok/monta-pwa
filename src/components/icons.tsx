@@ -29,7 +29,7 @@ import {
   type LucideProps,
   Pause,
 } from 'lucide-react';
-import { HTMLAttributes } from 'react';
+import * as React from 'react';
 
 export type Icon = LucideIcon;
 
@@ -105,7 +105,7 @@ export const Icons = {
       <path d="M1 1h22v22H1z" fill="none" />
     </svg>
   ),
-  kakao: ({ ...props }: HTMLAttributes<HTMLImageElement>) => (
+  kakao: ({ ...props }: React.HTMLAttributes<HTMLImageElement>) => (
     <img alt="kakao_icon" src="/kakao.svg" {...props} />
   ),
   naver: ({ ...props }: LucideProps) => (
