@@ -1,23 +1,30 @@
 import { useFoodInventoryQuery } from '@/apis/queries/member-queries';
-import { AddFoodCard } from '@/pages/(home)/components/add-food-card';
-import { FoodInventoryCard } from '@/pages/(home)/components/food-inventory-card';
+import { cn } from '@/lib/utils';
+import { IMember } from '@/models/member.model';
+import { AddFoodCard } from '@/pages/(home)/components/food-inventory-section/add-food-card';
+import { FoodInventoryCard } from '@/pages/(home)/components/food-inventory-section/food-inventory-card';
 
-interface Props {
-  memberId: string;
+interface FoodInventorySectionProps {
+  member: IMember;
+  className?: string;
 }
 
-export const FoodInventorySection = ({ memberId }: Props) => {
+export const FoodInventorySection = ({
+  member,
+  className,
+}: FoodInventorySectionProps) => {
   const {
     data: foodItemInventory,
     isPending,
     isError,
-  } = useFoodInventoryQuery(memberId);
+  } = useFoodInventoryQuery(member.member_id);
 
   if (isPending) {
     return (
-      <section className="px-4">
-        <p className="text-center text-sm font-bold pb-4">재료 (최대 4개)</p>{' '}
+      <section className={cn('px-4', className)}>
+        <p className="text-center text-sm font-bold pb-4">재료 (최대 4개)</p>
         <div className="grid grid-cols-4 gap-1">
+          <FoodInventoryCard.Skeleton />
           <FoodInventoryCard.Skeleton />
           <FoodInventoryCard.Skeleton />
           <FoodInventoryCard.Skeleton />
@@ -26,11 +33,15 @@ export const FoodInventorySection = ({ memberId }: Props) => {
     );
   }
   if (isError) {
-    return <div className="text-center text-red-500">오류가 발생했습니다.</div>;
+    return (
+      <div className={cn('text-center text-red-500', className)}>
+        오류가 발생했습니다.
+      </div>
+    );
   }
 
   return (
-    <section className="px-4">
+    <section className={cn('px-4', className)}>
       <p className="text-center text-sm font-bold pb-4">재료 (최대 4개)</p>
       <div className="grid grid-cols-4 gap-1">
         {foodItemInventory ? (
@@ -42,9 +53,7 @@ export const FoodInventorySection = ({ memberId }: Props) => {
             })}
             {foodItemInventory.length < 4 ? <AddFoodCard /> : null}
           </>
-        ) : (
-          <div></div>
-        )}
+        ) : null}
       </div>
     </section>
   );

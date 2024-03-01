@@ -1,20 +1,22 @@
-import { Dispatch, SetStateAction } from 'react';
 import { MinusIcon, PlusIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
-interface Props {
-  state: number;
-  setState: Dispatch<SetStateAction<number>>;
-  postfix?: string;
+interface TimerOptionPickerProps {
+  idx: number;
+  setIdx: (index: number) => void;
+  postfix: string;
   options: number[];
 }
 
-const OptionPicker = ({ state, setState, postfix = '분', options }: Props) => {
-  const MaxCount = options.length - 1;
-
-  const onClick = (adjustment: number) => {
-    setState(state + adjustment);
+export const TimerOptionPicker = ({
+  idx,
+  setIdx,
+  postfix,
+  options,
+}: TimerOptionPickerProps) => {
+  const adjustState = (adjustment: number) => {
+    setIdx(Math.max(0, Math.min(idx + adjustment, options.length - 1)));
   };
 
   return (
@@ -23,16 +25,14 @@ const OptionPicker = ({ state, setState, postfix = '분', options }: Props) => {
         variant="outline"
         size="icon"
         className="h-6 w-6 shrink-0 rounded-full"
-        onClick={() => onClick(-1)}
-        disabled={state <= 0}
+        onClick={() => adjustState(-1)}
+        disabled={idx <= 0}
       >
         <MinusIcon className="h-4 w-4" />
         <span className="sr-only">Decrease</span>
       </Button>
       <div className="text-center flex justify-center items-center gap-1 w-12">
-        <div className="text-xl font-bold tracking-tighter">
-          {options[state]}
-        </div>
+        <div className="text-xl font-bold tracking-tighter">{options[idx]}</div>
         <div className="text-[0.70rem] uppercase text-muted-foreground">
           {postfix}
         </div>
@@ -41,8 +41,8 @@ const OptionPicker = ({ state, setState, postfix = '분', options }: Props) => {
         variant="outline"
         size="icon"
         className="h-6 w-6 shrink-0 rounded-full"
-        onClick={() => onClick(1)}
-        disabled={state >= MaxCount}
+        onClick={() => adjustState(1)}
+        disabled={idx >= options.length - 1}
       >
         <PlusIcon className="h-4 w-4" />
         <span className="sr-only">Increase</span>
@@ -50,5 +50,3 @@ const OptionPicker = ({ state, setState, postfix = '분', options }: Props) => {
     </div>
   );
 };
-
-export default OptionPicker;

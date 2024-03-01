@@ -27,7 +27,7 @@ const InventoryPage = () => {
     return <div>Error</div>;
   }
   return (
-    <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe-offset-14">
+    <div className="h-full pt-safe-offset-14 pb-safe-offset-14">
       <HomeHeader />
       <main className="h-full overflow-y-scroll scrollbar-hide pb-10">
         <div className="w-full h-full py-4 px-4 space-y-6">

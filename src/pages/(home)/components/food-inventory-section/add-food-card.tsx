@@ -11,7 +11,7 @@ export const AddFoodCard = () => {
       to="/shop"
       className={cn(
         buttonVariants({ variant: 'ghost' }),
-        'h-auto min-h-24 p-1 flex flex-col items-center justify-center text-xs font-semibold'
+        'w-full h-full aspect-[3/4]'
       )}
     >
       <Icons.add />

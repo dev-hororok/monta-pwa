@@ -20,7 +20,6 @@ interface ModalsState {
   }>;
   // 타이머
   timer: ModalState;
-  timerOptions: ModalState;
   timerAlarm: ModalState;
   pauseTimer: ModalState<{ duration: number; startTimer: () => void }>;
 
@@ -52,7 +51,6 @@ export const useModalStore = create<ModalStore>()((set) => ({
     paletteAcquisition: { isOpen: false },
     timerAlarm: { isOpen: false },
     timer: { isOpen: false },
-    timerOptions: { isOpen: false },
     pauseTimer: { isOpen: false },
     createCategory: { isOpen: false },
     editCategory: { isOpen: false },

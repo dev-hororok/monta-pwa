@@ -1,11 +1,11 @@
 import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { HomeHeader } from '@/components/headers/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
-import { FoodInventorySection } from '@/sections/food-inventory-section';
-import { TimerSection } from '@/sections/home/timer-section';
+import { FoodInventorySection } from '@/pages/(home)/components/food-inventory-section';
+import { TimerSection } from '@/pages/(home)/components/timer-section';
 
 const MainPage = () => {
-  const { data, isPending, isError } = useCurrentMemberQuery();
+  const { data: member, isPending, isError } = useCurrentMemberQuery();
 
   if (isPending) {
     return <MobileLoadingSpinner />;
@@ -15,18 +15,14 @@ const MainPage = () => {
   }
 
   return (
-    <>
-      <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe-offset-14">
-        <HomeHeader />
-        <main className="h-full overflow-y-scroll scrollbar-hide">
-          <TimerSection />
+    <div className="h-full pt-safe-offset-14 pb-safe-offset-14">
+      <HomeHeader />
+      <main className="h-full overflow-y-scroll scrollbar-hide">
+        <TimerSection className="h-2/3" />
 
-          <div className="h-1/3">
-            <FoodInventorySection memberId={data.member_id} />
-          </div>
-        </main>
-      </div>
-    </>
+        <FoodInventorySection member={member} className="h-1/3" />
+      </main>
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ import { ReviewButton } from './components/review-button';
 
 const MorePage = () => {
   return (
-    <div className="rounded-t-md rounded-b-3xl pt-safe-offset-14 h-full pb-safe-offset-14">
+    <div className="h-full pt-safe-offset-14 pb-safe-offset-14">
       <MorePageHeader />
 
       <main className="h-full overflow-y-scroll scrollbar-hide space-y-4">

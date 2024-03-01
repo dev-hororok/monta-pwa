@@ -28,6 +28,8 @@ import {
   type LucideIcon,
   type LucideProps,
   Pause,
+  StepForwardIcon,
+  Play,
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -35,6 +37,7 @@ export type Icon = LucideIcon;
 
 export const Icons = {
   close: X,
+  play: Play,
   pause: Pause,
   spinner: Loader2,
   chevronLeft: ChevronLeft,
@@ -61,6 +64,7 @@ export const Icons = {
   shield: ShieldEllipsis,
   bell: Bell,
   bellOff: BellOff,
+  stepForward: StepForwardIcon,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

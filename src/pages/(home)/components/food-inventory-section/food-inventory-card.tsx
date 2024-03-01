@@ -5,7 +5,7 @@ import { formatTime } from '@/lib/date-format';
 import type { IFoodItemInventory } from '@/models/item.model';
 import { cn } from '@/lib/utils';
 import { useConsumeFoodItem } from '@/hooks/use-food-item';
-import { Skeleton } from '../../../components/ui/skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface FoodInventoryCardProps {
   foodItemInventory: IFoodItemInventory;
@@ -30,7 +30,7 @@ export const FoodInventoryCard = ({
       onClick={handleConsumeClick}
       className={cn(
         buttonVariants({ variant: isActive ? 'default' : 'ghost' }),
-        'h-auto p-1 flex flex-col items-center justify-center text-xs font-semibold cursor-pointer',
+        'h-auto p-1 flex-center flex-col text-xs font-semibold cursor-pointer',
         isActive && 'hover:-translate-y-1 duration-200 transition-transform'
       )}
     >
@@ -46,5 +46,5 @@ export const FoodInventoryCard = ({
   );
 };
 FoodInventoryCard.Skeleton = () => {
-  return <Skeleton className="w-full aspect-[3/4]"></Skeleton>;
+  return <Skeleton className="w-full h-full aspect-[3/4]"></Skeleton>;
 };

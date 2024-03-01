@@ -17,28 +17,26 @@ const MyPage = () => {
   }
 
   return (
-    <>
-      <div className="h-full rounded-t-md rounded-b-md pt-safe-offset-14 pb-safe-offset-14">
-        <MyPageHeader />
-        <main className="h-full overflow-y-scroll scrollbar-hide px-4">
-          <ProfileSection member={member} />
-          <Tabs defaultValue="calendar" className="w-full py-2 relative">
-            <div className="sticky top-0 bg-background py-2 z-40">
-              <TabsList className="grid grid-cols-2">
-                <TabsTrigger value="calendar">캘린더</TabsTrigger>
-                <TabsTrigger value="streak">스트릭</TabsTrigger>
-              </TabsList>
-            </div>
-            <TabsContent value="calendar">
-              <CalendarSection memberId={member.member_id} />
-            </TabsContent>
-            <TabsContent value="streak">
-              <StreakSection memberId={member.member_id} />
-            </TabsContent>
-          </Tabs>
-        </main>
-      </div>
-    </>
+    <div className="h-full pt-safe-offset-14 pb-safe-offset-14">
+      <MyPageHeader />
+      <main className="h-full overflow-y-scroll scrollbar-hide px-4">
+        <ProfileSection member={member} />
+        <Tabs defaultValue="calendar" className="w-full py-2 relative">
+          <div className="sticky top-0 bg-background py-2 z-40">
+            <TabsList className="grid grid-cols-2">
+              <TabsTrigger value="calendar">캘린더</TabsTrigger>
+              <TabsTrigger value="streak">스트릭</TabsTrigger>
+            </TabsList>
+          </div>
+          <TabsContent value="calendar">
+            <CalendarSection memberId={member.member_id} />
+          </TabsContent>
+          <TabsContent value="streak">
+            <StreakSection memberId={member.member_id} />
+          </TabsContent>
+        </Tabs>
+      </main>
+    </div>
   );
 };
 
