@@ -22,17 +22,9 @@ export const StudyGroupTimer = React.memo(
       <div className={cn('h-full', classNames)} {...props}>
         <div className="grid grid-cols-3 grid-rows-3 gap-2 w-full h-3/5 p-4">
           {Array.from({ length: 9 }).map((_, index) => {
-            const isCenterCell = index === 4;
-            const member = members[4 < index ? index - 1 : index];
+            const member = members[index];
 
-            return isCenterCell ? (
-              <img
-                key="fire"
-                src="./fire-1.png"
-                alt="모닥불"
-                className="w-full aspect-square"
-              />
-            ) : member ? (
+            return member ? (
               <StudyGroupMember
                 key={member.member_id}
                 member={member}
@@ -73,12 +65,11 @@ const TimerDisplay = () => {
 // 타이머 일시정지 후 타이머 종료 확인 모달 열기
 const TimerPauseButton = () => {
   const duration = useTimerStateStore((state) => state.duration);
-  const pauseTimer = useTimerStateStore((state) => state.pauseTimer);
   const startTimer = useTimerStateStore((state) => state.startTimer);
   const openModal = useModalStore((state) => state.openModal);
 
   const handlePauseClick = () => {
-    pauseTimer();
+    // pauseTimer();
     openModal('pauseTimer', {
       duration: duration,
       startTimer: startTimer,

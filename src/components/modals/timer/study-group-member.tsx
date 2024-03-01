@@ -3,7 +3,7 @@ import * as React from 'react';
 import { IMemberInfo } from '.';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { formatTime } from '@/lib/date-format';
-import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 interface MemberTimerProps {
   member: IMemberInfo;
@@ -13,8 +13,8 @@ interface MemberTimerProps {
 export const StudyGroupMember = React.memo(
   ({ member, isCurrentUser }: MemberTimerProps) => {
     return (
-      <div className="relative flex-center flex-col hover:bg-accent cursor-pointer py-2">
-        <div className="absolute top-1">
+      <div className="relative flex-center flex-col cursor-pointer py-2">
+        <div className="absolute top-0">
           <TimerDisplay joinedAtUTC={member.joinedAtUTC} />
         </div>
         <img
@@ -22,12 +22,13 @@ export const StudyGroupMember = React.memo(
           alt={member.nickname}
           className="w-4/5 aspect-square"
         />
-        <span className="absolute bottom-1 text-sm antialiased font-semibold">
-          {isCurrentUser ? (
-            <Badge className="">{member.nickname}</Badge>
-          ) : (
-            member.nickname
+        <span
+          className={cn(
+            'absolute bottom-1 text-xs antialiased font-semibold',
+            isCurrentUser && 'text-primary'
           )}
+        >
+          {member.nickname}
         </span>
       </div>
     );

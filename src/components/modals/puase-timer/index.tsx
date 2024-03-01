@@ -15,15 +15,14 @@ import { useTimerStateStore } from '@/stores/timer-state-store';
 
 const PuaseTimerDialog = () => {
   const { isOpen, data } = useModalStore((state) => state.modals.pauseTimer);
+  const duration = useTimerStateStore((state) => state.duration);
   const interuptTimer = useTimerStateStore((state) => state.interuptTimer);
   const closeModal = useModalStore((state) => state.closeModal);
 
   const { mutate: endStudyTimer } = useEndStudyTimerMutation();
 
   const onClickHandler = () => {
-    if (data && data.duration) {
-      endStudyTimer({ duration: data.duration, status: 'Incompleted' });
-    }
+    endStudyTimer({ duration: duration, status: 'Incompleted' });
     interuptTimer();
     closeModal('pauseTimer');
     closeModal('timer');
@@ -44,28 +43,24 @@ const PuaseTimerDialog = () => {
   return (
     <AlertDialog open={isOpen}>
       <AlertDialogContent
-        className={cn(
-          `w-full h-screen md:max-w-[416px] md:max-h-[736px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
-        )}
+        className={cn(`w-full md:max-w-mobile flex flex-col items-center`)}
       >
         <AlertDialogTitle>타이머를 종료하시겠습니까?</AlertDialogTitle>
         <AlertDialogDescription className="text-sm">
-          총 {formatTime(data.duration)}가 기록됩니다.
+          총 {formatTime(duration)}가 기록됩니다.
         </AlertDialogDescription>
 
-        <div className="w-full flex flex-col justify-end h-full gap-2">
-          <AlertDialogFooter className="w-full">
-            <AlertDialogCancel
-              onClick={onClickCancelHandler}
-              className="h-12 w-full"
-            >
-              취소
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={onClickHandler} className="h-12 w-full">
-              확인
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </div>
+        <AlertDialogFooter className="w-full">
+          <AlertDialogCancel
+            onClick={onClickCancelHandler}
+            className="h-12 w-full"
+          >
+            취소
+          </AlertDialogCancel>
+          <AlertDialogAction onClick={onClickHandler} className="h-12 w-full">
+            확인
+          </AlertDialogAction>
+        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
