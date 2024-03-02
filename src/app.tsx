@@ -10,13 +10,13 @@ import LoginPage from '@/pages/auth/login';
 import RegisterPage from '@/pages/auth/register';
 import AgreeToTermsPage from '@/pages/auth/agree';
 import SettingCategoriesPage from '@/pages/categories';
-import ProtectedRoute from '@/components/auth/protected-route';
-import UnauthedRoute from '@/components/auth/unauthed-route';
 import KakaoLoginCallback from './pages/auth/login/callback/kakao';
 import GoogleLoginCallback from './pages/auth/login/callback/google';
 import NaverLoginCallback from './pages/auth/login/callback/naver';
 import { RootLayout } from './components/layouts/root-layout';
 import { MobileLayout } from './components/layouts/mobile-layout';
+import { ProtectedRoute } from '@/components/auth/protected-route';
+import { UnauthedRoute } from '@/components/auth/unauthed-route';
 
 const router = createBrowserRouter(
   [

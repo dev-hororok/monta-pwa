@@ -7,7 +7,7 @@ interface UnauthedRouteProps {
   children: React.ReactNode;
 }
 
-const UnauthedRoute = ({ children }: UnauthedRouteProps) => {
+export const UnauthedRoute = ({ children }: UnauthedRouteProps) => {
   const accessToken = useAuthStore((state) => state.tokens.accessToken);
   const location = useLocation();
 
@@ -17,5 +17,3 @@ const UnauthedRoute = ({ children }: UnauthedRouteProps) => {
 
   return children;
 };
-
-export default UnauthedRoute;

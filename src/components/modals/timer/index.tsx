@@ -12,7 +12,7 @@ export interface IMemberInfo {
   joinedAtUTC: string; // utc Date
 }
 
-const TimerModal = () => {
+export const TimerModal = () => {
   useTimer(); // 타이머 작동
 
   const timerType = useTimerStateStore((state) => state.timerType);
@@ -33,5 +33,3 @@ const TimerModal = () => {
     </div>
   );
 };
-
-export default TimerModal;

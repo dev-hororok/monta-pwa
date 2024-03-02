@@ -14,7 +14,7 @@ import { useModalStore } from '@/stores/use-modal-store';
 import { Badge } from '@/components/ui/badge';
 import { useConsumeItem } from '@/pages/inventory/hooks/use-consume-item';
 
-const PaletteAcquisitionDialog = () => {
+export const PaletteAcquisitionDialog = () => {
   const { isOpen, data } = useModalStore(
     (state) => state.modals.paletteAcquisition
   );
@@ -101,5 +101,3 @@ const PaletteAcquisitionDialog = () => {
     </>
   );
 };
-
-export default PaletteAcquisitionDialog;

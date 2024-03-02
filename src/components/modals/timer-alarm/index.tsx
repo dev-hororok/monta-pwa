@@ -12,7 +12,7 @@ import { useModalStore } from '@/stores/use-modal-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useAppSettingsStore } from '@/stores/app-setting-store';
 
-const TimerAlarmDialog = () => {
+export const TimerAlarmDialog = () => {
   const { vibrationEnabled } = useAppSettingsStore(
     (state) => state.appSettings
   );
@@ -67,5 +67,3 @@ const TimerAlarmDialog = () => {
     </AlertDialog>
   );
 };
-
-export default TimerAlarmDialog;

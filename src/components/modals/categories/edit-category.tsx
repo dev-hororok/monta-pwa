@@ -3,7 +3,7 @@ import { useModalStore } from '@/stores/use-modal-store';
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
 import { EditCategoryForm } from '@/pages/categories/components/edit-category-form';
 
-const EditCategoryDialog = () => {
+export const EditCategoryDialog = () => {
   const { isOpen, data } = useModalStore((state) => state.modals.editCategory);
   const closeModal = useModalStore((state) => state.closeModal);
 
@@ -27,5 +27,3 @@ const EditCategoryDialog = () => {
     </AlertDialog>
   );
 };
-
-export default EditCategoryDialog;

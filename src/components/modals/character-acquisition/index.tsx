@@ -9,7 +9,7 @@ import {
 import { useModalStore } from '@/stores/use-modal-store';
 import { Badge } from '@/components/ui/badge';
 
-const CharacterAcquisitionDialog = () => {
+export const CharacterAcquisitionDialog = () => {
   const { isOpen, data: character } = useModalStore(
     (state) => state.modals.characterAcquisition
   );
@@ -56,5 +56,3 @@ const CharacterAcquisitionDialog = () => {
     </AlertDialog>
   );
 };
-
-export default CharacterAcquisitionDialog;

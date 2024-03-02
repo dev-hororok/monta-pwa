@@ -3,7 +3,7 @@ import { useModalStore } from '@/stores/use-modal-store';
 import { cn } from '@/lib/utils';
 import { CreateCategoryForm } from '@/pages/categories/components/create-category-form';
 
-const CreateCategoryDialog = () => {
+export const CreateCategoryDialog = () => {
   const { isOpen, data } = useModalStore(
     (state) => state.modals.createCategory
   );
@@ -27,5 +27,3 @@ const CreateCategoryDialog = () => {
     </AlertDialog>
   );
 };
-
-export default CreateCategoryDialog;
