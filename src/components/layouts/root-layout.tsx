@@ -8,7 +8,7 @@ import { ModalManager } from '@/components/modals/modal-manager';
 import { cn } from '@/lib/utils';
 import { useCheckDevice } from '@/hooks/use-check-device';
 
-const RootLayout = () => {
+export const RootLayout = () => {
   useCloseAppHandler();
   useViewport();
   useCheckDevice();
@@ -31,5 +31,3 @@ const RootLayout = () => {
     </div>
   );
 };
-
-export default RootLayout;

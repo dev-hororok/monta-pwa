@@ -1,26 +1,18 @@
 import { useCharacterInventoryQuery } from '@/apis/queries/member-queries';
-import { CharacterItemCard } from '@/pages/inventory/components/character-card';
-import { ICharacterInventory } from '@/models/character.model';
 import { IMember } from '@/models/member.model';
-import { useModalStore } from '@/stores/use-modal-store';
+import { CharacterItemCard } from './character-card';
+import { SellCharacterDialog } from './sell-character-dialog';
 
 interface CharacterInventorySectionProps {
   member: IMember;
 }
 
-const CharacterInventorySection = ({
+export const CharacterInventorySection = ({
   member,
 }: CharacterInventorySectionProps) => {
   const { data, isPending, isError } = useCharacterInventoryQuery(
     member.member_id
   );
-  const openModal = useModalStore((state) => state.openModal);
-
-  const handleCharacterItemCardClick = (
-    characterInventory: ICharacterInventory
-  ) => {
-    openModal('sellCharacter', { characterInventory, member });
-  };
 
   if (isPending) {
     return <div className="text-center">로딩 중...</div>;
@@ -54,16 +46,16 @@ const CharacterInventorySection = ({
       ) : (
         <div className="grid grid-cols-3 gap-2">
           {data.map((inventory) => (
-            <CharacterItemCard
+            <SellCharacterDialog
               key={inventory.character_inventory_id}
               characterInventory={inventory}
-              onClick={() => handleCharacterItemCardClick(inventory)}
-            />
+              member={member}
+            >
+              <CharacterItemCard characterInventory={inventory} />
+            </SellCharacterDialog>
           ))}
         </div>
       )}
     </section>
   );
 };
-
-export default CharacterInventorySection;

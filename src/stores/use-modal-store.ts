@@ -1,6 +1,5 @@
-import { ICharacter, ICharacterInventory } from '@/models/character.model';
-import { IConsumableItemInventory, Item } from '@/models/item.model';
-import { IMember } from '@/models/member.model';
+import { ICharacter } from '@/models/character.model';
+import { IConsumableItemInventory } from '@/models/item.model';
 import { IPalette } from '@/models/palette.model';
 import { IStudyCategory } from '@/models/study.model';
 import { create } from 'zustand';
@@ -21,20 +20,11 @@ interface ModalsState {
   // 타이머
   timer: ModalState;
   timerAlarm: ModalState;
-  pauseTimer: ModalState<{ duration: number; startTimer: () => void }>;
 
   // 카테고리
   createCategory: ModalState<{ memberId: string }>;
   editCategory: ModalState<{ memberId: string; category: IStudyCategory }>;
   deleteCategory: ModalState<{ memberId: string; category: IStudyCategory }>;
-
-  // 아이템 구매
-  purchaseItem: ModalState<{ member: IMember; item: Item }>;
-  // 캐릭터 판매
-  sellCharacter: ModalState<{
-    member: IMember;
-    characterInventory: ICharacterInventory;
-  }>;
 }
 
 type ModalType = keyof ModalsState;
@@ -51,12 +41,9 @@ export const useModalStore = create<ModalStore>()((set) => ({
     paletteAcquisition: { isOpen: false },
     timerAlarm: { isOpen: false },
     timer: { isOpen: false },
-    pauseTimer: { isOpen: false },
     createCategory: { isOpen: false },
     editCategory: { isOpen: false },
     deleteCategory: { isOpen: false },
-    purchaseItem: { isOpen: false },
-    sellCharacter: { isOpen: false },
   },
   openModal: (modalType, data) =>
     set((state) => ({

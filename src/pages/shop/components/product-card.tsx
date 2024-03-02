@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import type { Item } from '@/models/item.model';
-import { Skeleton } from '../../../components/ui/skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductCardProps {
   item: Item;
@@ -30,5 +30,5 @@ export const ProductCard = ({ item }: ProductCardProps) => {
 };
 
 ProductCard.Skeleton = () => {
-  return <Skeleton className="w-full aspect-[3/4]"></Skeleton>;
+  return <Skeleton className="w-full aspect-[3/4]" />;
 };

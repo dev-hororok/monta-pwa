@@ -28,7 +28,7 @@ const TimerAlarmDialog = () => {
     }
   }, [vibrationEnabled]);
 
-  const handleOnClick = () => {
+  const handleConfirmClick = () => {
     if (vibrationEnabled) window.navigator.vibrate(0);
     closeModal('timerAlarm');
     closeModal('timer');
@@ -55,7 +55,10 @@ const TimerAlarmDialog = () => {
 
         <div className="w-full flex flex-col justify-end h-full gap-2">
           <AlertDialogFooter className="w-full">
-            <AlertDialogAction onClick={handleOnClick} className="h-12 w-full">
+            <AlertDialogAction
+              onClick={handleConfirmClick}
+              className="h-12 w-full"
+            >
               확인
             </AlertDialogAction>
           </AlertDialogFooter>

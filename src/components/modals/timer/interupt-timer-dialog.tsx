@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import {
   AlertDialog,
@@ -6,6 +8,7 @@ import {
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { useEndStudyTimerMutation } from '@/apis/mutations/study-timer-mutations';
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
@@ -13,8 +16,12 @@ import { formatTime } from '@/lib/date-format';
 import { useModalStore } from '@/stores/use-modal-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 
-const PuaseTimerDialog = () => {
-  const { isOpen, data } = useModalStore((state) => state.modals.pauseTimer);
+interface InteruptTimerDialogProps {
+  children: React.ReactNode;
+}
+
+export const InteruptTimerDialog = ({ children }: InteruptTimerDialogProps) => {
+  const [isOpen, setIsOpen] = React.useState(false);
   const duration = useTimerStateStore((state) => state.duration);
   const interuptTimer = useTimerStateStore((state) => state.interuptTimer);
   const closeModal = useModalStore((state) => state.closeModal);
@@ -24,28 +31,22 @@ const PuaseTimerDialog = () => {
   const onClickHandler = () => {
     endStudyTimer({ duration: duration, status: 'Incompleted' });
     interuptTimer();
-    closeModal('pauseTimer');
     closeModal('timer');
   };
 
   // 취소 시 타이머 재시작
   const onClickCancelHandler = () => {
-    if (data && data.startTimer) {
-      data.startTimer();
-    }
-    closeModal('pauseTimer');
+    // startTimer();
+    setIsOpen(false);
   };
 
-  if (!isOpen || !data) {
-    return null;
-  }
-
   return (
-    <AlertDialog open={isOpen}>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+      <AlertDialogTrigger>{children}</AlertDialogTrigger>
       <AlertDialogContent
         className={cn(`w-full md:max-w-mobile flex flex-col items-center`)}
       >
-        <AlertDialogTitle>타이머를 종료하시겠습니까?</AlertDialogTitle>
+        <AlertDialogTitle>타이머를 중단하시겠습니까?</AlertDialogTitle>
         <AlertDialogDescription className="text-sm">
           총 {formatTime(duration)}가 기록됩니다.
         </AlertDialogDescription>
@@ -65,5 +66,3 @@ const PuaseTimerDialog = () => {
     </AlertDialog>
   );
 };
-
-export default PuaseTimerDialog;

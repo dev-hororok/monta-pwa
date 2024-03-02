@@ -1,14 +1,13 @@
 import * as React from 'react';
 
-import { formatTime } from '@/lib/date-format';
 import { IMemberInfo } from '.';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
-import { useTimerStateStore } from '@/stores/timer-state-store';
 import { StudyGroupMember } from './study-group-member';
-import { useModalStore } from '@/stores/use-modal-store';
 import { useAuthStore } from '@/stores/auth-store';
+import { TimerDisplay } from './timer-display';
+import { InteruptTimerDialog } from './interupt-timer-dialog';
 
 interface StudyGroupTimerProps extends React.HTMLAttributes<HTMLDivElement> {
   classNames?: string;
@@ -44,45 +43,19 @@ export const StudyGroupTimer = React.memo(
           <TimerDisplay />
         </div>
         <div className="flex-center h-1/5">
-          <TimerPauseButton />
+          <TimerInteruptButton />
         </div>
       </div>
     );
   }
 );
 
-// 타이머 시간 표시
-const TimerDisplay = () => {
-  const targetTime = useTimerStateStore((state) => state.targetTime);
-  const duration = useTimerStateStore((state) => state.duration);
+const TimerInteruptButton = () => {
   return (
-    <p className="text-7xl text-primary dark:text-foreground antialiased font-semibold">
-      {formatTime(targetTime - duration)}
-    </p>
-  );
-};
-
-// 타이머 일시정지 후 타이머 종료 확인 모달 열기
-const TimerPauseButton = () => {
-  const duration = useTimerStateStore((state) => state.duration);
-  const startTimer = useTimerStateStore((state) => state.startTimer);
-  const openModal = useModalStore((state) => state.openModal);
-
-  const handlePauseClick = () => {
-    // pauseTimer();
-    openModal('pauseTimer', {
-      duration: duration,
-      startTimer: startTimer,
-    });
-  };
-  return (
-    <Button
-      type="button"
-      onClick={handlePauseClick}
-      variant={'ghost'}
-      className={'p-2 h-auto'}
-    >
-      <Icons.pause className="w-10 h-10" />
-    </Button>
+    <InteruptTimerDialog>
+      <Button type="button" variant={'ghost'} className={'p-2 h-auto'}>
+        <Icons.pause className="w-10 h-10" />
+      </Button>
+    </InteruptTimerDialog>
   );
 };

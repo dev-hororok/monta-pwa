@@ -25,7 +25,6 @@ export const useConsumeFoodItem = () => {
       openModal('characterAcquisition', result.character);
     } catch (error) {
       toast.error('아이템 사용 중 오류가 발생했습니다.');
-      console.error(error);
     } finally {
       setIsLoading(false);
     }

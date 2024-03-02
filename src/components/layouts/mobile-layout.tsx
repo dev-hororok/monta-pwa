@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { FooterNav } from '@/components/footer-nav';
 
-const MobileLayout = () => {
+export const MobileLayout = () => {
   return (
     <>
       <Outlet />
@@ -9,5 +9,3 @@ const MobileLayout = () => {
     </>
   );
 };
-
-export default MobileLayout;

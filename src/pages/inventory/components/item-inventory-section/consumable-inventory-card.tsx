@@ -2,9 +2,9 @@ import { toast } from 'sonner';
 
 import type { IConsumableItemInventory } from '@/models/item.model';
 import { buttonVariants } from '@/components/ui/button';
-import { useConsumeItem } from '@/hooks/use-consume-item';
+import { useConsumeItem } from '@/pages/inventory/hooks/use-consume-item';
 import { cn } from '@/lib/utils';
-import { Skeleton } from '../../../components/ui/skeleton';
+import { Skeleton } from '../../../../components/ui/skeleton';
 
 interface ConsumableItemInventoryCardProps {
   consumableItemInventory: IConsumableItemInventory;

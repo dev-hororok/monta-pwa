@@ -22,7 +22,7 @@ const TimerModal = () => {
 
   return (
     <div className="absolute top-0 z-40 w-full h-full md:max-w-mobile md:max-h-mobile md:rounded-md bg-[#DAE3E1] dark:bg-background">
-      <div className="rounded-t-md rounded-b-3xl pt-safe-offset-4 h-full pb-safe">
+      <div className="pt-safe-offset-4 h-full pb-safe">
         <main className="h-full overflow-y-scroll scrollbar-hide">
           {timerType === 'Work' ? <StudyGroupTimer members={members} /> : null}
           {timerType === 'Rest' || timerType === 'LongRest' ? (

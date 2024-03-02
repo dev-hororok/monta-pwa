@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { useSellCharacterMutation } from '@/apis/mutations/shop-mutations';
-import { useModalStore } from '@/stores/use-modal-store';
 import type { ICharacterInventory } from '@/models/character.model';
 import { IMember } from '@/models/member.model';
 
@@ -13,7 +12,6 @@ const useSellCharacter = (
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(1);
   const { mutateAsync: sellCharacter } = useSellCharacterMutation();
-  const closeModal = useModalStore((state) => state.closeModal);
 
   const MaxCount = characterInventory ? characterInventory.quantity : 0;
 
@@ -40,7 +38,6 @@ const useSellCharacter = (
         count,
       });
       toast.success(result.notes);
-      closeModal('sellCharacter');
     } catch (e) {
       console.error('Error', e);
     } finally {

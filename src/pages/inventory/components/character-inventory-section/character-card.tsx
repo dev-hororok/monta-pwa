@@ -2,16 +2,14 @@ import type { ICharacterInventory } from '@/models/character.model';
 import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Skeleton } from '../../../components/ui/skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface CharacterItemCardProps {
   characterInventory: ICharacterInventory;
-  onClick: () => void;
 }
 
 export const CharacterItemCard = ({
   characterInventory,
-  onClick,
 }: CharacterItemCardProps) => {
   const { character, quantity } = characterInventory;
   const { grade, image_url, name, sell_price } = character;
@@ -22,7 +20,6 @@ export const CharacterItemCard = ({
         buttonVariants({ variant: 'ghost' }),
         'h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
-      onClick={onClick}
     >
       <Badge variant="secondary">{grade} 등급</Badge>
       <img

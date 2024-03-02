@@ -2,8 +2,8 @@ import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { HomeHeader } from '@/components/headers/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import FoodProductsSection from '@/pages/shop/components/food-products-section';
-import ToolProductsSection from '@/pages/shop/components/tool-products-section';
+import { FoodProductsSection } from '@/pages/shop/components/food-products-section';
+import { ToolProductsSection } from '@/pages/shop/components/tool-products-section';
 
 const ShopPage = () => {
   const { data: member, isPending, isError } = useCurrentMemberQuery();

@@ -15,7 +15,7 @@ export const StudyGroupMember = React.memo(
     return (
       <div className="relative flex-center flex-col cursor-pointer py-2">
         <div className="absolute top-0">
-          <TimerDisplay joinedAtUTC={member.joinedAtUTC} />
+          <MemberTimerDisplay joinedAtUTC={member.joinedAtUTC} />
         </div>
         <img
           src={member.image_url ? member.image_url : '/octopus.png'}
@@ -35,7 +35,7 @@ export const StudyGroupMember = React.memo(
   }
 );
 
-const TimerDisplay = ({ joinedAtUTC }: { joinedAtUTC: string }) => {
+const MemberTimerDisplay = ({ joinedAtUTC }: { joinedAtUTC: string }) => {
   const startTime = useTimerStateStore((state) => state.startTime);
   const globalDuration = useTimerStateStore((state) => state.duration);
   // 멤버 첫 렌더링 시 현재 유저가 그룹에 참여한 시간을 기준으로 차이 계산 (먼저들어온 유저: + | 나중에 들어온 유저: - )

@@ -1,19 +1,32 @@
+import * as React from 'react';
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
-import { useModalStore } from '@/stores/use-modal-store';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
-import useSellCharacter from './use-sell-character';
+import useSellCharacter from '../../hooks/use-sell-character';
+import { useState } from 'react';
+import { ICharacterInventory } from '@/models/character.model';
+import { IMember } from '@/models/member.model';
 
-const SellCharacterDialog = () => {
-  const { isOpen, data } = useModalStore((state) => state.modals.sellCharacter);
-  const closeModal = useModalStore((state) => state.closeModal);
+interface SellCharacterDialogProps {
+  characterInventory: ICharacterInventory;
+  member: IMember;
+  children: React.ReactNode;
+}
+
+export const SellCharacterDialog = ({
+  characterInventory,
+  member,
+  children,
+}: SellCharacterDialogProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const {
     isLoading,
@@ -22,25 +35,17 @@ const SellCharacterDialog = () => {
     decrementCount,
     onSubmitSell,
     MaxCount,
-  } = useSellCharacter(
-    data ? data.characterInventory : null,
-    data ? data.member : null
-  );
-
-  if (!isOpen || !data) {
-    return null;
-  }
+  } = useSellCharacter(characterInventory, member);
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={`w-full md:max-w-[416px] max-h-[400px] flex flex-col justify-start items-center`}
       >
         <div className="mx-auto w-full max-w-sm">
           <DialogHeader>
-            <DialogTitle>
-              {data.characterInventory.character.name} 판매
-            </DialogTitle>
+            <DialogTitle>{characterInventory.character.name} 판매</DialogTitle>
             <DialogDescription>수량을 선택해주세요.</DialogDescription>
           </DialogHeader>
           <div className="p-4 pb-0">
@@ -79,7 +84,7 @@ const SellCharacterDialog = () => {
             <Button
               type="button"
               variant="outline"
-              onClick={() => closeModal('sellCharacter')}
+              onClick={() => setIsOpen(false)}
               className="w-full"
             >
               취소
@@ -98,5 +103,3 @@ const SellCharacterDialog = () => {
     </Dialog>
   );
 };
-
-export default SellCharacterDialog;

@@ -1,12 +1,12 @@
 import { useConsumableInventoryQuery } from '@/apis/queries/member-queries';
-import { ConsumableItemInventoryCard } from '@/pages/inventory/components/consumable-inventory-card';
+import { ConsumableItemInventoryCard } from '@/pages/inventory/components/item-inventory-section/consumable-inventory-card';
 import type { IMember } from '@/models/member.model';
 
 interface ItemInventorySectionProps {
   member: IMember;
 }
 
-const ItemInventorySection = ({ member }: ItemInventorySectionProps) => {
+export const ItemInventorySection = ({ member }: ItemInventorySectionProps) => {
   const {
     data: items,
     isPending,
@@ -45,5 +45,3 @@ const ItemInventorySection = ({ member }: ItemInventorySectionProps) => {
     </section>
   );
 };
-
-export default ItemInventorySection;

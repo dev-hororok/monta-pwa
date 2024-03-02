@@ -1,8 +1,8 @@
 import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { HomeHeader } from '@/components/headers/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
-import CharacterInventorySection from '@/pages/inventory/components/character-incentory-section';
-import ItemInventorySection from '@/pages/inventory/components/item-inventory-section';
+import { ItemInventorySection } from '@/pages/inventory/components/item-inventory-section';
+import { CharacterInventorySection } from './components/character-inventory-section';
 
 export interface InventoryUseItem {
   itemType: 'streak-color-change';

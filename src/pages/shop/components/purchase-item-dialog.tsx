@@ -1,19 +1,31 @@
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
+import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
-import { useModalStore } from '@/stores/use-modal-store';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
-import { usePurchaseItem } from './use-purchase-item';
+import { usePurchaseItem } from './hooks/use-purchase-item';
+import { Item } from '@/models/item.model';
+import { IMember } from '@/models/member.model';
 
-const PurchaseItemDialog = () => {
-  const { isOpen, data } = useModalStore((state) => state.modals.purchaseItem);
-  const closeModal = useModalStore((state) => state.closeModal);
+interface PurchaseItemDialogProps {
+  item: Item;
+  member: IMember;
+  children: React.ReactNode;
+}
+
+export const PurchaseItemDialog = ({
+  item,
+  member,
+  children,
+}: PurchaseItemDialogProps) => {
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const {
     isLoading,
@@ -22,20 +34,26 @@ const PurchaseItemDialog = () => {
     decrementCount,
     onSubmitPurchase,
     MaxCount,
-  } = usePurchaseItem(data ? data.item : null);
+  } = usePurchaseItem(item);
 
-  if (!isOpen || !data) {
-    return null;
-  }
+  const handleConfirmClick = async () => {
+    await onSubmitPurchase();
+    setIsOpen(false);
+  };
+
+  const handleCancelClick = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger>{children}</DialogTrigger>
       <DialogContent
         className={`w-full md:max-w-[416px] max-h-[400px] flex flex-col justify-start items-center`}
       >
         <div className="mx-auto w-full max-w-sm">
           <DialogHeader>
-            <DialogTitle>{data.item.name} 구매</DialogTitle>
+            <DialogTitle>{item.name} 구매</DialogTitle>
             <DialogDescription>수량을 선택해주세요.</DialogDescription>
           </DialogHeader>
           <div className="p-4 pb-0">
@@ -64,8 +82,7 @@ const PurchaseItemDialog = () => {
                 className="h-8 w-8 shrink-0 rounded-full"
                 onClick={incrementCount}
                 disabled={
-                  count >= MaxCount ||
-                  (count + 1) * data.item.cost > data.member.point
+                  count >= MaxCount || (count + 1) * item.cost > member.point
                 }
               >
                 <PlusIcon className="h-4 w-4" />
@@ -77,14 +94,14 @@ const PurchaseItemDialog = () => {
             <Button
               type="button"
               variant="outline"
-              onClick={() => closeModal('purchaseItem')}
+              onClick={handleCancelClick}
               className="w-full"
             >
               취소
             </Button>
             <Button
               type="button"
-              onClick={onSubmitPurchase}
+              onClick={handleConfirmClick}
               disabled={isLoading}
               className="w-full"
             >
@@ -96,5 +113,3 @@ const PurchaseItemDialog = () => {
     </Dialog>
   );
 };
-
-export default PurchaseItemDialog;

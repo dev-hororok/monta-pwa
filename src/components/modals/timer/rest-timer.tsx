@@ -3,9 +3,9 @@ import * as React from 'react';
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { formatTime } from '@/lib/date-format';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useModalStore } from '@/stores/use-modal-store';
+import { TimerDisplay } from './timer-display';
 
 interface RestTimerProps extends React.HTMLAttributes<HTMLDivElement> {
   classNames?: string;
@@ -32,17 +32,6 @@ export const RestTimer = React.memo(
     );
   }
 );
-
-// 타이머 시간 표시
-const TimerDisplay = () => {
-  const targetTime = useTimerStateStore((state) => state.targetTime);
-  const duration = useTimerStateStore((state) => state.duration);
-  return (
-    <p className="text-7xl text-primary dark:text-foreground antialiased font-semibold">
-      {formatTime(targetTime - duration)}
-    </p>
-  );
-};
 
 // 쉬는 시간 타이머 생략 후 현재 모달 닫기
 const TimerPassButton = () => {
