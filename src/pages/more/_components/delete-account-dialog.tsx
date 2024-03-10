@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
 
 import {
   Dialog,
@@ -13,16 +13,25 @@ import {
 } from '@/components/ui/dialog';
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
-import { useDeleteAccountMutation } from '@/apis/mutations/account-mutations';
+import { useDeleteAccountMutation } from '@/apis/mutations/auth-mutations';
 
 export const DeleteAccountDialog = () => {
   const { mutateAsync: deleteAccount } = useDeleteAccountMutation();
-  const navigation = useNavigate();
+
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleLogoutClick = async () => {
-    await deleteAccount();
-    toast.success('성공적으로 회원탈퇴 되었습니다.');
-    navigation('/auth');
+    if (isLoading) return;
+    try {
+      setIsLoading(true);
+      await deleteAccount();
+      toast.success('성공적으로 회원탈퇴 되었습니다.');
+      // ProtectedRoute에서 redirect 처리됨
+    } catch (e) {
+      // react-query에서 처리됨
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -43,7 +52,11 @@ export const DeleteAccountDialog = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button onClick={handleLogoutClick} className="w-full">
+          <Button
+            onClick={handleLogoutClick}
+            className="w-full"
+            disabled={isLoading}
+          >
             확인
           </Button>
           <DialogClose asChild>

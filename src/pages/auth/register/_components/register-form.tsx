@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -15,8 +14,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button, buttonVariants } from '@/components/ui/button';
-import authService from '@/apis/services/auth-service';
 import { cn } from '@/lib/utils';
+import { useEmailRegisterMutation } from '@/apis/mutations/auth-mutations';
 
 const registerFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
@@ -30,27 +29,23 @@ type RegisterFormValues = z.infer<typeof registerFormSchema>;
 interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const RegisterForm = ({ className, ...props }: RegisterFormProps) => {
+  const { mutateAsync: emailRegister } = useEmailRegisterMutation();
+
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: { email: '', password: '' },
   });
   const [isLoading, setIsLoading] = React.useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (data: RegisterFormValues) => {
-    setIsLoading(true);
+    if (isLoading) return;
     try {
-      const result = await authService.register(data);
-      if (result.success) {
-        toast.success('회원가입에 성공하였습니다.');
-        navigate('/', { replace: true });
-      } else {
-        toast.error(result.error);
-      }
+      setIsLoading(true);
+      await emailRegister(data);
+      toast.success('회원가입에 성공하였습니다.');
+      // UnauthedRoute에서 redirect 처리됨
     } catch (e) {
-      toast.error(
-        e instanceof Error ? e.message : '서버에 문제가 발생했습니다.'
-      );
+      // react-query에서 처리됨
     } finally {
       setIsLoading(false);
     }

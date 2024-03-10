@@ -2,11 +2,8 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { z } from 'zod';
 
-import authService from '@/apis/services/auth-service';
 import {
   Form,
   FormControl,
@@ -17,6 +14,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useEmailLoginMutation } from '@/apis/mutations/auth-mutations';
+import { toast } from 'sonner';
 
 const loginFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
@@ -30,30 +29,22 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const LoginForm = ({ className, ...props }: LoginFormProps) => {
+  const { mutateAsync: emailLogin } = useEmailLoginMutation();
+
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: { email: '', password: '' },
   });
   const [isLoading, setIsLoading] = React.useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const handleSubmit = async (data: LoginFormValues) => {
-    setIsLoading(true);
+    if (isLoading) return;
     try {
-      const result = await authService.login(data);
-
-      if (result.success) {
-        toast.success('로그인에 성공하였습니다.');
-        const origin = location.state?.from?.pathname || '/';
-        navigate(origin);
-      } else {
-        toast.error(result.error);
-      }
+      setIsLoading(true);
+      await emailLogin(data);
+      toast.success('로그인에 성공하였습니다.');
     } catch (e) {
-      toast.error(
-        e instanceof Error ? e.message : '서버에 문제가 발생했습니다.'
-      );
+      // react-query에서 처리됨
     } finally {
       setIsLoading(false);
     }

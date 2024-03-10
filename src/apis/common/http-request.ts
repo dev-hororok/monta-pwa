@@ -1,9 +1,8 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
-import type { ApiSuccessResponse } from '../types/api-response';
 import { API_URL_NEST, API_URL_SPRING } from '@/constants/constants';
-import { AuthData } from '../services/auth-service';
 import { useAuthStore } from '@/stores/auth-store';
+import { refreshToken } from '../services/auth.api';
 
 // 인터셉터로 만료 시간 확인 및 토큰 리프레시
 async function refreshTokenIfNeeded() {
@@ -13,25 +12,17 @@ async function refreshTokenIfNeeded() {
 
   if (now >= expiresIn) {
     try {
-      const response = await axios.post<ApiSuccessResponse<AuthData>>(
-        `${API_URL_NEST}/timer-api/auth/refresh`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${tokens.refreshToken}`,
-          },
-        }
-      );
+      const data = await refreshToken(tokens.refreshToken);
 
       authenticate(
         accountId,
         {
-          accessToken: response.data.data.access_token,
-          refreshToken: response.data.data.refresh_token,
+          accessToken: data.access_token,
+          refreshToken: data.refresh_token,
         },
-        response.data.data.expires_in
+        data.expires_in
       );
-      return response.data.data.access_token;
+      return data.access_token;
     } catch (error) {
       useAuthStore.getState().logout();
     }
