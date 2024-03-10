@@ -1,4 +1,5 @@
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Dialog,
@@ -12,11 +13,18 @@ import {
 } from '@/components/ui/dialog';
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
+import { useDeleteAccountMutation } from '@/apis/mutations/account-mutations';
 
 export const DeleteAccountDialog = () => {
-  const handleDummyClick = () => {
-    toast.error('미구현', { duration: 1000 });
+  const { mutateAsync: deleteAccount } = useDeleteAccountMutation();
+  const navigation = useNavigate();
+
+  const handleLogoutClick = async () => {
+    await deleteAccount();
+    toast.success('성공적으로 회원탈퇴 되었습니다.');
+    navigation('/auth');
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -30,12 +38,12 @@ export const DeleteAccountDialog = () => {
       <DialogContent className="top-[35%] md:top-[50%] gap-4">
         <DialogHeader>
           <DialogTitle>정말 계정을 삭제하시겠습니까?</DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-destructive pt-2">
             서버에 저장된 모든 데이터가 삭제되며 데이터를 복구할 수 없습니다.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button onClick={handleDummyClick} className="w-full">
+          <Button onClick={handleLogoutClick} className="w-full">
             확인
           </Button>
           <DialogClose asChild>
