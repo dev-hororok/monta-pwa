@@ -1,8 +1,8 @@
 import { useFoodInventoryQuery } from '@/apis/queries/member-queries';
 import { cn } from '@/lib/utils';
 import { IMember } from '@/models/member.model';
-import { AddFoodCard } from '@/pages/(home)/components/food-inventory-section/add-food-card';
-import { FoodInventoryCard } from '@/pages/(home)/components/food-inventory-section/food-inventory-card';
+import { AddFoodCard } from './add-food-card';
+import { FoodInventoryCard } from './food-inventory-card';
 
 interface FoodInventorySectionProps {
   member: IMember;

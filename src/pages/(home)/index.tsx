@@ -1,8 +1,8 @@
 import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { HomeHeader } from '@/components/headers/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
-import { FoodInventorySection } from '@/pages/(home)/components/food-inventory-section';
-import { TimerSection } from '@/pages/(home)/components/timer-section';
+import { FoodInventorySection } from '@/pages/(home)/_components/food-inventory-section';
+import { TimerSection } from '@/pages/(home)/_components/timer-section';
 
 const MainPage = () => {
   const { data: member, isPending, isError } = useCurrentMemberQuery();

@@ -1,5 +1,5 @@
 import { useConsumableInventoryQuery } from '@/apis/queries/member-queries';
-import { ConsumableItemInventoryCard } from '@/pages/inventory/components/item-inventory-section/consumable-inventory-card';
+import { ConsumableItemInventoryCard } from './consumable-inventory-card';
 import type { IMember } from '@/models/member.model';
 
 interface ItemInventorySectionProps {

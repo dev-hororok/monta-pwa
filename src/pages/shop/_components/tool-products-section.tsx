@@ -1,18 +1,18 @@
-import { useShopFoodItemsQuery } from '@/apis/queries/shop-queries';
-import { ProductCard } from '@/pages/shop/components/product-card';
-import type { IMember } from '@/models/member.model';
+import { useShopConsumableItemsQuery } from '@/apis/queries/shop-queries';
+import { ProductCard } from './product-card';
 import { PurchaseItemDialog } from './purchase-item-dialog';
+import type { IMember } from '@/models/member.model';
 
-interface FoodProductsSectionProps {
+interface ToolProductsSectionProps {
   member: IMember;
 }
 
-export const FoodProductsSection = ({ member }: FoodProductsSectionProps) => {
+export const ToolProductsSection = ({ member }: ToolProductsSectionProps) => {
   const {
     data: items,
     isPending: itemsIsPending,
     isError: itemsIsError,
-  } = useShopFoodItemsQuery();
+  } = useShopConsumableItemsQuery();
 
   if (itemsIsPending) {
     return (

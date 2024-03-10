@@ -2,9 +2,9 @@ import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
 import { MyPageHeader } from '@/components/headers/my-page-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ProfileSection } from '@/pages/my/components/profile-section';
-import { CalendarSection } from './components/calendar-section';
-import { StreakSection } from './components/streak-section';
+import { ProfileSection } from './_components/profile-section';
+import { CalendarSection } from './_components/calendar-section';
+import { StreakSection } from './_components/streak-section';
 
 const MyPage = () => {
   const { data: member, isPending, isError } = useCurrentMemberQuery();

@@ -1,6 +1,6 @@
-import { EditNicknameDialog } from '@/pages/my/components/profile-section/edit-nickname-dialog';
-import { EditProfileImageDialog } from '@/pages/my/components/profile-section/edit-profile-img-dialog';
-import { EditStatusMessageDialog } from '@/pages/my/components/profile-section/edit-status-message-dialog';
+import { EditNicknameDialog } from './edit-nickname-dialog';
+import { EditProfileImageDialog } from './edit-profile-img-dialog';
+import { EditStatusMessageDialog } from './edit-status-message-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import type { IMember } from '@/models/member.model';

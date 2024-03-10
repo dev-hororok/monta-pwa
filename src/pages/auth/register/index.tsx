@@ -1,4 +1,4 @@
-import { RegisterForm } from '@/pages/auth/register/components/register-form';
+import { RegisterForm } from './_components/register-form';
 import { PrevHeader } from '@/components/headers/prev-header';
 
 const RegisterPage = () => {

@@ -9,7 +9,6 @@ import LoginGatewayPage from '@/pages/auth';
 import LoginPage from '@/pages/auth/login';
 import RegisterPage from '@/pages/auth/register';
 import AgreeToTermsPage from '@/pages/auth/agree';
-import SettingCategoriesPage from '@/pages/categories';
 import KakaoLoginCallback from './pages/auth/login/callback/kakao';
 import GoogleLoginCallback from './pages/auth/login/callback/google';
 import NaverLoginCallback from './pages/auth/login/callback/naver';
@@ -36,7 +35,6 @@ const router = createBrowserRouter(
             { path: 'more', element: <MorePage /> },
             { path: 'inventory', element: <InventoryPage /> },
             { path: 'shop', element: <ShopPage /> },
-            { path: 'categories', element: <SettingCategoriesPage /> },
           ],
         },
         {

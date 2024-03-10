@@ -1,12 +1,12 @@
 import { MorePageHeader } from '@/components/headers/more-page-header';
-import { DarkModeButton } from './components/darkmode-button';
-import { VibrationButton } from './components/vibration-button';
-import { DeleteAccountDialog } from './components/delete-account-dialog';
-import { LogoutDialog } from './components/logout-dialog';
-import { AppVersionView } from './components/app-version-view';
-import { TermsOfServiceButton } from './components/tos-button';
-import { PrivacyPolicyButton } from './components/privacy-policy-button';
-import { ReviewButton } from './components/review-button';
+import { DarkModeButton } from './_components/darkmode-button';
+import { VibrationButton } from './_components/vibration-button';
+import { DeleteAccountDialog } from './_components/delete-account-dialog';
+import { LogoutDialog } from './_components/logout-dialog';
+import { AppVersionView } from './_components/app-version-view';
+import { TermsOfServiceButton } from './_components/tos-button';
+import { PrivacyPolicyButton } from './_components/privacy-policy-button';
+import { ReviewButton } from './_components/review-button';
 
 const MorePage = () => {
   return (
