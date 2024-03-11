@@ -24,7 +24,7 @@ module.exports = {
         mobile: '416px',
       },
       fontFamily: {
-        nanum: ['"Nanum Gothic"', 'sans-serif'],
+        gamja: ['"Gamja Flower"', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

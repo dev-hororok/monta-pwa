@@ -16,10 +16,10 @@ body {
 
 @layer base {
   * {
-    @apply border-border font-nanum;
+    @apply border-border font-gamja tracking-wide;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground;
   }
 
   html {

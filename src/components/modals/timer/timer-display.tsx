@@ -5,7 +5,7 @@ export const TimerDisplay = () => {
   const targetTime = useTimerStateStore((state) => state.targetTime);
   const duration = useTimerStateStore((state) => state.duration);
   return (
-    <p className="text-7xl text-primary dark:text-foreground antialiased font-semibold">
+    <p className="text-7xl text-primary dark:text-foreground antialiased font-semibold tracking-widest">
       {formatTime(targetTime - duration)}
     </p>
   );

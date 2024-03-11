@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { useStartStudyTimerMutation } from '@/services/mutations/study-timer-mutations';
-import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useTimerOptionsStore } from '@/stores/timer-options-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
@@ -30,10 +29,9 @@ export const StartButton = () => {
   return (
     <Button
       onClick={startAndOpenTimerModal}
-      variant={'ghost'}
-      className={'p-2 h-auto'}
+      className={'rounded-3xl py-6 w-40 text-xl'}
     >
-      <Icons.play className="w-10 h-10" />
+      Start
     </Button>
   );
 };

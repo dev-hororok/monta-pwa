@@ -7,13 +7,13 @@ const LoginGatewayPage = () => {
   return (
     <div className="w-full h-full px-4 bg-background md:rounded-md pb-safe-offset-14 pt-safe-offset-14 overflow-hidden">
       <img
-        src="/fire-1.png"
+        src="/chicken_2.png"
         alt="monta-main"
-        className="h-1/2 aspect-square mx-auto"
+        className="h-1/2 p-10 aspect-square mx-auto"
       />
       <div className="h-1/2 flex flex-col items-center justify-between">
-        <p className="text-4xl font-semibold text-foreground tracking-wider">
-          몬스터 타이머
+        <p className="text-4xl font-bold antialiased text-foreground tracking-wider">
+          뽀모도로닭
         </p>
         <Link
           replace

@@ -1,5 +1,5 @@
 import { useCurrentMemberQuery } from '@/services/queries/member-queries';
-import { HomeHeader } from '@/components/headers/home-header';
+import { HomeHeader } from '@/pages/(home)/_components/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FoodProductsSection } from './_components/food-products-section';

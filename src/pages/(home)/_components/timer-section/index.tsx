@@ -1,11 +1,13 @@
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { TimerImage } from './timer-image';
-import { PassButton } from './pass-button';
-import { StartButton } from './start-button';
+// import { PassButton } from './pass-button';
+// import { StartButton } from './start-button';
 import { UpdateTimerOptionDialog } from './update-timer-options-dialog';
-import { Button } from '@/components/ui/button';
 import { formatTime } from '@/lib/date-format';
 import { cn } from '@/lib/utils';
+import { PassButton } from './pass-button';
+import { StartButton } from './start-button';
+import { Button } from '@/components/ui/button';
 
 interface TimerSectionProps {
   className?: string;
@@ -17,15 +19,21 @@ export const TimerSection = ({ className }: TimerSectionProps) => {
 
   return (
     <div className={cn('flex-center flex-col', className)}>
-      <TimerImage className="h-1/2" />
-      <div className="flex-center h-1/4">
+      <div className="h-1/2 flex justify-center items-end">
+        <TimerImage className="w-1/2 aspect-square" />
+      </div>
+
+      <div className="flex-center">
         <UpdateTimerOptionDialog>
-          <Button variant="ghost" className="text-6xl h-auto">
+          <Button
+            variant="ghost"
+            className="text-5xl h-auto flex items-center gap-2 tracking-widest"
+          >
             {formatTime(targetTime)}
           </Button>
         </UpdateTimerOptionDialog>
       </div>
-      <div className="flex-center h-1/4 gap-2">
+      <div className="h-1/2 flex justify-center items-center gap-2">
         {timerType !== 'Work' ? <PassButton /> : null}
         <StartButton />
       </div>

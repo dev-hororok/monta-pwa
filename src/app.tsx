@@ -1,21 +1,21 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
-import MainPage from '@/pages/(home)';
-import MyPage from '@/pages/my';
-import ShopPage from '@/pages/shop';
-import MorePage from '@/pages/more';
-import InventoryPage from '@/pages/inventory';
-import LoginGatewayPage from '@/pages/auth';
-import LoginPage from '@/pages/auth/login';
-import RegisterPage from '@/pages/auth/register';
-import AgreeToTermsPage from '@/pages/auth/agree';
+import MainPage from './pages/(home)';
+import MyPage from './pages/my';
+import ShopPage from './pages/shop';
+import MorePage from './pages/more';
+import InventoryPage from './pages/inventory';
+import LoginGatewayPage from './pages/auth';
+import LoginPage from './pages/auth/login';
+import RegisterPage from './pages/auth/register';
+import AgreeToTermsPage from './pages/auth/agree';
 import KakaoLoginCallback from './pages/auth/login/callback/kakao';
 import GoogleLoginCallback from './pages/auth/login/callback/google';
 import NaverLoginCallback from './pages/auth/login/callback/naver';
 import { RootLayout } from './components/layouts/root-layout';
 import { MobileLayout } from './components/layouts/mobile-layout';
-import { ProtectedRoute } from '@/components/auth/protected-route';
-import { UnauthedRoute } from '@/components/auth/unauthed-route';
+import { ProtectedRoute } from './components/auth/protected-route';
+import { UnauthedRoute } from './components/auth/unauthed-route';
 
 const router = createBrowserRouter(
   [

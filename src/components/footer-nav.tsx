@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
   },
   {
     text: '인벤토리',
-    icon: <Icons.bag className="w-5 h-5" />,
+    icon: <img src="/bag.png" className="w-7 h-7" />,
     href: '/inventory',
   },
   {
@@ -34,7 +34,7 @@ const navItems: NavItem[] = [
 
 export const FooterNav = () => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 md:absolute h-14 flex items-center mb-safe md:rounded-b-md bg-accent">
+    <nav className="fixed bottom-0 left-0 right-0 md:absolute h-14 flex items-center mb-safe md:rounded-b-md bg-gray-50/50">
       {navItems.map((nav) => {
         return (
           <NavItemLink
@@ -61,10 +61,10 @@ const NavItemLink = ({ icon, href }: NavItemLinkProps) => {
       to={href}
       replace
       className={({ isActive }) =>
-        `w-full text-xs ${
+        `w-full text-xs text-accent-foreground ${
           isActive
-            ? 'text-accent-foreground'
-            : 'text-accent-foreground/50 hover:text-accent-foreground duration-200'
+            ? ' opacity-100'
+            : 'opacity-50 hover:opacity-100 duration-200'
         }`
       }
     >

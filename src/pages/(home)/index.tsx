@@ -1,5 +1,5 @@
 import { useCurrentMemberQuery } from '@/services/queries/member-queries';
-import { HomeHeader } from '@/components/headers/home-header';
+import { HomeHeader } from '@/pages/(home)/_components/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { FoodInventorySection } from '@/pages/(home)/_components/food-inventory-section';
 import { TimerSection } from '@/pages/(home)/_components/timer-section';
@@ -18,7 +18,7 @@ const MainPage = () => {
     <div className="h-full pt-safe-offset-14 pb-safe-offset-14">
       <HomeHeader />
       <main className="h-full overflow-y-scroll scrollbar-hide">
-        <TimerSection className="h-2/3" />
+        <TimerSection className="h-full" />
 
         <FoodInventorySection member={member} className="h-1/3" />
       </main>
