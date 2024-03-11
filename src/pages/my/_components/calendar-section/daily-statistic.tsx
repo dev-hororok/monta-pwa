@@ -1,4 +1,4 @@
-import { useDailyStatisticQuery } from '@/apis/queries/member-queries';
+import { useDailyStatisticQuery } from '@/services/queries/member-queries';
 import { Skeleton } from '@/components/ui/skeleton';
 import { formatTime } from '@/lib/date-format';
 

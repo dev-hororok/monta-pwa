@@ -1,4 +1,4 @@
-import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
+import { useCurrentMemberQuery } from '@/services/queries/member-queries';
 import { HomeHeader } from '@/components/headers/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { FoodInventorySection } from '@/pages/(home)/_components/food-inventory-section';

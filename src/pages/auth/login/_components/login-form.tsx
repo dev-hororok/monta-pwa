@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { toast } from 'sonner';
 
 import {
   Form,
@@ -14,8 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useEmailLoginMutation } from '@/apis/mutations/auth-mutations';
-import { toast } from 'sonner';
+import { useEmailLoginMutation } from '@/services/mutations/auth-mutations';
 
 const loginFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),

@@ -6,7 +6,7 @@ import {
   googleLogin,
   kakaoLogin,
   naverLogin,
-} from '../services/auth.api';
+} from '../apis/auth.api';
 import { useAuthStore } from '@/stores/auth-store';
 
 // 이메일 로그인

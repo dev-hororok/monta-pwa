@@ -16,15 +16,15 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { IMember } from '@/models/member.model';
-import { useEditMemberMutation } from '@/apis/mutations/member-mutations';
+import { useEditMemberMutation } from '@/services/mutations/member-mutations';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '../../../../components/ui/form';
-import { Input } from '../../../../components/ui/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 const editNicknameFormSchema = z.object({
   nickname: z

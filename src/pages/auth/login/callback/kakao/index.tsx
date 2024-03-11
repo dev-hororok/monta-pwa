@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-import { useKakaoLoginMutation } from '@/apis/mutations/auth-mutations';
+import { useKakaoLoginMutation } from '@/services/mutations/auth-mutations';
 
 const KakaoLoginCallback = () => {
   const { mutateAsync: kakaoLogin } = useKakaoLoginMutation();

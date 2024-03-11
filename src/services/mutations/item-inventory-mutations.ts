@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   consumeConsumableItem,
   consumeFoodItem,
-} from '../services/item-inventory.api';
+} from '../apis/item-inventory.api';
 import {
   CHARACTER_INVENTORY_QUERY_KEY,
   CONSUMABLE_INVENTORY_QUERY_KEY,

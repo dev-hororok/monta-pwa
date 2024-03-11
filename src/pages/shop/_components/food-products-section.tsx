@@ -1,4 +1,4 @@
-import { useShopFoodItemsQuery } from '@/apis/queries/shop-queries';
+import { useShopFoodItemsQuery } from '@/services/queries/shop-queries';
 import { ProductCard } from './product-card';
 import type { IMember } from '@/models/member.model';
 import { PurchaseItemDialog } from './purchase-item-dialog';

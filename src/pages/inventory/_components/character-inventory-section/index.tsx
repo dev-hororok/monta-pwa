@@ -1,4 +1,4 @@
-import { useCharacterInventoryQuery } from '@/apis/queries/member-queries';
+import { useCharacterInventoryQuery } from '@/services/queries/member-queries';
 import { IMember } from '@/models/member.model';
 import { CharacterItemCard } from './character-card';
 import { SellCharacterDialog } from './sell-character-dialog';

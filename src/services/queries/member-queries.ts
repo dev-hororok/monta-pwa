@@ -9,7 +9,7 @@ import {
   fetchMonthlyStatistic,
   fetchStatisticHeatMap,
   fetchStudyStreak,
-} from '@/apis/services/member.api';
+} from '@/services/apis/member.api';
 
 // 현재유저 조회
 export const CURRENT_MEMBER_QUERY_KEY = 'currentUser';

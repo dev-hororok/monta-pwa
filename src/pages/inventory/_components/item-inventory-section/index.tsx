@@ -1,4 +1,4 @@
-import { useConsumableInventoryQuery } from '@/apis/queries/member-queries';
+import { useConsumableInventoryQuery } from '@/services/queries/member-queries';
 import { ConsumableItemInventoryCard } from './consumable-inventory-card';
 import type { IMember } from '@/models/member.model';
 

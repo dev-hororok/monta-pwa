@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { endStudyTimer, startStudyTimer } from '../services/study-timer.api';
+import { endStudyTimer, startStudyTimer } from '../apis/study-timer.api';
 import {
   FOOD_INVENTORY_QUERY_KEY,
   STATISTIC_DAILY,

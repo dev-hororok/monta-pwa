@@ -4,7 +4,7 @@ import { OnArgs, TileArgs } from 'react-calendar';
 import {
   useStatisticHeatMapQuery,
   useMonthlyStatisticQuery,
-} from '@/apis/queries/member-queries';
+} from '@/services/queries/member-queries';
 import { formatDateStr } from '@/lib/date-format';
 
 type ValuePiece = Date | null;

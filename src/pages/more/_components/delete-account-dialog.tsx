@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
-import { useDeleteAccountMutation } from '@/apis/mutations/auth-mutations';
+import { useDeleteAccountMutation } from '@/services/mutations/auth-mutations';
 
 export const DeleteAccountDialog = () => {
   const { mutateAsync: deleteAccount } = useDeleteAccountMutation();

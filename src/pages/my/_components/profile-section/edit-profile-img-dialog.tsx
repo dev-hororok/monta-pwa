@@ -13,8 +13,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { IMember } from '@/models/member.model';
-import { useEditMemberMutation } from '@/apis/mutations/member-mutations';
-import { useCharacterInventoryQuery } from '@/apis/queries/member-queries';
+import { useEditMemberMutation } from '@/services/mutations/member-mutations';
+import { useCharacterInventoryQuery } from '@/services/queries/member-queries';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface EditProfileImageDialogProps {

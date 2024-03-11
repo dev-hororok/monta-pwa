@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useStartStudyTimerMutation } from '@/apis/mutations/study-timer-mutations';
+import { useStartStudyTimerMutation } from '@/services/mutations/study-timer-mutations';
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useTimerOptionsStore } from '@/stores/timer-options-store';

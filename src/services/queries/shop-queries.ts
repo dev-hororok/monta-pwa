@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  fetchShopConsumableItems,
-  fetchShopFoodItems,
-} from '../services/shop.api';
+import { fetchShopConsumableItems, fetchShopFoodItems } from '../apis/shop.api';
 
 // 상점 음식 아이템 조회
 export const SHOP_FOOD_ITEMS_QUERY_KEY = 'shopFoodItems';

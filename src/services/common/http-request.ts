@@ -2,7 +2,7 @@ import axios, { InternalAxiosRequestConfig } from 'axios';
 
 import { API_URL_NEST, API_URL_SPRING } from '@/constants/constants';
 import { useAuthStore } from '@/stores/auth-store';
-import { refreshToken } from '../services/auth.api';
+import { refreshToken } from '../apis/auth.api';
 
 // 인터셉터로 만료 시간 확인 및 토큰 리프레시
 async function refreshTokenIfNeeded() {

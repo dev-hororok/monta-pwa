@@ -1,4 +1,4 @@
-import { useCurrentMemberQuery } from '@/apis/queries/member-queries';
+import { useCurrentMemberQuery } from '@/services/queries/member-queries';
 import { MyPageHeader } from '@/components/headers/my-page-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';

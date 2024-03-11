@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import type { IFoodItemInventory } from '@/models/item.model';
-import { useConsumeFoodItemMutation } from '@/apis/mutations/item-inventory-mutations';
+import { useConsumeFoodItemMutation } from '@/services/mutations/item-inventory-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
 
 interface UseConsumeItemArgs {

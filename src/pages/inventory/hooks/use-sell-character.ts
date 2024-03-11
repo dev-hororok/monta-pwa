@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { useSellCharacterMutation } from '@/apis/mutations/shop-mutations';
+import { useSellCharacterMutation } from '@/services/mutations/shop-mutations';
 import type { ICharacterInventory } from '@/models/character.model';
 import { IMember } from '@/models/member.model';
 

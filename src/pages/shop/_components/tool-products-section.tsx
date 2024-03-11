@@ -1,4 +1,4 @@
-import { useShopConsumableItemsQuery } from '@/apis/queries/shop-queries';
+import { useShopConsumableItemsQuery } from '@/services/queries/shop-queries';
 import { ProductCard } from './product-card';
 import { PurchaseItemDialog } from './purchase-item-dialog';
 import type { IMember } from '@/models/member.model';

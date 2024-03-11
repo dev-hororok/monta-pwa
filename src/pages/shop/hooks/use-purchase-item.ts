@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { usePurchaseItemMutation } from '@/apis/mutations/shop-mutations';
+import { usePurchaseItemMutation } from '@/services/mutations/shop-mutations';
 import { Item } from '@/models/item.model';
 
 export const usePurchaseItem = (item: Item | null) => {

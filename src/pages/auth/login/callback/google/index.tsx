@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-import { useGoogleLoginMutation } from '@/apis/mutations/auth-mutations';
+import { useGoogleLoginMutation } from '@/services/mutations/auth-mutations';
 
 const GoogleLoginCallback = () => {
   const { mutateAsync: googleLogin } = useGoogleLoginMutation();

@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { useEndStudyTimerMutation } from '@/apis/mutations/study-timer-mutations';
+import { useEndStudyTimerMutation } from '@/services/mutations/study-timer-mutations';
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
 import { formatTime } from '@/lib/date-format';
 import { useModalStore } from '@/stores/use-modal-store';

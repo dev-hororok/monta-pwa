@@ -15,7 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useEmailRegisterMutation } from '@/apis/mutations/auth-mutations';
+import { useEmailRegisterMutation } from '@/services/mutations/auth-mutations';
 
 const registerFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-import { useNaverLoginMutation } from '@/apis/mutations/auth-mutations';
+import { useNaverLoginMutation } from '@/services/mutations/auth-mutations';
 
 const NaverLoginCallback = () => {
   const { mutateAsync: naverLogin } = useNaverLoginMutation();

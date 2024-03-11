@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import type { IConsumableItemInventory } from '@/models/item.model';
-import { useConsumeConsumableItemMutation } from '@/apis/mutations/item-inventory-mutations';
+import { useConsumeConsumableItemMutation } from '@/services/mutations/item-inventory-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
 
 interface UseConsumeItemArgs {

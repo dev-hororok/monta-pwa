@@ -10,9 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { usePurchaseItem } from './hooks/use-purchase-item';
 import { Item } from '@/models/item.model';
 import { IMember } from '@/models/member.model';
+import { usePurchaseItem } from '../hooks/use-purchase-item';
 
 interface PurchaseItemDialogProps {
   item: Item;
