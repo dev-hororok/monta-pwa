@@ -1,41 +1,30 @@
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-import { handleApiError } from '@/apis/common/api-error-handler';
-import { API_URL_NEST } from '@/constants/constants';
-import { useAuthStore } from '@/stores/auth-store';
+import { useKakaoLoginMutation } from '@/apis/mutations/auth-mutations';
 
 const KakaoLoginCallback = () => {
+  const { mutateAsync: kakaoLogin } = useKakaoLoginMutation();
   const navigate = useNavigate();
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
+    if (!code) {
+      navigate('/auth/login');
+      return;
+    }
     const fetch = async () => {
       try {
-        const response = await axios.post(
-          `${API_URL_NEST}/timer-api/auth/kakao/login`,
-          { code }
-        );
-        useAuthStore.getState().authenticate(
-          response.data.data.account.account_id,
-          {
-            accessToken: response.data.data.access_token,
-            refreshToken: response.data.data.refresh_token,
-          },
-          response.data.data.expires_in
-        );
-
+        await kakaoLogin({ code });
         toast.success('로그인에 성공하였습니다.');
-        navigate('/');
       } catch (e) {
-        const result = handleApiError(e);
-        toast.error(result.error);
+        // react-query에서 처리됨
         navigate('/auth/login');
       }
     };
     fetch();
-  }, [navigate]);
+  }, [navigate, kakaoLogin]);
+
   return null;
 };
 

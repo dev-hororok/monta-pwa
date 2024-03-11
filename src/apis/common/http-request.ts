@@ -29,6 +29,7 @@ async function refreshTokenIfNeeded() {
   }
   return tokens.accessToken;
 }
+
 const requestInterceptor = async (config: InternalAxiosRequestConfig) => {
   const accessToken = await refreshTokenIfNeeded();
   if (accessToken) {

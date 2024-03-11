@@ -9,6 +9,7 @@ import {
 } from '../queries/member-queries';
 import type { StudyRecordStatusType } from '@/models/study.model';
 
+// 타이머 시작 시간 기록
 export const useStartStudyTimerMutation = () => {
   return useMutation({
     mutationFn: (body: { category_id?: string }) => {
@@ -17,6 +18,7 @@ export const useStartStudyTimerMutation = () => {
   });
 };
 
+// 타이머 종료 시간 기록
 export const useEndStudyTimerMutation = () => {
   const queryClient = useQueryClient();
 

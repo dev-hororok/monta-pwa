@@ -2,7 +2,6 @@ import { nestHttpRequest } from '../common/http-request';
 import type { ApiSuccessResponse } from '../types/api-response';
 import type { IMember } from '@/models/member.model';
 import type { ICharacterInventory } from '@/models/character.model';
-import type { IStudyRecord } from '@/models/study.model';
 import type {
   IConsumableItemInventory,
   IFoodItemInventory,
@@ -54,14 +53,6 @@ export const fetchStudyStreak = async (memberId: string) => {
     `/timer-api/members/${memberId}/study-streak`
   );
   return response.data.data;
-};
-
-// 유저 공부기록 조회
-export const fetchStudyRecords = async (memberId: string) => {
-  const response = await nestHttpRequest.get<
-    ApiSuccessResponse<{ study_records: IStudyRecord[] }>
-  >(`/timer-api/members/${memberId}/study-records`);
-  return response.data.data.study_records;
 };
 
 // 유저 공부기록 통계 조회(daily)

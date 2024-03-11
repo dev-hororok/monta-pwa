@@ -28,6 +28,33 @@ export const emailRegister = async (credentials: {
   return response.data.data;
 };
 
+// 카카오 oauth
+export const kakaoLogin = async (credentials: { code: string }) => {
+  const response = await axios.post<ApiSuccessResponse<AuthResponseData>>(
+    `${API_URL_NEST}/timer-api/auth/kakao/login`,
+    credentials
+  );
+  return response.data.data;
+};
+
+// 구글 oauth
+export const googleLogin = async (credentials: { code: string }) => {
+  const response = await axios.post<ApiSuccessResponse<AuthResponseData>>(
+    `${API_URL_NEST}/timer-api/auth/google/login`,
+    credentials
+  );
+  return response.data.data;
+};
+
+// 네이버 oauth
+export const naverLogin = async (credentials: { code: string }) => {
+  const response = await axios.post<ApiSuccessResponse<AuthResponseData>>(
+    `${API_URL_NEST}/timer-api/auth/naver/login`,
+    credentials
+  );
+  return response.data.data;
+};
+
 // 계정 탈퇴
 export const deleteAccount = async () => {
   const response = await nestHttpRequest.delete<ApiSuccessResponse<null>>(

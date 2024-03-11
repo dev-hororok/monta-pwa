@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { editMember } from '../services/member.api';
 import { CURRENT_MEMBER_QUERY_KEY } from '../queries/member-queries';
 
+// 유저 정보 수정
 export const useEditMemberMutation = () => {
   const queryClient = useQueryClient();
 

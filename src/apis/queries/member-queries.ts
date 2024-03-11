@@ -8,7 +8,6 @@ import {
   fetchFoodInventory,
   fetchMonthlyStatistic,
   fetchStatisticHeatMap,
-  fetchStudyRecords,
   fetchStudyStreak,
 } from '@/apis/services/member.api';
 
@@ -61,17 +60,6 @@ export const useStudyStreakQuery = (memberId: string) => {
   return useQuery({
     queryKey: [STUDY_STREAK_QUERY_KEY],
     queryFn: () => fetchStudyStreak(memberId),
-    staleTime: 10 * 60 * 1000,
-    enabled: !!memberId,
-  });
-};
-
-// 공부 기록 조회
-export const STUDY_RECORDS_QUERY_KEY = 'studyRecords';
-export const useStudyRecordsQuery = (memberId: string) => {
-  return useQuery({
-    queryKey: [STUDY_RECORDS_QUERY_KEY],
-    queryFn: () => fetchStudyRecords(memberId),
     staleTime: 10 * 60 * 1000,
     enabled: !!memberId,
   });
