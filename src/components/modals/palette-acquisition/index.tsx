@@ -13,21 +13,26 @@ import {
 import { useModalStore } from '@/stores/use-modal-store';
 import { Badge } from '@/components/ui/badge';
 import { useConsumeItem } from '@/pages/inventory/hooks/use-consume-item';
+import { useState } from 'react';
 
 export const PaletteAcquisitionDialog = () => {
   const { isOpen, data } = useModalStore(
     (state) => state.modals.paletteAcquisition
+  );
+  const [curQuantity, setCurQuantity] = useState(
+    data?.consumableItemInventory.quantity || 0
   );
   const closeModal = useModalStore((state) => state.closeModal);
   const { consume } = useConsumeItem();
 
   const onClickHandler = () => {
     if (!data) return;
-    if (data.consumableItemInventory.quantity < 1) {
+    if (curQuantity < 1) {
       toast.error('개수가 부족합니다.');
       return;
     }
     consume({ itemInventory: data.consumableItemInventory });
+    setCurQuantity((prev) => prev - 1);
   };
 
   const onClickCloseModal = () => {
@@ -91,9 +96,9 @@ export const PaletteAcquisitionDialog = () => {
                 type="button"
                 onClick={onClickHandler}
                 className="h-12 w-full"
-                disabled={data.consumableItemInventory.quantity < 1}
+                disabled={curQuantity < 1}
               >
-                다시뽑기
+                다시뽑기 x {curQuantity}
               </AlertDialogAction>
             </AlertDialogFooter>
           </div>

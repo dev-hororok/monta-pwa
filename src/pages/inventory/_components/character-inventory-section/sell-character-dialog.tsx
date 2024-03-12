@@ -33,7 +33,6 @@ export const SellCharacterDialog = ({
     count,
     incrementCount,
     decrementCount,
-    resetCount,
     onSubmitSell,
     MaxCount,
   } = useSellCharacter(characterInventory, member);
@@ -43,7 +42,6 @@ export const SellCharacterDialog = ({
     setIsOpen(false);
   };
   const handleClose = () => {
-    resetCount();
     setIsOpen(false);
   };
 
