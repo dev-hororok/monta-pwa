@@ -42,8 +42,10 @@ export const ConsumeItemDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="top-[35%] md:top-[50%] gap-4">
+      <DialogTrigger>{children}</DialogTrigger>
+      <DialogContent
+        className={`w-full md:max-w-mobile max-h-[400px] flex flex-col justify-start items-center`}
+      >
         <DialogHeader>
           <DialogTitle>{item.name}을(를) 사용하시겠습니까?</DialogTitle>
         </DialogHeader>

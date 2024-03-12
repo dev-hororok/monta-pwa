@@ -55,7 +55,7 @@ export const SellCharacterDialog = ({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger>{children}</DialogTrigger>
       <DialogContent
-        className={`w-full md:max-w-[416px] max-h-[400px] flex flex-col justify-start items-center`}
+        className={`w-full md:max-w-mobile max-h-[400px] flex flex-col justify-start items-center`}
       >
         <div className="mx-auto w-full max-w-sm">
           <DialogHeader>
