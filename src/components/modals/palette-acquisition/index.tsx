@@ -20,7 +20,7 @@ export const PaletteAcquisitionDialog = () => {
     (state) => state.modals.paletteAcquisition
   );
   const [curQuantity, setCurQuantity] = useState(
-    data?.consumableItemInventory.quantity || 0
+    (data?.consumableItemInventory.quantity || 1) - 1
   );
   const closeModal = useModalStore((state) => state.closeModal);
   const { consume } = useConsumeItem();
