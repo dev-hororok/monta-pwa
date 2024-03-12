@@ -2,6 +2,7 @@ import { useCharacterInventoryQuery } from '@/services/queries/member-queries';
 import type { IMember } from '@/types/models/member.model';
 import { CharacterItemCard } from './character-card';
 import { SellCharacterDialog } from './sell-character-dialog';
+import { useMemo } from 'react';
 
 interface CharacterInventorySectionProps {
   member: IMember;
@@ -10,21 +11,20 @@ interface CharacterInventorySectionProps {
 export const CharacterInventorySection = ({
   member,
 }: CharacterInventorySectionProps) => {
-  const { data, isPending, isError } = useCharacterInventoryQuery(
-    member.member_id
-  );
+  const {
+    data: inventory,
+    isPending,
+    isError,
+  } = useCharacterInventoryQuery(member.member_id);
 
-  if (isPending) {
-    return <div className="text-center">로딩 중...</div>;
-  }
+  const totalSellPrice = useMemo(() => {
+    if (!inventory) return 0;
+    return inventory.reduce((acc, cur) => acc + cur.character.sell_price, 0);
+  }, [inventory]);
+
   if (isError) {
     return <div className="text-center text-red-500">오류가 발생했습니다.</div>;
   }
-
-  const totalSellPrice = data.reduce(
-    (acc, cur) => acc + cur.character.sell_price,
-    0
-  );
 
   return (
     <section>
@@ -34,7 +34,7 @@ export const CharacterInventorySection = ({
           <p className="text-foreground/60">{totalSellPrice}원</p>
         </div>
         <span className="font-semibold text-muted-foreground">
-          {data.length} 개
+          {inventory ? inventory.length : 0} 개
         </span>
       </header>
       {isPending ? (
@@ -45,13 +45,13 @@ export const CharacterInventorySection = ({
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-2">
-          {data.map((inventory) => (
+          {inventory.map((item) => (
             <SellCharacterDialog
-              key={inventory.character_inventory_id}
-              characterInventory={inventory}
+              key={item.character_inventory_id}
+              characterInventory={item}
               member={member}
             >
-              <CharacterItemCard characterInventory={inventory} />
+              <CharacterItemCard characterInventory={item} />
             </SellCharacterDialog>
           ))}
         </div>

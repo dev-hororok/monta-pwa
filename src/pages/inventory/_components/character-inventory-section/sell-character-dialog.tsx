@@ -39,7 +39,7 @@ export const SellCharacterDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger>{children}</DialogTrigger>
       <DialogContent
         className={`w-full md:max-w-[416px] max-h-[400px] flex flex-col justify-start items-center`}
       >
