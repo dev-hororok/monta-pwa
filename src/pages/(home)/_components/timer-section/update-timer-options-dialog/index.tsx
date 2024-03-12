@@ -12,6 +12,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { IsTogetherOption } from './is-together-option';
 
 export const UpdateTimerOptionDialog = ({
   children,
@@ -40,7 +41,7 @@ export const UpdateTimerOptionDialog = ({
             타이머 설정을 변경하면 진행 중인 포모도로가 초기화됩니다.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="pb-6 w-full space-y-2">
+        <div className="pb-6 w-full space-y-3">
           <TimerOption label="집중 시간" optionKey="pomodoroTime" />
           <TimerOption
             label="집중 횟수"
@@ -49,6 +50,7 @@ export const UpdateTimerOptionDialog = ({
           />
           <TimerOption label="쉬는 시간" optionKey="restTime" />
           <TimerOption label="긴 쉬는 시간" optionKey="longRestTime" />
+          <IsTogetherOption />
         </div>
         <AlertDialogAction onClick={handleConfirm}>확인</AlertDialogAction>
       </AlertDialogContent>

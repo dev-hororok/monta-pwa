@@ -42,7 +42,7 @@ export const InteruptTimerDialog = ({ children }: InteruptTimerDialogProps) => {
 
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialogTrigger>{children}</AlertDialogTrigger>
+      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent
         className={cn(`w-full md:max-w-mobile flex flex-col items-center`)}
       >

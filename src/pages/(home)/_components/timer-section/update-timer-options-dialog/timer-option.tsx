@@ -23,15 +23,17 @@ export const TimerOption: React.FC<TimerOptionProps> = ({
 
   return (
     <div className="flex items-center justify-between">
-      <span className="antialiased font-semibold">{label}</span>
-      <TimerOptionPicker
-        idx={timerOptions[optionKey].indexOf(value)}
-        setIdx={(index) =>
-          setValue({ [optionKey]: timerOptions[optionKey][index] })
-        }
-        options={timerOptions[optionKey]}
-        postfix={postfix}
-      />
+      <span className="antialiased font-semibold w-1/2">{label}</span>
+      <div className="w-1/2 flex-center">
+        <TimerOptionPicker
+          idx={timerOptions[optionKey].indexOf(value)}
+          setIdx={(index) =>
+            setValue({ [optionKey]: timerOptions[optionKey][index] })
+          }
+          options={timerOptions[optionKey]}
+          postfix={postfix}
+        />
+      </div>
     </div>
   );
 };

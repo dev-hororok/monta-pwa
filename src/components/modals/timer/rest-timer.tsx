@@ -15,13 +15,15 @@ export const RestTimer = React.memo(
   ({ classNames, ...props }: RestTimerProps) => {
     return (
       <div className={cn('h-full', classNames)} {...props}>
-        <img
-          onContextMenu={(e) => e.preventDefault()}
-          loading="eager"
-          src={'./octopus.png'}
-          alt="rest-timer"
-          className={'h-3/5 mx-auto animate-soft-bounce'}
-        />
+        <div className={'w-full h-3/5 flex items-end justify-center'}>
+          <img
+            onContextMenu={(e) => e.preventDefault()}
+            loading="eager"
+            src={'./chicken_1.png'}
+            alt="rest-timer"
+            className={'w-1/2 aspect-square'}
+          />
+        </div>
         <div className="flex-center h-1/5">
           <TimerDisplay />
         </div>

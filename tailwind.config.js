@@ -60,6 +60,7 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        'calendar-active': 'hsl(var(--calendar-active))',
       },
       borderRadius: {
         lg: 'var(--radius)',

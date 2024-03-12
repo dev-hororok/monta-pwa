@@ -3,12 +3,9 @@ import type { ApiSuccessResponse } from '../types/api-response';
 import { nestHttpRequest } from '../common/http-request';
 
 // 스터디 타이머 시작
-export const startStudyTimer = async (body: { category_id?: string }) => {
+export const startStudyTimer = async () => {
   const response = await nestHttpRequest.post<ApiSuccessResponse<null>>(
-    `/timer-api/study-timer/start`,
-    {
-      category_id: body.category_id ? Number(body.category_id) : null,
-    }
+    `/timer-api/study-timer/start`
   );
   return response.data.data;
 };

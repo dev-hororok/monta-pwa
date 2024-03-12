@@ -1,3 +1,4 @@
+import { DEFAULT_MEMBER_IMAGE_URL } from '@/constants/constants';
 import { EditNicknameDialog } from './edit-nickname-dialog';
 import { EditProfileImageDialog } from './edit-profile-img-dialog';
 import { EditStatusMessageDialog } from './edit-status-message-dialog';
@@ -15,7 +16,7 @@ export const ProfileSection = ({ member }: ProfileSectionProps) => {
       <EditProfileImageDialog member={member}>
         <Avatar className="w-28 h-28 hover:bg-accent cursor-pointer">
           <AvatarImage
-            src={member.image_url ? member.image_url : '/octopus.png'}
+            src={member.image_url ? member.image_url : DEFAULT_MEMBER_IMAGE_URL}
           />
           <AvatarFallback>{member.nickname}</AvatarFallback>
         </Avatar>

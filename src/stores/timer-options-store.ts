@@ -1,4 +1,3 @@
-import { IStudyCategory } from '@/types/models/study.model';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -20,9 +19,10 @@ interface TimerOptionsStore {
   sectionCount: number;
   restTime: number;
   longRestTime: number;
-  selectedCategory: IStudyCategory | null;
   setTimerOptions: (options: Partial<Record<TimerOptionKey, number>>) => void;
-  setSelectedCategory: (category: IStudyCategory | null) => void;
+
+  isTogetherEnabled: boolean;
+  toggleIsTogetherEnabled: () => void;
 }
 
 export const useTimerOptionsStore = create<TimerOptionsStore>()(
@@ -32,16 +32,18 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
       sectionCount: 4, // 기본 섹션 4회
       restTime: 5, // 쉬는시간
       longRestTime: 15, // 긴 쉬는시간
-      selectedCategory: null,
+      isTogetherEnabled: false, // 함께 공부하기 유무
       setTimerOptions: (options) =>
         set((state) => ({
           ...state,
           ...options,
         })),
-      setSelectedCategory: (category) =>
-        set(() => ({
-          selectedCategory: category,
-        })),
+      toggleIsTogetherEnabled: () => {
+        set((state) => ({
+          ...state,
+          isTogetherEnabled: !state.isTogetherEnabled,
+        }));
+      },
     }),
     {
       name: 'timer-option-storage',

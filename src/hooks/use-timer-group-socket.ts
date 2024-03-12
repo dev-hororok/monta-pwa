@@ -5,12 +5,12 @@ import { useAuthStore } from '@/stores/auth-store';
 import { TimerType } from '@/stores/timer-state-store';
 import type { IMemberInfo } from '@/components/modals/timer';
 
-export const useTimerGroupSocket = (timerType: TimerType) => {
+export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
   const accessToken = useAuthStore((state) => state.tokens.accessToken);
   const [members, setMembers] = useState<IMemberInfo[]>([]);
 
   useEffect(() => {
-    if (timerType !== 'Work') {
+    if (timerType !== 'Work' || !active) {
       setMembers([]);
       return;
     }

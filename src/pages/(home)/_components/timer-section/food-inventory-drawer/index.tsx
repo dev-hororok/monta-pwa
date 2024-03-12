@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerClose,
@@ -19,7 +18,7 @@ interface FoodInventoryDrawerProps {
 export const FoodInventoryDrawer = ({ children }: FoodInventoryDrawerProps) => {
   return (
     <Drawer>
-      <DrawerTrigger>{children}</DrawerTrigger>
+      <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-mobile">
           <DrawerHeader>
@@ -30,11 +29,7 @@ export const FoodInventoryDrawer = ({ children }: FoodInventoryDrawerProps) => {
           </DrawerHeader>
           <FoodInventorySection />
           <DrawerFooter>
-            <DrawerClose>
-              <Button variant="outline" className="w-full">
-                close
-              </Button>
-            </DrawerClose>
+            <DrawerClose className="w-full">close</DrawerClose>
           </DrawerFooter>
         </div>
       </DrawerContent>

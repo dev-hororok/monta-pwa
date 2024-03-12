@@ -12,8 +12,8 @@ import type { StudyRecordStatusType } from '@/types/models/study.model';
 // 타이머 시작 시간 기록
 export const useStartStudyTimerMutation = () => {
   return useMutation({
-    mutationFn: (body: { category_id?: string }) => {
-      return startStudyTimer(body);
+    mutationFn: () => {
+      return startStudyTimer();
     },
   });
 };

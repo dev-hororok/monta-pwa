@@ -16,6 +16,7 @@ import type { IMember } from '@/types/models/member.model';
 import { useEditMemberMutation } from '@/services/mutations/member-mutations';
 import { useCharacterInventoryQuery } from '@/services/queries/member-queries';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { DEFAULT_MEMBER_IMAGE_URL } from '@/constants/constants';
 
 interface EditProfileImageDialogProps {
   member: IMember;
@@ -120,7 +121,7 @@ const DefaultCharacter = ({ onClick, isSelected }: DefaultCharacterProps) => {
   return (
     <div key={'0'} onClick={onClick} className="relative">
       <img
-        src={'/octopus.png'}
+        src={DEFAULT_MEMBER_IMAGE_URL}
         alt={`default-image`}
         className="w-full aspect-square cursor-pointer rounded-full"
       />
@@ -130,7 +131,7 @@ const DefaultCharacter = ({ onClick, isSelected }: DefaultCharacterProps) => {
         </span>
       ) : null}
       <p className="w-full text-xs font-semibold text-center line-clamp-2">
-        기본 문어
+        기본 닭
       </p>
     </div>
   );

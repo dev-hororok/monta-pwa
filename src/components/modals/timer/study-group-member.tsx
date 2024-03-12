@@ -4,6 +4,7 @@ import { IMemberInfo } from '.';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { formatTime } from '@/lib/date-format';
 import { cn } from '@/lib/utils';
+import { DEFAULT_MEMBER_IMAGE_URL } from '@/constants/constants';
 
 interface MemberTimerProps {
   member: IMemberInfo;
@@ -18,7 +19,7 @@ export const StudyGroupMember = React.memo(
           <MemberTimerDisplay joinedAtUTC={member.joinedAtUTC} />
         </div>
         <img
-          src={member.image_url ? member.image_url : '/octopus.png'}
+          src={member.image_url ? member.image_url : DEFAULT_MEMBER_IMAGE_URL}
           alt={member.nickname}
           className="w-4/5 aspect-square"
         />

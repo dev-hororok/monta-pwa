@@ -6,6 +6,7 @@ import {
   useMonthlyStatisticQuery,
 } from '@/services/queries/member-queries';
 import { formatDateStr } from '@/lib/date-format';
+import { DEFAULT_STAMP_IMAGE_URL } from '@/constants/constants';
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -76,7 +77,9 @@ export const useCalendar = (memberId: string) => {
       if (view === 'month') {
         const dateStr = formatDateStr(date);
         if (studiedDays.has(dateStr)) {
-          return <img src="/octopus.png" className="w-8 h-8 mx-auto" />;
+          return (
+            <img src={DEFAULT_STAMP_IMAGE_URL} className="w-8 h-8 mx-auto" />
+          );
         } else {
           return <div className="w-8 h-8" />;
         }
