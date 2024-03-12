@@ -1,8 +1,5 @@
-import { toast } from 'sonner';
-
 import type { IConsumableItemInventory } from '@/types/models/item.model';
 import { buttonVariants } from '@/components/ui/button';
-import { useConsumeItem } from '@/pages/inventory/hooks/use-consume-item';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -13,21 +10,11 @@ interface ConsumableItemInventoryCardProps {
 export const ConsumableItemInventoryCard = ({
   consumableItemInventory,
 }: ConsumableItemInventoryCardProps) => {
-  const { consume } = useConsumeItem();
   const { quantity, item } = consumableItemInventory;
   const { image_url, name } = item;
 
-  const handleClick = () => {
-    if (quantity < 1) {
-      toast.error('개수가 부족합니다.');
-      return;
-    }
-    consume({ itemInventory: consumableItemInventory });
-  };
-
   return (
     <div
-      onClick={handleClick}
       className={cn(
         buttonVariants({ variant: 'ghost' }),
         'h-auto p-1 flex flex-col items-center justify-center text-xs font-semibold cursor-pointer'

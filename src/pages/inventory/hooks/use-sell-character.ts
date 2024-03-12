@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
 import { useSellCharacterMutation } from '@/services/mutations/shop-mutations';
@@ -13,14 +13,21 @@ const useSellCharacter = (
   const [count, setCount] = useState(1);
   const { mutateAsync: sellCharacter } = useSellCharacterMutation();
 
-  const MaxCount = characterInventory ? characterInventory.quantity : 0;
+  const MaxCount = useMemo(
+    () => (characterInventory ? characterInventory.quantity : 0),
+    [characterInventory]
+  );
 
-  const incrementCount = () =>
-    setCount((prevCount) => Math.min(prevCount + 1, MaxCount));
-  const decrementCount = () =>
-    setCount((prevCount) => Math.max(prevCount - 1, 1));
+  const incrementCount = useCallback(
+    () => setCount((prevCount) => Math.min(prevCount + 1, MaxCount)),
+    [MaxCount]
+  );
+  const decrementCount = useCallback(
+    () => setCount((prevCount) => Math.max(prevCount - 1, 1)),
+    []
+  );
 
-  const onSubmitSell = async () => {
+  const onSubmitSell = useCallback(async () => {
     if (!characterInventory || !member) return;
     if (
       member.image_url === characterInventory.character.image_url &&
@@ -39,14 +46,16 @@ const useSellCharacter = (
       });
       toast.success(result.notes);
     } catch (e) {
+      // react-query에서 처리됨
       console.error('Error', e);
     } finally {
       setIsLoading(false);
     }
-  };
-  const resetCount = () => {
+  }, [characterInventory, count, member, sellCharacter]);
+
+  const resetCount = useCallback(() => {
     setCount(1);
-  };
+  }, [setCount]);
 
   return {
     isLoading,
