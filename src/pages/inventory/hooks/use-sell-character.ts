@@ -44,12 +44,16 @@ const useSellCharacter = (
       setIsLoading(false);
     }
   };
+  const resetCount = () => {
+    setCount(1);
+  };
 
   return {
     isLoading,
     count,
     incrementCount,
     decrementCount,
+    resetCount,
     onSubmitSell,
     MaxCount,
   };

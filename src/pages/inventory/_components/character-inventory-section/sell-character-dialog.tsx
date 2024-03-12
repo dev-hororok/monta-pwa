@@ -34,8 +34,22 @@ export const SellCharacterDialog = ({
     incrementCount,
     decrementCount,
     onSubmitSell,
+    resetCount,
     MaxCount,
   } = useSellCharacter(characterInventory, member);
+
+  // 같은 모달 다시열면 count 초기화
+  React.useEffect(() => {
+    resetCount();
+  }, [resetCount]);
+
+  const handleSubmit = () => {
+    onSubmitSell();
+    setIsOpen(false);
+  };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -84,14 +98,14 @@ export const SellCharacterDialog = ({
             <Button
               type="button"
               variant="outline"
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               className="w-full"
             >
               취소
             </Button>
             <Button
               type="button"
-              onClick={onSubmitSell}
+              onClick={handleSubmit}
               disabled={isLoading}
               className="w-full"
             >
