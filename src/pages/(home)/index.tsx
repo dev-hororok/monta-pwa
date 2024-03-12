@@ -1,11 +1,10 @@
 import { useCurrentMemberQuery } from '@/services/queries/member-queries';
 import { HomeHeader } from '@/pages/(home)/_components/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
-import { FoodInventorySection } from '@/pages/(home)/_components/food-inventory-section';
 import { TimerSection } from '@/pages/(home)/_components/timer-section';
 
 const MainPage = () => {
-  const { data: member, isPending, isError } = useCurrentMemberQuery();
+  const { isPending, isError } = useCurrentMemberQuery();
 
   if (isPending) {
     return <MobileLoadingSpinner />;
@@ -19,8 +18,6 @@ const MainPage = () => {
       <HomeHeader />
       <main className="h-full overflow-y-scroll scrollbar-hide">
         <TimerSection className="h-full" />
-
-        <FoodInventorySection member={member} className="h-1/3" />
       </main>
     </div>
   );

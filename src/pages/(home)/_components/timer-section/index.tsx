@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { PassButton } from './pass-button';
 import { StartButton } from './start-button';
 import { Button } from '@/components/ui/button';
+import { FoodInventoryButton } from './food-inventory-button';
 
 interface TimerSectionProps {
   className?: string;
@@ -23,7 +24,7 @@ export const TimerSection = ({ className }: TimerSectionProps) => {
         <TimerImage className="w-1/2 aspect-square" />
       </div>
 
-      <div className="flex-center">
+      <div className="flex-center gap-2">
         <UpdateTimerOptionDialog>
           <Button
             variant="ghost"
@@ -34,7 +35,7 @@ export const TimerSection = ({ className }: TimerSectionProps) => {
         </UpdateTimerOptionDialog>
       </div>
       <div className="h-1/2 flex justify-center items-center gap-2">
-        {timerType !== 'Work' ? <PassButton /> : null}
+        {timerType === 'Work' ? <FoodInventoryButton /> : <PassButton />}
         <StartButton />
       </div>
     </div>

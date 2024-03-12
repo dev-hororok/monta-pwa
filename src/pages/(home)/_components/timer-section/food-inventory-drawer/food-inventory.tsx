@@ -1,28 +1,26 @@
 import { useFoodInventoryQuery } from '@/services/queries/member-queries';
 import { cn } from '@/lib/utils';
-import type { IMember } from '@/types/models/member.model';
 import { AddFoodCard } from './add-food-card';
 import { FoodInventoryCard } from './food-inventory-card';
+import { useAuthStore } from '@/stores/auth-store';
 
 interface FoodInventorySectionProps {
-  member: IMember;
   className?: string;
 }
 
 export const FoodInventorySection = ({
-  member,
   className,
 }: FoodInventorySectionProps) => {
+  const memberId = useAuthStore((state) => state.memberId);
   const {
     data: foodItemInventory,
     isPending,
     isError,
-  } = useFoodInventoryQuery(member.member_id);
+  } = useFoodInventoryQuery(memberId);
 
   if (isPending) {
     return (
       <section className={cn('px-4', className)}>
-        <p className="text-center text-sm font-bold pb-4">재료 (최대 4개)</p>
         <div className="grid grid-cols-4 gap-1">
           <FoodInventoryCard.Skeleton />
           <FoodInventoryCard.Skeleton />
@@ -42,7 +40,6 @@ export const FoodInventorySection = ({
 
   return (
     <section className={cn('px-4', className)}>
-      <p className="text-center text-sm font-bold pb-4">재료 (최대 4개)</p>
       <div className="grid grid-cols-4 gap-1">
         {foodItemInventory ? (
           <>
