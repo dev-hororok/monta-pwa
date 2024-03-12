@@ -26,6 +26,9 @@ const useSellCharacter = (
     () => setCount((prevCount) => Math.max(prevCount - 1, 1)),
     []
   );
+  const resetCount = useCallback(() => {
+    setCount(1);
+  }, [setCount]);
 
   const onSubmitSell = useCallback(async () => {
     if (!characterInventory || !member) return;
@@ -45,17 +48,14 @@ const useSellCharacter = (
         count,
       });
       toast.success(result.notes);
+      resetCount();
     } catch (e) {
       // react-query에서 처리됨
       console.error('Error', e);
     } finally {
       setIsLoading(false);
     }
-  }, [characterInventory, count, member, sellCharacter]);
-
-  const resetCount = useCallback(() => {
-    setCount(1);
-  }, [setCount]);
+  }, [characterInventory, count, member, sellCharacter, resetCount]);
 
   return {
     isLoading,
