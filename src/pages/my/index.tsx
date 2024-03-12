@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ProfileSection } from './_components/profile-section';
 import { CalendarSection } from './_components/calendar-section';
 import { StreakSection } from './_components/streak-section';
+import { SummarySection } from './_components/summary-section';
 
 const MyPage = () => {
   const { data: member, isPending, isError } = useCurrentMemberQuery();
@@ -21,6 +22,7 @@ const MyPage = () => {
       <MyPageHeader />
       <main className="h-full overflow-y-scroll scrollbar-hide px-4">
         <ProfileSection member={member} />
+        <SummarySection memberId={member.member_id} />
         <Tabs defaultValue="calendar" className="w-full py-2 relative">
           <div className="sticky top-0 bg-background py-2 z-40">
             <TabsList className="grid grid-cols-2">

@@ -33,7 +33,8 @@ export const CalendarSection = ({ memberId }: CalendarSectionProps) => {
         />
         <p className="text-right text-sm text-foreground/70">
           <span>{formatTime(monthlyStatistic?.totalSeconds || 0)}</span> /
-          <span> {monthlyStatistic?.uniqueStudyDays || 0}일</span>
+          <span> {monthlyStatistic?.uniqueStudyDays || 0}일</span> /
+          <span> {monthlyStatistic?.totalCompleted || 0}회</span>
         </p>
       </div>
 

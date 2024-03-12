@@ -22,6 +22,7 @@ export const RestTimer = React.memo(
             alt="rest-timer"
             className={'w-1/2 aspect-square'}
           />
+          <p>닭이 휴식중 입니다...</p>
         </div>
         <div className="h-1/2">
           <div className="flex justify-center items-start h-1/2 pt-4">

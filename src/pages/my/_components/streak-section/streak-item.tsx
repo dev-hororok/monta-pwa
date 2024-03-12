@@ -33,6 +33,7 @@ export const StreakItem = ({ date }: StreakItemProps) => {
         <p className="text-sm font-semibold text-center">
           {formatTime(date.value ? date.value : 0)}
         </p>
+        <p className="text-sm font-semibold text-center"></p>
         <p className="text-xs text-foreground/70 text-center">{date.date}</p>
       </PopoverContent>
     </Popover>

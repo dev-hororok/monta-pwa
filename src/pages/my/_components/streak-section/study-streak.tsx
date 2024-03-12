@@ -23,12 +23,12 @@ const generateYearDates = (): Date[] => {
 
 const groupByWeeks = (dates: Date[], heatMapData: IStatisticHeatMapData[]) => {
   const weeks: {
-    dates: { date: string; value?: number }[];
+    dates: { date: string; value?: number; totalCompleted?: number }[];
     month: number;
     isFirstWeek: boolean;
   }[] = [];
 
-  let week: { date: string; value?: number }[] = [];
+  let week: { date: string; value?: number; totalCompleted?: number }[] = [];
   let lastMonth: number | null = null;
 
   dates.forEach((date, idx) => {
@@ -50,6 +50,7 @@ const groupByWeeks = (dates: Date[], heatMapData: IStatisticHeatMapData[]) => {
     week.push({
       date: dateStr,
       value: heatMapNode ? heatMapNode.totalSeconds : 0,
+      totalCompleted: heatMapNode ? heatMapNode.totalCompleted : 0,
     });
     if (idx === dates.length - 1) {
       weeks.push({

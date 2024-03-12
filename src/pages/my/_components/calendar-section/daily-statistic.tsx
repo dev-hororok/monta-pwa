@@ -43,7 +43,7 @@ export const DailyStatistic = ({ memberId, dateStr }: DailyStatisticProps) => {
         </div>
         <div className="w-full flex-center flex-col">
           <p className="text-primary">완료한 섹션</p>
-          <p className="text-lg">{formatTime(data.totalSeconds)}</p>
+          <p className="text-lg">{data.totalCompleted}</p>
         </div>
       </div>
     </div>
