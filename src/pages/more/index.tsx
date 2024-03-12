@@ -1,5 +1,4 @@
 import { MorePageHeader } from '@/components/headers/more-page-header';
-import { DarkModeButton } from './_components/darkmode-button';
 import { VibrationButton } from './_components/vibration-button';
 import { DeleteAccountDialog } from './_components/delete-account-dialog';
 import { LogoutDialog } from './_components/logout-dialog';
@@ -16,7 +15,7 @@ const MorePage = () => {
       <main className="h-full overflow-y-scroll scrollbar-hide space-y-4">
         <div className="space-y-2">
           <p className="px-6 font-semibold">시스템</p>
-          <DarkModeButton />
+          {/* <DarkModeButton /> */}
           <VibrationButton />
         </div>
         <div className="space-y-2">
