@@ -21,11 +21,11 @@ export const TimerSection = ({ className }: TimerSectionProps) => {
 
   return (
     <div className={cn('flex-center flex-col', className)}>
-      <div className="h-1/2 flex justify-center items-end">
+      <div className="h-2/5 flex justify-center items-end">
         <TimerImage className="w-1/2 aspect-square" />
       </div>
 
-      <div className="flex-center flex-col gap-2">
+      <div className="h-1/5 flex flex-col items-center justify-start gap-2">
         <UpdateTimerOptionDialog>
           <Button
             variant="ghost"
@@ -37,7 +37,7 @@ export const TimerSection = ({ className }: TimerSectionProps) => {
 
         <TimerSectionCounter />
       </div>
-      <div className="h-1/2 flex justify-center items-center gap-2">
+      <div className="h-2/5 flex justify-center items-center gap-2">
         {timerType === 'Work' ? <FoodInventoryButton /> : <PassButton />}
         <StartButton />
       </div>

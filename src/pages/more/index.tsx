@@ -1,4 +1,4 @@
-import { MorePageHeader } from '@/components/headers/more-page-header';
+import { MorePageHeader } from '@/pages/more/_components/more-page-header';
 import { VibrationButton } from './_components/vibration-button';
 import { DeleteAccountDialog } from './_components/delete-account-dialog';
 import { LogoutDialog } from './_components/logout-dialog';

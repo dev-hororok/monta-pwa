@@ -34,7 +34,7 @@ const navItems: NavItem[] = [
 
 export const FooterNav = () => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 md:absolute h-14 flex items-center mb-safe md:rounded-b-md bg-gray-50/50">
+    <nav className="fixed bottom-0 left-0 right-0 md:absolute h-14 flex items-center md:rounded-b-md bg-gray-50">
       {navItems.map((nav) => {
         return (
           <NavItemLink

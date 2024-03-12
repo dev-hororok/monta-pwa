@@ -14,7 +14,7 @@ export const RestTimer = React.memo(
   ({ classNames, ...props }: RestTimerProps) => {
     return (
       <div className={cn('h-full', classNames)} {...props}>
-        <div className={'w-full h-1/2 flex items-end justify-center'}>
+        <div className={'w-full h-1/2 flex flex-col items-center justify-end'}>
           <img
             onContextMenu={(e) => e.preventDefault()}
             loading="eager"
