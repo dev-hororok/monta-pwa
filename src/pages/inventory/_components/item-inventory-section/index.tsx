@@ -1,6 +1,7 @@
 import { useConsumableInventoryQuery } from '@/services/queries/member-queries';
 import { ConsumableItemInventoryCard } from './consumable-inventory-card';
 import type { IMember } from '@/types/models/member.model';
+import { ConsumeItemDialog } from './consume-item-dialog';
 
 interface ItemInventorySectionProps {
   member: IMember;
@@ -30,12 +31,15 @@ export const ItemInventorySection = ({ member }: ItemInventorySectionProps) => {
         <>
           {items.length === 0 ? <EmptyItemMessage /> : null}
           <div className="grid grid-cols-3 gap-2">
-            {items.map((item, idx) => {
+            {items.map((item) => {
               return (
-                <ConsumableItemInventoryCard
-                  key={idx}
-                  consumableItemInventory={item}
-                />
+                <ConsumeItemDialog
+                  key={item.item_inventory_id}
+                  itemInventory={item}
+                  member={member}
+                >
+                  <ConsumableItemInventoryCard consumableItemInventory={item} />
+                </ConsumeItemDialog>
               );
             })}
           </div>
