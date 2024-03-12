@@ -1,4 +1,4 @@
-import { IStudyStreak } from '@/models/streak.model';
+import type { IStudyStreak } from '@/types/models/streak.model';
 import { Badge } from '@/components/ui/badge';
 
 interface Props {

@@ -3,7 +3,7 @@ import { EditProfileImageDialog } from './edit-profile-img-dialog';
 import { EditStatusMessageDialog } from './edit-status-message-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import type { IMember } from '@/models/member.model';
+import type { IMember } from '@/types/models/member.model';
 
 interface ProfileSectionProps {
   member: IMember;

@@ -1,6 +1,6 @@
 import { useTimer } from '@/hooks/use-timer';
 import { useTimerStateStore } from '@/stores/timer-state-store';
-import type { IMember } from '@/models/member.model';
+import type { IMember } from '@/types/models/member.model';
 import { StudyGroupTimer } from './study-group-timer';
 import { RestTimer } from './rest-timer';
 import { useTimerGroupSocket } from '@/hooks/use-timer-group-socket';

@@ -13,8 +13,8 @@ import {
 import type {
   IConsumableItemInventory,
   IFoodItemInventory,
-} from '@/models/item.model';
-import type { IStudyStreak } from '@/models/streak.model';
+} from '@/types/models/item.model';
+import type { IStudyStreak } from '@/types/models/streak.model';
 
 // 음식 아이템 사용
 export const useConsumeFoodItemMutation = () => {

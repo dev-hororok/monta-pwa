@@ -1,4 +1,4 @@
-import type { StudyRecordStatusType } from '@/models/study.model';
+import type { StudyRecordStatusType } from '@/types/models/study.model';
 import type { ApiSuccessResponse } from '../types/api-response';
 import { nestHttpRequest } from '../common/http-request';
 

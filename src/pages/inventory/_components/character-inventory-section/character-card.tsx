@@ -1,4 +1,4 @@
-import type { ICharacterInventory } from '@/models/character.model';
+import type { ICharacterInventory } from '@/types/models/character.model';
 import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';

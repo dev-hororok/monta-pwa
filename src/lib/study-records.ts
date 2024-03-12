@@ -1,4 +1,4 @@
-import { IStudyRecord } from '@/models/study.model';
+import type { IStudyRecord } from '@/types/models/study.model';
 import { formatDateStr } from './date-format';
 
 export interface HeatMapData {

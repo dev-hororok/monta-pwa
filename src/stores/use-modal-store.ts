@@ -1,6 +1,6 @@
-import { ICharacter } from '@/models/character.model';
-import { IConsumableItemInventory } from '@/models/item.model';
-import { IPalette } from '@/models/palette.model';
+import { ICharacter } from '@/types/models/character.model';
+import { IConsumableItemInventory } from '@/types/models/item.model';
+import { IPalette } from '@/types/models/palette.model';
 import { create } from 'zustand';
 
 interface ModalState<T = undefined> {

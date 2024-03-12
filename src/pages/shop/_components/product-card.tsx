@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
-import type { Item } from '@/models/item.model';
+import type { Item } from '@/types/models/item.model';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductCardProps {

@@ -1,7 +1,7 @@
 import { useShopConsumableItemsQuery } from '@/services/queries/shop-queries';
 import { ProductCard } from './product-card';
 import { PurchaseItemDialog } from './purchase-item-dialog';
-import type { IMember } from '@/models/member.model';
+import type { IMember } from '@/types/models/member.model';
 
 interface ToolProductsSectionProps {
   member: IMember;

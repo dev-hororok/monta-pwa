@@ -1,6 +1,6 @@
-import type { ICharacter } from '@/models/character.model';
+import type { ICharacter } from '@/types/models/character.model';
 import type { ApiSuccessResponse } from '../types/api-response';
-import type { IPalette } from '@/models/palette.model';
+import type { IPalette } from '@/types/models/palette.model';
 import { springHttpRequest } from '../common/http-request';
 
 // 음식 아이템 사용

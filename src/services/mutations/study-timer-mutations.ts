@@ -7,7 +7,7 @@ import {
   STATISTIC_HEAT_MAP,
   STATISTIC_MONTHLY,
 } from '../queries/member-queries';
-import type { StudyRecordStatusType } from '@/models/study.model';
+import type { StudyRecordStatusType } from '@/types/models/study.model';
 
 // 타이머 시작 시간 기록
 export const useStartStudyTimerMutation = () => {

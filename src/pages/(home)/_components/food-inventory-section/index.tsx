@@ -1,6 +1,6 @@
 import { useFoodInventoryQuery } from '@/services/queries/member-queries';
 import { cn } from '@/lib/utils';
-import { IMember } from '@/models/member.model';
+import type { IMember } from '@/types/models/member.model';
 import { AddFoodCard } from './add-food-card';
 import { FoodInventoryCard } from './food-inventory-card';
 

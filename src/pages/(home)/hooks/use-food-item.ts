@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import type { IFoodItemInventory } from '@/models/item.model';
+import type { IFoodItemInventory } from '@/types/models/item.model';
 import { useConsumeFoodItemMutation } from '@/services/mutations/item-inventory-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
 

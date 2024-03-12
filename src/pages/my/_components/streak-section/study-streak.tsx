@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 
-import type { IStudyStreak } from '@/models/streak.model';
-import type { IStatisticHeatMapData } from '@/models/statistic.model';
+import type { IStudyStreak } from '@/types/models/streak.model';
+import type { IStatisticHeatMapData } from '@/types/models/statistic.model';
 import { formatDateStr } from '@/lib/date-format';
 import { StreakItem } from './streak-item';
 

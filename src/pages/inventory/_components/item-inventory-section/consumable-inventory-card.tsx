@@ -1,6 +1,6 @@
 import { toast } from 'sonner';
 
-import type { IConsumableItemInventory } from '@/models/item.model';
+import type { IConsumableItemInventory } from '@/types/models/item.model';
 import { buttonVariants } from '@/components/ui/button';
 import { useConsumeItem } from '@/pages/inventory/hooks/use-consume-item';
 import { cn } from '@/lib/utils';

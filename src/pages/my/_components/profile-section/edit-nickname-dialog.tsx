@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { IMember } from '@/models/member.model';
+import type { IMember } from '@/types/models/member.model';
 import { useEditMemberMutation } from '@/services/mutations/member-mutations';
 import {
   Form,

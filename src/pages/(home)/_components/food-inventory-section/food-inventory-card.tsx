@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 
 import { buttonVariants } from '@/components/ui/button';
 import { formatTime } from '@/lib/date-format';
-import type { IFoodItemInventory } from '@/models/item.model';
+import type { IFoodItemInventory } from '@/types/models/item.model';
 import { cn } from '@/lib/utils';
 import { useConsumeFoodItem } from '@/pages/(home)/hooks/use-food-item';
 import { Skeleton } from '@/components/ui/skeleton';

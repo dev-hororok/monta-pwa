@@ -1,6 +1,6 @@
 import { useConsumableInventoryQuery } from '@/services/queries/member-queries';
 import { ConsumableItemInventoryCard } from './consumable-inventory-card';
-import type { IMember } from '@/models/member.model';
+import type { IMember } from '@/types/models/member.model';
 
 interface ItemInventorySectionProps {
   member: IMember;

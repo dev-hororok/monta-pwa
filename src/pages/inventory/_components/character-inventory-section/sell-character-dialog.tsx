@@ -12,8 +12,8 @@ import {
 } from '@/components/ui/dialog';
 import useSellCharacter from '../../hooks/use-sell-character';
 import { useState } from 'react';
-import { ICharacterInventory } from '@/models/character.model';
-import { IMember } from '@/models/member.model';
+import type { ICharacterInventory } from '@/types/models/character.model';
+import type { IMember } from '@/types/models/member.model';
 
 interface SellCharacterDialogProps {
   characterInventory: ICharacterInventory;

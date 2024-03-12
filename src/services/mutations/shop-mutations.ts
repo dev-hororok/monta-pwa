@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { IMember } from '@/models/member.model';
+import type { IMember } from '@/types/models/member.model';
 import { purchaseItem, sellCharacter } from '../apis/shop.api';
 import {
   CHARACTER_INVENTORY_QUERY_KEY,

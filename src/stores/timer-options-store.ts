@@ -1,4 +1,4 @@
-import { IStudyCategory } from '@/models/study.model';
+import { IStudyCategory } from '@/types/models/study.model';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 

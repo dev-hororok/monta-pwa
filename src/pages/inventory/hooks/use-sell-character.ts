@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { useSellCharacterMutation } from '@/services/mutations/shop-mutations';
-import type { ICharacterInventory } from '@/models/character.model';
-import { IMember } from '@/models/member.model';
+import type { ICharacterInventory } from '@/types/models/character.model';
+import type { IMember } from '@/types/models/member.model';
 
 const useSellCharacter = (
   characterInventory: ICharacterInventory | null,

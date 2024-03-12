@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { usePurchaseItemMutation } from '@/services/mutations/shop-mutations';
-import { Item } from '@/models/item.model';
+import { Item } from '@/types/models/item.model';
 
 export const usePurchaseItem = (item: Item | null) => {
   const [isLoading, setIsLoading] = useState(false);

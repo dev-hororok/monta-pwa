@@ -1,17 +1,17 @@
 import { nestHttpRequest } from '../common/http-request';
 import type { ApiSuccessResponse } from '../types/api-response';
-import type { IMember } from '@/models/member.model';
-import type { ICharacterInventory } from '@/models/character.model';
+import type { IMember } from '@/types/models/member.model';
+import type { ICharacterInventory } from '@/types/models/character.model';
 import type {
   IConsumableItemInventory,
   IFoodItemInventory,
-} from '@/models/item.model';
+} from '@/types/models/item.model';
 import type {
   IDailyStatistic,
   IMontlyStatistic,
   IStatisticHeatMapData,
-} from '@/models/statistic.model';
-import type { IStudyStreak } from '@/models/streak.model';
+} from '@/types/models/statistic.model';
+import type { IStudyStreak } from '@/types/models/streak.model';
 import { useAuthStore } from '@/stores/auth-store';
 
 // 현재유저 조회

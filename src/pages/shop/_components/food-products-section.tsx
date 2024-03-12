@@ -1,6 +1,6 @@
 import { useShopFoodItemsQuery } from '@/services/queries/shop-queries';
 import { ProductCard } from './product-card';
-import type { IMember } from '@/models/member.model';
+import type { IMember } from '@/types/models/member.model';
 import { PurchaseItemDialog } from './purchase-item-dialog';
 
 interface FoodProductsSectionProps {
