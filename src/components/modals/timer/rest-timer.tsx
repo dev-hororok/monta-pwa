@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useTimerStateStore } from '@/stores/timer-state-store';
@@ -15,7 +14,7 @@ export const RestTimer = React.memo(
   ({ classNames, ...props }: RestTimerProps) => {
     return (
       <div className={cn('h-full', classNames)} {...props}>
-        <div className={'w-full h-3/5 flex items-end justify-center'}>
+        <div className={'w-full h-1/2 flex items-end justify-center'}>
           <img
             onContextMenu={(e) => e.preventDefault()}
             loading="eager"
@@ -24,11 +23,13 @@ export const RestTimer = React.memo(
             className={'w-1/2 aspect-square'}
           />
         </div>
-        <div className="flex-center h-1/5">
-          <TimerDisplay />
-        </div>
-        <div className="flex-center h-1/5">
-          <TimerPassButton />
+        <div className="h-1/2">
+          <div className="flex justify-center items-start h-1/2 pt-4">
+            <TimerDisplay />
+          </div>
+          <div className="flex justify-center items-start h-1/2">
+            <TimerPassButton />
+          </div>
         </div>
       </div>
     );
@@ -48,10 +49,10 @@ const TimerPassButton = () => {
     <Button
       type="button"
       onClick={handleButtonClick}
-      variant={'ghost'}
-      className={'p-2 h-auto'}
+      variant={'secondary'}
+      className={'rounded-3xl py-6 w-40 text-xl'}
     >
-      <Icons.pause className="w-10 h-10" />
+      Skip
     </Button>
   );
 };

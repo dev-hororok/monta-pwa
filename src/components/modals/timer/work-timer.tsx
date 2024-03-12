@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { TimerDisplay } from './timer-display';
@@ -40,8 +39,12 @@ export const WorkTimer = React.memo(
 const TimerInteruptButton = () => {
   return (
     <InteruptTimerDialog>
-      <Button type="button" variant={'ghost'} className={'p-2 h-auto'}>
-        <Icons.pause className="w-10 h-10" />
+      <Button
+        type="button"
+        variant={'secondary'}
+        className={'rounded-3xl py-6 w-40 text-xl'}
+      >
+        Give up
       </Button>
     </InteruptTimerDialog>
   );

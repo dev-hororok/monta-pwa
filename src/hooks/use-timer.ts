@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useEndStudyTimerMutation } from '@/services/mutations/study-timer-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
+import { useTimerOptionsStore } from '@/stores/timer-options-store';
 
 export const useTimer = () => {
   const {
@@ -9,11 +10,13 @@ export const useTimer = () => {
     isActive,
     timerType,
     targetTime,
+    sectionCompleted,
     nextTimer,
     startTimer,
     pauseTimer,
     _updateTimer,
   } = useTimerStateStore();
+  const sectionCount = useTimerOptionsStore((state) => state.sectionCount);
   const { mutate: endStudyTimer } = useEndStudyTimerMutation();
   const openModal = useModalStore((state) => state.openModal);
 
@@ -44,10 +47,30 @@ export const useTimer = () => {
   // 타이머 종료상황
   React.useEffect(() => {
     if (duration < targetTime) return;
+    let alarmType = '';
     if (timerType === 'Work') {
       endStudyTimer({ status: 'Completed', duration });
+      if (sectionCompleted + 1 === sectionCount) {
+        alarmType = 'FinishSection';
+      } else {
+        alarmType = 'EndWork';
+      }
+    } else {
+      alarmType = 'EndRest';
     }
+
+    openModal('timerAlarm', {
+      alarmType: alarmType,
+    });
     nextTimer();
-    openModal('timerAlarm');
-  }, [timerType, targetTime, duration, nextTimer, endStudyTimer, openModal]);
+  }, [
+    timerType,
+    targetTime,
+    duration,
+    sectionCompleted,
+    sectionCount,
+    nextTimer,
+    endStudyTimer,
+    openModal,
+  ]);
 };

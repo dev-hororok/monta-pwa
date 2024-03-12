@@ -5,21 +5,22 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useModalStore } from '@/stores/use-modal-store';
-import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useAppSettingsStore } from '@/stores/app-setting-store';
+import { EndWorkAlarm } from './end-work-alarm';
+import { EndRestAlarm } from './end-rest-alarm';
+import { FinishSectionAlarm } from './finish-section-alarm';
 
 export const TimerAlarmDialog = () => {
   const { vibrationEnabled } = useAppSettingsStore(
     (state) => state.appSettings
   );
   const isOpen = useModalStore((state) => state.modals.timerAlarm.isOpen);
+  const alarmType =
+    useModalStore((state) => state.modals.timerAlarm.data?.alarmType) ||
+    'EndWork';
   const closeModal = useModalStore((state) => state.closeModal);
-
-  const timerType = useTimerStateStore((state) => state.timerType);
 
   React.useEffect(() => {
     if (vibrationEnabled) {
@@ -41,27 +42,18 @@ export const TimerAlarmDialog = () => {
           `w-full h-screen md:max-w-[416px] md:max-h-[736px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
         )}
       >
-        <AlertDialogTitle>
-          {timerType === 'Work'
-            ? '쉬는시간 끝!!!'
-            : '어디서 맛있는 냄새가 납니다'}
-        </AlertDialogTitle>
-
-        {timerType === 'Work' ? (
-          <img src="./whale.png" alt="main" className="h-1/2 mx-auto" />
-        ) : (
-          <img src="./shrimp.png" alt="main" className="h-1/2 mx-auto" />
-        )}
-
-        <div className="w-full flex flex-col justify-end h-full gap-2">
-          <AlertDialogFooter className="w-full">
+        {alarmType === 'EndWork' ? <EndWorkAlarm /> : null}
+        {alarmType === 'EndRest' ? <EndRestAlarm /> : null}
+        {alarmType === 'FinishSection' ? <FinishSectionAlarm /> : null}
+        <div className="h-1/2 flex items-end">
+          <div className="flex justify-center items-start h-1/2">
             <AlertDialogAction
               onClick={handleConfirmClick}
-              className="h-12 w-full"
+              className={'rounded-3xl py-6 w-40 text-xl'}
             >
               확인
             </AlertDialogAction>
-          </AlertDialogFooter>
+          </div>
         </div>
       </AlertDialogContent>
     </AlertDialog>

@@ -33,9 +33,7 @@ export const TimerModal = () => {
             <StudyGroupTimer members={members} />
           ) : null}
           {timerType === 'Work' && !isTogetherEnabled ? <WorkTimer /> : null}
-          {timerType === 'Rest' || timerType === 'LongRest' ? (
-            <RestTimer />
-          ) : null}
+          {timerType === 'Rest' ? <RestTimer /> : null}
         </main>
       </div>
     </div>

@@ -49,7 +49,7 @@ export const UpdateTimerOptionDialog = ({
             postfix="회"
           />
           <TimerOption label="쉬는 시간" optionKey="restTime" />
-          <TimerOption label="긴 쉬는 시간" optionKey="longRestTime" />
+          {/* <TimerOption label="긴 쉬는 시간" optionKey="longRestTime" /> */}
           <IsTogetherOption />
         </div>
         <AlertDialogAction onClick={handleConfirm}>확인</AlertDialogAction>

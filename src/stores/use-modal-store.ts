@@ -8,6 +8,8 @@ interface ModalState<T = undefined> {
   data?: T;
 }
 
+type AlarmType = 'EndWork' | 'EndRest' | 'FinishSection';
+
 interface ModalsState {
   // 캐릭터 획득
   characterAcquisition: ModalState<ICharacter>;
@@ -18,7 +20,7 @@ interface ModalsState {
   }>;
   // 타이머
   timer: ModalState;
-  timerAlarm: ModalState;
+  timerAlarm: ModalState<{ alarmType: AlarmType }>;
 }
 
 type ModalType = keyof ModalsState;

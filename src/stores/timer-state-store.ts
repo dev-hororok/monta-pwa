@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { useTimerOptionsStore } from './timer-options-store';
 
-export type TimerType = 'Work' | 'Rest' | 'LongRest';
+export type TimerType = 'Work' | 'Rest';
 
 interface TimerStateStore {
   startTime: number | null; // 타이머를 시작한 시간 (Unix timestamp)
@@ -46,7 +46,7 @@ export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
     });
   },
   nextTimer: () => {
-    const { pomodoroTime, restTime, longRestTime, sectionCount } =
+    const { pomodoroTime, restTime, sectionCount } =
       useTimerOptionsStore.getState();
     const { timerType, sectionCompleted } = get();
 
@@ -55,14 +55,17 @@ export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
     let newSectionCompleted = sectionCompleted;
 
     if (timerType === 'Work' && sectionCompleted + 1 < sectionCount) {
+      // 휴식 시간
       newTimerType = 'Rest';
       newTargetTime = restTime * 60;
       newSectionCompleted += 1;
     } else if (timerType === 'Work') {
-      newTimerType = 'LongRest';
-      newTargetTime = longRestTime * 60;
+      // 타이머 완료
+      newTimerType = 'Work';
+      newTargetTime = pomodoroTime * 60;
       newSectionCompleted = 0;
     } else {
+      // 공부 시간
       newTimerType = 'Work';
       newTargetTime = pomodoroTime * 60;
     }
