@@ -91,6 +91,7 @@ export const PaletteAcquisitionDialog = () => {
                 type="button"
                 onClick={onClickHandler}
                 className="h-12 w-full"
+                disabled={data.consumableItemInventory.quantity < 1}
               >
                 다시뽑기
               </AlertDialogAction>
