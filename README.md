@@ -123,14 +123,14 @@
   - startTime을 기록하여 앱이 백그라운드로 갈때 타이머를 멈추고 앱이 다시 활성화 되면 startTime 기준으로 시간 업데이트
 - [x] 타이머 정확도 높히기
   - 타이머 시작 시 시간(`startTime`)을 기록하고 초 업데이트 시 `startTime - Date.now()`로 정확성 높이기
-- [ ] 앱이 백그라운드 상태면 vibration API와 타이머 종료 api를 보낼 수 없음
+- [x] 앱이 백그라운드 상태면 vibration API와 타이머 종료 api를 보낼 수 없음
   - 따라서 앱에 다시 들어왔을때 진동과 종료 api를 처리해야함
   - 스터디 레코드에 targetTime을 기록하고 endTime에 Date대신 초단위로 기록하여 최대 targetTime만 기록되도록 로직수정
     (Math.min(targetTime, (Date.now() - record.created_at.getTime()) / 1000))
 - [x] 구글 간편로그인 기능
 - [x] 카카오 간편로그인 기능
 - [x] 네이버 간편로그인 기능
-- [ ] Color Theme 작업 (가시성 향상, 브랜드 색 결정)
+- [x] Color Theme 작업 (가시성 향상, 브랜드 색 결정)
 - [x] 타이머 중단 Dialog 디자인 수정
 - [x] 로그아웃 확인 Dialog 작업
 - [x] 계정 삭제 기능
