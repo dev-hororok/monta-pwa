@@ -59,6 +59,8 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
                 vapidKey: FIREBASE_VAPID_KEY,
               });
 
+              // 토큰 백엔드에 보내기
+
               console.log('Token generated : ', token);
             } else if (permission === 'denied') {
               //notifications are blocked

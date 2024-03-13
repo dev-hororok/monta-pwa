@@ -12,10 +12,10 @@ self.addEventListener('push', function (e) {
   if (!e.data.json()) return;
 
   const resultData = e.data.json().notification;
+
   const notificationTitle = resultData.title;
   const notificationOptions = {
     body: resultData.body,
   };
-
   self.registration.showNotification(notificationTitle, notificationOptions);
 });

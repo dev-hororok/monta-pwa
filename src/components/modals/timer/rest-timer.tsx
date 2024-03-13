@@ -18,7 +18,7 @@ export const RestTimer = React.memo(
           <img
             onContextMenu={(e) => e.preventDefault()}
             loading="eager"
-            src={'./chicken_1.png'}
+            src={'./chicken_animation_sleep.png'}
             alt="rest-timer"
             className={'w-1/2 aspect-square'}
           />

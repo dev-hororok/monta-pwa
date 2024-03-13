@@ -17,11 +17,11 @@ export const WorkTimer = React.memo(
           <img
             onContextMenu={(e) => e.preventDefault()}
             loading="eager"
-            src={'./chicken_2.png'}
+            src={'./chicken_animation.png'}
             alt="rest-timer"
             className={'w-1/2 aspect-square'}
           />
-          <p>닭이 자라고 있습니다...</p>
+          <p>목표가 얼마 안남았닭...!</p>
         </div>
         <div className="h-1/2">
           <div className="flex justify-center items-start h-1/2 pt-4">

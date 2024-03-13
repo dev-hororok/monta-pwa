@@ -13,11 +13,11 @@ export const TimerImage = React.memo(({ animation, className }: Props) => {
 
   const timerImageSrc = React.useMemo(() => {
     if (timerType === 'Work') {
-      return './chicken_2.png';
+      return './chicken.png';
     } else if (timerType === 'Rest') {
-      return './chicken_1.png';
+      return './chicken.png';
     } else {
-      return './chicken_1.png';
+      return './chicken.png';
     }
   }, [timerType]);
 

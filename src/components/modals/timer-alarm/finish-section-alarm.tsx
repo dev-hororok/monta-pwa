@@ -17,7 +17,7 @@ export const FinishSectionAlarm = () => {
     <div className={'w-full h-1/2 flex flex-col items-center justify-end'}>
       <Fireworks autorun={{ speed: 1, duration: 2000 }} />
       <img
-        src={'./chicken_2.png'}
+        src={'./chicken_finish.png'}
         alt="main"
         className={'w-1/2 aspect-square'}
       />
