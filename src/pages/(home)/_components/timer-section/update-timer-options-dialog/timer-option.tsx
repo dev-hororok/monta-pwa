@@ -11,12 +11,14 @@ interface TimerOptionProps {
   label: string;
   optionKey: TimerOptionKey;
   postfix?: string;
+  disabled: boolean;
 }
 
 export const TimerOption: React.FC<TimerOptionProps> = ({
   label,
   optionKey,
   postfix = '분',
+  disabled,
 }) => {
   const value = useTimerOptionsStore((state) => state[optionKey]);
   const setValue = useTimerOptionsStore((state) => state.setTimerOptions);
@@ -32,6 +34,7 @@ export const TimerOption: React.FC<TimerOptionProps> = ({
           }
           options={timerOptions[optionKey]}
           postfix={postfix}
+          disabled={disabled}
         />
       </div>
     </div>

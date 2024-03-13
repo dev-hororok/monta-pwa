@@ -13,12 +13,15 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { IsTogetherOption } from './is-together-option';
+import { TimerModeOption } from './timer-mode-option';
+import { useTimerOptionsStore } from '@/stores/timer-options-store';
 
 export const UpdateTimerOptionDialog = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  const timerMode = useTimerOptionsStore((state) => state.timerMode);
   const initTimer = useTimerStateStore((state) => state.initTimer);
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -42,15 +45,25 @@ export const UpdateTimerOptionDialog = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="pb-6 w-full space-y-3">
-          <TimerOption label="집중 시간" optionKey="pomodoroTime" />
+          <TimerOption
+            label="집중 시간"
+            optionKey="pomodoroTime"
+            disabled={timerMode === 'normal'}
+          />
           <TimerOption
             label="집중 횟수"
             optionKey="sectionCount"
             postfix="회"
+            disabled={timerMode === 'normal'}
           />
-          <TimerOption label="쉬는 시간" optionKey="restTime" />
+          <TimerOption
+            label="쉬는 시간"
+            optionKey="restTime"
+            disabled={timerMode === 'normal'}
+          />
           {/* <TimerOption label="긴 쉬는 시간" optionKey="longRestTime" /> */}
           <IsTogetherOption />
+          <TimerModeOption />
         </div>
         <AlertDialogAction onClick={handleConfirm}>확인</AlertDialogAction>
       </AlertDialogContent>

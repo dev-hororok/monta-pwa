@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export type TimerMode = 'normal' | 'pomodoro';
 export type TimerOptionKey = 'pomodoroTime' | 'sectionCount' | 'restTime';
 // | 'longRestTime';
 
@@ -12,6 +13,7 @@ export const timerOptions: Record<TimerOptionKey, number[]> = {
 };
 
 interface TimerOptionsStore {
+  timerMode: TimerMode;
   pomodoroTime: number;
   sectionCount: number;
   restTime: number;
@@ -20,11 +22,13 @@ interface TimerOptionsStore {
 
   isTogetherEnabled: boolean;
   toggleIsTogetherEnabled: () => void;
+  toggleTimerMode: () => void;
 }
 
 export const useTimerOptionsStore = create<TimerOptionsStore>()(
   persist(
     (set) => ({
+      timerMode: 'normal',
       pomodoroTime: 25, // 기본 뽀모도로 시간 25분
       sectionCount: 4, // 기본 섹션 4회
       restTime: 5, // 쉬는시간
@@ -39,6 +43,12 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
         set((state) => ({
           ...state,
           isTogetherEnabled: !state.isTogetherEnabled,
+        }));
+      },
+      toggleTimerMode: () => {
+        set((state) => ({
+          ...state,
+          timerMode: state.timerMode === 'normal' ? 'pomodoro' : 'normal',
         }));
       },
     }),

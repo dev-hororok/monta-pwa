@@ -10,12 +10,14 @@ import { StartButton } from './start-button';
 import { Button } from '@/components/ui/button';
 import { FoodInventoryButton } from './food-inventory-button';
 import { TimerSectionCounter } from './timer-section-counter';
+import { useTimerOptionsStore } from '@/stores/timer-options-store';
 
 interface TimerSectionProps {
   className?: string;
 }
 
 export const TimerSection = ({ className }: TimerSectionProps) => {
+  const timerMode = useTimerOptionsStore((state) => state.timerMode);
   const timerType = useTimerStateStore((state) => state.timerType);
   const targetTime = useTimerStateStore((state) => state.targetTime);
 
@@ -31,11 +33,11 @@ export const TimerSection = ({ className }: TimerSectionProps) => {
             variant="ghost"
             className="text-5xl h-auto flex items-center gap-2 tracking-widest"
           >
-            {formatTime(targetTime)}
+            {formatTime(timerMode === 'pomodoro' ? targetTime : 0)}
           </Button>
         </UpdateTimerOptionDialog>
 
-        <TimerSectionCounter />
+        {timerMode === 'pomodoro' ? <TimerSectionCounter /> : null}
       </div>
       <div className="h-2/5 flex justify-center items-center gap-2">
         {timerType === 'Work' ? <FoodInventoryButton /> : <PassButton />}

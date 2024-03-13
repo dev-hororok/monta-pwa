@@ -11,11 +11,15 @@ import { useAppSettingsStore } from '@/stores/app-setting-store';
 import { EndWorkAlarm } from './end-work-alarm';
 import { EndRestAlarm } from './end-rest-alarm';
 import { FinishSectionAlarm } from './finish-section-alarm';
+import { useTimerStateStore } from '@/stores/timer-state-store';
+import { useTimerOptionsStore } from '@/stores/timer-options-store';
 
 export const TimerAlarmDialog = () => {
   const { vibrationEnabled } = useAppSettingsStore(
     (state) => state.appSettings
   );
+  const timerMode = useTimerOptionsStore((state) => state.timerMode);
+  const interuptTimer = useTimerStateStore((state) => state.interuptTimer);
   const isOpen = useModalStore((state) => state.modals.timerAlarm.isOpen);
   const alarmType =
     useModalStore((state) => state.modals.timerAlarm.data?.alarmType) ||
@@ -31,6 +35,11 @@ export const TimerAlarmDialog = () => {
 
   const handleConfirmClick = () => {
     if (vibrationEnabled) window.navigator.vibrate(0);
+
+    if (timerMode === 'normal') {
+      interuptTimer();
+    }
+
     closeModal('timerAlarm');
     closeModal('timer');
   };

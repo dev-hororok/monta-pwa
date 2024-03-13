@@ -17,6 +17,7 @@ export const useTimer = () => {
     _updateTimer,
   } = useTimerStateStore();
   const sectionCount = useTimerOptionsStore((state) => state.sectionCount);
+  const timerMode = useTimerOptionsStore((state) => state.timerMode);
   const { mutate: endStudyTimer } = useEndStudyTimerMutation();
   const openModal = useModalStore((state) => state.openModal);
 
@@ -44,8 +45,10 @@ export const useTimer = () => {
     return () => clearInterval(interval);
   }, [isActive, duration, _updateTimer]);
 
-  // 타이머 종료상황
+  // 뽀모도로 타이머 종료 트리거
   React.useEffect(() => {
+    if (timerMode === 'normal') return;
+
     if (duration < targetTime) return;
     let alarmType = '';
     if (timerType === 'Work') {
@@ -64,6 +67,7 @@ export const useTimer = () => {
     });
     nextTimer();
   }, [
+    timerMode,
     timerType,
     targetTime,
     duration,
