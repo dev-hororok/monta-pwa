@@ -30,9 +30,7 @@ export const useCloseAppHandler = (delay = 1500) => {
         }, delay);
       } else {
         // 사용자가 지정된 시간 내에 다시 뒤로 가기를 누르면 앱 종료
-        for (let i = 0; i < window.history.length; ++i) {
-          window.history.back();
-        }
+        window.history.go(-(window.history.length + 2));
       }
     };
 
