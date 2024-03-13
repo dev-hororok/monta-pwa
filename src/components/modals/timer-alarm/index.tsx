@@ -36,6 +36,7 @@ export const TimerAlarmDialog = () => {
   const handleConfirmClick = () => {
     if (vibrationEnabled) window.navigator.vibrate(0);
 
+    // 일반 타이머는 타이머 중단 시 finish alarm에서 duration을 표시해야 해서 알람을 닫을 때 초기화
     if (timerMode === 'normal') {
       interuptTimer();
     }

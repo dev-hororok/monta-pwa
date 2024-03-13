@@ -27,31 +27,24 @@ export const InteruptTimerDialog = ({ children }: InteruptTimerDialogProps) => {
   const duration = useTimerStateStore((state) => state.duration);
   const pauseTimer = useTimerStateStore((state) => state.pauseTimer);
   const interuptTimer = useTimerStateStore((state) => state.interuptTimer);
-  const openModal = useModalStore((state) => state.openModal);
-  const closeModal = useModalStore((state) => state.closeModal);
+  const { openModal, closeModal } = useModalStore((state) => state);
 
   const { mutate: endStudyTimer } = useEndStudyTimerMutation();
 
   const onClickHandler = () => {
     endStudyTimer({ duration: duration, status: 'Incompleted' });
 
-    // 일반 타이머: 중단 시 멈추고 완료 알람 모달 열기
+    // 일반 타이머: 중단 시 일시정지 후 완료 알람 모달에서 interuptTimer()처리
     if (timerMode === 'normal') {
       pauseTimer();
       openModal('timerAlarm', {
         alarmType: 'FinishSection',
       });
     } else {
-      // 뽀모도로 타이머: 타이머 초기화 후 모달 닫기
+      // 뽀모도로 타이머: 타이머 초기화 후 알람 없이 모달 닫기
       interuptTimer();
       closeModal('timer');
     }
-  };
-
-  // 취소 시 타이머 재시작
-  const onClickCancelHandler = () => {
-    // startTimer();
-    setIsOpen(false);
   };
 
   return (
@@ -66,12 +59,7 @@ export const InteruptTimerDialog = ({ children }: InteruptTimerDialogProps) => {
         </AlertDialogDescription>
 
         <AlertDialogFooter className="w-full">
-          <AlertDialogCancel
-            onClick={onClickCancelHandler}
-            className="h-12 w-full"
-          >
-            취소
-          </AlertDialogCancel>
+          <AlertDialogCancel className="h-12 w-full">취소</AlertDialogCancel>
           <AlertDialogAction onClick={onClickHandler} className="h-12 w-full">
             확인
           </AlertDialogAction>

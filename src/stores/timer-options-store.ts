@@ -1,3 +1,6 @@
+import { FIREBASE_VAPID_KEY } from '@/constants/constants';
+import { messaging } from '@/lib/firebase';
+import { getToken } from 'firebase/messaging';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -27,7 +30,7 @@ interface TimerOptionsStore {
 
 export const useTimerOptionsStore = create<TimerOptionsStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       timerMode: 'normal',
       pomodoroTime: 25, // 기본 뽀모도로 시간 25분
       sectionCount: 4, // 기본 섹션 4회
@@ -45,11 +48,38 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
           isTogetherEnabled: !state.isTogetherEnabled,
         }));
       },
-      toggleTimerMode: () => {
-        set((state) => ({
-          ...state,
-          timerMode: state.timerMode === 'normal' ? 'pomodoro' : 'normal',
-        }));
+      toggleTimerMode: async () => {
+        if (get().timerMode === 'normal') {
+          // 웹 푸시 권한 요청 & notification_token 등록 api
+          try {
+            const permission = await Notification.requestPermission();
+
+            if (permission === 'granted') {
+              const token = await getToken(messaging, {
+                vapidKey: FIREBASE_VAPID_KEY,
+              });
+
+              console.log('Token generated : ', token);
+            } else if (permission === 'denied') {
+              //notifications are blocked
+              alert('You denied for the notification');
+            }
+          } catch (e) {
+            console.log(e);
+          }
+
+          set((state) => ({
+            ...state,
+            timerMode: 'pomodoro',
+          }));
+        } else {
+          // notification_token 만료 api
+
+          set((state) => ({
+            ...state,
+            timerMode: 'normal',
+          }));
+        }
       },
     }),
     {
