@@ -15,6 +15,9 @@ self.addEventListener('push', function (e) {
 
   const notificationTitle = resultData.title;
   const notificationOptions = {
+    icon: 'https://d2quahb2ygxiv.cloudfront.net/ebde53456e9aacc4e5601.png',
+    badge: 'https://d2quahb2ygxiv.cloudfront.net/ebde53456e9aacc4e5601.png',
+    tag: 'pomodoro-timer',
     body: resultData.body,
   };
   self.registration.showNotification(notificationTitle, notificationOptions);
