@@ -23,21 +23,30 @@ export const timerOptions: Record<TimerOptionKey, number[]> = {
 };
 
 interface TimerOptionsStore {
+  prevState: {
+    timerMode: TimerMode;
+    pomodoroTime: number;
+    sectionCount: number;
+    restTime: number;
+  } | null;
   timerMode: TimerMode;
   pomodoroTime: number;
   sectionCount: number;
   restTime: number;
   // longRestTime: number;
-  setTimerOptions: (options: Partial<Record<TimerOptionKey, number>>) => void;
-
   isTogetherEnabled: boolean;
+  setTimerOptions: (options: Partial<Record<TimerOptionKey, number>>) => void;
   toggleIsTogetherEnabled: () => void;
   toggleTimerMode: () => void;
+
+  checkIsTimerOptionsChanged: () => boolean;
+  saveTimerOptions: () => void;
 }
 
 export const useTimerOptionsStore = create<TimerOptionsStore>()(
   persist(
     (set, get) => ({
+      prevState: null,
       timerMode: 'normal',
       pomodoroTime: 25, // 기본 뽀모도로 시간 25분
       sectionCount: 4, // 기본 섹션 4회
@@ -49,6 +58,29 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
           ...state,
           ...options,
         })),
+
+      checkIsTimerOptionsChanged: () => {
+        const { timerMode, pomodoroTime, sectionCount, restTime, prevState } =
+          get();
+
+        return !(
+          prevState &&
+          prevState.timerMode === timerMode &&
+          prevState.pomodoroTime === pomodoroTime &&
+          prevState.sectionCount === sectionCount &&
+          prevState.restTime === restTime
+        );
+      },
+
+      // 이전 상태 저장
+      saveTimerOptions: () => {
+        const { timerMode, pomodoroTime, sectionCount, restTime } = get();
+        set((state) => ({
+          ...state,
+          prevState: { timerMode, pomodoroTime, sectionCount, restTime },
+        }));
+      },
+
       toggleIsTogetherEnabled: () => {
         set((state) => ({
           ...state,
