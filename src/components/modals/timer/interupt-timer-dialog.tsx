@@ -10,10 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import {
-  useCancelScheduleTimerMutation,
-  useEndStudyTimerMutation,
-} from '@/services/mutations/study-timer-mutations';
+import { useEndStudyTimerMutation } from '@/services/mutations/study-timer-mutations';
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
 import { formatTime } from '@/lib/date-format';
 import { useModalStore } from '@/stores/use-modal-store';
@@ -27,7 +24,6 @@ interface InteruptTimerDialogProps {
 export const InteruptTimerDialog = ({ children }: InteruptTimerDialogProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const { mutate: cancelScheduleTimer } = useCancelScheduleTimerMutation();
   const timerMode = useTimerOptionsStore((state) => state.timerMode);
   const duration = useTimerStateStore((state) => state.duration);
   const pauseTimer = useTimerStateStore((state) => state.pauseTimer);
@@ -46,9 +42,8 @@ export const InteruptTimerDialog = ({ children }: InteruptTimerDialogProps) => {
         alarmType: 'FinishSection',
       });
     } else {
-      // 뽀모도로 타이머: 타이머 초기화 후 알람 없이 모달 닫기
+      // 뽀모도로 타이머: 타이머 초기화 후 모달 닫기
       interuptTimer();
-      cancelScheduleTimer(); // 푸시 알림 예약 취소
       closeModal('timer');
     }
   };
