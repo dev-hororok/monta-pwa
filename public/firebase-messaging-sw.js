@@ -19,3 +19,36 @@ self.addEventListener('push', function (e) {
   };
   self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+self.addEventListener('notificationclick', function (event) {
+  console.log('On notification click: ', event.notification.tag);
+  event.notification.close();
+
+  const urlToOpen = new URL('/', self.location.origin).href;
+
+  // 이미 열려 있는 탭에 포커스를 주거나, 새 탭을 열기
+  const promiseChain = self.clients
+    .matchAll({
+      type: 'window',
+      includeUncontrolled: true,
+    })
+    .then((windowClients) => {
+      let matchingClient = null;
+
+      for (let i = 0; i < windowClients.length; i++) {
+        const windowClient = windowClients[i];
+        if (windowClient.url === urlToOpen) {
+          matchingClient = windowClient;
+          break;
+        }
+      }
+
+      if (matchingClient) {
+        return matchingClient.focus();
+      } else {
+        return self.clients.openWindow(urlToOpen);
+      }
+    });
+
+  event.waitUntil(promiseChain);
+});
