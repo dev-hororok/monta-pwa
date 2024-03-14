@@ -90,8 +90,14 @@ export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
     });
   },
   _updateTimer: () => {
+    const timerMode = useTimerOptionsStore.getState().timerMode;
     const { startTime, isActive, targetTime, duration } = get();
-    if (!isActive || !startTime || duration === targetTime) return;
+    if (
+      !isActive ||
+      !startTime ||
+      (timerMode === 'pomodoro' && duration === targetTime)
+    )
+      return;
 
     const now = Date.now();
     const elapsedSeconds = Math.floor((now - startTime) / 1000);
