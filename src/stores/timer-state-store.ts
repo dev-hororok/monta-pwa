@@ -101,7 +101,10 @@ export const useTimerStateStore = create<TimerStateStore>((set, get) => ({
 
     const now = Date.now();
     const elapsedSeconds = Math.floor((now - startTime) / 1000);
-    const newDuration = Math.min(elapsedSeconds, targetTime);
+    const newDuration =
+      timerMode === 'pomodoro'
+        ? Math.min(elapsedSeconds, targetTime)
+        : elapsedSeconds;
     set({ duration: newDuration });
   },
 }));
