@@ -15,9 +15,9 @@ export const TimerImage = React.memo(({ animation, className }: Props) => {
     if (timerType === 'Work') {
       return './chicken.png';
     } else if (timerType === 'Rest') {
-      return './chicken.png';
+      return './chicken_exhausted.png';
     } else {
-      return './chicken.png';
+      return './chicken_exhausted.png';
     }
   }, [timerType]);
 
