@@ -9,7 +9,7 @@ interface TimerStateStore {
   isActive: boolean; // 초마다 타이머를 업데이트할지 여부
   timerType: TimerType;
   sectionCompleted: number; // 타이머를 완료한 카운트
-  targetTime: number; // 타이머 목표시간
+  targetTime: number; // 타이머 목표시간 (seconds)
   startTimer: () => void; // 타이머 시작
   pauseTimer: () => void; // 타이머 일시정지
   interuptTimer: () => void; // 타이머 중지 (공부 타이머로 세팅)

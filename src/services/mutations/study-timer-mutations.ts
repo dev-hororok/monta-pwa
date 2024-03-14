@@ -8,6 +8,7 @@ import {
   STATISTIC_MONTHLY,
 } from '../queries/member-queries';
 import type { StudyRecordStatusType } from '@/types/models/study.model';
+import { cancelTimerSchedule, scheduleTimer } from '../apis/push.api';
 
 // 타이머 시작 시간 기록
 export const useStartStudyTimerMutation = () => {
@@ -44,6 +45,27 @@ export const useEndStudyTimerMutation = () => {
       await queryClient.invalidateQueries({
         queryKey: [STATISTIC_HEAT_MAP],
       });
+    },
+  });
+};
+
+// 뽀모도로 타이머 알림 예약
+export const useScheduleTimerMutation = () => {
+  return useMutation({
+    mutationFn: (body: {
+      timerType: 'Work' | 'Rest';
+      targetSeconds: number;
+    }) => {
+      return scheduleTimer(body);
+    },
+  });
+};
+
+// 뽀모도로 타이머 알림 예약 취소
+export const useCancelScheduleTimerMutation = () => {
+  return useMutation({
+    mutationFn: () => {
+      return cancelTimerSchedule();
     },
   });
 };
