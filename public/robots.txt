@@ -1,0 +1,3 @@
+Sitemap: https://woo3145.com/sitemap.xml     
+User-agent: *  
+Allow: / 

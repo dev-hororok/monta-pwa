@@ -1,8 +1,15 @@
-import { FIREBASE_VAPID_KEY } from '@/constants/constants';
 import { messaging } from '@/lib/firebase';
+import {
+  disablePush,
+  enablePush,
+  getNotificationPublicKey,
+} from '@/services/apis/push.api';
 import { getToken } from 'firebase/messaging';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useAuthStore } from './auth-store';
+import { getDeviceType } from '@/lib/utils';
+import { toast } from 'sonner';
 
 export type TimerMode = 'normal' | 'pomodoro';
 export type TimerOptionKey = 'pomodoroTime' | 'sectionCount' | 'restTime';
@@ -55,32 +62,40 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
             const permission = await Notification.requestPermission();
 
             if (permission === 'granted') {
+              const notificationPublicKey = await getNotificationPublicKey();
               const token = await getToken(messaging, {
-                vapidKey: FIREBASE_VAPID_KEY,
+                vapidKey: notificationPublicKey,
               });
-
               // 토큰 백엔드에 보내기
-
-              console.log('Token generated : ', token);
+              await enablePush({
+                member_id: useAuthStore.getState().memberId,
+                notification_token: token,
+                device_type: getDeviceType(),
+              });
+              set((state) => ({
+                ...state,
+                timerMode: 'pomodoro',
+              }));
             } else if (permission === 'denied') {
-              //notifications are blocked
-              alert('You denied for the notification');
+              toast.error('웹 알람이 허용되지 않았어요. QnA를 참고해주세요.');
             }
           } catch (e) {
-            console.log(e);
+            toast.error('서버에 문제가 발생했어요. 잠시 후 다시 시도해주세요.');
           }
-
-          set((state) => ({
-            ...state,
-            timerMode: 'pomodoro',
-          }));
         } else {
           // notification_token 만료 api
-
-          set((state) => ({
-            ...state,
-            timerMode: 'normal',
-          }));
+          try {
+            await disablePush({
+              member_id: useAuthStore.getState().memberId,
+              device_type: getDeviceType(),
+            });
+            set((state) => ({
+              ...state,
+              timerMode: 'normal',
+            }));
+          } catch (e) {
+            toast.error('서버에 문제가 발생했어요. 잠시 후 다시 시도해주세요.');
+          }
         }
       },
     }),

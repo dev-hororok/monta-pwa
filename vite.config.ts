@@ -21,6 +21,7 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
+      includeAssets: ['robot.txt'],
       manifest: {
         name: '뽀모도로닭',
         short_name: '뽀모닭',
