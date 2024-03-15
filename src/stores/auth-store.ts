@@ -2,6 +2,7 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface AuthState {
+  isLoggedIn: boolean;
   accountId: string;
   memberId: string;
   tokens: {
@@ -24,6 +25,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
+      isLoggedIn: false,
       memberId: '',
       accountId: '',
       tokens: {
@@ -32,13 +34,14 @@ export const useAuthStore = create<AuthState>()(
       },
       expiresIn: 0,
       authenticate: (accountId, tokens, expiresIn) => {
-        set({ accountId, tokens, expiresIn });
+        set({ accountId, tokens, expiresIn, isLoggedIn: true });
       },
       setMemberId: (memberId) => {
         set({ memberId });
       },
       logout: () => {
         set({
+          isLoggedIn: false,
           accountId: '',
           memberId: '',
           tokens: {

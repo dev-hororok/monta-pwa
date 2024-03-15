@@ -3,6 +3,7 @@ import { TimerModal } from './timer';
 import { TimerAlarmDialog } from './timer-alarm';
 import { PaletteAcquisitionDialog } from './palette-acquisition';
 import { CharacterAcquisitionDialog } from './character-acquisition';
+import { RequireLoginDialog } from './require-login';
 
 export const ModalManager = () => {
   const { modals } = useModalStore();
@@ -16,6 +17,8 @@ export const ModalManager = () => {
 
       {modals.timer.isOpen ? <TimerModal /> : null}
       {modals.timerAlarm.isOpen ? <TimerAlarmDialog /> : null}
+
+      {modals.requireLogin.isOpen ? <RequireLoginDialog /> : null}
     </>
   );
 };

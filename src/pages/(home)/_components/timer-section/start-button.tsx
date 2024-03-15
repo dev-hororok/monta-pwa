@@ -4,8 +4,10 @@ import { useStartStudyTimerMutation } from '@/services/mutations/study-timer-mut
 import { Button } from '@/components/ui/button';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useModalStore } from '@/stores/use-modal-store';
+import { useAuthStore } from '@/stores/auth-store';
 
 export const StartButton = () => {
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const { mutate: startStudyTimer } = useStartStudyTimerMutation();
 
   const openModal = useModalStore((state) => state.openModal);
@@ -14,13 +16,18 @@ export const StartButton = () => {
   const startTimer = useTimerStateStore((state) => state.startTimer);
 
   const startAndOpenTimerModal = React.useCallback(() => {
+    if (!isLoggedIn) {
+      openModal('requireLogin');
+      return;
+    }
+
     // 공부 시간은 서버에 기록
     if (timerType === 'Work') {
       startStudyTimer();
     }
     startTimer();
     openModal('timer');
-  }, [openModal, startTimer, startStudyTimer, timerType]);
+  }, [openModal, startTimer, startStudyTimer, timerType, isLoggedIn]);
 
   return (
     <Button

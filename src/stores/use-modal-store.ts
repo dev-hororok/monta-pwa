@@ -21,6 +21,9 @@ interface ModalsState {
   // 타이머
   timer: ModalState;
   timerAlarm: ModalState<{ alarmType: AlarmType }>;
+
+  // 로그인 요구
+  requireLogin: ModalState;
 }
 
 type ModalType = keyof ModalsState;
@@ -37,6 +40,7 @@ export const useModalStore = create<ModalStore>()((set) => ({
     paletteAcquisition: { isOpen: false },
     timerAlarm: { isOpen: false },
     timer: { isOpen: false },
+    requireLogin: { isOpen: false },
   },
   openModal: (modalType, data) =>
     set((state) => ({

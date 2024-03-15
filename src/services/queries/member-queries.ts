@@ -10,6 +10,7 @@ import {
   fetchStatisticHeatMap,
   fetchStudyStreak,
 } from '@/services/apis/member.api';
+import { useAuthStore } from '@/stores/auth-store';
 
 // 현재유저 조회
 export const CURRENT_MEMBER_QUERY_KEY = 'currentUser';
@@ -18,6 +19,7 @@ export const useCurrentMemberQuery = () => {
     queryKey: [CURRENT_MEMBER_QUERY_KEY],
     queryFn: () => fetchCurrentMember(),
     staleTime: 10 * 60 * 1000,
+    enabled: !!useAuthStore.getState().isLoggedIn,
   });
 };
 

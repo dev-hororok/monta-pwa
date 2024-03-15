@@ -14,7 +14,7 @@ import GoogleLoginCallback from './pages/auth/login/callback/google';
 import NaverLoginCallback from './pages/auth/login/callback/naver';
 import { RootLayout } from './components/layouts/root-layout';
 import { MobileLayout } from './components/layouts/mobile-layout';
-import { ProtectedRoute } from './components/auth/protected-route';
+// import { ProtectedRoute } from './components/auth/protected-route';
 import { UnauthedRoute } from './components/auth/unauthed-route';
 
 const router = createBrowserRouter(
@@ -24,11 +24,7 @@ const router = createBrowserRouter(
       element: <RootLayout />,
       children: [
         {
-          element: (
-            <ProtectedRoute>
-              <MobileLayout />
-            </ProtectedRoute>
-          ),
+          element: <MobileLayout />,
           children: [
             { index: true, element: <MainPage /> },
             { path: 'my', element: <MyPage /> },

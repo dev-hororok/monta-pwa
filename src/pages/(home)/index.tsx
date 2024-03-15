@@ -4,9 +4,9 @@ import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { TimerSection } from '@/pages/(home)/_components/timer-section';
 
 const MainPage = () => {
-  const { isPending, isError } = useCurrentMemberQuery();
+  const { isError, isLoading } = useCurrentMemberQuery();
 
-  if (isPending) {
+  if (isLoading) {
     return <MobileLoadingSpinner />;
   }
   if (isError) {
