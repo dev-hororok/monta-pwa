@@ -1,13 +1,12 @@
 import { useShopConsumableItemsQuery } from '@/services/queries/shop-queries';
 import { ProductCard } from './product-card';
 import { PurchaseItemDialog } from './purchase-item-dialog';
-import type { IMember } from '@/types/models/member.model';
+import { useCurrentMemberQuery } from '@/services/queries/member-queries';
+import { useRequireLogin } from '@/hooks/use-require-login';
 
-interface ToolProductsSectionProps {
-  member: IMember;
-}
-
-export const ToolProductsSection = ({ member }: ToolProductsSectionProps) => {
+export const ToolProductsSection = () => {
+  const { data: member } = useCurrentMemberQuery();
+  const { openRequireLoginModal } = useRequireLogin();
   const {
     data: items,
     isPending: itemsIsPending,
@@ -35,10 +34,14 @@ export const ToolProductsSection = ({ member }: ToolProductsSectionProps) => {
     <section>
       <div className="grid grid-cols-3 gap-2">
         {items.map((item, idx) => {
-          return (
+          return member ? (
             <PurchaseItemDialog key={idx} item={item} member={member}>
               <ProductCard item={item} />
             </PurchaseItemDialog>
+          ) : (
+            <div key={idx} onClick={openRequireLoginModal}>
+              <ProductCard item={item} />
+            </div>
           );
         })}
       </div>

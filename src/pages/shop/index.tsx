@@ -6,9 +6,9 @@ import { FoodProductsSection } from './_components/food-products-section';
 import { ToolProductsSection } from './_components/tool-products-section';
 
 const ShopPage = () => {
-  const { data: member, isPending, isError } = useCurrentMemberQuery();
+  const { isLoading, isError } = useCurrentMemberQuery();
 
-  if (isPending) {
+  if (isLoading) {
     return <MobileLoadingSpinner />;
   }
   if (isError) {
@@ -27,10 +27,10 @@ const ShopPage = () => {
             </TabsList>
           </div>
           <TabsContent value="foods">
-            <FoodProductsSection member={member} />
+            <FoodProductsSection />
           </TabsContent>
           <TabsContent value="tools">
-            <ToolProductsSection member={member} />
+            <ToolProductsSection />
           </TabsContent>
         </Tabs>
       </main>
