@@ -6,8 +6,12 @@ import { AppVersionView } from './_components/app-version-view';
 import { TermsOfServiceButton } from './_components/tos-button';
 import { PrivacyPolicyButton } from './_components/privacy-policy-button';
 import { ReviewButton } from './_components/review-button';
+import { useAuthStore } from '@/stores/auth-store';
+import { Icons } from '@/components/icons';
+import { Link } from 'react-router-dom';
 
 const MorePage = () => {
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   return (
     <div className="h-full pt-safe-offset-14 pb-safe-offset-14">
       <MorePageHeader />
@@ -20,8 +24,22 @@ const MorePage = () => {
         </div>
         <div className="space-y-2">
           <p className="px-6 font-semibold">계정</p>
-          <DeleteAccountDialog />
-          <LogoutDialog />
+          {isLoggedIn ? (
+            <>
+              <DeleteAccountDialog />
+              <LogoutDialog />
+            </>
+          ) : (
+            <Link
+              to="/auth/login"
+              className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm"
+            >
+              <div className="flex items-center gap-2">
+                <Icons.login className="h-[1.2rem] w-[1.2rem]" />
+                로그인
+              </div>
+            </Link>
+          )}
         </div>
 
         <div className="space-y-2">

@@ -30,6 +30,7 @@ import {
   Pause,
   StepForwardIcon,
   Play,
+  LogIn,
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -54,6 +55,7 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   add: Plus,
+  login: LogIn,
   logout: LogOut,
   removeUser: UserRoundX,
   vibrate: Vibrate,
