@@ -41,7 +41,7 @@ const router = createBrowserRouter(
             </UnauthedRoute>
           ),
           children: [
-            { index: true, element: <LoginGatewayPage /> },
+            // { index: true, element: <LoginGatewayPage /> },
             { path: 'login', element: <LoginPage /> },
             { path: 'agree', element: <AgreeToTermsPage /> },
             { path: 'register', element: <RegisterPage /> },
