@@ -45,6 +45,7 @@ const EditProfileSection = ({
     <EditProfileImageDialog member={member}>
       <Avatar className="w-28 h-28 hover:bg-accent cursor-pointer">
         <AvatarImage
+          alt="profile image"
           src={member.image_url ? member.image_url : DEFAULT_MEMBER_IMAGE_URL}
         />
         <AvatarFallback>{member.nickname}</AvatarFallback>
@@ -55,7 +56,7 @@ const EditProfileSection = ({
       onClick={onRequireLoginClick}
       className="w-28 h-28 hover:bg-accent cursor-pointer"
     >
-      <AvatarImage src={DEFAULT_ISITOR_IMAGE_URL} />
+      <AvatarImage alt="profile image" src={DEFAULT_ISITOR_IMAGE_URL} />
     </Avatar>
   );
 };

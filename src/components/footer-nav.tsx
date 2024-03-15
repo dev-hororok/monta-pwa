@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
   },
   {
     text: '인벤토리',
-    icon: <img src="/bag.png" className="w-7 h-7" />,
+    icon: <img src="/bag.png" alt="bag" className="w-7 h-7" />,
     href: '/inventory',
   },
   {
@@ -60,6 +60,7 @@ const NavItemLink = ({ icon, href }: NavItemLinkProps) => {
     <NavLink
       to={href}
       replace
+      aria-label={href}
       className={({ isActive }) =>
         `w-full text-xs text-accent-foreground ${
           isActive
