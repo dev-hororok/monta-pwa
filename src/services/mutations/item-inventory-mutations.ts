@@ -1,82 +1,64 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
-  consumeConsumableItem,
-  consumeFoodItem,
-} from '../apis/item-inventory.api';
-import {
   CHARACTER_INVENTORY_QUERY_KEY,
   CONSUMABLE_INVENTORY_QUERY_KEY,
+  CURRENT_MEMBER_QUERY_KEY,
   FOOD_INVENTORY_QUERY_KEY,
   STUDY_STREAK_QUERY_KEY,
 } from '../queries/member-queries';
-import type {
-  IConsumableItemInventory,
-  IFoodItemInventory,
-} from '@/types/models/item.model';
-import type { IStudyStreak } from '@/types/models/streak.model';
+import { consumeItem } from '../apis/item-inventory.api';
+import { IMember } from '@/types/models/member.model';
+import { ItemInventory } from '@/types/models/item.model';
 
-// 음식 아이템 사용
-export const useConsumeFoodItemMutation = () => {
+// 아이템 사용
+export const useConsumeItemMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: { item_inventory_id: string }) => {
-      return consumeFoodItem(data.item_inventory_id);
+    mutationFn: (data: { item_inventory: ItemInventory }) => {
+      return consumeItem(data.item_inventory.item_inventory_id);
     },
 
-    onSuccess: async (_result, variables) => {
-      await queryClient.invalidateQueries({
-        queryKey: [CHARACTER_INVENTORY_QUERY_KEY],
-      });
-      queryClient.setQueryData(
-        [FOOD_INVENTORY_QUERY_KEY],
-        (old: IFoodItemInventory[] | null) => {
-          if (!old) return old;
-          return old.filter(
-            (o) => o.item_inventory_id !== variables.item_inventory_id
-          );
-        }
-      );
-    },
-  });
-};
+    onSuccess: async (data, variables) => {
+      if (variables.item_inventory.item_type === 'Food') {
+        await queryClient.invalidateQueries({
+          queryKey: [FOOD_INVENTORY_QUERY_KEY],
+        });
+      } else if (variables.item_inventory.item_type === 'Consumable') {
+        await queryClient.invalidateQueries({
+          queryKey: [CONSUMABLE_INVENTORY_QUERY_KEY],
+        });
+      }
 
-// 사용 아이템 사용
-export const useConsumeConsumableItemMutation = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (data: { item_inventory_id: string }) => {
-      return consumeConsumableItem(data.item_inventory_id);
-    },
-    onSuccess: async (result, variables) => {
-      queryClient.setQueryData(
-        [CONSUMABLE_INVENTORY_QUERY_KEY],
-        (old: IConsumableItemInventory[] | null) => {
-          if (!old) return old;
-          return old.map((inven) => {
-            if (inven.item_inventory_id === variables.item_inventory_id) {
-              return {
-                ...inven,
-                quantity: inven.quantity - 1,
-              };
-            }
-            return inven;
-          });
-        }
-      );
-      queryClient.setQueryData(
-        [STUDY_STREAK_QUERY_KEY],
-        (old: IStudyStreak | null) => {
-          if (!old) return old;
-          console.log(old);
-          return {
-            ...old,
-            palette: result.palette,
-          };
-        }
-      );
+      // 캐릭터 획득
+      if (data.result === 'Character Acquisition') {
+        await queryClient.invalidateQueries({
+          queryKey: [CHARACTER_INVENTORY_QUERY_KEY],
+        });
+        // 팔레트 변경
+      } else if (data.result === 'Palette Acquisition') {
+        await queryClient.invalidateQueries({
+          queryKey: [STUDY_STREAK_QUERY_KEY],
+        });
+        // 포인트 획득
+      } else if (data.result === 'Point Acquisition') {
+        queryClient.setQueryData(
+          [CURRENT_MEMBER_QUERY_KEY],
+          (old: IMember | null) => {
+            if (!old) return old;
+            return {
+              ...old,
+              point: data.member.point,
+            };
+          }
+        );
+        // 포인트 박스 획득 (Consumable Item Acquisition 으로 유연성 개선 필요)
+      } else if (data.result === 'Point Box Acquisition') {
+        await queryClient.invalidateQueries({
+          queryKey: [CONSUMABLE_INVENTORY_QUERY_KEY],
+        });
+      }
     },
   });
 };

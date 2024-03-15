@@ -12,8 +12,8 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useModalStore } from '@/stores/use-modal-store';
 import { Badge } from '@/components/ui/badge';
-import { useConsumeItem } from '@/pages/inventory/hooks/use-consume-item';
 import { useState } from 'react';
+import { useConsumeItem } from '@/hooks/use-consume-item';
 
 export const PaletteAcquisitionDialog = () => {
   const { isOpen, data } = useModalStore(
@@ -23,15 +23,15 @@ export const PaletteAcquisitionDialog = () => {
     (data?.consumableItemInventory.quantity || 1) - 1
   );
   const closeModal = useModalStore((state) => state.closeModal);
-  const { consume } = useConsumeItem();
+  const { consume, isLoading } = useConsumeItem();
 
-  const onClickHandler = () => {
+  const onClickHandler = async () => {
     if (!data) return;
     if (curQuantity < 1) {
       toast.error('개수가 부족합니다.');
       return;
     }
-    consume({ itemInventory: data.consumableItemInventory });
+    await consume({ itemInventory: data.consumableItemInventory });
     setCurQuantity((prev) => prev - 1);
   };
 
@@ -43,45 +43,47 @@ export const PaletteAcquisitionDialog = () => {
     return null;
   }
 
+  const { palette } = data;
+
   return (
     <>
       <AlertDialog open={isOpen}>
         <AlertDialogContent
           className={cn(
-            `w-full md:max-w-[416px] max-h-[400px] flex flex-col items-center py-safe-offset-14 overflow-y-scroll scrollbar-hide`
+            `w-full md:max-w-mobile max-h-[400px] flex flex-col items-center py-6`
           )}
         >
-          {data.palette.grade === 'Epic' ? (
+          {palette.grade === 'Epic' ? (
             <Fireworks autorun={{ speed: 1, duration: 300 }} />
           ) : null}
-          {data.palette.grade === 'Legendary' ? (
+          {palette.grade === 'Legendary' ? (
             <Fireworks autorun={{ speed: 4, duration: 2000 }} />
           ) : null}
           <AlertDialogTitle className="text-2xl">팔레트 변경</AlertDialogTitle>
 
           <div className="flex items-center gap-4">
             <div
-              style={{ backgroundColor: data.palette.light_color }}
+              style={{ backgroundColor: palette.light_color }}
               className="w-8 h-8"
             />
             <div
-              style={{ backgroundColor: data.palette.normal_color }}
+              style={{ backgroundColor: palette.normal_color }}
               className="w-8 h-8"
             />
             <div
-              style={{ backgroundColor: data.palette.dark_color }}
+              style={{ backgroundColor: palette.dark_color }}
               className="w-8 h-8"
             />
             <div
-              style={{ backgroundColor: data.palette.darker_color }}
+              style={{ backgroundColor: palette.darker_color }}
               className="w-8 h-8"
             />
           </div>
           <div className="flex justify-center">
-            <Badge>{data.palette.grade} 등급</Badge>
+            <Badge>{palette.grade} 등급</Badge>
           </div>
           <p className="text-center font-semibold text-lg py-4">
-            {data.palette.name}
+            {palette.name}
           </p>
           <div className="w-full flex flex-col justify-end h-full gap-2">
             <AlertDialogFooter className="w-full">
@@ -89,6 +91,7 @@ export const PaletteAcquisitionDialog = () => {
                 type="button"
                 onClick={onClickCloseModal}
                 className="h-12 w-full"
+                disabled={isLoading}
               >
                 확인
               </AlertDialogCancel>
@@ -96,7 +99,7 @@ export const PaletteAcquisitionDialog = () => {
                 type="button"
                 onClick={onClickHandler}
                 className="h-12 w-full"
-                disabled={curQuantity < 1}
+                disabled={isLoading || curQuantity < 1}
               >
                 다시뽑기 x {curQuantity}
               </AlertDialogAction>

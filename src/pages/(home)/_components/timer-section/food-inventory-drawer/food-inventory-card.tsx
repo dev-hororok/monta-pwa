@@ -1,11 +1,9 @@
-import { toast } from 'sonner';
-
 import { buttonVariants } from '@/components/ui/button';
 import { formatTime } from '@/lib/date-format';
 import type { IFoodItemInventory } from '@/types/models/item.model';
 import { cn } from '@/lib/utils';
-import { useConsumeFoodItem } from '@/pages/(home)/hooks/use-food-item';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useConsumeItem } from '@/hooks/use-consume-item';
 
 interface FoodInventoryCardProps {
   foodItemInventory: IFoodItemInventory;
@@ -14,16 +12,13 @@ interface FoodInventoryCardProps {
 export const FoodInventoryCard = ({
   foodItemInventory,
 }: FoodInventoryCardProps) => {
-  const { consume, isLoading } = useConsumeFoodItem();
-  const isActive = foodItemInventory.progress === 0;
+  const { consume, isLoading } = useConsumeItem();
 
   const handleConsumeClick = async () => {
-    if (!isActive) {
-      toast.error('아직 음식이 다 익지 않았습니다.');
-      return;
-    }
-    await consume({ foodItemInventory });
+    await consume({ itemInventory: foodItemInventory });
   };
+
+  const isActive = foodItemInventory.progress === 0;
 
   return (
     <div

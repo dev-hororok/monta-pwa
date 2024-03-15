@@ -13,8 +13,7 @@ import {
 import { useState } from 'react';
 import type { IMember } from '@/types/models/member.model';
 import type { IConsumableItemInventory } from '@/types/models/item.model';
-import { useConsumeItem } from '../../hooks/use-consume-item';
-import { toast } from 'sonner';
+import { useConsumeItem } from '@/hooks/use-consume-item';
 
 interface UseItemDialogProps {
   itemInventory: IConsumableItemInventory;
@@ -29,13 +28,9 @@ export const ConsumeItemDialog = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const { consume } = useConsumeItem();
-  const { quantity, item } = itemInventory;
+  const { item } = itemInventory;
 
   const handleSubmit = () => {
-    if (quantity < 1) {
-      toast.error('개수가 부족합니다.');
-      return;
-    }
     consume({ itemInventory: itemInventory });
     setIsOpen(false);
   };
