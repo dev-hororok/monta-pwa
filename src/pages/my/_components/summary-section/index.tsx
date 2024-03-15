@@ -3,12 +3,10 @@ import {
   useDailyStatisticQuery,
   useMonthlyStatisticQuery,
 } from '@/services/queries/member-queries';
+import { useAuthStore } from '@/stores/auth-store';
 
-interface SummarySectionProps {
-  memberId: string;
-}
-
-export const SummarySection = ({ memberId }: SummarySectionProps) => {
+export const SummarySection = () => {
+  const memberId = useAuthStore((state) => state.memberId);
   const curDate = new Date();
   const { data: dailyStatistic } = useDailyStatisticQuery(
     memberId,

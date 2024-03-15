@@ -14,11 +14,11 @@ export const FoodInventorySection = ({
   const memberId = useAuthStore((state) => state.memberId);
   const {
     data: foodItemInventory,
-    isPending,
+    isLoading,
     isError,
   } = useFoodInventoryQuery(memberId);
 
-  if (isPending) {
+  if (isLoading) {
     return (
       <section className={cn('px-4', className)}>
         <div className="grid grid-cols-4 gap-1">
@@ -50,7 +50,9 @@ export const FoodInventorySection = ({
             })}
             {foodItemInventory.length < 4 ? <AddFoodCard /> : null}
           </>
-        ) : null}
+        ) : (
+          <AddFoodCard />
+        )}
       </div>
     </section>
   );

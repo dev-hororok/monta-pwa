@@ -6,11 +6,14 @@ import { ProfileSection } from './_components/profile-section';
 import { CalendarSection } from './_components/calendar-section';
 import { StreakSection } from './_components/streak-section';
 import { SummarySection } from './_components/summary-section';
+import { useAuthStore } from '@/stores/auth-store';
+import { SummarySectionExaple } from './_components/summary-section/example';
 
 const MyPage = () => {
-  const { data: member, isPending, isError } = useCurrentMemberQuery();
+  const isLoggedIn = useAuthStore();
+  const { isLoading, isError } = useCurrentMemberQuery();
 
-  if (isPending) {
+  if (isLoading) {
     return <MobileLoadingSpinner />;
   }
   if (isError) {
@@ -21,8 +24,8 @@ const MyPage = () => {
     <div className="h-full pt-safe-offset-14 pb-safe-offset-14">
       <MyPageHeader />
       <main className="h-full overflow-y-scroll scrollbar-hide px-4">
-        <ProfileSection member={member} />
-        <SummarySection memberId={member.member_id} />
+        <ProfileSection />
+        {isLoggedIn ? <SummarySection /> : <SummarySectionExaple />}
         <Tabs defaultValue="calendar" className="w-full py-2 relative">
           <div className="sticky top-0 bg-background py-2 z-40">
             <TabsList className="grid grid-cols-2">
@@ -31,10 +34,10 @@ const MyPage = () => {
             </TabsList>
           </div>
           <TabsContent value="calendar">
-            <CalendarSection memberId={member.member_id} />
+            <CalendarSection />
           </TabsContent>
           <TabsContent value="streak">
-            <StreakSection memberId={member.member_id} />
+            <StreakSection />
           </TabsContent>
         </Tabs>
       </main>

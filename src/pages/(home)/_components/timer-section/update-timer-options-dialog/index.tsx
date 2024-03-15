@@ -15,12 +15,14 @@ import {
 import { IsTogetherOption } from './is-together-option';
 import { TimerModeOption } from './timer-mode-option';
 import { useTimerOptionsStore } from '@/stores/timer-options-store';
+import { useAuthStore } from '@/stores/auth-store';
 
 export const UpdateTimerOptionDialog = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const timerMode = useTimerOptionsStore((state) => state.timerMode);
   const checkIsTimerOptionsChanged = useTimerOptionsStore(
     (state) => state.checkIsTimerOptionsChanged
@@ -58,18 +60,18 @@ export const UpdateTimerOptionDialog = ({
           <TimerOption
             label="집중 시간"
             optionKey="pomodoroTime"
-            disabled={timerMode === 'normal'}
+            disabled={!isLoggedIn || timerMode === 'normal'}
           />
           <TimerOption
             label="집중 횟수"
             optionKey="sectionCount"
             postfix="회"
-            disabled={timerMode === 'normal'}
+            disabled={!isLoggedIn || timerMode === 'normal'}
           />
           <TimerOption
             label="쉬는 시간"
             optionKey="restTime"
-            disabled={timerMode === 'normal'}
+            disabled={!isLoggedIn || timerMode === 'normal'}
           />
           {/* <TimerOption label="긴 쉬는 시간" optionKey="longRestTime" /> */}
           <IsTogetherOption />

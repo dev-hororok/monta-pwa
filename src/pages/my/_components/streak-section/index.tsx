@@ -6,12 +6,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { formatDateStr } from '@/lib/date-format';
 import { StreakInfo } from './streak-info';
 import { StudyStreak } from './study-streak';
+import { useAuthStore } from '@/stores/auth-store';
 
-interface StreakSectionProps {
-  memberId: string;
-}
-
-export const StreakSection = ({ memberId }: StreakSectionProps) => {
+export const StreakSection = () => {
+  const memberId = useAuthStore((state) => state.memberId);
   const endDate = new Date();
   const startDate = new Date(new Date().setFullYear(endDate.getFullYear() - 1));
   const { data: streakInfo, isLoading: isStreakLoading } =

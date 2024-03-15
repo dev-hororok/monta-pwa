@@ -33,7 +33,7 @@ export const RequireLoginDialog = () => {
       <AlertDialog open={isOpen}>
         <AlertDialogContent
           className={cn(
-            `w-full md:max-w-[416px] max-h-[320px] flex flex-col items-center`
+            `w-full md:max-w-mobile max-h-[320px] flex flex-col items-center`
           )}
         >
           <AlertDialogTitle className="text-2xl">

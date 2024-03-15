@@ -4,10 +4,10 @@ import { useStartStudyTimerMutation } from '@/services/mutations/study-timer-mut
 import { Button } from '@/components/ui/button';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useModalStore } from '@/stores/use-modal-store';
-import { useAuthStore } from '@/stores/auth-store';
+import { useRequireLogin } from '@/hooks/use-require-login';
 
 export const StartButton = () => {
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const { isLoggedIn, openRequireLoginModal } = useRequireLogin();
   const { mutate: startStudyTimer } = useStartStudyTimerMutation();
 
   const openModal = useModalStore((state) => state.openModal);
@@ -17,7 +17,7 @@ export const StartButton = () => {
 
   const startAndOpenTimerModal = React.useCallback(() => {
     if (!isLoggedIn) {
-      openModal('requireLogin');
+      openRequireLoginModal();
       return;
     }
 
@@ -27,7 +27,14 @@ export const StartButton = () => {
     }
     startTimer();
     openModal('timer');
-  }, [openModal, startTimer, startStudyTimer, timerType, isLoggedIn]);
+  }, [
+    openModal,
+    startTimer,
+    startStudyTimer,
+    timerType,
+    isLoggedIn,
+    openRequireLoginModal,
+  ]);
 
   return (
     <Button

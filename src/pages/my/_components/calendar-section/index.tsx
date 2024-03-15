@@ -4,12 +4,10 @@ import '@/styles/calendar.css';
 import { formatTime } from '@/lib/date-format';
 import { useCalendar } from '@/pages/my/hooks/use-calendar';
 import { DailyStatistic } from './daily-statistic';
+import { useAuthStore } from '@/stores/auth-store';
 
-interface CalendarSectionProps {
-  memberId: string;
-}
-
-export const CalendarSection = ({ memberId }: CalendarSectionProps) => {
+export const CalendarSection = () => {
+  const memberId = useAuthStore((state) => state.memberId);
   const {
     value,
     onChange,

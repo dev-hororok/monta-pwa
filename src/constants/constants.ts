@@ -18,5 +18,6 @@ export const FIREBASE_MESSAGING_SENDER_ID = import.meta.env
 export const FIREBASE_APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
 export const FIREBASE_VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
 
-export const DEFAULT_MEMBER_IMAGE_URL = '/chicken_1.png';
+export const DEFAULT_ISITOR_IMAGE_URL = '/chicken_1.png';
+export const DEFAULT_MEMBER_IMAGE_URL = '/chicken.png';
 export const DEFAULT_STAMP_IMAGE_URL = '/chicken_2.png';
