@@ -44,7 +44,11 @@ export const TimerSection = ({ className }: TimerSectionProps) => {
         {isPomodoro ? <TimerSectionCounter /> : null}
       </div>
       <div className="h-2/5 flex justify-center items-center gap-2">
-        {timerType === 'Work' ? <FoodInventoryButton /> : <PassButton />}
+        {isLoggedIn && timerType !== 'Work' && timerMode === 'pomodoro' ? (
+          <PassButton />
+        ) : (
+          <FoodInventoryButton />
+        )}
         <StartButton />
       </div>
     </div>
