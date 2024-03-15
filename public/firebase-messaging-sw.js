@@ -1,14 +1,14 @@
-self.addEventListener('install', function () {
-  console.log('fcm sw install..');
-  self.skipWaiting();
+self.addEventListener('install', () => {
+  self.skipWaiting(); // 이전 버전의 서비스 워커를 대기 상태로 만들지 않고 즉시 새 버전으로 전환
 });
 
-self.addEventListener('activate', function () {
-  console.log('fcm sw activate..');
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    self.clients.claim() // 새로운 서비스 워커가 활성화되면, 열려 있는 클라이언트를 즉시 제어
+  );
 });
 
 self.addEventListener('push', function (e) {
-  console.log('push: ', e.data.json());
   if (!e.data.json()) return;
 
   const resultData = e.data.json().notification;
@@ -21,11 +21,13 @@ self.addEventListener('push', function (e) {
     renotify: true, // 알람이 겹치면 다시 알림
     body: resultData.body,
   };
-  self.registration.showNotification(notificationTitle, notificationOptions);
+
+  event.waitUntil(
+    self.registration.showNotification(notificationTitle, notificationOptions)
+  );
 });
 
 self.addEventListener('notificationclick', function (event) {
-  console.log('On notification click: ', event.notification.tag);
   event.notification.close();
 
   const urlToOpen = new URL('/', self.location.origin).href;
