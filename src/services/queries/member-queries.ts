@@ -31,7 +31,6 @@ export const useFoodInventoryQuery = (memberId: string) => {
     queryFn: () => fetchFoodInventory(memberId),
     staleTime: 10 * 60 * 1000,
     enabled: !!memberId,
-    initialData: [],
   });
 };
 
@@ -43,7 +42,6 @@ export const useConsumableInventoryQuery = (memberId: string) => {
     queryFn: () => fetchConsumableInventory(memberId),
     staleTime: 10 * 60 * 1000,
     enabled: !!memberId,
-    initialData: [],
   });
 };
 
@@ -55,7 +53,6 @@ export const useCharacterInventoryQuery = (memberId: string) => {
     queryFn: () => fetchCharacterInventory(memberId),
     staleTime: 10 * 60 * 1000,
     enabled: !!memberId,
-    initialData: [],
   });
 };
 
@@ -111,6 +108,5 @@ export const useStatisticHeatMapQuery = (
     queryFn: () => fetchStatisticHeatMap(memberId, start, end),
     staleTime: 24 * 60 * 1000,
     enabled: !!memberId,
-    initialData: [],
   });
 };
