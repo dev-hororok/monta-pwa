@@ -30,12 +30,13 @@ export const useInitializeApp = () => {
 
   // 알람 권한이 없는데 뽀모도로 모드가 켜져있는 경우 처리
   React.useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (Notification.permission !== 'granted' && timerMode === 'pomodoro') {
-      toast.error(
-        '푸시 메세지 토큰에 문제가 발생하여 일반 타이머 모드로 전환되었습니다.'
-      );
-      toggleTimerMode();
+    if (typeof window !== 'undefined' && typeof Notification !== 'undefined') {
+      if (Notification.permission !== 'granted' && timerMode === 'pomodoro') {
+        toast.error(
+          '푸시 메세지 토큰에 문제가 발생하여 일반 타이머 모드로 전환되었습니다.'
+        );
+        toggleTimerMode();
+      }
     }
   }, [timerMode, toggleTimerMode]);
 };
