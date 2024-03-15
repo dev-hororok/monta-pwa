@@ -9,12 +9,12 @@ const commonMessages = [
 export const CHARACTER_CHATS = {
   Visitor: [
     '로그인을 해주세요 ㅜㅜ',
-    '여러 캐릭터를 수집해보세요!',
+    '로그인 하고 여러 캐릭터를 만나보세요!',
     '로그인 얼마 안걸려요 ㅜㅜ',
     'ㅜㅜ 제발요',
   ],
   Normal: [...commonMessages, '뽀모도로 모드를 사용해보세요!'],
-  Work: [...commonMessages, '25분이 효율이 가장 좋데요!', '온전히 집중하기!!'],
+  Work: [...commonMessages, '25분이 효율이 가장 좋대요!', '온전히 집중하기!!'],
   Rest: [
     '잠깐 쉬는 시간이에요~',
     '조금만 쉬어요~~',
