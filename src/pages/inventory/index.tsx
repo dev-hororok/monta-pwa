@@ -3,6 +3,9 @@ import { HomeHeader } from '@/pages/(home)/_components/home-header';
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { ItemInventorySection } from './_components/item-inventory-section';
 import { CharacterInventorySection } from './_components/character-inventory-section';
+import { useAuthStore } from '@/stores/auth-store';
+import { ItemInventorySectionExample } from './_components/item-inventory-section/exmple';
+import { CharacterInventorySectionExample } from './_components/character-inventory-section/example';
 
 export interface InventoryUseItem {
   itemType: 'streak-color-change';
@@ -18,9 +21,10 @@ export interface InventoryCharacter {
 }
 
 const InventoryPage = () => {
-  const { data: member, isPending, isError } = useCurrentMemberQuery();
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const { data: member, isLoading, isError } = useCurrentMemberQuery();
 
-  if (isPending) {
+  if (isLoading) {
     return <MobileLoadingSpinner />;
   }
   if (isError) {
@@ -32,10 +36,18 @@ const InventoryPage = () => {
       <main className="h-full overflow-y-scroll scrollbar-hide pb-10">
         <div className="w-full h-full py-4 px-4 space-y-6">
           {/* 사용아이템 Section */}
-          <ItemInventorySection member={member} />
+          {isLoggedIn && member ? (
+            <ItemInventorySection member={member} />
+          ) : (
+            <ItemInventorySectionExample />
+          )}
 
           {/* 캐릭터 Section */}
-          <CharacterInventorySection member={member} />
+          {isLoggedIn && member ? (
+            <CharacterInventorySection member={member} />
+          ) : (
+            <CharacterInventorySectionExample />
+          )}
         </div>
       </main>
     </div>
