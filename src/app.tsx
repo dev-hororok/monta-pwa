@@ -5,7 +5,7 @@ import MyPage from './pages/my';
 import ShopPage from './pages/shop';
 import MorePage from './pages/more';
 import InventoryPage from './pages/inventory';
-import LoginGatewayPage from './pages/auth';
+// import LoginGatewayPage from './pages/auth';
 import LoginPage from './pages/auth/login';
 import RegisterPage from './pages/auth/register';
 import AgreeToTermsPage from './pages/auth/agree';
