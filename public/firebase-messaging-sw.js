@@ -16,8 +16,9 @@ self.addEventListener('push', function (e) {
   const notificationTitle = resultData.title;
   const notificationOptions = {
     icon: '/icons/icon-192x192.png',
-    badge: '/icons/icon-192x192.png',
-    tag: 'pomodoro-timer',
+    badge: '/icons/icon-128x128.png',
+    tag: 'pomodoro-timer', // 알람 최대 1개 표시
+    renotify: true, // 알람이 겹치면 다시 알림
     body: resultData.body,
   };
   self.registration.showNotification(notificationTitle, notificationOptions);
