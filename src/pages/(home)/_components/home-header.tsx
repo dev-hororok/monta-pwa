@@ -10,7 +10,6 @@ export const HomeHeader = () => {
         <Button
           type="button"
           variant={'ghost'}
-          size={'icon'}
           className="flex items-center text-lg"
           aria-label="shop"
         >

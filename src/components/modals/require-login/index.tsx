@@ -45,14 +45,14 @@ export const RequireLoginDialog = () => {
               <AlertDialogCancel
                 type="button"
                 onClick={onClickCloseModal}
-                className="h-12 w-full text-lg"
+                className="h-12 w-full text-base"
               >
                 닫기
               </AlertDialogCancel>
               <AlertDialogAction
                 type="button"
                 onClick={onClickHandler}
-                className="h-12 w-full text-lg"
+                className="h-12 w-full text-base"
               >
                 계속하기
               </AlertDialogAction>
