@@ -36,6 +36,7 @@ interface TimerOptionsStore {
   // longRestTime: number;
   isTogetherEnabled: boolean;
   setTimerOptions: (options: Partial<Record<TimerOptionKey, number>>) => void;
+  resetOptions: () => void;
   toggleIsTogetherEnabled: () => void;
   toggleTimerMode: () => void;
 
@@ -58,6 +59,17 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
           ...state,
           ...options,
         })),
+
+      resetOptions: () => {
+        set(() => ({
+          prevState: null,
+          timerMode: 'normal',
+          pomodoroTime: 25,
+          sectionCount: 4,
+          restTime: 5,
+          isTogetherEnabled: false,
+        }));
+      },
 
       checkIsTimerOptionsChanged: () => {
         const { timerMode, pomodoroTime, sectionCount, restTime, prevState } =
