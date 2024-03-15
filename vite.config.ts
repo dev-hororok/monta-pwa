@@ -22,7 +22,7 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      includeAssets: ['robots.txt'],
+      includeAssets: ['robots.txt', 'sitemap.xml'],
       workbox: {
         skipWaiting: true,
         clientsClaim: true,
