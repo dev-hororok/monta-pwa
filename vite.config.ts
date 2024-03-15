@@ -17,16 +17,22 @@ export default defineConfig({
   },
   plugins: [
     VitePWA({
+      injectRegister: 'auto',
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true,
       },
-      includeAssets: ['robot.txt'],
+      includeAssets: ['robots.txt'],
+      workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
+      },
       manifest: {
         name: '뽀모도로닭',
         short_name: '뽀모닭',
         description: 'pomodoro timer app',
-        theme_color: '#000000',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
         icons: [
           {
             src: 'icons/icon-192x192.png',

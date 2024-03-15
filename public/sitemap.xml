@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://pomodak.com/</loc>
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://pomodak.com/my</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://pomodak.com/more</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://pomodak.com/inventory</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://pomodak.com/shop</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://pomodak.com/auth</loc>
+        <priority>0.50</priority>
+    </url>
+</urlset>

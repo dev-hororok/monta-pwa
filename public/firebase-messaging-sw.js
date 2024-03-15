@@ -1,13 +1,3 @@
-self.addEventListener('install', () => {
-  self.skipWaiting(); // 이전 버전의 서비스 워커를 대기 상태로 만들지 않고 즉시 새 버전으로 전환
-});
-
-self.addEventListener('activate', () => {
-  // event.waitUntil(
-  //   self.clients.claim() // 새로운 서비스 워커가 활성화되면, 열려 있는 클라이언트를 즉시 제어
-  // );
-});
-
 self.addEventListener('push', function (e) {
   if (!e.data.json()) return;
 
