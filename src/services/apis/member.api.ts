@@ -14,6 +14,8 @@ import type {
 import type { IStudyStreak } from '@/types/models/streak.model';
 import { useAuthStore } from '@/stores/auth-store';
 
+const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 // 현재유저 조회
 export const fetchCurrentMember = async () => {
   const response = await nestHttpRequest.get<
@@ -62,7 +64,9 @@ export const fetchDailyStatistic = async (
 ) => {
   const response = await nestHttpRequest.get<
     ApiSuccessResponse<IDailyStatistic>
-  >(`/timer-api/members/${memberId}/statistics?date=${dateStr}`);
+  >(
+    `/timer-api/members/${memberId}/statistics?date=${dateStr}&timezone=${timeZone}`
+  );
   return response.data.data;
 };
 
@@ -75,7 +79,7 @@ export const fetchMonthlyStatistic = async (
   const response = await nestHttpRequest.get<
     ApiSuccessResponse<IMontlyStatistic>
   >(
-    `/timer-api/members/${memberId}/statistics/monthly?year=${year}&month=${month}`
+    `/timer-api/members/${memberId}/statistics/monthly?year=${year}&month=${month}&timezone=${timeZone}`
   );
   return response.data.data;
 };
@@ -89,7 +93,7 @@ export const fetchStatisticHeatMap = async (
   const response = await nestHttpRequest.get<
     ApiSuccessResponse<IStatisticHeatMapData[]>
   >(
-    `/timer-api/members/${memberId}/statistics/heat-map?start=${start}&end=${end}`
+    `/timer-api/members/${memberId}/statistics/heat-map?start=${start}&end=${end}&timezone=${timeZone}`
   );
   return response.data.data;
 };
