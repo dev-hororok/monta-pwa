@@ -49,6 +49,7 @@ export const scheduleTimer = async (body: {
     `/timer-api/study-timer/schedule`,
     body
   );
+  console.log('예약: ', response);
   return response.data.data;
 };
 
@@ -57,5 +58,6 @@ export const cancelTimerSchedule = async () => {
   const response = await nestHttpRequest.post<ApiSuccessResponse<null>>(
     `/timer-api/study-timer/cancel`
   );
+  console.log('취소: ', response);
   return response.data.data;
 };

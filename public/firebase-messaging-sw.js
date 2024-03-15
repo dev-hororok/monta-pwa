@@ -22,9 +22,7 @@ self.addEventListener('push', function (e) {
     body: resultData.body,
   };
 
-  event.waitUntil(
-    self.registration.showNotification(notificationTitle, notificationOptions)
-  );
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });
 
 self.addEventListener('notificationclick', function (event) {
