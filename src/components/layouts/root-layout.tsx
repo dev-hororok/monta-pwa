@@ -6,8 +6,10 @@ import { useViewport } from '@/hooks/use-viewport';
 import { ModalManager } from '@/components/modals/modal-manager';
 import { cn } from '@/lib/utils';
 import { useCheckDevice } from '@/hooks/use-check-device';
+import { useInitializeApp } from '@/hooks/use-initialize-app';
 
 export const RootLayout = () => {
+  useInitializeApp();
   useCloseAppHandler();
   useViewport();
   useCheckDevice();

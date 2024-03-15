@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { API_URL_NEST } from '@/constants/constants';
 import { useAuthStore } from '@/stores/auth-store';
-import { TimerType } from '@/stores/timer-state-store';
+import type { TimerType } from '@/stores/timer-state-store';
 import type { IMemberInfo } from '@/components/modals/timer';
 
 export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
@@ -45,7 +45,7 @@ export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
       console.log('Disconnecting from socket server');
       socket.disconnect();
     };
-  }, [accessToken, timerType]);
+  }, [accessToken, timerType, active]);
 
   return { members };
 };
