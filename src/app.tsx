@@ -5,7 +5,6 @@ import MyPage from './pages/my';
 import ShopPage from './pages/shop';
 import MorePage from './pages/more';
 import InventoryPage from './pages/inventory';
-// import LoginGatewayPage from './pages/auth';
 import LoginPage from './pages/auth/login';
 import RegisterPage from './pages/auth/register';
 import AgreeToTermsPage from './pages/auth/agree';
@@ -16,6 +15,8 @@ import { RootLayout } from './components/layouts/root-layout';
 import { MobileLayout } from './components/layouts/mobile-layout';
 // import { ProtectedRoute } from './components/auth/protected-route';
 import { UnauthedRoute } from './components/auth/unauthed-route';
+import { NotFoundPage } from './pages/not-found';
+import LoginGatewayPage from './pages/auth';
 
 const router = createBrowserRouter(
   [
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
             { path: 'more', element: <MorePage /> },
             { path: 'inventory', element: <InventoryPage /> },
             { path: 'shop', element: <ShopPage /> },
+            { path: '*', element: <NotFoundPage /> },
           ],
         },
         {
@@ -41,7 +43,7 @@ const router = createBrowserRouter(
             </UnauthedRoute>
           ),
           children: [
-            // { index: true, element: <LoginGatewayPage /> },
+            { index: true, element: <LoginGatewayPage /> },
             { path: 'login', element: <LoginPage /> },
             { path: 'agree', element: <AgreeToTermsPage /> },
             { path: 'register', element: <RegisterPage /> },
