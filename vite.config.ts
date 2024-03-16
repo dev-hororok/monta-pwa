@@ -1,6 +1,7 @@
 import path from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vite';
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   build: {
@@ -8,7 +9,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            return 'vendor';
+            return 'vendors';
           }
         },
       },
@@ -16,6 +17,10 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
   },
   plugins: [
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+    }),
     VitePWA({
       injectRegister: 'auto',
       registerType: 'autoUpdate',
