@@ -27,7 +27,11 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      includeAssets: ['robots.txt', 'sitemap.xml'],
+      includeAssets: [
+        'robots.txt',
+        'sitemap.xml',
+        '.well-known/assetlinks.json',
+      ],
       workbox: {
         skipWaiting: true,
         clientsClaim: true,
