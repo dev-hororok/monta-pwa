@@ -5,7 +5,7 @@ const TermsPage = () => {
   const location = useLocation();
   return (
     <div className="h-full pt-safe-offset-14 pb-safe-offset-8 font-sans">
-      <PrevHeader to={location.state.prevPage || '/'} title="이용약관" />
+      <PrevHeader to={location?.state?.prevPage || '/'} title="이용약관" />
       <main className="h-full overflow-y-scroll scrollbar-hide px-4 pt-4 space-y-4 text-sm [&_p]:mb-4 leading-6">
         <p>제 1 장 총 칙.</p>
         <p>

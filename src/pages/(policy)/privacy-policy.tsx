@@ -7,7 +7,7 @@ const PrivacyPolicyPage = () => {
   return (
     <div className="h-full pt-safe-offset-14 pb-safe-offset-8 font-sans">
       <PrevHeader
-        to={location.state.prevPage || '/'}
+        to={location?.state?.prevPage || '/'}
         title="개인정보 처리방침"
       />
       <main className="h-full overflow-y-scroll scrollbar-hide px-4 pt-4 space-y-4 text-sm [&_p]:mb-4 leading-6">
