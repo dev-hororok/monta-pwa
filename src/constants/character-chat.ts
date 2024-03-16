@@ -11,7 +11,6 @@ export const CHARACTER_CHATS = {
     '로그인을 해주세요 ㅜㅜ',
     '로그인 하고 여러 캐릭터를 만나보세요!',
     '로그인 얼마 안걸려요 ㅜㅜ',
-    'ㅜㅜ 제발요',
   ],
   Normal: [...commonMessages, '뽀모도로 모드를 사용해보세요!'],
   Work: [...commonMessages, '25분이 효율이 가장 좋대요!', '온전히 집중하기!!'],

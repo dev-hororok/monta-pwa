@@ -60,7 +60,7 @@ export const TimerImage = React.memo(({ className }: Props) => {
   React.useEffect(() => {
     const intervalId = setInterval(() => {
       changeMessage();
-      setTimeout(() => setMessage(''), 4000); // 2초 후 메시지 숨김
+      setTimeout(() => setMessage(''), 4000); // 4초 후 메시지 숨김
     }, 10000);
     return () => clearInterval(intervalId);
   }, [changeMessage]);
@@ -84,5 +84,5 @@ export const TimerImage = React.memo(({ className }: Props) => {
 const Message = ({ message }: { message: string }) => {
   if (!message) return null;
 
-  return <p className="absolute top-0 right-1/2">{message}</p>;
+  return <p className="absolute top-0 left-1/4">{message}</p>;
 };
