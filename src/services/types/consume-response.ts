@@ -1,10 +1,8 @@
-interface PointBoxAcquisition {
-  result: 'Point Box Acquisition'; // 개선 필요
-  item: {
-    description: string;
-    item_id: number;
-    item_name: string;
-  };
+import { Item } from '@/types/models/item.model';
+
+interface ConsumableItemAcquisition {
+  result: 'Consumable Item Acquisition'; // 개선 필요
+  item: Item;
 }
 interface CharacterAcquisition {
   result: 'Character Acquisition';
@@ -42,7 +40,7 @@ interface PointAcquisition {
 }
 
 export type ConsumeItemResponseData =
-  | PointBoxAcquisition
+  | ConsumableItemAcquisition
   | CharacterAcquisition
   | PaletteAcquisition
   | PointAcquisition;

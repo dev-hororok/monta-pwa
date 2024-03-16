@@ -43,7 +43,7 @@ export const useConsumeItem = () => {
         openModal('pointAcquisition', {
           earned_point: data.member.earned_point,
         });
-      } else if (data.result === 'Point Box Acquisition') {
+      } else if (data.result === 'Consumable Item Acquisition') {
         openModal('consumableItemAcquisition', {
           item: data.item,
         });

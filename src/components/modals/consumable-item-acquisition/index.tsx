@@ -32,13 +32,11 @@ export const ConsumableItemAcquisitionDialog = () => {
       >
         <AlertDialogTitle className="text-3xl">아이템 획득</AlertDialogTitle>
         <img
-          src={'/chiken.png'}
+          src={item.image_url}
           alt="consumable item image"
           className="h-2/5 mx-auto"
         />
-        <p className="text-center font-semibold text-lg py-4">
-          {item.item_name}
-        </p>
+        <p className="text-center font-semibold text-lg py-4">{item.name}</p>
         <p className="text-center text-foreground/70">{item.description}</p>
         <div className="w-full flex flex-col justify-end h-full gap-2">
           <AlertDialogFooter className="w-full">

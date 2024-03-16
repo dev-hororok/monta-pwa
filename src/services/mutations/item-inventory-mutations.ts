@@ -53,8 +53,8 @@ export const useConsumeItemMutation = () => {
             };
           }
         );
-        // 포인트 박스 획득 (Consumable Item Acquisition 으로 유연성 개선 필요)
-      } else if (data.result === 'Point Box Acquisition') {
+        // 포인트 박스 획득
+      } else if (data.result === 'Consumable Item Acquisition') {
         await queryClient.invalidateQueries({
           queryKey: [CONSUMABLE_INVENTORY_QUERY_KEY],
         });

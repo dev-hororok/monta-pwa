@@ -1,7 +1,8 @@
-import { ICharacter } from '@/types/models/character.model';
-import { IConsumableItemInventory } from '@/types/models/item.model';
-import { IPalette } from '@/types/models/palette.model';
 import { create } from 'zustand';
+
+import type { ICharacter } from '@/types/models/character.model';
+import type { IConsumableItemInventory, Item } from '@/types/models/item.model';
+import type { IPalette } from '@/types/models/palette.model';
 
 interface ModalState<T = undefined> {
   isOpen: boolean;
@@ -22,11 +23,7 @@ interface ModalsState {
   }>;
   // 사용아이템 획득
   consumableItemAcquisition: ModalState<{
-    item: {
-      item_id: number;
-      item_name: string;
-      description: string;
-    };
+    item: Item;
   }>;
   // 포인트 획득
   pointAcquisition: ModalState<{
