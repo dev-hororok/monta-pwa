@@ -17,6 +17,8 @@ import { MobileLayout } from './components/layouts/mobile-layout';
 import { UnauthedRoute } from './components/auth/unauthed-route';
 import { NotFoundPage } from './pages/not-found';
 import LoginGatewayPage from './pages/auth';
+import PrivacyPolicyPage from './pages/(policy)/privacy-policy';
+import TermsPage from './pages/(policy)/terms';
 
 const router = createBrowserRouter(
   [
@@ -34,6 +36,14 @@ const router = createBrowserRouter(
             { path: 'shop', element: <ShopPage /> },
             { path: '*', element: <NotFoundPage /> },
           ],
+        },
+        {
+          path: 'privacy',
+          element: <PrivacyPolicyPage />,
+        },
+        {
+          path: 'terms',
+          element: <TermsPage />,
         },
         {
           path: 'auth',

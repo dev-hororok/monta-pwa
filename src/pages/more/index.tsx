@@ -3,12 +3,12 @@ import { VibrationButton } from './_components/vibration-button';
 import { DeleteAccountDialog } from './_components/delete-account-dialog';
 import { LogoutDialog } from './_components/logout-dialog';
 import { AppVersionView } from './_components/app-version-view';
-import { TermsOfServiceButton } from './_components/tos-button';
 import { PrivacyPolicyButton } from './_components/privacy-policy-button';
 import { ReviewButton } from './_components/review-button';
 import { useAuthStore } from '@/stores/auth-store';
 import { Icons } from '@/components/icons';
 import { Link } from 'react-router-dom';
+import { TermsOfServiceButton } from './_components/tos-button';
 
 const MorePage = () => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);

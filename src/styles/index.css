@@ -16,10 +16,10 @@ body {
 
 @layer base {
   * {
-    @apply border-border font-gamja tracking-wide;
+    @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-gamja tracking-wide;
   }
 
   html {

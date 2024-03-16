@@ -6,6 +6,7 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { cn } from '@/lib/utils';
 import { PrevHeader } from '@/components/headers/prev-header';
+import { Link } from 'react-router-dom';
 
 const AgreeToTermsPage = () => {
   const [allChecked, setAllChecked] = useState(false);
@@ -75,7 +76,9 @@ const AgreeToTermsPage = () => {
             >
               [필수] 이용약관 동의
             </label>
-            <ChevronRightIcon />
+            <Link to="/terms" replace state={{ prevPage: '/auth/agree' }}>
+              <ChevronRightIcon />
+            </Link>
           </div>
           <div className="flex items-center space-x-4">
             <Checkbox
@@ -90,7 +93,9 @@ const AgreeToTermsPage = () => {
             >
               [필수] 개인정보 수집 및 이용 동의
             </label>
-            <ChevronRightIcon />
+            <Link to="/privacy" replace state={{ prevPage: '/auth/agree' }}>
+              <ChevronRightIcon />
+            </Link>
           </div>
         </div>
 

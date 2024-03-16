@@ -6,15 +6,17 @@ import { Icons } from '../icons';
 interface Props {
   to: string;
   rightButton?: React.ReactNode;
+  title?: string;
 }
 
-export const PrevHeader = ({ to, rightButton }: Props) => {
+export const PrevHeader = ({ to, rightButton, title }: Props) => {
   return (
-    <div className="flex items-end justify-between fixed top-0 left-0 right-0 md:absolute h-14 px-3 mt-safe md:rounded-t-md bg-background">
-      <Link to={to} replace>
+    <header className="flex items-end justify-center fixed top-0 left-0 right-0 md:absolute h-14 mt-safe md:rounded-t-md bg-background">
+      <Link to={to} replace className="absolute left-3">
         <Icons.chevronLeft className="w-8 h-8" />
       </Link>
-      {rightButton}
-    </div>
+      {title ? <h2 className="text-xl">{title}</h2> : null}
+      <div className="absolute right-3">{rightButton}</div>
+    </header>
   );
 };
