@@ -8,5 +8,15 @@
         "1B:64:DA:EF:2B:E7:2F:64:C7:6C:2A:33:8A:84:C6:D5:26:C5:50:A7:27:7B:0B:CB:B3:46:4E:90:48:3B:EB:72"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.pomodak.twa",
+      "sha256_cert_fingerprints": [
+        "0A:80:B2:A2:D8:87:11:35:EE:72:39:90:35:86:A4:9F:12:7C:AD:6E:D3:BD:55:E9:94:AB:FE:E4:1E:4E:9D:79"
+      ]
+    }
   }
 ]
