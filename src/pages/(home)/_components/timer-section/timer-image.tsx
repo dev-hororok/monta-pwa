@@ -84,5 +84,5 @@ export const TimerImage = React.memo(({ className }: Props) => {
 const Message = ({ message }: { message: string }) => {
   if (!message) return null;
 
-  return <p className="absolute top-0 left-1/4">{message}</p>;
+  return <p className="absolute -top-2 left-1/4">{message}</p>;
 };

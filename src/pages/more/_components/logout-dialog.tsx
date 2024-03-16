@@ -22,7 +22,7 @@ export const LogoutDialog = () => {
   const handleLogoutClick = () => {
     queryClient.clear();
     logout();
-    navigate('/');
+    navigate('/', { replace: true });
   };
   return (
     <Dialog>

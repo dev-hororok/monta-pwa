@@ -10,10 +10,8 @@ export const useViewport = () => {
     const handleViewportChange = () => {
       if (window.visualViewport) {
         setViewportSize(window.innerWidth, window.visualViewport.height);
-        document.body.style.height = `${window.visualViewport.height}px`;
       } else {
         setViewportSize(window.innerWidth, window.innerHeight);
-        document.body.style.height = `${window.innerHeight}px`;
       }
     };
 
