@@ -70,6 +70,7 @@ export const TimerImage = React.memo(({ className }: Props) => {
       <img
         onContextMenu={(e) => e.preventDefault()}
         loading="eager"
+        fetchpriority="high"
         src={timerImageSrc}
         alt="main-timer"
         onClick={handleClick}
