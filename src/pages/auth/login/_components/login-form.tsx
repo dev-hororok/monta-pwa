@@ -108,17 +108,7 @@ export const LoginForm = ({ className, ...props }: LoginFormProps) => {
       <div className="flex justify-center items-center text-sm">
         <Link
           replace
-          to="/auth/register"
-          className={cn(
-            buttonVariants({ variant: 'link' }),
-            'h-auto py-0 text-foreground/50'
-          )}
-        >
-          계정 찾기
-        </Link>
-        <Link
-          replace
-          to="/auth/register"
+          to="/auth/forgot-password"
           className={cn(
             buttonVariants({ variant: 'link' }),
             'h-auto py-0 text-foreground/50'

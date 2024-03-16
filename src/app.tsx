@@ -19,6 +19,7 @@ import { NotFoundPage } from './pages/not-found';
 import LoginGatewayPage from './pages/auth';
 import PrivacyPolicyPage from './pages/(policy)/privacy-policy';
 import TermsPage from './pages/(policy)/terms';
+import { ForgotPasswordPage } from './pages/auth/forgot-password';
 
 const router = createBrowserRouter(
   [
@@ -57,6 +58,7 @@ const router = createBrowserRouter(
             { path: 'login', element: <LoginPage /> },
             { path: 'agree', element: <AgreeToTermsPage /> },
             { path: 'register', element: <RegisterPage /> },
+            { path: 'forgot-password', element: <ForgotPasswordPage /> },
             { path: 'login/callback/kakao', element: <KakaoLoginCallback /> },
             { path: 'login/callback/google', element: <GoogleLoginCallback /> },
             { path: 'login/callback/naver', element: <NaverLoginCallback /> },
