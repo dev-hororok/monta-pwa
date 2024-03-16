@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.pomodak.twa",
+      "sha256_cert_fingerprints": [
+        "1B:64:DA:EF:2B:E7:2F:64:C7:6C:2A:33:8A:84:C6:D5:26:C5:50:A7:27:7B:0B:CB:B3:46:4E:90:48:3B:EB:72"
+      ]
+    }
+  }
+]
