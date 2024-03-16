@@ -15,7 +15,7 @@ export const RootLayout = () => {
   useCheckDevice();
 
   return (
-    <div className="w-full flex justify-center items-center h-screen">
+    <div className="w-full h-dvh flex justify-center items-center">
       <div
         className={cn(
           'relative w-full h-full bg-background select-none transition-colors',
