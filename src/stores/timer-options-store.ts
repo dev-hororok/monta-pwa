@@ -16,9 +16,9 @@ export type TimerOptionKey = 'pomodoroTime' | 'sectionCount' | 'restTime';
 // | 'longRestTime';
 
 export const timerOptions: Record<TimerOptionKey, number[]> = {
-  pomodoroTime: [0.1, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 90, 120],
-  sectionCount: [1, 2, 3, 4, 5, 6, 7, 8],
-  restTime: [0.1, 3, 5, 10, 15, 20, 25, 30, 35, 40],
+  pomodoroTime: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 90, 120],
+  sectionCount: [2, 3, 4, 5, 6, 7, 8],
+  restTime: [3, 5, 10, 15, 20, 25, 30, 35, 40],
   // longRestTime: [3, 5, 10, 15, 20, 25, 30, 35, 40],
 };
 
