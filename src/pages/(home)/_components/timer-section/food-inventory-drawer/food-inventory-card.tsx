@@ -24,7 +24,7 @@ export const FoodInventoryCard = ({
     <div
       onClick={handleConsumeClick}
       className={cn(
-        buttonVariants({ variant: isActive ? 'default' : 'ghost' }),
+        buttonVariants({ variant: isActive ? 'outline' : 'ghost' }),
         'h-auto p-1 flex-center flex-col text-xs font-semibold cursor-pointer',
         isActive && 'hover:-translate-y-1 duration-200 transition-transform'
       )}
