@@ -7,10 +7,14 @@ export const FoodInventoryButton = () => {
       <Button
         type="button"
         variant={'ghost'}
-        className="rounded-3xl text-xl py-6 px-6"
+        className="rounded-3xl text-xl py-6 px-4"
         aria-label="food-inventory"
       >
-        <img src="/egg.png" alt="bag" className="size-8" />
+        <img
+          src="https://d2quahb2ygxiv.cloudfront.net/c92b5b1ca2b81459a46ef.png"
+          alt="bag"
+          className="size-12"
+        />
       </Button>
     </FoodInventoryDrawer>
   );

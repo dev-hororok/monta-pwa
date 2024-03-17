@@ -19,6 +19,7 @@ export const ReactQueryProvider = ({ children }: { children: ReactNode }) => {
 
       queries: {
         gcTime: 10 * MINUTE,
+        retry: 1,
       },
     },
     queryCache: new QueryCache({
