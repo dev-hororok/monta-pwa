@@ -21,7 +21,17 @@ const loginFormSchema = z.object({
   email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
   password: z
     .string()
-    .min(4, { message: '비밀번호는 최소 4자 이상이어야 합니다.' }),
+    .min(8, { message: '비밀번호는 최소 8자 이상 입니다.' })
+    .max(20, { message: '비밀번호는 최대 20자 이하 입니다.' })
+    .regex(/(?=.*\d)/, {
+      message: '비밀번호에는 적어도 하나의 숫자가 포함되어야 합니다.',
+    })
+    .regex(/(?=.*[a-z])/, {
+      message: '비밀번호에는 적어도 하나의 소문자가 포함되어야 합니다.',
+    })
+    .regex(/(?=.*[\W])/, {
+      message: '비밀번호에는 적어도 하나의 특수 문자가 포함되어야 합니다.',
+    }),
 });
 
 type LoginFormValues = z.infer<typeof loginFormSchema>;
@@ -98,7 +108,7 @@ export const LoginForm = ({ className, ...props }: LoginFormProps) => {
           <span className="text-muted-foreground">아직 계정이 없으신가요?</span>
           <Link
             replace
-            to="/auth/agree"
+            to="/auth/register"
             className={cn(buttonVariants({ variant: 'link' }), 'h-auto py-0')}
           >
             회원가입

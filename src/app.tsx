@@ -7,7 +7,6 @@ import MorePage from './pages/more';
 import InventoryPage from './pages/inventory';
 import LoginPage from './pages/auth/login';
 import RegisterPage from './pages/auth/register';
-import AgreeToTermsPage from './pages/auth/agree';
 import KakaoLoginCallback from './pages/auth/login/callback/kakao';
 import GoogleLoginCallback from './pages/auth/login/callback/google';
 import NaverLoginCallback from './pages/auth/login/callback/naver';
@@ -56,7 +55,6 @@ const router = createBrowserRouter(
           children: [
             { index: true, element: <LoginGatewayPage /> },
             { path: 'login', element: <LoginPage /> },
-            { path: 'agree', element: <AgreeToTermsPage /> },
             { path: 'register', element: <RegisterPage /> },
             { path: 'forgot-password', element: <ForgotPasswordPage /> },
             { path: 'login/callback/kakao', element: <KakaoLoginCallback /> },

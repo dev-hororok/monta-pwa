@@ -16,10 +16,20 @@ export const emailLogin = async (credentials: {
   return response.data.data;
 };
 
+// 이메일 확인 메일 발송
+export const sendCheckEmail = async (data: { email: string }) => {
+  const response = await nestHttpRequest.post<ApiSuccessResponse<null>>(
+    '/timer-api/auth/email/check',
+    data
+  );
+  return response.data.data;
+};
+
 // 이메일 회원가입
 export const emailRegister = async (credentials: {
   email: string;
   password: string;
+  code: string;
 }) => {
   const response = await nestHttpRequest.post<
     ApiSuccessResponse<AuthResponseData>

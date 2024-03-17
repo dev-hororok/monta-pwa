@@ -6,6 +6,7 @@ import {
   googleLogin,
   kakaoLogin,
   naverLogin,
+  sendCheckEmail,
 } from '../apis/auth.api';
 import { useAuthStore } from '@/stores/auth-store';
 
@@ -29,10 +30,19 @@ export const useEmailLoginMutation = () => {
   });
 };
 
+// 이메일 확인 메일 발송
+export const useSendCheckEmailMutation = () => {
+  return useMutation({
+    mutationFn: (data: { email: string }) => {
+      return sendCheckEmail(data);
+    },
+  });
+};
+
 // 이메일 회원가입
 export const useEmailRegisterMutation = () => {
   return useMutation({
-    mutationFn: (data: { email: string; password: string }) => {
+    mutationFn: (data: { email: string; password: string; code: string }) => {
       return emailRegister(data);
     },
 
