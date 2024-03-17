@@ -1,4 +1,4 @@
-import { Icons } from '@/components/icons';
+import { morePageIcons } from '@/components/icons';
 import { useNavigate } from 'react-router-dom';
 
 export const TermsOfServiceButton = () => {
@@ -12,7 +12,11 @@ export const TermsOfServiceButton = () => {
       className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm"
     >
       <div className="flex items-center gap-2">
-        <Icons.fileText className="h-[1.2rem] w-[1.2rem]" />
+        <img
+          src={morePageIcons.documents}
+          alt="documents icon"
+          className="h-[1.2rem] w-[1.2rem]"
+        />
         이용약관
       </div>
     </div>

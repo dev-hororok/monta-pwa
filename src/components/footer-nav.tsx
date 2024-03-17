@@ -2,32 +2,38 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import type { NavItem } from '@/types/nav';
-import { Icons } from '@/components/icons';
+import { footerNavIcons } from '@/components/icons';
 
 const navItems: NavItem[] = [
   {
     text: '홈',
-    icon: <Icons.home className="w-5 h-5" />,
+    icon: <img src={footerNavIcons.home} alt="home icon" className="size-6" />,
     href: '/',
   },
   {
     text: '내정보',
-    icon: <Icons.user className="w-5 h-5" />,
+    icon: <img src={footerNavIcons.user} alt="user icon" className="size-6" />,
     href: '/my',
   },
   {
     text: '상점',
-    icon: <Icons.shop className="w-5 h-5" />,
+    icon: <img src={footerNavIcons.shop} alt="shop icon" className="size-6" />,
     href: '/shop',
   },
   {
     text: '인벤토리',
-    icon: <img src="/bag.png" alt="bag" className="w-7 h-7" />,
+    icon: (
+      <img
+        src={footerNavIcons.backpack}
+        alt="backpack icon"
+        className="size-6"
+      />
+    ),
     href: '/inventory',
   },
   {
     text: '더보기',
-    icon: <Icons.moreHorizontal className="w-5 h-5" />,
+    icon: <img src={footerNavIcons.dots} alt="dots icon" className="size-6" />,
     href: '/more',
   },
 ];

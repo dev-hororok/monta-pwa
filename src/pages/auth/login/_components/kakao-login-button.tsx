@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { toast } from 'sonner';
 
-import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { BASE_URL, KAKAO_REST_API_KEY } from '@/constants/constants';
 import { useKakaoLoginMutation } from '@/services/mutations/auth-mutations';
+import { socialIcons } from '@/components/icons';
 
 export const KakaoLoginButton = () => {
   const { mutateAsync: kakaoLogin } = useKakaoLoginMutation();
@@ -45,7 +45,7 @@ export const KakaoLoginButton = () => {
       className="w-full h-12 gap-4 bg-[#FEE500] hover:bg-[#FEE500]"
       onClick={handleLogin}
     >
-      <Icons.kakao className="w-6 h-6" />
+      <img src={socialIcons.kakao} alt="kakao icon" className="w-6 h-6" />
       <p className="text-black">카카오 로그인</p>
     </Button>
   );

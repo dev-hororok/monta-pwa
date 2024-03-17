@@ -11,9 +11,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useDeleteAccountMutation } from '@/services/mutations/auth-mutations';
+import { morePageIcons } from '@/components/icons';
 
 export const DeleteAccountDialog = () => {
   const { mutateAsync: deleteAccount } = useDeleteAccountMutation();
@@ -39,7 +39,11 @@ export const DeleteAccountDialog = () => {
       <DialogTrigger asChild>
         <div className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm">
           <div className="flex items-center gap-2">
-            <Icons.removeUser className="h-[1.2rem] w-[1.2rem]" />
+            <img
+              src={morePageIcons.userX}
+              alt="userX icon"
+              className="h-[1.2rem] w-[1.2rem]"
+            />
             계정 삭제
           </div>
         </div>

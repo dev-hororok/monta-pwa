@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { toast } from 'sonner';
 
-import { Icons } from '@/components/icons';
+import { socialIcons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { BASE_URL, NAVER_CLIENT_ID } from '@/constants/constants';
 import { useNaverLoginMutation } from '@/services/mutations/auth-mutations';
@@ -45,7 +45,7 @@ export const NaverLoginButton = () => {
       className="w-full h-12 gap-4 bg-[#03C75A] hover:bg-[#03C75A]"
       onClick={handleLogin}
     >
-      <Icons.naver className="w-6 h-6" />
+      <img src={socialIcons.naver} alt="naver icon" className="w-6 h-6" />
       <p className="text-white">네이버 로그인</p>
     </Button>
   );

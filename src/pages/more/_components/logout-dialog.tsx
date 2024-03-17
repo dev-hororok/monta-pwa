@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import { Icons } from '@/components/icons';
+import { morePageIcons } from '@/components/icons';
 import { useAuthStore } from '@/stores/auth-store';
 import {
   Dialog,
@@ -29,7 +29,11 @@ export const LogoutDialog = () => {
       <DialogTrigger asChild>
         <div className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm">
           <div className="flex items-center gap-2">
-            <Icons.logout className="h-[1.2rem] w-[1.2rem]" />
+            <img
+              src={morePageIcons.logout}
+              alt="logout icon"
+              className="h-[1.2rem] w-[1.2rem]"
+            />
             로그아웃
           </div>
         </div>

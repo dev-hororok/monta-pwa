@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { toast } from 'sonner';
 
-import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useGoogleLoginMutation } from '@/services/mutations/auth-mutations';
 import { BASE_URL, GOOGLE_CLIENT_ID } from '@/constants/constants';
+import { socialIcons } from '@/components/icons';
 
 export const GoogleLoginButton = () => {
   const { mutateAsync: googleLogin } = useGoogleLoginMutation();
@@ -49,7 +49,11 @@ export const GoogleLoginButton = () => {
       className="w-full h-12 gap-4 bg-white dark:bg-white hover:bg-white"
       onClick={handleLogin}
     >
-      <Icons.google className="w-6 h-6 fill-foreground" />
+      <img
+        src={socialIcons.google}
+        alt="google icon"
+        className="w-6 h-6 fill-foreground"
+      />
       <p className="text-black">구글 로그인</p>
     </Button>
   );

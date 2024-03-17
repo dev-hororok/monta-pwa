@@ -1,7 +1,7 @@
 import { useCurrentMemberQuery } from '@/services/queries/member-queries';
 import { Button } from '../../../components/ui/button';
 import { Link } from 'react-router-dom';
-import { CDN_IMAGES } from '@/constants/cdn-images';
+import { headerIcons } from '@/components/icons';
 
 export const HomeHeader = () => {
   const { data } = useCurrentMemberQuery();
@@ -11,10 +11,10 @@ export const HomeHeader = () => {
         <Button
           type="button"
           variant={'ghost'}
-          className="flex items-center text-lg"
+          className="flex items-center text-lg px-2"
           aria-label="shop"
         >
-          <img src={CDN_IMAGES.feather} alt="point" className="size-8" />
+          <img src={headerIcons.feather} alt="point icon" className="size-6" />
           {data?.point}
         </Button>
       </Link>
@@ -26,7 +26,11 @@ export const HomeHeader = () => {
           className="flex items-center text-lg"
           aria-label="more"
         >
-          <img src={CDN_IMAGES.settings} alt="settings" className="size-8" />
+          <img
+            src={headerIcons.settings}
+            alt="settings icon"
+            className="size-6"
+          />
         </Button>
       </Link>
     </div>

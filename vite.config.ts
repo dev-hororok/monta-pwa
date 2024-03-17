@@ -60,6 +60,21 @@ export default defineConfig({
               },
             },
           },
+          // CDN 이미지 캐싱 구성
+          {
+            urlPattern: /^https:\/\/d2quahb2ygxiv\.cloudfront\.net\/.*/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'cdn-images',
+              expiration: {
+                maxEntries: 100, // 캐시에 저장할 최대 이미지 수
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30일
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
         ],
       },
       manifest: {

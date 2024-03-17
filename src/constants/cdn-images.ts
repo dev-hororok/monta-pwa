@@ -15,7 +15,5 @@ export const CDN_IMAGES = {
   },
 
   chair: 'https://d2quahb2ygxiv.cloudfront.net/a46ef4fdd77fb5ffcdf2f.png',
-  backpack: 'https://d2quahb2ygxiv.cloudfront.net/c92b5b1ca2b81459a46ef.png',
-  feather: 'https://d2quahb2ygxiv.cloudfront.net/46ef4fdd77fb5ffcdf2f2.png',
-  settings: 'https://d2quahb2ygxiv.cloudfront.net/6ef4fdd77fb5ffcdf2f22.png',
+  nest: 'https://d2quahb2ygxiv.cloudfront.net/c92b5b1ca2b81459a46ef.png',
 };

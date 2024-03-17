@@ -6,9 +6,9 @@ import { AppVersionView } from './_components/app-version-view';
 import { PrivacyPolicyButton } from './_components/privacy-policy-button';
 import { ReviewButton } from './_components/review-button';
 import { useAuthStore } from '@/stores/auth-store';
-import { Icons } from '@/components/icons';
 import { Link } from 'react-router-dom';
 import { TermsOfServiceButton } from './_components/tos-button';
+import { morePageIcons } from '@/components/icons';
 
 const MorePage = () => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
@@ -35,7 +35,11 @@ const MorePage = () => {
               className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm"
             >
               <div className="flex items-center gap-2">
-                <Icons.login className="h-[1.2rem] w-[1.2rem]" />
+                <img
+                  src={morePageIcons.login}
+                  alt="login icon"
+                  className="h-[1.2rem] w-[1.2rem]"
+                />
                 로그인
               </div>
             </Link>

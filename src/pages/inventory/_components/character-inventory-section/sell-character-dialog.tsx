@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,6 +13,7 @@ import useSellCharacter from '../../hooks/use-sell-character';
 import { useState } from 'react';
 import type { ICharacterInventory } from '@/types/models/character.model';
 import type { IMember } from '@/types/models/member.model';
+import { commonIcons } from '@/components/icons';
 
 interface SellCharacterDialogProps {
   characterInventory: ICharacterInventory;
@@ -65,7 +65,11 @@ export const SellCharacterDialog = ({
                 onClick={decrementCount}
                 disabled={count <= 1}
               >
-                <MinusIcon className="h-4 w-4" />
+                <img
+                  src={commonIcons.minus}
+                  alt="minus icon"
+                  className="size-4"
+                />
                 <span className="sr-only">Decrease</span>
               </Button>
               <div className="flex-1 text-center">
@@ -83,7 +87,11 @@ export const SellCharacterDialog = ({
                 onClick={incrementCount}
                 disabled={count >= MaxCount}
               >
-                <PlusIcon className="h-4 w-4" />
+                <img
+                  src={commonIcons.plus}
+                  alt="plus icon"
+                  className="size-4"
+                />
                 <span className="sr-only">Increase</span>
               </Button>
             </div>

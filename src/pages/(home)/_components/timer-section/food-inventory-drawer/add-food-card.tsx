@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
 import { buttonVariants } from '@/components/ui/button';
-import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
+import { commonIcons } from '@/components/icons';
 
 export const AddFoodCard = () => {
   return (
@@ -14,7 +14,7 @@ export const AddFoodCard = () => {
         'w-full h-full aspect-[3/4]'
       )}
     >
-      <Icons.add />
+      <img src={commonIcons.plus} alt="plus icon" className="size-6" />
     </Link>
   );
 };

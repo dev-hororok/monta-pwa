@@ -1,4 +1,4 @@
-import { Icons } from '@/components/icons';
+import { morePageIcons } from '@/components/icons';
 import { toast } from 'sonner';
 
 export const ReviewButton = () => {
@@ -11,7 +11,11 @@ export const ReviewButton = () => {
       className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm"
     >
       <div className="flex items-center gap-2">
-        <Icons.star className="h-[1.2rem] w-[1.2rem]" />
+        <img
+          src={morePageIcons.star}
+          alt="star icon"
+          className="h-[1.2rem] w-[1.2rem]"
+        />
         리뷰 작성
       </div>
     </div>

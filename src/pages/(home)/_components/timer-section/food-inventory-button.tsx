@@ -11,7 +11,7 @@ export const FoodInventoryButton = () => {
         className="rounded-3xl text-xl py-6 px-4"
         aria-label="food-inventory"
       >
-        <img src={CDN_IMAGES.backpack} alt="backpack" className="size-12" />
+        <img src={CDN_IMAGES.nest} alt="nest icon" className="size-12" />
       </Button>
     </FoodInventoryDrawer>
   );

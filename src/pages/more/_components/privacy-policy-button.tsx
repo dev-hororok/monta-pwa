@@ -1,4 +1,4 @@
-import { Icons } from '@/components/icons';
+import { morePageIcons } from '@/components/icons';
 import { useNavigate } from 'react-router-dom';
 
 export const PrivacyPolicyButton = () => {
@@ -12,7 +12,11 @@ export const PrivacyPolicyButton = () => {
       className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm"
     >
       <div className="flex items-center gap-2">
-        <Icons.shield className="h-[1.2rem] w-[1.2rem]" />
+        <img
+          src={morePageIcons.shield}
+          alt="shield icon"
+          className="h-[1.2rem] w-[1.2rem]"
+        />
         개인정보처리방침
       </div>
     </div>

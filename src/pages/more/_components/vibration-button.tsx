@@ -1,6 +1,6 @@
 import { toast } from 'sonner';
 
-import { Icons } from '@/components/icons';
+import { morePageIcons } from '@/components/icons';
 import { useAppSettingsStore } from '@/stores/app-setting-store';
 
 export const VibrationButton = () => {
@@ -36,12 +36,20 @@ export const VibrationButton = () => {
     >
       {appSettings.vibrationEnabled ? (
         <div className="flex items-center gap-2">
-          <Icons.vibrate className="h-[1.2rem] w-[1.2rem]" />
+          <img
+            src={morePageIcons.deviceVibration}
+            alt="vibration icon"
+            className="h-[1.2rem] w-[1.2rem]"
+          />
           진동 On
         </div>
       ) : (
         <div className="flex items-center gap-2">
-          <Icons.vibrateOff className="h-[1.2rem] w-[1.2rem]" />
+          <img
+            src={morePageIcons.deviceX}
+            alt="vibrationX icon"
+            className="h-[1.2rem] w-[1.2rem]"
+          />
           진동 Off
         </div>
       )}
