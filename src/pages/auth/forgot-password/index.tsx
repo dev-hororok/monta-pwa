@@ -1,76 +1,102 @@
-import * as React from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { PrevHeader } from '@/components/headers/prev-header';
-// import { useEmailLoginMutation } from '@/services/mutations/auth-mutations';
+  useCheckForgotPasswordMutation,
+  useForgotPasswordCodeEmailMutation,
+  useResetPasswordMutation,
+} from '@/services/mutations/auth-mutations';
+import { toast } from 'sonner';
+import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
+import { BackStepHeader } from './_components/back-step-header';
+import { SendCodeStep } from './_components/send-code-step';
+import { CheckCodeStep } from './_components/check-code-step';
+import { ResetPasswordStep } from './_components/reset-password-step';
 
-const forgotPasswordSchema = z.object({
-  email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
-});
+const ForgotPasswordPage = () => {
+  const navigate = useNavigate();
+  const { mutateAsync: sendEmail, isPending: isPendingSendEmail } =
+    useForgotPasswordCodeEmailMutation();
+  const { mutateAsync: checkCode, isPending: isPendingCheckCode } =
+    useCheckForgotPasswordMutation();
+  const { mutateAsync: resetPassword, isPending: isPendingResetPassword } =
+    useResetPasswordMutation();
 
-//
+  const [step, setStep] = useState(1);
+  const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
 
-type LoginFormValues = z.infer<typeof forgotPasswordSchema>;
+  // 뒤로가기
+  const handleBackStepClick = () => {
+    if (step === 1) {
+      navigate('/auth/login', { replace: true });
+      return;
+    }
+    setStep((step) => step - 1);
+  };
 
-interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+  // 1 단계
+  const handleCodeSuccess = async (email: string) => {
+    await sendEmail(
+      { email },
+      {
+        onSuccess: () => {
+          toast.success('성공적으로 이메일이 발송되었습니다.');
+          setEmail(email);
+          setStep(2);
+        }, // default onError에서 처리
+      }
+    );
+  };
 
-export const ForgotPasswordPage = ({ className, ...props }: LoginFormProps) => {
-  //   const { mutateAsync: emailLogin } = useEmailLoginMutation();
+  // 2 단계
+  const handleCheckCodeSuccess = async (code: string) => {
+    await checkCode(
+      { email, code },
+      {
+        onSuccess: (result) => {
+          toast.success('새 비밀번호를 입력해주세요.');
+          setToken(result.hash);
+          setStep(3);
+        }, // default onError에서 처리
+      }
+    );
+  };
 
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(forgotPasswordSchema),
-    defaultValues: { email: '' },
-  });
-  const [isLoading] = React.useState(false);
+  const reSendCode = async () => {
+    await handleCodeSuccess(email);
+  };
 
-  const handleSubmit = async (data: LoginFormValues) => {
-    console.log(data);
+  // 3 단계
+  const handleResetPasswordSuccess = async (password: string) => {
+    await resetPassword(
+      { hash: token, password },
+      {
+        onSuccess: () => {
+          toast.success('성공적으로 패스워드를 변경했습니다.');
+          navigate('/auth/login');
+        }, // default onError에서 처리
+      }
+    );
   };
 
   return (
     <div className="h-full md:rounded-md overflow-hidden pt-safe-offset-14 pb-safe-offset-14">
-      <div className="pt-8 px-6">
-        <h4 className="text-3xl text-primary">패스워드 찾기</h4>
-      </div>
-      <PrevHeader to="/" />
-      <div className={cn('grid gap-6 bg-card w-full', className)} {...props}>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)}>
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="이메일"
-                      {...field}
-                      className="h-12 mb-2"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button disabled={isLoading} className="w-full h-12">
-              이메일 확인
-            </Button>
-          </form>
-        </Form>
-      </div>
+      <BackStepHeader onClick={handleBackStepClick} />
+      {isPendingSendEmail || isPendingCheckCode || isPendingResetPassword ? (
+        <MobileLoadingSpinner isOveray />
+      ) : null}
+      {step === 1 ? <SendCodeStep onSuccess={handleCodeSuccess} /> : null}
+      {step === 2 ? (
+        <CheckCodeStep
+          onSuccess={handleCheckCodeSuccess}
+          reSendCode={reSendCode}
+        />
+      ) : null}
+      {step === 3 ? (
+        <ResetPasswordStep onSuccess={handleResetPasswordSuccess} />
+      ) : null}
     </div>
   );
 };
+
+export default ForgotPasswordPage;

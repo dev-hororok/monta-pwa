@@ -1,12 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
+  checkForgotPasswordCode,
   deleteAccount,
   emailLogin,
   emailRegister,
   googleLogin,
   kakaoLogin,
   naverLogin,
+  resetPassword,
   sendCheckEmail,
+  sendForgotPasswordCodeEmail,
 } from '../apis/auth.api';
 import { useAuthStore } from '@/stores/auth-store';
 
@@ -55,6 +58,33 @@ export const useEmailRegisterMutation = () => {
         },
         data.expires_in
       );
+    },
+  });
+};
+
+// 패스워드 분실 코드 메일 발송
+export const useForgotPasswordCodeEmailMutation = () => {
+  return useMutation({
+    mutationFn: (data: { email: string }) => {
+      return sendForgotPasswordCodeEmail(data);
+    },
+  });
+};
+
+// 패스워드 분실 코드 메일 발송
+export const useCheckForgotPasswordMutation = () => {
+  return useMutation({
+    mutationFn: (data: { email: string; code: string }) => {
+      return checkForgotPasswordCode(data);
+    },
+  });
+};
+
+// 패스워드 변경
+export const useResetPasswordMutation = () => {
+  return useMutation({
+    mutationFn: (data: { hash: string; password: string }) => {
+      return resetPassword(data);
     },
   });
 };

@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'react-router-dom';
 import { z } from 'zod';
 
 import {
@@ -11,11 +10,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-const sendCheckEmailStepFormSchema = z.object({
-  email: z.string().email({ message: '유효하지 않은 이메일 주소입니다.' }),
+const resetPasswordStepFormSchema = z.object({
   password: z
     .string()
     .min(8, { message: '비밀번호는 최소 8자 이상 입니다.' })
@@ -31,28 +29,26 @@ const sendCheckEmailStepFormSchema = z.object({
     }),
 });
 
-type SendCheckEmailStepFormValues = z.infer<
-  typeof sendCheckEmailStepFormSchema
->;
+type ResetPasswordStepFormValues = z.infer<typeof resetPasswordStepFormSchema>;
 
-interface SendCheckEmailStepProps {
-  onSuccess: (email: string, password: string) => void;
+interface ResetPasswordStepProps {
+  onSuccess: (password: string) => void;
 }
 
-export const SendCheckEmailStep = ({ onSuccess }: SendCheckEmailStepProps) => {
-  const form = useForm<SendCheckEmailStepFormValues>({
-    resolver: zodResolver(sendCheckEmailStepFormSchema),
-    defaultValues: { email: '', password: '' },
+export const ResetPasswordStep = ({ onSuccess }: ResetPasswordStepProps) => {
+  const form = useForm<ResetPasswordStepFormValues>({
+    resolver: zodResolver(resetPasswordStepFormSchema),
+    defaultValues: { password: '' },
   });
 
-  const handleSubmit = async (data: SendCheckEmailStepFormValues) => {
-    onSuccess(data.email, data.password);
+  const handleSubmit = async (data: ResetPasswordStepFormValues) => {
+    onSuccess(data.password);
   };
 
   return (
     <div className="px-6 py-8 flex flex-col">
       <div className="pb-4">
-        <h4 className="text-3xl text-primary">가입하기</h4>
+        <h4 className="text-3xl text-primary">새 비밀번호 입력</h4>
       </div>
       <div className={cn('grid gap-6 bg-card w-full py-10')}>
         <Form {...form}>
@@ -60,18 +56,6 @@ export const SendCheckEmailStep = ({ onSuccess }: SendCheckEmailStepProps) => {
             onSubmit={form.handleSubmit(handleSubmit)}
             className="space-y-2"
           >
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="">
-                  <FormControl>
-                    <Input placeholder="이메일" {...field} className="h-12" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="password"
@@ -90,22 +74,9 @@ export const SendCheckEmailStep = ({ onSuccess }: SendCheckEmailStepProps) => {
                 </FormItem>
               )}
             />
-            <Button className="w-full h-12">인증코드 발송</Button>
+            <Button className="w-full h-12">비밀번호 변경</Button>
           </form>
         </Form>
-
-        <div className="flex justify-center items-center text-sm">
-          <div className="flex justify-center items-center text-sm">
-            <span className="text-muted-foreground">이미 계정이 있나요?</span>
-            <Link
-              replace
-              to="/auth/login"
-              className={cn(buttonVariants({ variant: 'link' }), 'h-auto py-0')}
-            >
-              로그인
-            </Link>
-          </div>
-        </div>
       </div>
     </div>
   );

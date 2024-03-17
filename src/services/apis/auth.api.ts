@@ -38,6 +38,38 @@ export const emailRegister = async (credentials: {
   return response.data.data;
 };
 
+// 패스워드 분실 코드 메일 발송
+export const sendForgotPasswordCodeEmail = async (data: { email: string }) => {
+  const response = await nestHttpRequest.post<ApiSuccessResponse<null>>(
+    '/timer-api/auth/password/forgot',
+    data
+  );
+  return response.data.data;
+};
+
+// 패스워드 분실 코드 확인
+export const checkForgotPasswordCode = async (data: {
+  email: string;
+  code: string;
+}) => {
+  const response = await nestHttpRequest.post<
+    ApiSuccessResponse<{ hash: string }>
+  >('/timer-api/auth/password/check-code', data);
+  return response.data.data;
+};
+
+// 패스워드 변경
+export const resetPassword = async (data: {
+  hash: string;
+  password: string;
+}) => {
+  const response = await nestHttpRequest.post<ApiSuccessResponse<null>>(
+    '/timer-api/auth/password/reset',
+    data
+  );
+  return response.data.data;
+};
+
 // 카카오 oauth
 export const kakaoLogin = async (credentials: { code: string }) => {
   const response = await axios.post<ApiSuccessResponse<AuthResponseData>>(
