@@ -28,7 +28,11 @@ export const RootLayout = () => {
           <DarkModeToggle />
         </div> */}
       </div>
-      <Toaster position="top-center" duration={1500} />
+      <Toaster
+        position="top-center"
+        className="[&>li]:font-gamja"
+        duration={1500}
+      />
     </div>
   );
 };
