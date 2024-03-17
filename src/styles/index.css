@@ -3,13 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-}
 body {
   overscroll-behavior: contain;
 }
@@ -22,21 +15,8 @@ body {
     @apply bg-background text-foreground font-gamja tracking-wide;
   }
 
-  html {
-    height: -webkit-fill-available;
-  }
-
-  body {
-    height: -webkit-fill-available;
-  }
-
   .flex-center {
     @apply flex justify-center items-center;
-  }
-
-  /* If using React, set height on the root div as well */
-  #root {
-    height: -webkit-fill-available;
   }
 
   /* 스트릭 기본색상 */

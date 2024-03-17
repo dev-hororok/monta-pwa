@@ -1,10 +1,10 @@
-import { messaging } from '@/lib/firebase';
+import { app } from '@/lib/firebase';
 import {
   disablePush,
   enablePush,
   getNotificationPublicKey,
 } from '@/services/apis/push.api';
-import { getToken } from 'firebase/messaging';
+import { getMessaging, getToken } from 'firebase/messaging';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useAuthStore } from './auth-store';
@@ -104,6 +104,7 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
           // 웹 푸시 권한 요청 & notification_token 등록 api
           try {
             const permission = await Notification.requestPermission();
+            const messaging = getMessaging(app);
 
             if (permission === 'granted') {
               const notificationPublicKey = await getNotificationPublicKey();

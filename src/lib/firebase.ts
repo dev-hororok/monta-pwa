@@ -8,8 +8,6 @@ import {
 } from '@/constants/constants';
 import { initializeApp } from 'firebase/app';
 
-import { getMessaging } from 'firebase/messaging';
-
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_AUTH_DOMAIN,
@@ -20,5 +18,4 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const messaging = getMessaging(app);
+export const app = initializeApp(firebaseConfig);
