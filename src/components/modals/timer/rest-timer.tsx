@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { useModalStore } from '@/stores/use-modal-store';
 import { TimerDisplay } from './timer-display';
+import { CDN_IMAGES } from '@/constants/cdn-images';
 
 interface RestTimerProps extends React.HTMLAttributes<HTMLDivElement> {
   classNames?: string;
@@ -18,7 +19,7 @@ export const RestTimer = React.memo(
           <img
             onContextMenu={(e) => e.preventDefault()}
             loading="eager"
-            src={'./chicken_animation_sleep.png'}
+            src={CDN_IMAGES.mascot.animation_sleep}
             alt="rest-timer"
             className={'w-1/2 aspect-square'}
           />

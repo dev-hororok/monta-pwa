@@ -1,5 +1,5 @@
 import {
-  DEFAULT_ISITOR_IMAGE_URL,
+  DEFAULT_VISITOR_IMAGE_URL,
   DEFAULT_MEMBER_IMAGE_URL,
 } from '@/constants/constants';
 import { EditNicknameDialog } from './edit-nickname-dialog';
@@ -56,7 +56,7 @@ const EditProfileSection = ({
       onClick={onRequireLoginClick}
       className="w-28 h-28 hover:bg-accent cursor-pointer"
     >
-      <AvatarImage alt="profile image" src={DEFAULT_ISITOR_IMAGE_URL} />
+      <AvatarImage alt="profile image" src={DEFAULT_VISITOR_IMAGE_URL} />
     </Avatar>
   );
 };

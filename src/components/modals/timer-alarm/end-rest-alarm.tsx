@@ -1,8 +1,10 @@
+import { CDN_IMAGES } from '@/constants/cdn-images';
+
 export const EndRestAlarm = () => {
   return (
     <div className={'w-full h-1/2 flex flex-col items-center justify-end'}>
       <img
-        src={'./chicken_wakeup.png'}
+        src={CDN_IMAGES.mascot.wakeup}
         alt="main"
         className={'w-1/2 aspect-square'}
       />

@@ -3,6 +3,7 @@ import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import { useTimerOptionsStore } from '@/stores/timer-options-store';
 import { useTimerStateStore } from '@/stores/timer-state-store';
 import { formatTime } from '@/lib/date-format';
+import { CDN_IMAGES } from '@/constants/cdn-images';
 
 export const FinishSectionAlarm = () => {
   const timerMode = useTimerOptionsStore((state) => state.timerMode);
@@ -17,7 +18,7 @@ export const FinishSectionAlarm = () => {
     <div className={'w-full h-1/2 flex flex-col items-center justify-end'}>
       <Fireworks autorun={{ speed: 1, duration: 2000 }} />
       <img
-        src={'./chicken_finish.png'}
+        src={CDN_IMAGES.mascot.finish}
         alt="main"
         className={'w-1/2 aspect-square'}
       />

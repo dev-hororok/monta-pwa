@@ -5,6 +5,7 @@ import { type TimerType, useTimerStateStore } from '@/stores/timer-state-store';
 import { useTimerOptionsStore } from '@/stores/timer-options-store';
 import { useAuthStore } from '@/stores/auth-store';
 import { CHARACTER_CHATS } from '@/constants/character-chat';
+import { CDN_IMAGES } from '@/constants/cdn-images';
 
 interface Props {
   className?: string;
@@ -29,12 +30,12 @@ export const TimerImage = React.memo(({ className }: Props) => {
 
   const timerImageSrc = React.useMemo(() => {
     if (showImageType === 'Work') {
-      return './chicken.png';
+      return CDN_IMAGES.mascot.normal;
     } else if (showImageType === 'Rest') {
-      return './chicken_exhausted.png';
+      return CDN_IMAGES.mascot.exhausted;
     } else {
       // Visitor | Normal
-      return './chicken.png';
+      return CDN_IMAGES.mascot.normal;
     }
   }, [showImageType]);
 

@@ -32,6 +32,8 @@ export default defineConfig({
         'robots.txt',
         'sitemap.xml',
         '.well-known/assetlinks.json',
+        '/icons/favicon.ico',
+        '/icons/icon-192x192.png',
       ],
       workbox: {
         skipWaiting: true,

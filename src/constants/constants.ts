@@ -1,3 +1,5 @@
+import { CDN_IMAGES } from './cdn-images';
+
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const API_URL_NEST = import.meta.env.VITE_URL_NEST;
 export const API_URL_SPRING = import.meta.env.VITE_URL_SPRING;
@@ -18,6 +20,6 @@ export const FIREBASE_MESSAGING_SENDER_ID = import.meta.env
 export const FIREBASE_APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
 export const FIREBASE_VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
 
-export const DEFAULT_ISITOR_IMAGE_URL = '/chicken_1.png';
-export const DEFAULT_MEMBER_IMAGE_URL = '/chicken.png';
-export const DEFAULT_STAMP_IMAGE_URL = '/chicken_2.png';
+export const DEFAULT_VISITOR_IMAGE_URL = CDN_IMAGES.visitor.mascot;
+export const DEFAULT_MEMBER_IMAGE_URL = CDN_IMAGES.mascot.normal;
+export const DEFAULT_STAMP_IMAGE_URL = CDN_IMAGES.mascot.normal;

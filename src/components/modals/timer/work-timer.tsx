@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { TimerDisplay } from './timer-display';
 import { InteruptTimerDialog } from './interupt-timer-dialog';
+import { CDN_IMAGES } from '@/constants/cdn-images';
 
 interface WorkTimerProps extends React.HTMLAttributes<HTMLDivElement> {
   classNames?: string;
@@ -17,7 +18,7 @@ export const WorkTimer = React.memo(
           <img
             onContextMenu={(e) => e.preventDefault()}
             loading="eager"
-            src={'./chicken_animation.png'}
+            src={CDN_IMAGES.mascot.animation_work}
             alt="rest-timer"
             className={'w-1/2 aspect-square'}
           />

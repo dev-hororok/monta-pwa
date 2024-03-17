@@ -1,6 +1,7 @@
 import { useCurrentMemberQuery } from '@/services/queries/member-queries';
 import { Button } from '../../../components/ui/button';
 import { Link } from 'react-router-dom';
+import { CDN_IMAGES } from '@/constants/cdn-images';
 
 export const HomeHeader = () => {
   const { data } = useCurrentMemberQuery();
@@ -13,7 +14,8 @@ export const HomeHeader = () => {
           className="flex items-center text-lg"
           aria-label="shop"
         >
-          <img src="./money.png" alt="point" className="size-8" /> {data?.point}
+          <img src={CDN_IMAGES.feather} alt="point" className="size-8" />
+          {data?.point}
         </Button>
       </Link>
       <Link to="/more" replace>
@@ -24,7 +26,7 @@ export const HomeHeader = () => {
           className="flex items-center text-lg"
           aria-label="more"
         >
-          <img src="./settings.png" alt="settings" className="size-8" />
+          <img src={CDN_IMAGES.settings} alt="settings" className="size-8" />
         </Button>
       </Link>
     </div>

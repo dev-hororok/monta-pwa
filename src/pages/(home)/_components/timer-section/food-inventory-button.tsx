@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { FoodInventoryDrawer } from './food-inventory-drawer';
+import { CDN_IMAGES } from '@/constants/cdn-images';
 
 export const FoodInventoryButton = () => {
   return (
@@ -10,11 +11,7 @@ export const FoodInventoryButton = () => {
         className="rounded-3xl text-xl py-6 px-4"
         aria-label="food-inventory"
       >
-        <img
-          src="https://d2quahb2ygxiv.cloudfront.net/c92b5b1ca2b81459a46ef.png"
-          alt="bag"
-          className="size-12"
-        />
+        <img src={CDN_IMAGES.backpack} alt="backpack" className="size-12" />
       </Button>
     </FoodInventoryDrawer>
   );
