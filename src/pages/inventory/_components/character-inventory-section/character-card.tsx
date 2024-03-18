@@ -21,7 +21,7 @@ export const CharacterItemCard = ({
         'h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
     >
-      <Badge variant="secondary">{grade} 등급</Badge>
+      <Badge variant="secondary">{grade}</Badge>
       <img
         onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
         src={image_url}
