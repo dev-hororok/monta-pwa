@@ -34,6 +34,7 @@ export default defineConfig({
         '.well-known/assetlinks.json',
         '/icons/favicon.ico',
         '/icons/icon-192x192.png',
+        '/icons/icon-96x96.png',
       ],
       workbox: {
         skipWaiting: true,
