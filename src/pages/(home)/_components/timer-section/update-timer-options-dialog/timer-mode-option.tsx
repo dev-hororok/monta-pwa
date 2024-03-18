@@ -15,9 +15,14 @@ export const TimerModeOption = () => {
       openRequireLoginModal();
       return;
     }
-    setIsLoading(true);
-    await toggle();
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      await toggle();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
