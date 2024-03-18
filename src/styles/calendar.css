@@ -9,6 +9,9 @@
   line-height: 1.125em;
   border: none;
 }
+.react-calendar .react-calendar__tile {
+  padding: 4px 0 0 0;
+}
 .react-calendar__navigation button {
   color: hsl(var(--primary));
   min-width: 44px;

@@ -77,11 +77,19 @@ export const useCalendar = (memberId: string) => {
       if (view === 'month') {
         const dateStr = formatDateStr(date);
         if (studiedDays.has(dateStr)) {
+          const hours = Math.floor((studiedDays.get(dateStr) || 0) / 3600);
+          const minutes = Math.floor((studiedDays.get(dateStr) || 0) / 60);
+
           return (
-            <img src={DEFAULT_STAMP_IMAGE_URL} className="w-8 h-8 mx-auto" />
+            <div className="h-12">
+              <img src={DEFAULT_STAMP_IMAGE_URL} className="mx-auto size-8" />
+              <p className="text-foreground h-4 text-xs">
+                {hours ? `${hours}h ` : ''} {minutes}min
+              </p>
+            </div>
           );
         } else {
-          return <div className="w-8 h-8" />;
+          return <div className="w-8 h-12" />;
         }
       }
       return null;

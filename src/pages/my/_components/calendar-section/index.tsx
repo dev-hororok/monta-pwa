@@ -18,8 +18,8 @@ export const CalendarSection = () => {
   } = useCalendar(memberId);
 
   return (
-    <section className="px-4">
-      <div className="calendar-container py-4">
+    <section className="px-0">
+      <div className="calendar-container pt-4">
         <Calendar
           value={value}
           onChange={onChange}
