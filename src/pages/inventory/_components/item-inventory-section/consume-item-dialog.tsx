@@ -5,6 +5,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -43,6 +44,7 @@ export const ConsumeItemDialog = ({
       >
         <DialogHeader>
           <DialogTitle>{item.name}을(를) 사용하시겠습니까?</DialogTitle>
+          <DialogDescription>{item.description}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button onClick={handleSubmit} className="w-full">

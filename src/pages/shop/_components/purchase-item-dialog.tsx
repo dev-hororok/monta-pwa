@@ -54,7 +54,8 @@ export const PurchaseItemDialog = ({
         <div className="mx-auto w-full max-w-sm">
           <DialogHeader>
             <DialogTitle>{item.name} 구매</DialogTitle>
-            <DialogDescription>수량을 선택해주세요.</DialogDescription>
+            <DialogDescription>{item.description}</DialogDescription>
+            <DialogDescription>구매할 수량을 선택해주세요.</DialogDescription>
           </DialogHeader>
           <div className="p-4 pb-0">
             <div className="flex items-center justify-center space-x-2">
