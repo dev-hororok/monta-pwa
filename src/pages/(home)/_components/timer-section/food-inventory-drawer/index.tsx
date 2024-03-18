@@ -22,9 +22,10 @@ export const FoodInventoryDrawer = ({ children }: FoodInventoryDrawerProps) => {
       <DrawerContent>
         <div className="mx-auto w-full max-w-mobile">
           <DrawerHeader>
-            <DrawerTitle>재료</DrawerTitle>
+            <DrawerTitle>보유중인 알</DrawerTitle>
             <DrawerDescription>
-              최대 4개까지 보관할 수 있습니다.
+              최대 4개까지 보관할 수 있습니다. <br />
+              (버릴 수 없어요. 끝까지 책임져주세요!)
             </DrawerDescription>
           </DrawerHeader>
           <FoodInventorySection />
