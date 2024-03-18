@@ -33,6 +33,8 @@ import google from '../assets/google.svg';
 import naver from '../assets/naver.svg';
 import kakao from '../assets/kakao.svg';
 
+import emptySpace from '../assets/empty-space.png';
+
 export const commonIcons = {
   x,
   left,
@@ -40,6 +42,10 @@ export const commonIcons = {
   plus,
   minus,
   lock,
+};
+
+export const timerIcons = {
+  emptySpace,
 };
 
 export const headerIcons = {

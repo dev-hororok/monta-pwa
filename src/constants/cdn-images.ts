@@ -14,6 +14,5 @@ export const CDN_IMAGES = {
     mascot: 'https://d2quahb2ygxiv.cloudfront.net/9a46ef4fdd77fb5ffcdf2.png',
   },
 
-  chair: 'https://d2quahb2ygxiv.cloudfront.net/a46ef4fdd77fb5ffcdf2f.png',
   nest: 'https://d2quahb2ygxiv.cloudfront.net/c92b5b1ca2b81459a46ef.png',
 };

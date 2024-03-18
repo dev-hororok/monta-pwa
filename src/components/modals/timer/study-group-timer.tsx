@@ -7,7 +7,7 @@ import { StudyGroupMember } from './study-group-member';
 import { useAuthStore } from '@/stores/auth-store';
 import { TimerDisplay } from './timer-display';
 import { InteruptTimerDialog } from './interupt-timer-dialog';
-import { CDN_IMAGES } from '@/constants/cdn-images';
+import { timerIcons } from '@/components/icons';
 
 interface StudyGroupTimerProps extends React.HTMLAttributes<HTMLDivElement> {
   classNames?: string;
@@ -32,7 +32,7 @@ export const StudyGroupTimer = React.memo(
             ) : (
               <img
                 key={`empty-${index}`}
-                src={CDN_IMAGES.chair}
+                src={timerIcons.emptySpace}
                 alt="빈 자리"
                 className="w-full aspect-square"
               />

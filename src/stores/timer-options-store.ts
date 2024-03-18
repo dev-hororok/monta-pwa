@@ -38,7 +38,7 @@ interface TimerOptionsStore {
   setTimerOptions: (options: Partial<Record<TimerOptionKey, number>>) => void;
   resetOptions: () => void;
   toggleIsTogetherEnabled: () => void;
-  toggleTimerMode: () => void;
+  toggleTimerMode: () => Promise<void>;
 
   checkIsTimerOptionsChanged: () => boolean;
   saveTimerOptions: () => void;
