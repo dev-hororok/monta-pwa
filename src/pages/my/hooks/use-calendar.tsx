@@ -85,7 +85,7 @@ export const useCalendar = (memberId: string) => {
             <div className="h-12">
               <img src={DEFAULT_STAMP_IMAGE_URL} className="mx-auto size-8" />
               <p className="text-foreground h-4 text-xs">
-                {hours ? `${hours}h ` : ''} {minutes}min
+                {hours ? `${hours}h ` : ''} {minutes}m
               </p>
             </div>
           );
