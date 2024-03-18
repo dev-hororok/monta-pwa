@@ -77,8 +77,9 @@ export const useCalendar = (memberId: string) => {
       if (view === 'month') {
         const dateStr = formatDateStr(date);
         if (studiedDays.has(dateStr)) {
-          const hours = Math.floor((studiedDays.get(dateStr) || 0) / 3600);
-          const minutes = Math.floor((studiedDays.get(dateStr) || 0) / 60);
+          const totalMinutes = Math.floor((studiedDays.get(dateStr) || 0) / 60);
+          const hours = Math.floor(totalMinutes / 60);
+          const minutes = totalMinutes % 60;
 
           return (
             <div className="h-12">
