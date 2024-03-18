@@ -11,7 +11,7 @@ export const AppVersionView = () => {
         />
         앱 버전
       </div>
-      <span>1.0.0</span>
+      <span>1.0.1</span>
     </div>
   );
 };
