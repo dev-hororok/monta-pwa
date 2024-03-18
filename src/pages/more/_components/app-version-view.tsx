@@ -1,4 +1,5 @@
 import { morePageIcons } from '@/components/icons';
+import { APP_INFO } from '@/constants/app-info';
 
 export const AppVersionView = () => {
   return (
@@ -11,7 +12,7 @@ export const AppVersionView = () => {
         />
         앱 버전
       </div>
-      <span>1.0.1</span>
+      <span>{APP_INFO.version}</span>
     </div>
   );
 };
