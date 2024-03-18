@@ -9,6 +9,7 @@ import { useAuthStore } from '@/stores/auth-store';
 import { Link } from 'react-router-dom';
 import { TermsOfServiceButton } from './_components/tos-button';
 import { morePageIcons } from '@/components/icons';
+import { QnAButton } from './_components/qna-button';
 
 const MorePage = () => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
@@ -51,6 +52,7 @@ const MorePage = () => {
           <AppVersionView />
           <TermsOfServiceButton />
           <PrivacyPolicyButton />
+          <QnAButton />
           <ReviewButton />
         </div>
       </main>

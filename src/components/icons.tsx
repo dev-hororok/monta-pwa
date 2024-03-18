@@ -23,6 +23,7 @@ import info from '../assets/info.svg';
 import documents from '../assets/documents.svg';
 import shield from '../assets/shield.svg';
 import star from '../assets/star.svg';
+import qna from '../assets/qna.svg';
 
 import eggCracked from '../assets/egg-cracked.svg';
 import reload from '../assets/reload.svg';
@@ -72,6 +73,7 @@ export const morePageIcons = {
   documents,
   shield,
   star,
+  qna,
 };
 
 export const footerNavIcons = {
