@@ -100,6 +100,11 @@ export const useTimerOptionsStore = create<TimerOptionsStore>()(
         }));
       },
       toggleTimerMode: async () => {
+        if (!('Notification' in window)) {
+          toast.error('브라우저가 notification을 지원하지 않습니다.');
+          return;
+        }
+
         if (get().timerMode === 'normal') {
           // 웹 푸시 권한 요청 & notification_token 등록 api
           try {
