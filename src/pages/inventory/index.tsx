@@ -7,11 +7,6 @@ import { useAuthStore } from '@/stores/auth-store';
 import { ItemInventorySectionExample } from './_components/item-inventory-section/exmple';
 import { CharacterInventorySectionExample } from './_components/character-inventory-section/example';
 
-export interface InventoryUseItem {
-  itemType: 'streak-color-change';
-  count: number;
-}
-
 export interface InventoryCharacter {
   imgSrc: string;
   alt: string;
