@@ -22,7 +22,7 @@ const ShopPage = () => {
         <Tabs defaultValue="foods" className="w-full px-4 py-2 relative">
           <div className="sticky top-0 bg-background py-2">
             <TabsList className="grid grid-cols-2">
-              <TabsTrigger value="foods">재료</TabsTrigger>
+              <TabsTrigger value="foods">알</TabsTrigger>
               <TabsTrigger value="tools">사용 아이템</TabsTrigger>
             </TabsList>
           </div>
