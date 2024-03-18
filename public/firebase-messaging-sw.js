@@ -5,8 +5,8 @@ self.addEventListener('push', function (e) {
 
   const notificationTitle = resultData.title;
   const notificationOptions = {
-    icon: './icons/icon-192x192.png',
-    badge: './icons/icon-96x96.png', // 96x96이 넘어가면 기본 문자열로 적용됨
+    icon: 'https://d2quahb2ygxiv.cloudfront.net/3235712d0c0f11899f4bf.png',
+    badge: 'https://d2quahb2ygxiv.cloudfront.net/23235712d0c0f11899f4b.png', // cdn
     tag: 'pomodoro-timer', // 알람 최대 1개 표시
     renotify: true, // 알람이 겹치면 다시 알림
     body: resultData.body,
