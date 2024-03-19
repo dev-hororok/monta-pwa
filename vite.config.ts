@@ -78,7 +78,7 @@ export default defineConfig({
         ],
       },
       manifest: {
-        name: '뽀모닭',
+        name: '뽀모도로닭',
         short_name: '뽀모닭',
         description:
           '귀여운 뽀모도로 타이머 + 포커스 타이머 + 집중 타이머 + 캐릭터 수집(pomodoro timer, focus app, study timer, focus timer)',
