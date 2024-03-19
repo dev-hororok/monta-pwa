@@ -83,6 +83,7 @@ export default defineConfig({
         description: 'pomodoro timer app',
         theme_color: '#ffffff',
         background_color: '#ffffff',
+        orientation: 'portrait',
         icons: [
           {
             src: 'icons/icon-192x192.png',
