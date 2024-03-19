@@ -48,7 +48,7 @@ export const useInitializeApp = () => {
       }
     };
 
-    document.addEventListener('touchmove', preventZoom);
+    document.addEventListener('touchmove', preventZoom, { passive: false });
     return () => {
       document.removeEventListener('touchmove', preventZoom);
     };
