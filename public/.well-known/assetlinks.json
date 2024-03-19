@@ -15,7 +15,8 @@
       "namespace": "android_app",
       "package_name": "com.pomodak.twa",
       "sha256_cert_fingerprints": [
-        "0A:80:B2:A2:D8:87:11:35:EE:72:39:90:35:86:A4:9F:12:7C:AD:6E:D3:BD:55:E9:94:AB:FE:E4:1E:4E:9D:79"
+        "0A:80:B2:A2:D8:87:11:35:EE:72:39:90:35:86:A4:9F:12:7C:AD:6E:D3:BD:55:E9:94:AB:FE:E4:1E:4E:9D:79",
+        "44:9D:8A:35:7B:92:4F:74:7E:44:1C:83:E7:C2:2F:34:54:6B:0C:B9:B9:DE:EC:5C:AB:EB:4A:1E:9A:7A:6A:DB"
       ]
     }
   }
