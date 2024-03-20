@@ -1,9 +1,10 @@
 import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
-import { useAllCharactersQuery } from '@/services/admin/characters.queries';
+import { useAdminAllCharactersQuery } from '@/services/admin/characters.queries';
 import { AdminCharacterCard } from './_components/character-card';
+import { Link } from 'react-router-dom';
 
 export const AdminCharactersPage = () => {
-  const { data: characters, isLoading, isError } = useAllCharactersQuery();
+  const { data: characters, isLoading, isError } = useAdminAllCharactersQuery();
 
   if (isLoading) {
     return <MobileLoadingSpinner />;
@@ -21,7 +22,9 @@ export const AdminCharactersPage = () => {
           {characters &&
             characters.map((item) => {
               return (
-                <AdminCharacterCard character={item} key={item.character_id} />
+                <Link to={`./${item.character_id}`} key={item.character_id}>
+                  <AdminCharacterCard character={item} />
+                </Link>
               );
             })}
         </div>

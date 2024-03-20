@@ -21,6 +21,7 @@ import TermsPage from './pages/(policy)/terms';
 import ForgotPasswordPage from './pages/auth/forgot-password';
 import { AdminRoute } from './components/auth/admin-route';
 import { AdminCharactersPage } from './pages/admin/characters';
+import { AdminCharacterPage } from './pages/admin/characters/[character_id]';
 
 const router = createBrowserRouter(
   [
@@ -42,6 +43,14 @@ const router = createBrowserRouter(
               element: (
                 <AdminRoute>
                   <AdminCharactersPage />
+                </AdminRoute>
+              ),
+            },
+            {
+              path: 'admin/characters/:character_id',
+              element: (
+                <AdminRoute>
+                  <AdminCharacterPage />
                 </AdminRoute>
               ),
             },
