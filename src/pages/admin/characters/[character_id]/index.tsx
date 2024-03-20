@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatDateStr } from '@/lib/date-format';
 import { EditCharacterNameDialog } from '../_components/edit-character-name';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { EditCharacterImageDialog } from '../_components/edit-character-image';
 
 export const AdminCharacterPage = () => {
   const params = useParams<{ character_id: string }>();
@@ -45,15 +47,12 @@ export const AdminCharacterPage = () => {
         />
 
         <div className="w-full h-auto flex-center flex-col py-4 gap-4">
-          <p>{character.character_id}</p>
-          <img
-            onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
-            src={character.image_url}
-            alt={character.name}
-            width={200}
-            height={200}
-            className="p-2"
-          />
+          <p className="text-xl">ID: {character.character_id}</p>
+          <EditCharacterImageDialog character={character}>
+            <Avatar className="w-40 h-40 hover:bg-accent cursor-pointer rounded-sm">
+              <AvatarImage alt={character.name} src={character.image_url} />
+            </Avatar>
+          </EditCharacterImageDialog>
 
           <EditCharacterNameDialog character={character}>
             <Button
