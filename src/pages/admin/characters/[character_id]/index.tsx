@@ -10,6 +10,7 @@ import { EditCharacterImageDialog } from '../_components/edit-character-image-di
 import { EditCharacterDescriptionDialog } from '../_components/edit-character-description-dialog';
 import { EditCharacterGradeDialog } from '../_components/edit-character-grade-dialog';
 import { CharacterGradeBadge } from '@/components/character-grade-badge';
+import { EditCharacterPriceDialog } from '../_components/edit-character-price-dialog';
 
 export const AdminCharacterPage = () => {
   const params = useParams<{ character_id: string }>();
@@ -77,7 +78,15 @@ export const AdminCharacterPage = () => {
           <EditCharacterGradeDialog character={character}>
             <CharacterGradeBadge grade={character.grade} />
           </EditCharacterGradeDialog>
-          <p className="text-lg">가격: {character.sell_price}</p>
+          <EditCharacterPriceDialog character={character}>
+            <Button
+              type="button"
+              variant={'ghost'}
+              className="text-lg font-normal antialiased"
+            >
+              가격: {character.sell_price}
+            </Button>
+          </EditCharacterPriceDialog>
           <p className="text-lg">
             생성일: {formatDateStr(character.created_at)}
           </p>
