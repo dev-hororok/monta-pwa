@@ -22,6 +22,7 @@ import ForgotPasswordPage from './pages/auth/forgot-password';
 import { AdminRoute } from './components/auth/admin-route';
 import { AdminCharactersPage } from './pages/admin/characters';
 import { AdminCharacterPage } from './pages/admin/characters/[character_id]';
+import { AdminPage } from './pages/admin';
 
 const router = createBrowserRouter(
   [
@@ -39,12 +40,25 @@ const router = createBrowserRouter(
             { path: 'shop', element: <ShopPage /> },
             { path: '*', element: <NotFoundPage /> },
             {
-              path: 'admin/characters',
-              element: (
-                <AdminRoute>
-                  <AdminCharactersPage />
-                </AdminRoute>
-              ),
+              path: 'admin',
+              children: [
+                {
+                  index: true,
+                  element: (
+                    <AdminRoute>
+                      <AdminPage />
+                    </AdminRoute>
+                  ),
+                },
+                {
+                  path: 'characters',
+                  element: (
+                    <AdminRoute>
+                      <AdminCharactersPage />
+                    </AdminRoute>
+                  ),
+                },
+              ],
             },
             {
               path: 'admin/characters/:character_id',

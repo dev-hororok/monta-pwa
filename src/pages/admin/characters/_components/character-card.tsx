@@ -23,7 +23,7 @@ export const AdminCharacterCard = ({ character }: AdminCharacterCardProps) => {
     <div
       className={cn(
         buttonVariants({ variant: 'ghost' }),
-        'h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
+        'w-full h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
     >
       <p className="text-base">id: {character_id}</p>
@@ -59,10 +59,14 @@ const CharacterInfo = ({
   description,
   updated_at,
 }: CharacterInfoProps) => (
-  <div className="w-full flex flex-col items-center justify-center gap-1.5">
+  <div className="w-full gap-1.5">
     <p className="w-full font-semibold truncate text-center">{name}</p>
-    <p className="text-foreground/60">{sellPrice}원</p>
-    <p className="w-full text-foreground/60 truncate">{description}</p>
-    <p className="text-foreground/60">수정일: {formatDateStr(updated_at)}</p>
+    <p className="text-foreground/60 text-center">{sellPrice}원</p>
+    <p className="w-full truncate text-center text-foreground/60">
+      {description}
+    </p>
+    <p className="text-foreground/60 text-center">
+      수정일: {formatDateStr(updated_at)}
+    </p>
   </div>
 );
