@@ -19,6 +19,8 @@ import LoginGatewayPage from './pages/auth';
 import PrivacyPolicyPage from './pages/(policy)/privacy-policy';
 import TermsPage from './pages/(policy)/terms';
 import ForgotPasswordPage from './pages/auth/forgot-password';
+import { AdminRoute } from './components/auth/admin-route';
+import { AdminCharactersPage } from './pages/admin/characters';
 
 const router = createBrowserRouter(
   [
@@ -35,6 +37,14 @@ const router = createBrowserRouter(
             { path: 'inventory', element: <InventoryPage /> },
             { path: 'shop', element: <ShopPage /> },
             { path: '*', element: <NotFoundPage /> },
+            {
+              path: 'admin/characters',
+              element: (
+                <AdminRoute>
+                  <AdminCharactersPage />
+                </AdminRoute>
+              ),
+            },
           ],
         },
         {
