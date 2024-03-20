@@ -3,12 +3,13 @@ import { useAdminCharacterQuery } from '@/services/admin/characters.queries';
 import { useParams } from 'react-router-dom';
 import { PrevHeader } from '@/components/headers/prev-header';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { formatDateStr } from '@/lib/date-format';
 import { EditCharacterNameDialog } from '../_components/edit-character-name-dialog';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { EditCharacterImageDialog } from '../_components/edit-character-image-dialog';
 import { EditCharacterDescriptionDialog } from '../_components/edit-character-description-dialog';
+import { EditCharacterGradeDialog } from '../_components/edit-character-grade-dialog';
+import { CharacterGradeBadge } from '@/components/character-grade-badge';
 
 export const AdminCharacterPage = () => {
   const params = useParams<{ character_id: string }>();
@@ -73,7 +74,9 @@ export const AdminCharacterPage = () => {
               {character.description}
             </Button>
           </EditCharacterDescriptionDialog>
-          <Badge>{character.grade}</Badge>
+          <EditCharacterGradeDialog character={character}>
+            <CharacterGradeBadge grade={character.grade} />
+          </EditCharacterGradeDialog>
           <p className="text-lg">가격: {character.sell_price}</p>
           <p className="text-lg">
             생성일: {formatDateStr(character.created_at)}
