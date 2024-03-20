@@ -34,8 +34,8 @@ export const FoodProductsSection = () => {
 
   return (
     <section>
+      {items && items.length === 0 ? <EmptyFoodProductsMessage /> : null}
       <div className="grid grid-cols-3 gap-2">
-        {items && items.length === 0 ? <EmptyFoodProductsMessage /> : null}
         {items &&
           items.map((item, idx) => {
             return member ? (
@@ -55,7 +55,7 @@ export const FoodProductsSection = () => {
 
 const EmptyFoodProductsMessage = () => {
   return (
-    <div className="flex-center flex-col py-4 gap-2">
+    <div className="flex-center flex-col py-12 gap-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="icon icon-tabler icon-tabler-egg-off"
