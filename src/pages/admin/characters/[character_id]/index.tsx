@@ -5,9 +5,9 @@ import { PrevHeader } from '@/components/headers/prev-header';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatDateStr } from '@/lib/date-format';
-import { EditCharacterNameDialog } from '../_components/edit-character-name';
+import { EditCharacterNameDialog } from '../_components/edit-character-name-dialog';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { EditCharacterImageDialog } from '../_components/edit-character-image';
+import { EditCharacterImageDialog } from '../_components/edit-character-image-dialog';
 
 export const AdminCharacterPage = () => {
   const params = useParams<{ character_id: string }>();
