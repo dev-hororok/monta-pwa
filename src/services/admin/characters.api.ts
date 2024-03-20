@@ -26,7 +26,7 @@ export const editCharacter = async (
     description?: string;
     image_url?: string;
     grade?: string;
-    sell_price?: string;
+    sell_price?: number;
   }
 ) => {
   const response = await springHttpRequest.patch<ApiSuccessResponse<any>>(

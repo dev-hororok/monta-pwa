@@ -20,7 +20,7 @@ export const useEditCharacterMutation = () => {
         description?: string;
         image_url?: string;
         grade?: string;
-        sell_price?: string;
+        sell_price?: number;
       };
     }) => {
       return editCharacter(characterId, body);
