@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import {
   fetchCharacterInventory,
   fetchConsumableInventory,
+  fetchCurrentAccount,
   fetchCurrentMember,
   fetchDailyStatistic,
   fetchFoodInventory,
@@ -18,6 +19,17 @@ export const useCurrentMemberQuery = () => {
   return useQuery({
     queryKey: [CURRENT_MEMBER_QUERY_KEY],
     queryFn: () => fetchCurrentMember(),
+    staleTime: 10 * 60 * 1000,
+    enabled: !!useAuthStore.getState().isLoggedIn,
+  });
+};
+
+// 현재유저 계정조회
+export const CURRENT_ACCOUNT_QUERY_KEY = 'currentAccount';
+export const useCurrentAccountQuery = () => {
+  return useQuery({
+    queryKey: [CURRENT_ACCOUNT_QUERY_KEY],
+    queryFn: () => fetchCurrentAccount(),
     staleTime: 10 * 60 * 1000,
     enabled: !!useAuthStore.getState().isLoggedIn,
   });

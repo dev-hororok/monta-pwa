@@ -13,6 +13,7 @@ import type {
 } from '@/types/models/statistic.model';
 import type { IStudyStreak } from '@/types/models/streak.model';
 import { useAuthStore } from '@/stores/auth-store';
+import { IAccount } from '@/types/models/account.model';
 
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -23,6 +24,14 @@ export const fetchCurrentMember = async () => {
   >('/timer-api/members/me');
   useAuthStore.getState().setMemberId(response.data.data.member.member_id);
   return response.data.data.member;
+};
+
+// 현재유저 계정 조회
+export const fetchCurrentAccount = async () => {
+  const response = await nestHttpRequest.get<ApiSuccessResponse<IAccount>>(
+    '/timer-api/auth/me'
+  );
+  return response.data.data;
 };
 
 // 보유중인 음식 조회
