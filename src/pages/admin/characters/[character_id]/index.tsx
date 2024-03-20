@@ -8,6 +8,7 @@ import { formatDateStr } from '@/lib/date-format';
 import { EditCharacterNameDialog } from '../_components/edit-character-name-dialog';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { EditCharacterImageDialog } from '../_components/edit-character-image-dialog';
+import { EditCharacterDescriptionDialog } from '../_components/edit-character-description-dialog';
 
 export const AdminCharacterPage = () => {
   const params = useParams<{ character_id: string }>();
@@ -63,7 +64,15 @@ export const AdminCharacterPage = () => {
               {character.name}
             </Button>
           </EditCharacterNameDialog>
-          <p className="text-lg">{character.description}</p>
+          <EditCharacterDescriptionDialog character={character}>
+            <Button
+              type="button"
+              variant={'ghost'}
+              className="text-lg font-normal"
+            >
+              {character.description}
+            </Button>
+          </EditCharacterDescriptionDialog>
           <Badge>{character.grade}</Badge>
           <p className="text-lg">가격: {character.sell_price}</p>
           <p className="text-lg">
