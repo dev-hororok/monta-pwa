@@ -1,8 +1,8 @@
 import type { ICharacterInventory } from '@/types/models/character.model';
 import { buttonVariants } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
+import { CharacterGradeBadge } from '@/components/character-grade-badge';
+import { cn } from '@/lib/utils';
 
 interface CharacterItemCardProps {
   characterInventory: ICharacterInventory;
@@ -21,7 +21,7 @@ export const CharacterItemCard = ({
         'h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
     >
-      <Badge variant="secondary">{grade}</Badge>
+      <CharacterGradeBadge grade={grade} />
       <img
         onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
         src={image_url}

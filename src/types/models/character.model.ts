@@ -1,9 +1,11 @@
+export type CharacterGrade = 'Common' | 'Rare' | 'Epic' | 'Legendary';
+
 export interface ICharacter {
   character_id: number;
   name: string;
   description: string;
   image_url: string;
-  grade: string;
+  grade: CharacterGrade;
   sell_price: number;
 }
 

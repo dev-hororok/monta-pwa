@@ -1,8 +1,8 @@
 import { buttonVariants } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { IAdminCharacter } from '@/services/admin/types/characters.model';
 import { formatDateStr } from '@/lib/date-format';
+import { CharacterGradeBadge } from '@/components/character-grade-badge';
 
 interface AdminCharacterCardProps {
   character: IAdminCharacter;
@@ -27,7 +27,7 @@ export const AdminCharacterCard = ({ character }: AdminCharacterCardProps) => {
       )}
     >
       <p className="text-base">id: {character_id}</p>
-      <Badge variant="secondary">{grade}</Badge>
+      <CharacterGradeBadge grade={grade} />
       <img
         onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
         src={image_url}
