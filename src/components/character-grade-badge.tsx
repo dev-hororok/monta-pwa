@@ -4,9 +4,13 @@ import { cn } from '@/lib/utils';
 
 interface CharacterGradeBadgeProps {
   grade: CharacterGrade;
+  className?: string;
 }
 
-export const CharacterGradeBadge = ({ grade }: CharacterGradeBadgeProps) => {
+export const CharacterGradeBadge = ({
+  grade,
+  className,
+}: CharacterGradeBadgeProps) => {
   const commonStyle =
     'bg-secondary text-secondary-foreground hover:bg-secondary/80';
   const rareStyle = 'bg-blue-500 text-white hover:bg-blue-500/80';
@@ -21,7 +25,8 @@ export const CharacterGradeBadge = ({ grade }: CharacterGradeBadgeProps) => {
         grade === 'Common' && commonStyle,
         grade === 'Rare' && rareStyle,
         grade === 'Epic' && epicStyle,
-        grade === 'Legendary' && legendaryStyle
+        grade === 'Legendary' && legendaryStyle,
+        className
       )}
     >
       {grade}
