@@ -9,7 +9,15 @@ interface AdminCharacterCardProps {
 }
 
 export const AdminCharacterCard = ({ character }: AdminCharacterCardProps) => {
-  const { grade, image_url, name, sell_price, updated_at } = character;
+  const {
+    character_id,
+    grade,
+    image_url,
+    name,
+    sell_price,
+    updated_at,
+    description,
+  } = character;
 
   return (
     <div
@@ -18,6 +26,7 @@ export const AdminCharacterCard = ({ character }: AdminCharacterCardProps) => {
         'h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
     >
+      <p className="text-base">id: {character_id}</p>
       <Badge variant="secondary">{grade}</Badge>
       <img
         onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
@@ -31,6 +40,7 @@ export const AdminCharacterCard = ({ character }: AdminCharacterCardProps) => {
         name={name}
         sellPrice={sell_price}
         updated_at={updated_at}
+        description={description}
       />
     </div>
   );
@@ -39,15 +49,20 @@ export const AdminCharacterCard = ({ character }: AdminCharacterCardProps) => {
 interface CharacterInfoProps {
   name: string;
   sellPrice: number;
+  description: string;
   updated_at: Date | string;
 }
 
-const CharacterInfo = ({ name, sellPrice, updated_at }: CharacterInfoProps) => (
+const CharacterInfo = ({
+  name,
+  sellPrice,
+  description,
+  updated_at,
+}: CharacterInfoProps) => (
   <div className="w-full flex flex-col items-center justify-center gap-1.5">
     <p className="w-full font-semibold truncate text-center">{name}</p>
-    <p className="flex items-center gap-1 text-foreground/60">{sellPrice}원</p>
-    <p className="flex items-center gap-1 text-foreground/60">
-      수정일: {formatDateStr(updated_at)}
-    </p>
+    <p className="text-foreground/60">{sellPrice}원</p>
+    <p className="w-full text-foreground/60 truncate">{description}</p>
+    <p className="text-foreground/60">수정일: {formatDateStr(updated_at)}</p>
   </div>
 );
