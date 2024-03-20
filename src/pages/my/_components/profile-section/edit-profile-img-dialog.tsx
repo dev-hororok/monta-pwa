@@ -62,7 +62,7 @@ export function EditProfileImageDialog({
             선택한 캐릭터로 공부에 참여할 수 있어요
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className={'w-full h-48 p-4'}>
+        <ScrollArea className={'w-full h-full max-h-72 p-2'}>
           <div className="grid grid-cols-3 gap-2">
             <DefaultCharacter
               onClick={() => setSelectedImageUrl('')}
@@ -131,7 +131,7 @@ const DefaultCharacter = ({ onClick, isSelected }: DefaultCharacterProps) => {
         </span>
       ) : null}
       <p className="w-full text-xs font-semibold text-center line-clamp-2">
-        기본 닭
+        뉴비닭
       </p>
     </div>
   );

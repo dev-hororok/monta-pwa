@@ -10,6 +10,10 @@ export const CDN_IMAGES = {
       'https://d2quahb2ygxiv.cloudfront.net/6b6dc92b5b1ca2b81459a.png',
   },
 
+  newMember: {
+    mascot: 'https://d2quahb2ygxiv.cloudfront.net/df17af0a7a5c169f90044.png',
+  },
+
   visitor: {
     mascot: 'https://d2quahb2ygxiv.cloudfront.net/9a46ef4fdd77fb5ffcdf2.png',
   },

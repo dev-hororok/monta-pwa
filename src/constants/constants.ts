@@ -21,5 +21,5 @@ export const FIREBASE_APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
 export const FIREBASE_VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
 
 export const DEFAULT_VISITOR_IMAGE_URL = CDN_IMAGES.visitor.mascot;
-export const DEFAULT_MEMBER_IMAGE_URL = CDN_IMAGES.mascot.normal;
+export const DEFAULT_MEMBER_IMAGE_URL = CDN_IMAGES.newMember.mascot;
 export const DEFAULT_STAMP_IMAGE_URL = CDN_IMAGES.mascot.normal;
