@@ -38,6 +38,10 @@ export const useApiError = () => {
           handlers.default('An unexpected error occurred.');
         }
       } else {
+        if (error instanceof Error && error.message) {
+          handlers.default(error.message);
+          return;
+        }
         handlers.default('An unexpected error occurred.');
       }
     },
