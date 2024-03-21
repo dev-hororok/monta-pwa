@@ -26,7 +26,7 @@ export const AppVersionView = () => {
     setClickCount((prevCount) => {
       const newCount = prevCount + 1;
       if (newCount === 10) {
-        navigate('/admin');
+        navigate('/admin', { replace: true });
       }
       return newCount;
     });
