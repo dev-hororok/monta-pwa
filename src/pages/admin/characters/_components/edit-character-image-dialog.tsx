@@ -14,8 +14,11 @@ import {
 } from '@/components/ui/dialog';
 import { useEditCharacterMutation } from '@/services/admin/characters.mutations';
 import { type IAdminCharacter } from '@/services/admin/types/characters.model';
-import { uploadFile } from '@/services/admin/upload.api';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { useUploadImage } from '../hooks/use-upload-image';
+import { useApiError } from '@/hooks/use-api-error';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 interface EditCharacterImageDialogProps {
   character: IAdminCharacter;
@@ -26,29 +29,20 @@ export function EditCharacterImageDialog({
   children,
   character,
 }: EditCharacterImageDialogProps) {
+  const { handleError } = useApiError();
   const [isOpen, setIsOpen] = React.useState(false);
-  const [imageFile, setImageFile] = React.useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = React.useState(character.image_url);
   const { mutateAsync: editCharacter } = useEditCharacterMutation();
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    setImageFile(file);
-    if (file) {
-      setPreviewUrl(URL.createObjectURL(file));
-    }
-  };
+  const { imageFile, previewUrl, uploadImage, handleFileChange } =
+    useUploadImage({
+      initialUrl: character.image_url,
+    });
 
   const handleSubmit = async () => {
     if (!imageFile) {
       return setIsOpen(false);
     }
-
-    const formData = new FormData();
-    formData.append('file', imageFile);
-
     try {
-      const imageUrl = await uploadFile(formData);
+      const imageUrl = await uploadImage();
 
       await editCharacter({
         characterId: character.character_id,
@@ -57,7 +51,7 @@ export function EditCharacterImageDialog({
       toast.success('성공적으로 캐릭터 이미지를 변경했습니다.');
       setIsOpen(false);
     } catch (e) {
-      // 네트워크 에러나 기타 예외 처리
+      handleError(e);
     }
   };
 
@@ -77,12 +71,15 @@ export function EditCharacterImageDialog({
             <AvatarImage alt="Preview" src={previewUrl} />
           </Avatar>
         )}
-        <input
-          type="file"
-          onChange={handleFileChange}
-          accept="image/*"
-          className="mx-auto"
-        />
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="picture">이미지</Label>
+          <Input
+            id="picture"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+        </div>
 
         <DialogFooter>
           <DialogClose asChild>

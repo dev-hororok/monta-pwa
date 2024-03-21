@@ -27,7 +27,10 @@ import type { IAdminCharacter } from '@/services/admin/types/characters.model';
 import { useEditCharacterMutation } from '@/services/admin/characters.mutations';
 
 const editCharacterNameFormSchema = z.object({
-  name: z.string().min(1, { message: '최소 1자 이상이어야 합니다.' }),
+  name: z
+    .string()
+    .min(1, { message: '최소 1자 이상이어야 합니다.' })
+    .max(15, { message: '이름은 최대 15자 이하' }),
 });
 
 type EditCharacterNameFormValues = z.infer<typeof editCharacterNameFormSchema>;

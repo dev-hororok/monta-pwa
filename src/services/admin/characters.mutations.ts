@@ -1,5 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteCharacter, editCharacter } from './characters.api';
+import {
+  createCharacter,
+  deleteCharacter,
+  editCharacter,
+} from './characters.api';
 import {
   ADMIN_ALL_CHARACTERS_QUERY_KEY,
   ADMIN_CHARACTER_QUERY_KEY,
@@ -50,6 +54,33 @@ export const useDeleteCharacterMutation = () => {
       await queryClient.removeQueries({
         queryKey: [ADMIN_CHARACTER_QUERY_KEY, variables.characterId],
       });
+      await queryClient.invalidateQueries({
+        queryKey: [ADMIN_ALL_CHARACTERS_QUERY_KEY],
+      });
+    },
+  });
+};
+
+// 캐릭터 정보 수정
+export const useCreateCharacterMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      body,
+    }: {
+      body: {
+        name: string;
+        description: string;
+        image_url: string;
+        grade: string;
+        sell_price: number;
+      };
+    }) => {
+      return createCharacter(body);
+    },
+
+    onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [ADMIN_ALL_CHARACTERS_QUERY_KEY],
       });

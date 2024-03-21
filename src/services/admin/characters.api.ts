@@ -18,6 +18,20 @@ export const fetchCharacter = async (character_id: number) => {
   return response.data.data.getCharacterDto;
 };
 
+// 캐릭터 생성
+export const createCharacter = async (body: {
+  name: string;
+  description: string;
+  image_url: string;
+  grade: string;
+  sell_price: number;
+}) => {
+  const response = await springHttpRequest.post<
+    ApiSuccessResponse<{ character_id: number }>
+  >(`/admin/characters`, body);
+  return response.data.data;
+};
+
 // 캐릭터 수정
 export const editCharacter = async (
   character_id: number,

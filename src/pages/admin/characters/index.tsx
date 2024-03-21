@@ -4,6 +4,7 @@ import { AdminCharacterCard } from './_components/character-card';
 import { Link } from 'react-router-dom';
 import { PrevHeader } from '@/components/headers/prev-header';
 import { Button } from '@/components/ui/button';
+import { CreateCharacterDialog } from './_components/create-character-dialog';
 
 export const AdminCharactersPage = () => {
   const { data: characters, isLoading, isError } = useAdminAllCharactersQuery();
@@ -21,12 +22,14 @@ export const AdminCharactersPage = () => {
           to="/admin"
           title="캐릭터 관리"
           rightButton={
-            <Button
-              variant="ghost"
-              className="text-destructive hover:text-destructive"
-            >
-              추가
-            </Button>
+            <CreateCharacterDialog>
+              <Button
+                variant="ghost"
+                className="text-destructive hover:text-destructive"
+              >
+                추가
+              </Button>
+            </CreateCharacterDialog>
           }
         />
 
