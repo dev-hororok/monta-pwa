@@ -29,7 +29,8 @@ import { Input } from '@/components/ui/input';
 const editNicknameFormSchema = z.object({
   nickname: z
     .string()
-    .min(2, { message: '닉네임 최소 2자 이상이어야 합니다.' }),
+    .min(2, { message: '닉네임 최소 2자 입니다.' })
+    .max(10, { message: '닉네임은 최대 10자 입니다.' }),
 });
 
 type EditNicknameFormValues = z.infer<typeof editNicknameFormSchema>;
@@ -87,6 +88,7 @@ export function EditNicknameDialog({
                   <FormItem>
                     <FormControl>
                       <Input
+                        maxLength={10}
                         placeholder="닉네임"
                         {...field}
                         className="w-full h-12 text-center"

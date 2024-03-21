@@ -27,7 +27,9 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 
 const editStatusMessageFormSchema = z.object({
-  statusMessage: z.string(),
+  statusMessage: z
+    .string()
+    .max(120, { message: '상태 메세지는 최대 60자 이하입니다.' }),
 });
 
 type EditStatusMessageFormValues = z.infer<typeof editStatusMessageFormSchema>;
@@ -87,6 +89,7 @@ export function EditStatusMessageDialog({
                   <FormItem>
                     <FormControl>
                       <Textarea
+                        maxLength={60}
                         placeholder="상태 메시지"
                         {...field}
                         className="w-full h-12 text-center"
