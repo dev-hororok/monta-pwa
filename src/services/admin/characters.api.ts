@@ -35,3 +35,11 @@ export const editCharacter = async (
   );
   return response.data.data;
 };
+
+// 캐릭터 삭제
+export const deleteCharacter = async (character_id: number) => {
+  const response = await springHttpRequest.delete<ApiSuccessResponse<any>>(
+    `/admin/characters/${character_id}`
+  );
+  return response.data.data;
+};

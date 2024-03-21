@@ -11,6 +11,7 @@ import { EditCharacterDescriptionDialog } from '../_components/edit-character-de
 import { EditCharacterGradeDialog } from '../_components/edit-character-grade-dialog';
 import { CharacterGradeBadge } from '@/components/character-grade-badge';
 import { EditCharacterPriceDialog } from '../_components/edit-character-price-dialog';
+import { DeleteCharacterDialog } from '../_components/delete-character-dialog';
 
 export const AdminCharacterPage = () => {
   const params = useParams<{ character_id: string }>();
@@ -40,12 +41,14 @@ export const AdminCharacterPage = () => {
           to="/admin/characters"
           title="캐릭터 수정/삭제"
           rightButton={
-            <Button
-              variant="ghost"
-              className="text-destructive hover:text-destructive"
-            >
-              삭제
-            </Button>
+            <DeleteCharacterDialog character={character}>
+              <Button
+                variant="ghost"
+                className="text-destructive hover:text-destructive"
+              >
+                삭제
+              </Button>
+            </DeleteCharacterDialog>
           }
         />
 
