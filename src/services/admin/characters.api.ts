@@ -13,9 +13,10 @@ export const fetchAllCharacters = async () => {
 // 캐릭터 하나 조회
 export const fetchCharacter = async (character_id: number) => {
   const response = await springHttpRequest.get<
-    ApiSuccessResponse<{ getCharacterDto: IAdminCharacter }>
+    ApiSuccessResponse<{ character: IAdminCharacter }>
   >(`/admin/characters/${character_id}`);
-  return response.data.data.getCharacterDto;
+
+  return response.data.data.character;
 };
 
 // 캐릭터 생성

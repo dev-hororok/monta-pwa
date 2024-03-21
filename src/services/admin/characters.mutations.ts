@@ -51,7 +51,7 @@ export const useDeleteCharacterMutation = () => {
     },
 
     onSuccess: async (_, variables) => {
-      await queryClient.removeQueries({
+      queryClient.removeQueries({
         queryKey: [ADMIN_CHARACTER_QUERY_KEY, variables.characterId],
       });
       await queryClient.invalidateQueries({
