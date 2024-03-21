@@ -67,7 +67,11 @@ const EditNicknameSection = ({
 }: EditComponentsProps) => {
   return member ? (
     <EditNicknameDialog member={member}>
-      <Button type="button" variant={'ghost'}>
+      <Button
+        type="button"
+        variant={'ghost'}
+        className="whitespace-break-spaces h-auto font-normal text-sm text-foreground/70 w-full break-all"
+      >
         {member.nickname}
       </Button>
     </EditNicknameDialog>
@@ -87,7 +91,7 @@ const EditStatusMessageSection = ({
       <Button
         type="button"
         variant={'ghost'}
-        className="font-normal text-sm text-foreground/70"
+        className="whitespace-break-spaces h-auto font-normal text-sm text-foreground/70 w-full break-all"
       >
         {member?.status_message
           ? member.status_message

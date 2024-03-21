@@ -24,7 +24,7 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 const editStatusMessageFormSchema = z.object({
   statusMessage: z.string(),
@@ -86,7 +86,7 @@ export function EditStatusMessageDialog({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input
+                      <Textarea
                         placeholder="상태 메시지"
                         {...field}
                         className="w-full h-12 text-center"
