@@ -24,6 +24,7 @@ import { AdminCharactersPage } from './pages/admin/characters';
 import { AdminCharacterPage } from './pages/admin/characters/[character_id]';
 import { AdminPage } from './pages/admin';
 import { AdminItemsPage } from './pages/admin/items';
+import { AdminItemPage } from './pages/admin/items/[item_id]';
 
 const router = createBrowserRouter(
   [
@@ -60,6 +61,14 @@ const router = createBrowserRouter(
                   ),
                 },
                 {
+                  path: 'characters/:character_id',
+                  element: (
+                    <AdminRoute>
+                      <AdminCharacterPage />
+                    </AdminRoute>
+                  ),
+                },
+                {
                   path: 'items',
                   element: (
                     <AdminRoute>
@@ -67,15 +76,15 @@ const router = createBrowserRouter(
                     </AdminRoute>
                   ),
                 },
+                {
+                  path: 'items/:item_id',
+                  element: (
+                    <AdminRoute>
+                      <AdminItemPage />
+                    </AdminRoute>
+                  ),
+                },
               ],
-            },
-            {
-              path: 'admin/characters/:character_id',
-              element: (
-                <AdminRoute>
-                  <AdminCharacterPage />
-                </AdminRoute>
-              ),
             },
           ],
         },

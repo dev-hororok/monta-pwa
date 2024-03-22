@@ -27,7 +27,7 @@ import { Label } from '@/components/ui/label';
 import { useApiError } from '@/hooks/use-api-error';
 import { useUploadImage } from '../../characters/hooks/use-upload-image';
 import { ItemType } from '@/types/models/item.model';
-import { useCreateItemMutation } from '@/services/admin/item.mutations';
+import { useCreateItemMutation } from '@/services/admin/items.mutations';
 import { Checkbox } from '@/components/ui/checkbox';
 
 const createItemFormSchema = z.object({
@@ -91,7 +91,10 @@ export const CreateItemDialog = ({ children }: CreateItemDialogProps) => {
           <AlertDialogTitle>캐릭터 생성</AlertDialogTitle>
         </AlertDialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="space-y-2"
+          >
             {previewUrl ? (
               <Avatar className="w-40 h-40 mx-auto rounded-sm">
                 <AvatarImage alt="Preview" src={previewUrl} />
@@ -222,8 +225,8 @@ export const CreateItemDialog = ({ children }: CreateItemDialogProps) => {
               control={form.control}
               name="is_hidden"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>파는거?</FormLabel>
+                <FormItem className="flex items-center gap-4">
+                  <FormLabel>판매 안하는 물건?</FormLabel>
                   <FormControl>
                     <Checkbox
                       checked={field.value}
