@@ -32,7 +32,10 @@ export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
     });
 
     socket.on('newMember', (data) => {
-      setMembers((prevMembers) => [...prevMembers, data]);
+      setMembers((prevMembers) => [
+        ...prevMembers.filter((m) => m.member_id !== data.member_id),
+        data,
+      ]);
     });
 
     socket.on('memberLeft', (data) => {
