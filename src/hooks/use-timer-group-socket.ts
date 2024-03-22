@@ -4,6 +4,7 @@ import { API_URL_NEST } from '@/constants/constants';
 import { useAuthStore } from '@/stores/auth-store';
 import type { TimerType } from '@/stores/timer-state-store';
 import type { IMemberInfo } from '@/components/modals/timer';
+import { toast } from 'sonner';
 
 export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
   const accessToken = useAuthStore((state) => state.tokens.accessToken);
@@ -15,10 +16,16 @@ export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
       return;
     }
 
-    const socket = io(API_URL_NEST, {
+    const socket = io(`${API_URL_NEST}/user/study-group`, {
       auth: {
         token: accessToken,
       },
+
+      transports: ['websocket'],
+    });
+
+    socket.on('error', (data) => {
+      toast.error(data);
     });
 
     socket.on('connect', () => {
