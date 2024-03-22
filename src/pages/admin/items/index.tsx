@@ -2,9 +2,9 @@ import { MobileLoadingSpinner } from '@/components/mobile-loading-spinner';
 import { Link } from 'react-router-dom';
 import { PrevHeader } from '@/components/headers/prev-header';
 import { Button } from '@/components/ui/button';
-import { CreateCharacterDialog } from '../characters/_components/create-character-dialog';
 import { AdminItemCard } from './_components/item-card';
 import { useAdminAllItemsQuery } from '@/services/admin/items.queries';
+import { CreateItemDialog } from './_components/create-item-dialog';
 
 export const AdminItemsPage = () => {
   const { data: items, isLoading, isError } = useAdminAllItemsQuery();
@@ -22,14 +22,14 @@ export const AdminItemsPage = () => {
           to="/admin"
           title="아이템 관리"
           rightButton={
-            <CreateCharacterDialog>
+            <CreateItemDialog>
               <Button
                 variant="ghost"
                 className="text-destructive hover:text-destructive"
               >
                 추가
               </Button>
-            </CreateCharacterDialog>
+            </CreateItemDialog>
           }
         />
 

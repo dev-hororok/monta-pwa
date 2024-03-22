@@ -35,7 +35,7 @@ const createCharacterFormSchema = z.object({
     .min(1, { message: '이름은 최소 1자 이상' })
     .max(15, { message: '이름은 최대 15자 이하' }),
   description: z.string().min(1, { message: '설명은 최소 1자 이상' }),
-  sell_price: z.number(),
+  sell_price: z.coerce.number(),
 });
 
 type CreateCharacterFormValues = z.infer<typeof createCharacterFormSchema>;

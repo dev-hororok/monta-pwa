@@ -61,7 +61,7 @@ export const useDeleteCharacterMutation = () => {
   });
 };
 
-// 캐릭터 정보 수정
+// 캐릭터 생성
 export const useCreateCharacterMutation = () => {
   const queryClient = useQueryClient();
 
