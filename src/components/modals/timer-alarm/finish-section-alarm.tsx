@@ -24,7 +24,7 @@ export const FinishSectionAlarm = () => {
       />
       {totalStudyTime < 60 ? (
         <div className="w-2/3 mx-auto text-center">
-          <p>이야~~ {totalStudyTime}초나 공부하다니 정말 대단해!!!</p>
+          <p>이야~~ {totalStudyTime}초나 집중하다니 정말 대단해!!!</p>
         </div>
       ) : (
         <div className="w-2/3 mx-auto text-center">
