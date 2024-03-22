@@ -2,13 +2,18 @@ import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { API_URL_NEST } from '@/constants/constants';
 import { useAuthStore } from '@/stores/auth-store';
-import type { TimerType } from '@/stores/timer-state-store';
+import { type TimerType } from '@/stores/timer-state-store';
 import type { IMemberInfo } from '@/components/modals/timer';
 import { toast } from 'sonner';
+import { useTimerOptionsStore } from '@/stores/timer-options-store';
 
 export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
   const accessToken = useAuthStore((state) => state.tokens.accessToken);
   const [members, setMembers] = useState<IMemberInfo[]>([]);
+
+  const toggleIsTogetherEnabled = useTimerOptionsStore(
+    (state) => state.toggleIsTogetherEnabled
+  );
 
   useEffect(() => {
     if (timerType !== 'Work' || !active) {
@@ -16,7 +21,7 @@ export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
       return;
     }
 
-    const socket = io(`${API_URL_NEST}/user/study-group`, {
+    const socket = io(`${API_URL_NEST}/study-group`, {
       auth: {
         token: accessToken,
       },
@@ -26,6 +31,18 @@ export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
 
     socket.on('error', (data) => {
       toast.error(data);
+    });
+
+    // 어드민이 방을 폭파하면 함께 공부하기 모드 꺼짐
+    socket.on('explodeGroup', () => {
+      toast.error(
+        '문제가 생겨서 방이 폭파되었습니다 ㅜㅜ. 시간은 계속 기록됩니다!',
+        {
+          duration: Infinity,
+        }
+      );
+      toggleIsTogetherEnabled();
+      socket.disconnect();
     });
 
     socket.on('connect', () => {
