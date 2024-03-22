@@ -15,7 +15,14 @@ export const AdminItemCard = ({ item }: AdminItemCardProps) => {
         'w-full h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
     >
-      <p className="text-base">id: {item.item_id}</p>
+      <p
+        className={cn(
+          'text-base w-full text-center',
+          !item.is_hidden && 'bg-amber-100'
+        )}
+      >
+        {item.item_type === 'Food' ? '🐣' : '🛠️'} id: {item.item_id}
+      </p>
       <img
         onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
         src={item.image_url}
@@ -24,32 +31,30 @@ export const AdminItemCard = ({ item }: AdminItemCardProps) => {
         height={200}
         className="p-2"
       />
-      <ItemInfo
-        name={item.name}
-        price={item.cost}
-        updated_at={item.updated_at}
-        description={item.description}
-      />
+      <ItemInfo item={item} />
     </div>
   );
 };
 
 interface ItemInfoProps {
-  name: string;
-  price: number;
-  description: string;
-  updated_at: Date | string;
+  item: IAdminItem;
 }
 
-const ItemInfo = ({ name, price, description, updated_at }: ItemInfoProps) => (
-  <div className="w-full gap-1.5">
-    <p className="w-full font-semibold truncate text-center">{name}</p>
-    <p className="text-foreground/60 text-center">{price}원</p>
+const ItemInfo = ({ item }: ItemInfoProps) => (
+  <div className="w-full gap-1.5 ">
+    <p className="w-full font-semibold truncate text-center">{item.name}</p>
+    <p className="text-foreground/60 text-center">{item.cost}원</p>
     <p className="w-full truncate text-center text-foreground/60">
-      {description}
+      {item.description}
     </p>
+    <p className="text-foreground text-center">효과: {item.effect_code}</p>
+    {item.required_study_time ? (
+      <p className="text-foreground text-center">
+        먹이: {item.required_study_time / 60}분
+      </p>
+    ) : null}
     <p className="text-foreground/60 text-center">
-      수정일: {formatDateStr(updated_at)}
+      수정일: {formatDateStr(item.updated_at)}
     </p>
   </div>
 );
