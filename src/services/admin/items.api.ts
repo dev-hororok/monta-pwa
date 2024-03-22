@@ -1,6 +1,7 @@
+import { ItemType } from '@/types/models/item.model';
 import { springHttpRequest } from '../common/http-request';
 import { ApiSuccessResponse } from '../types/api-response';
-import { IAdminItem } from './types/item.model';
+import { type IAdminItem } from './types/item.model';
 
 // 모든 아이템 조회
 export const fetchAllItems = async () => {
@@ -26,6 +27,27 @@ export const createItem = async (
   const response = await springHttpRequest.post<
     ApiSuccessResponse<{ item_id: number }>
   >(`v2/admin/items`, body);
+  return response.data.data;
+};
+
+// 캐릭터 수정
+export const editItem = async (
+  itemId: number,
+  body: {
+    name?: string;
+    description?: string;
+    image_url?: string;
+    cost?: number;
+    effect_code?: number;
+    required_study_time?: number;
+    is_hidden?: boolean;
+    item_type?: ItemType;
+  }
+) => {
+  const response = await springHttpRequest.patch<ApiSuccessResponse<any>>(
+    `v2/admin/items/${itemId}`,
+    body
+  );
   return response.data.data;
 };
 

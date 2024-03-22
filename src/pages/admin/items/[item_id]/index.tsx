@@ -4,6 +4,7 @@ import { PrevHeader } from '@/components/headers/prev-header';
 import { Button } from '@/components/ui/button';
 import { DeleteItemDialog } from '../_components/delete-item-dialog';
 import { useAdminItemQuery } from '@/services/admin/items.queries';
+import { EditItemDescriptionDialog } from '../_components/edit-item-description-dialog';
 
 export const AdminItemPage = () => {
   const params = useParams<{ item_id: string }>();
@@ -43,6 +44,18 @@ export const AdminItemPage = () => {
             </DeleteItemDialog>
           }
         />
+
+        <div className="w-full h-auto flex-center flex-col py-4 gap-4">
+          <EditItemDescriptionDialog item={item}>
+            <Button
+              type="button"
+              variant={'ghost'}
+              className="text-lg font-normal"
+            >
+              {item.description}
+            </Button>
+          </EditItemDescriptionDialog>
+        </div>
       </main>
     </div>
   );
