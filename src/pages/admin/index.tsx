@@ -20,6 +20,15 @@ export const AdminPage = () => {
           >
             캐릭터 관리
           </Link>
+          <Link
+            to="./items"
+            className={cn(
+              buttonVariants({ variant: 'outline' }),
+              'w-full py-4'
+            )}
+          >
+            아이템 관리
+          </Link>
         </div>
       </main>
     </div>

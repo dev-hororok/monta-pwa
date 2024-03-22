@@ -23,6 +23,7 @@ import { AdminRoute } from './components/auth/admin-route';
 import { AdminCharactersPage } from './pages/admin/characters';
 import { AdminCharacterPage } from './pages/admin/characters/[character_id]';
 import { AdminPage } from './pages/admin';
+import { AdminItemsPage } from './pages/admin/items';
 
 const router = createBrowserRouter(
   [
@@ -55,6 +56,14 @@ const router = createBrowserRouter(
                   element: (
                     <AdminRoute>
                       <AdminCharactersPage />
+                    </AdminRoute>
+                  ),
+                },
+                {
+                  path: 'items',
+                  element: (
+                    <AdminRoute>
+                      <AdminItemsPage />
                     </AdminRoute>
                   ),
                 },

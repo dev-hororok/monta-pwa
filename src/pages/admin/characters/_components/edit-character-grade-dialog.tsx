@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import type { IAdminCharacter } from '@/services/admin/types/characters.model';
+import type { IAdminCharacter } from '@/services/admin/types/character.model';
 import { useEditCharacterMutation } from '@/services/admin/characters.mutations';
 import { CharacterGrade } from '@/types/models/character.model';
 import { Button } from '@/components/ui/button';

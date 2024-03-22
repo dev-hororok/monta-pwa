@@ -23,7 +23,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import type { IAdminCharacter } from '@/services/admin/types/characters.model';
+import type { IAdminCharacter } from '@/services/admin/types/character.model';
 import { useEditCharacterMutation } from '@/services/admin/characters.mutations';
 
 const editCharacterPriceFormSchema = z.object({

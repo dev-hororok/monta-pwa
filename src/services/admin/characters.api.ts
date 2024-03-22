@@ -1,6 +1,6 @@
 import { springHttpRequest } from '@/services/common/http-request';
 import { ApiSuccessResponse } from '@/services/types/api-response';
-import { IAdminCharacter } from './types/characters.model';
+import { IAdminCharacter } from './types/character.model';
 
 // 모든 캐릭터 조회
 export const fetchAllCharacters = async () => {

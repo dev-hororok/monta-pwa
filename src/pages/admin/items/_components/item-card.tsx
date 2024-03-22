@@ -1,24 +1,13 @@
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { IAdminCharacter } from '@/services/admin/types/character.model';
 import { formatDateStr } from '@/lib/date-format';
-import { CharacterGradeBadge } from '@/components/character-grade-badge';
+import { IAdminItem } from '@/services/admin/types/item.model';
 
-interface AdminCharacterCardProps {
-  character: IAdminCharacter;
+interface AdminItemCardProps {
+  item: IAdminItem;
 }
 
-export const AdminCharacterCard = ({ character }: AdminCharacterCardProps) => {
-  const {
-    character_id,
-    grade,
-    image_url,
-    name,
-    sell_price,
-    updated_at,
-    description,
-  } = character;
-
+export const AdminItemCard = ({ item }: AdminItemCardProps) => {
   return (
     <div
       className={cn(
@@ -26,42 +15,36 @@ export const AdminCharacterCard = ({ character }: AdminCharacterCardProps) => {
         'w-full h-auto p-2 flex flex-col items-center justify-center text-xs shadow-sm cursor-pointer'
       )}
     >
-      <p className="text-base">id: {character_id}</p>
-      <CharacterGradeBadge grade={grade} />
+      <p className="text-base">id: {item.item_id}</p>
       <img
         onContextMenu={(e) => e.preventDefault()} // 이미지 우클릭 방지
-        src={image_url}
-        alt={name}
+        src={item.image_url}
+        alt={item.name}
         width={200}
         height={200}
         className="p-2"
       />
-      <CharacterInfo
-        name={name}
-        sellPrice={sell_price}
-        updated_at={updated_at}
-        description={description}
+      <ItemInfo
+        name={item.name}
+        price={item.cost}
+        updated_at={item.updated_at}
+        description={item.description}
       />
     </div>
   );
 };
 
-interface CharacterInfoProps {
+interface ItemInfoProps {
   name: string;
-  sellPrice: number;
+  price: number;
   description: string;
   updated_at: Date | string;
 }
 
-const CharacterInfo = ({
-  name,
-  sellPrice,
-  description,
-  updated_at,
-}: CharacterInfoProps) => (
+const ItemInfo = ({ name, price, description, updated_at }: ItemInfoProps) => (
   <div className="w-full gap-1.5">
     <p className="w-full font-semibold truncate text-center">{name}</p>
-    <p className="text-foreground/60 text-center">{sellPrice}원</p>
+    <p className="text-foreground/60 text-center">{price}원</p>
     <p className="w-full truncate text-center text-foreground/60">
       {description}
     </p>

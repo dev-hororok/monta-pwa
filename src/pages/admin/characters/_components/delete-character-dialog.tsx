@@ -11,7 +11,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
-import type { IAdminCharacter } from '@/services/admin/types/characters.model';
+import type { IAdminCharacter } from '@/services/admin/types/character.model';
 import { useDeleteCharacterMutation } from '@/services/admin/characters.mutations';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';

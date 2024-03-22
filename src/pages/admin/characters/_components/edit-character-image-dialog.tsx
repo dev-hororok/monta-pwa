@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { useEditCharacterMutation } from '@/services/admin/characters.mutations';
-import { type IAdminCharacter } from '@/services/admin/types/characters.model';
+import { type IAdminCharacter } from '@/services/admin/types/character.model';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { useUploadImage } from '../hooks/use-upload-image';
 import { useApiError } from '@/hooks/use-api-error';
