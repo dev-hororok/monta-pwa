@@ -112,6 +112,7 @@ export const CreateItemDialog = ({ children }: CreateItemDialogProps) => {
               />
             </div>
 
+            <Label htmlFor="itemType">알/사용템</Label>
             <div className={'w-full py-4 flex items-center gap-4'}>
               <Button
                 variant={itemType === 'Food' ? 'default' : 'outline'}

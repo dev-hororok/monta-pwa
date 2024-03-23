@@ -5,6 +5,10 @@ import { Button } from '@/components/ui/button';
 import { DeleteItemDialog } from '../_components/delete-item-dialog';
 import { useAdminItemQuery } from '@/services/admin/items.queries';
 import { EditItemDescriptionDialog } from '../_components/edit-item-description-dialog';
+import { IAdminItem } from '@/services/admin/types/item.model';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { EditItemImageDialog } from '../_components/edit-item-image-dialog';
+import { EditItemNameDialog } from '../_components/edit-item-name-dialog';
 
 export const AdminItemPage = () => {
   const params = useParams<{ item_id: string }>();
@@ -46,17 +50,46 @@ export const AdminItemPage = () => {
         />
 
         <div className="w-full h-auto flex-center flex-col py-4 gap-4">
-          <EditItemDescriptionDialog item={item}>
-            <Button
-              type="button"
-              variant={'ghost'}
-              className="text-lg font-normal"
-            >
-              {item.description}
-            </Button>
-          </EditItemDescriptionDialog>
+          <EditImageSection item={item} />
+          <EditNameSection item={item} />
+          <EditDescriptionSection item={item} />
         </div>
       </main>
     </div>
+  );
+};
+
+interface EditComponentsProps {
+  item: IAdminItem;
+}
+const EditImageSection = ({ item }: EditComponentsProps) => {
+  return (
+    <EditItemImageDialog item={item}>
+      <Avatar className="w-40 h-40 hover:bg-accent cursor-pointer rounded-sm">
+        <AvatarImage alt={item.name} src={item.image_url} />
+      </Avatar>
+    </EditItemImageDialog>
+  );
+};
+const EditNameSection = ({ item }: EditComponentsProps) => {
+  return (
+    <EditItemNameDialog item={item}>
+      <Button
+        type="button"
+        variant={'ghost'}
+        className="text-xl font-bold antialiased"
+      >
+        {item.name}
+      </Button>
+    </EditItemNameDialog>
+  );
+};
+const EditDescriptionSection = ({ item }: EditComponentsProps) => {
+  return (
+    <EditItemDescriptionDialog item={item}>
+      <Button type="button" variant={'ghost'} className="text-lg font-normal">
+        {item.description}
+      </Button>
+    </EditItemDescriptionDialog>
   );
 };
