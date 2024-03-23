@@ -12,6 +12,8 @@ import { EditItemNameDialog } from '../_components/edit-item-name-dialog';
 import { EditItemCostDialog } from '../_components/edit-item-cost-dialog';
 import { EditItemRequiredTimeDialog } from '../_components/edit-item-required-time-dialog';
 import { EditItemEffectCodeDialog } from '../_components/edit-item-effect-code-dialog';
+import { EditItemIsHiddenDialog } from '../_components/edit-item-is-hidden-dialog';
+import { EditItemTypeDialog } from '../_components/edit-item-type-dialog';
 
 export const AdminItemPage = () => {
   const params = useParams<{ item_id: string }>();
@@ -61,6 +63,8 @@ export const AdminItemPage = () => {
           {item.item_type === 'Food' ? (
             <EditRequiredTimeSection item={item} />
           ) : null}
+          <EditIsHiddenSection item={item} />
+          <EditItemTypeSection item={item} />
         </div>
       </main>
     </div>
@@ -105,7 +109,7 @@ const EditCostSection = ({ item }: EditComponentsProps) => {
   return (
     <EditItemCostDialog item={item}>
       <Button type="button" variant={'ghost'} className="text-lg font-normal">
-        {item.cost}
+        가격: {item.cost}
       </Button>
     </EditItemCostDialog>
   );
@@ -114,7 +118,7 @@ const EditRequiredTimeSection = ({ item }: EditComponentsProps) => {
   return (
     <EditItemRequiredTimeDialog item={item}>
       <Button type="button" variant={'ghost'} className="text-lg font-normal">
-        {(item.required_study_time || 0) / 60}분
+        먹이: {(item.required_study_time || 0) / 60}분
       </Button>
     </EditItemRequiredTimeDialog>
   );
@@ -123,8 +127,26 @@ const EditEffectCodeSection = ({ item }: EditComponentsProps) => {
   return (
     <EditItemEffectCodeDialog item={item}>
       <Button type="button" variant={'ghost'} className="text-lg font-normal">
-        {item.effect_code}
+        아이템 효과: {item.effect_code}
       </Button>
     </EditItemEffectCodeDialog>
+  );
+};
+const EditIsHiddenSection = ({ item }: EditComponentsProps) => {
+  return (
+    <EditItemIsHiddenDialog item={item}>
+      <Button type="button" variant={'ghost'} className="text-lg font-normal">
+        상점 표시: {item.is_hidden ? '판매 X' : '판매중'}
+      </Button>
+    </EditItemIsHiddenDialog>
+  );
+};
+const EditItemTypeSection = ({ item }: EditComponentsProps) => {
+  return (
+    <EditItemTypeDialog item={item}>
+      <Button type="button" variant={'ghost'} className="text-lg font-normal">
+        타입 {item.item_type === 'Food' ? '🐣' : '🛠️'}
+      </Button>
+    </EditItemTypeDialog>
   );
 };
