@@ -9,6 +9,9 @@ import { IAdminItem } from '@/services/admin/types/item.model';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { EditItemImageDialog } from '../_components/edit-item-image-dialog';
 import { EditItemNameDialog } from '../_components/edit-item-name-dialog';
+import { EditItemCostDialog } from '../_components/edit-item-cost-dialog';
+import { EditItemRequiredTimeDialog } from '../_components/edit-item-required-time-dialog';
+import { EditItemEffectCodeDialog } from '../_components/edit-item-effect-code-dialog';
 
 export const AdminItemPage = () => {
   const params = useParams<{ item_id: string }>();
@@ -53,6 +56,11 @@ export const AdminItemPage = () => {
           <EditImageSection item={item} />
           <EditNameSection item={item} />
           <EditDescriptionSection item={item} />
+          <EditCostSection item={item} />
+          <EditEffectCodeSection item={item} />
+          {item.item_type === 'Food' ? (
+            <EditRequiredTimeSection item={item} />
+          ) : null}
         </div>
       </main>
     </div>
@@ -91,5 +99,32 @@ const EditDescriptionSection = ({ item }: EditComponentsProps) => {
         {item.description}
       </Button>
     </EditItemDescriptionDialog>
+  );
+};
+const EditCostSection = ({ item }: EditComponentsProps) => {
+  return (
+    <EditItemCostDialog item={item}>
+      <Button type="button" variant={'ghost'} className="text-lg font-normal">
+        {item.cost}
+      </Button>
+    </EditItemCostDialog>
+  );
+};
+const EditRequiredTimeSection = ({ item }: EditComponentsProps) => {
+  return (
+    <EditItemRequiredTimeDialog item={item}>
+      <Button type="button" variant={'ghost'} className="text-lg font-normal">
+        {(item.required_study_time || 0) / 60}분
+      </Button>
+    </EditItemRequiredTimeDialog>
+  );
+};
+const EditEffectCodeSection = ({ item }: EditComponentsProps) => {
+  return (
+    <EditItemEffectCodeDialog item={item}>
+      <Button type="button" variant={'ghost'} className="text-lg font-normal">
+        {item.effect_code}
+      </Button>
+    </EditItemEffectCodeDialog>
   );
 };
