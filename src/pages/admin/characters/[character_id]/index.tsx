@@ -12,6 +12,7 @@ import { EditCharacterGradeDialog } from '../_components/edit-character-grade-di
 import { CharacterGradeBadge } from '@/components/character-grade-badge';
 import { EditCharacterPriceDialog } from '../_components/edit-character-price-dialog';
 import { DeleteCharacterDialog } from '../_components/delete-character-dialog';
+import { IAdminCharacter } from '@/services/admin/types/character.model';
 
 export const AdminCharacterPage = () => {
   const params = useParams<{ character_id: string }>();
@@ -54,42 +55,13 @@ export const AdminCharacterPage = () => {
 
         <div className="w-full h-auto flex-center flex-col py-4 gap-4">
           <p className="text-xl">ID: {character.character_id}</p>
-          <EditCharacterImageDialog character={character}>
-            <Avatar className="w-40 h-40 hover:bg-accent cursor-pointer rounded-sm">
-              <AvatarImage alt={character.name} src={character.image_url} />
-            </Avatar>
-          </EditCharacterImageDialog>
 
-          <EditCharacterNameDialog character={character}>
-            <Button
-              type="button"
-              variant={'ghost'}
-              className="text-xl font-bold antialiased"
-            >
-              {character.name}
-            </Button>
-          </EditCharacterNameDialog>
-          <EditCharacterDescriptionDialog character={character}>
-            <Button
-              type="button"
-              variant={'ghost'}
-              className="text-lg font-normal"
-            >
-              {character.description}
-            </Button>
-          </EditCharacterDescriptionDialog>
-          <EditCharacterGradeDialog character={character}>
-            <CharacterGradeBadge grade={character.grade} />
-          </EditCharacterGradeDialog>
-          <EditCharacterPriceDialog character={character}>
-            <Button
-              type="button"
-              variant={'ghost'}
-              className="text-lg font-normal antialiased"
-            >
-              가격: {character.sell_price}
-            </Button>
-          </EditCharacterPriceDialog>
+          <EditImageSection character={character} />
+          <EditNameSection character={character} />
+          <EditDescriptionSection character={character} />
+          <EditGradeSection character={character} />
+          <EditPriceSection character={character} />
+
           <p className="text-lg">
             생성일: {formatDateStr(character.created_at)}
           </p>
@@ -99,5 +71,60 @@ export const AdminCharacterPage = () => {
         </div>
       </main>
     </div>
+  );
+};
+
+interface EditComponentsProps {
+  character: IAdminCharacter;
+}
+const EditImageSection = ({ character }: EditComponentsProps) => {
+  return (
+    <EditCharacterImageDialog character={character}>
+      <Avatar className="w-40 h-40 hover:bg-accent cursor-pointer rounded-sm">
+        <AvatarImage alt={character.name} src={character.image_url} />
+      </Avatar>
+    </EditCharacterImageDialog>
+  );
+};
+const EditNameSection = ({ character }: EditComponentsProps) => {
+  return (
+    <EditCharacterNameDialog character={character}>
+      <Button
+        type="button"
+        variant={'ghost'}
+        className="text-xl font-bold antialiased"
+      >
+        {character.name}
+      </Button>
+    </EditCharacterNameDialog>
+  );
+};
+const EditDescriptionSection = ({ character }: EditComponentsProps) => {
+  return (
+    <EditCharacterDescriptionDialog character={character}>
+      <Button type="button" variant={'ghost'} className="text-lg font-normal">
+        {character.description}
+      </Button>
+    </EditCharacterDescriptionDialog>
+  );
+};
+const EditGradeSection = ({ character }: EditComponentsProps) => {
+  return (
+    <EditCharacterGradeDialog character={character}>
+      <CharacterGradeBadge grade={character.grade} />
+    </EditCharacterGradeDialog>
+  );
+};
+const EditPriceSection = ({ character }: EditComponentsProps) => {
+  return (
+    <EditCharacterPriceDialog character={character}>
+      <Button
+        type="button"
+        variant={'ghost'}
+        className="text-lg font-normal antialiased"
+      >
+        가격: {character.sell_price}
+      </Button>
+    </EditCharacterPriceDialog>
   );
 };
