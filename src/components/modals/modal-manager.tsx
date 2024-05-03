@@ -6,6 +6,7 @@ import { CharacterAcquisitionDialog } from './character-acquisition';
 import { RequireLoginDialog } from './require-login';
 import { ConsumableItemAcquisitionDialog } from './consumable-item-acquisition';
 import { PointAcquisitionDialog } from './point-acquisition';
+import { AppInsatllDialog } from './app-install';
 
 export const ModalManager = () => {
   const { modals } = useModalStore();
@@ -25,6 +26,8 @@ export const ModalManager = () => {
       {modals.timerAlarm.isOpen ? <TimerAlarmDialog /> : null}
 
       {modals.requireLogin.isOpen ? <RequireLoginDialog /> : null}
+
+      {modals.appInstall.isOpen ? <AppInsatllDialog /> : null}
     </>
   );
 };

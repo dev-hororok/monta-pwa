@@ -72,7 +72,7 @@ export const useTimerGroupSocket = (timerType: TimerType, active: boolean) => {
       console.log('Disconnecting from socket server');
       socket.disconnect();
     };
-  }, [accessToken, timerType, active]);
+  }, [accessToken, timerType, active, toggleIsTogetherEnabled]);
 
   return { members };
 };

@@ -35,6 +35,9 @@ interface ModalsState {
 
   // 로그인 요구
   requireLogin: ModalState;
+
+  // 앱 설치 안내
+  appInstall: ModalState;
 }
 
 type ModalType = keyof ModalsState;
@@ -54,6 +57,7 @@ export const useModalStore = create<ModalStore>()((set) => ({
     timerAlarm: { isOpen: false },
     timer: { isOpen: false },
     requireLogin: { isOpen: false },
+    appInstall: { isOpen: true },
   },
   openModal: (modalType, data) =>
     set((state) => ({
