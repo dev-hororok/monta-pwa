@@ -4,7 +4,7 @@ import { DeleteAccountDialog } from './_components/delete-account-dialog';
 import { LogoutDialog } from './_components/logout-dialog';
 import { AppVersionView } from './_components/app-version-view';
 import { PrivacyPolicyButton } from './_components/privacy-policy-button';
-import { ReviewButton } from './_components/review-button';
+import { PlayStoreButton } from './_components/playstore-button';
 import { useAuthStore } from '@/stores/auth-store';
 import { Link } from 'react-router-dom';
 import { TermsOfServiceButton } from './_components/tos-button';
@@ -53,7 +53,7 @@ const MorePage = () => {
           <TermsOfServiceButton />
           <PrivacyPolicyButton />
           <QnAButton />
-          <ReviewButton />
+          <PlayStoreButton />
         </div>
       </main>
     </div>

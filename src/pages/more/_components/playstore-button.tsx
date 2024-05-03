@@ -1,13 +1,13 @@
 import { morePageIcons } from '@/components/icons';
-import { toast } from 'sonner';
+import { APP_INFO } from '@/constants/app-info';
+import { Link } from 'react-router-dom';
 
-export const ReviewButton = () => {
-  const handleDummyClick = () => {
-    toast.error('미구현', { duration: 1000 });
-  };
+export const PlayStoreButton = () => {
   return (
-    <div
-      onClick={handleDummyClick}
+    <Link
+      to={APP_INFO.playStoreUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className="flex items-center w-full py-4 px-6 hover:bg-accent cursor-pointer text-sm"
     >
       <div className="flex items-center gap-2">
@@ -16,8 +16,8 @@ export const ReviewButton = () => {
           alt="star icon"
           className="h-[1.2rem] w-[1.2rem]"
         />
-        리뷰 작성
+        플레이스토어 이동
       </div>
-    </div>
+    </Link>
   );
 };

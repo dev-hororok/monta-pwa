@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import type { Item } from '@/types/models/item.model';
 import { Skeleton } from '@/components/ui/skeleton';
+import { formatTime } from '@/lib/date-format';
 
 interface ProductCardProps {
   item: Item;
@@ -24,6 +25,12 @@ export const ProductCard = ({ item }: ProductCardProps) => {
       <div className="w-full flex flex-col items-center justify-between gap-1.5">
         <p className="font-semibold truncate text-center">{item.name}</p>
         <p className="text-foreground/60">{item.cost} 원</p>
+
+        {item.item_type === 'Food' && 0 < item.required_study_time ? (
+          <p className="text-foreground/60">
+            ⏳ {formatTime(item.required_study_time)}
+          </p>
+        ) : null}
       </div>
     </div>
   );
