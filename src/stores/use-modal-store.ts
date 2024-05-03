@@ -9,7 +9,7 @@ interface ModalState<T = undefined> {
   data?: T;
 }
 
-type AlarmType = 'EndWork' | 'EndRest' | 'FinishSection';
+type AlarmType = 'EndWork' | 'EndRest' | 'FinishSection' | 'GiveUpWork';
 
 interface ModalsState {
   // 캐릭터 획득

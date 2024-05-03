@@ -1,7 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { endStudyTimer, startStudyTimer } from '../apis/study-timer.api';
 import {
+  endStudyTimer,
+  rewardPoints,
+  startStudyTimer,
+} from '../apis/study-timer.api';
+import {
+  CURRENT_MEMBER_QUERY_KEY,
   FOOD_INVENTORY_QUERY_KEY,
   STATISTIC_DAILY,
   STATISTIC_HEAT_MAP,
@@ -9,6 +14,7 @@ import {
 } from '../queries/member-queries';
 import type { StudyRecordStatusType } from '@/types/models/study.model';
 import { cancelTimerSchedule, scheduleTimer } from '../apis/push.api';
+import { IMember } from '@/types/models/member.model';
 
 // 타이머 시작 시간 기록
 export const useStartStudyTimerMutation = () => {
@@ -66,6 +72,29 @@ export const useCancelScheduleTimerMutation = () => {
   return useMutation({
     mutationFn: () => {
       return cancelTimerSchedule();
+    },
+  });
+};
+
+// 포인트 지급
+export const useRewardPointMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (seconds: number) => {
+      const point = Math.floor(seconds / 60) * 9;
+      return rewardPoints({ point });
+    },
+    onSuccess: async (data) => {
+      queryClient.setQueryData(
+        [CURRENT_MEMBER_QUERY_KEY],
+        (old: IMember | null) => {
+          if (!old) return old;
+          return {
+            ...old,
+            point: data.total_point,
+          };
+        }
+      );
     },
   });
 };

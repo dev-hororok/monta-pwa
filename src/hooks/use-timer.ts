@@ -3,6 +3,7 @@ import { useTimerStateStore } from '@/stores/timer-state-store';
 import {
   useCancelScheduleTimerMutation,
   useEndStudyTimerMutation,
+  useRewardPointMutation,
   useScheduleTimerMutation,
 } from '@/services/mutations/study-timer-mutations';
 import { useModalStore } from '@/stores/use-modal-store';
@@ -25,6 +26,7 @@ export const useTimer = () => {
   const timerMode = useTimerOptionsStore((state) => state.timerMode);
   const { mutate: endStudyTimer } = useEndStudyTimerMutation();
   const { mutate: scheduleTimer } = useScheduleTimerMutation();
+  const { mutate: rewardPoints } = useRewardPointMutation();
   const { mutate: cancelTimerSchedule } = useCancelScheduleTimerMutation();
   const openModal = useModalStore((state) => state.openModal);
 
@@ -83,7 +85,8 @@ export const useTimer = () => {
     if (duration < targetTime) return;
     let alarmType = '';
     if (timerType === 'Work') {
-      endStudyTimer({ status: 'Completed', duration });
+      endStudyTimer({ status: 'Completed', duration: targetTime }); // 타이머 종료
+      rewardPoints(targetTime); // 포인트 지급
       if (sectionCompleted + 1 === sectionCount) {
         alarmType = 'FinishSection';
       } else {
@@ -106,6 +109,7 @@ export const useTimer = () => {
     sectionCount,
     nextTimer,
     endStudyTimer,
+    rewardPoints,
     openModal,
   ]);
 };

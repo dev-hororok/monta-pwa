@@ -5,7 +5,13 @@ import { useTimerStateStore } from '@/stores/timer-state-store';
 import { formatTime } from '@/lib/date-format';
 import { CDN_IMAGES } from '@/constants/cdn-images';
 
-export const FinishSectionAlarm = () => {
+interface FinishSectionAlarmProps {
+  earnedPoints: number;
+}
+
+export const FinishSectionAlarm = ({
+  earnedPoints,
+}: FinishSectionAlarmProps) => {
   const timerMode = useTimerOptionsStore((state) => state.timerMode);
   const pomodoroTime = useTimerOptionsStore((state) => state.pomodoroTime);
   const sectionCount = useTimerOptionsStore((state) => state.sectionCount);
@@ -28,9 +34,10 @@ export const FinishSectionAlarm = () => {
         </div>
       ) : (
         <div className="w-2/3 mx-auto text-center">
-          <p>축하합니다.</p>
-          <p>총 {formatTime(totalStudyTime)} 만큼 집중했습니다.</p>
+          <p>총 {formatTime(totalStudyTime)} 만큼 집중했습니다!</p>
           <p>충분한 휴식을 취해주세요.</p>
+          <br />
+          <p>{earnedPoints} 포인트를 획득했습니다.</p>
         </div>
       )}
     </div>

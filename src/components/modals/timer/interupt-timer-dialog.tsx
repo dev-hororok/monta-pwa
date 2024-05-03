@@ -27,8 +27,7 @@ export const InteruptTimerDialog = ({ children }: InteruptTimerDialogProps) => {
   const timerMode = useTimerOptionsStore((state) => state.timerMode);
   const duration = useTimerStateStore((state) => state.duration);
   const pauseTimer = useTimerStateStore((state) => state.pauseTimer);
-  const interuptTimer = useTimerStateStore((state) => state.interuptTimer);
-  const { openModal, closeModal } = useModalStore((state) => state);
+  const { openModal } = useModalStore((state) => state);
 
   const { mutate: endStudyTimer } = useEndStudyTimerMutation();
 
@@ -43,8 +42,10 @@ export const InteruptTimerDialog = ({ children }: InteruptTimerDialogProps) => {
       });
     } else {
       // 뽀모도로 타이머: 타이머 초기화 후 모달 닫기
-      interuptTimer();
-      closeModal('timer');
+      pauseTimer();
+      openModal('timerAlarm', {
+        alarmType: 'GiveUpWork',
+      });
     }
   };
 
